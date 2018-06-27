@@ -1,0 +1,38 @@
+page-splash {
+
+	.bgcolor {
+		background: color($colors, daysgreen, base);
+	}
+
+	.text {
+		padding: 55px 0px 45px 20px;
+	}
+
+	.text p {
+		margin: 0px;
+		color: white;
+		font-size: 23px;
+		font-weight: 500;
+	}
+
+	.opacity {
+		display: table;
+		background: #000;
+	}
+
+	.opacity img {
+		display: table-cell;
+    vertical-align: middle;
+		opacity: 0.9;
+	}
+
+	.logo {
+		padding: 25px 0px;
+	}
+
+	.logo img {
+		width: 65px;
+		height: 65px;
+	}
+
+}

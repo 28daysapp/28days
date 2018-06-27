@@ -1,0 +1,29 @@
+page-test {
+
+	.cards {
+		background: color($colors, cardbggray, base);
+		border: 1px solid color($colors, daysgreen, base);
+	}
+
+	h2 {
+		margin-bottom: 10px !important;
+		border-bottom: 1px solid #000000;
+		display: inline-block;
+		padding-bottom: 5px;
+	}
+
+	.align-right {
+		text-align: right;
+	}
+
+	.cards p {
+		font-size: 13px;
+	}
+
+	.warning {
+		color: color($colors, danger, base) !important;
+		font-size: 12px !important;
+		margin-top: 5px;
+	}
+
+}

@@ -1,0 +1,78 @@
+page-payment {
+	.cards-bg {
+		background: color($colors, cardbggray, base);
+		border-radius: 10px;
+	}
+
+	ion-card-content {
+		padding: 10px !important;
+	}
+
+	.cards-bg button {
+		border-top: 1px solid color($colors, dark, base);
+	}
+
+	.alignleft {
+		float: left;
+	}
+
+	.alignright {
+		float: right;
+	}
+
+	.green {
+		color: color($colors, daysgreen, base);
+		font-size: 130%;
+	}
+
+	.cards-white {
+		background: color($colors, white, base);
+		border-radius: 10px;
+	}
+
+	.textcontent {
+		text-align: left;
+		color: color($colors, daysgreen, base);
+	}
+
+	.methodContainer {
+		display: block;
+		position: relative;
+		padding-left: 35px;
+		margin-top: 10px;
+		margin-bottom: 8px;	   
+	    cursor: pointer;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+
+	.methodContainer input{
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.checkmark {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 20px;
+		width: 20px;
+		background-color: #ddd;
+		border-radius: 50%;
+	}
+
+	.methodContainer:hover input ~ .checkmark {
+		background-color: #ccc;
+	}
+
+	.methodContainer input:checked ~ .checkmark {
+		background-color: color($colors, daysgreen, base);
+	}
+
+	.methodContainer input:checked ~ .checkmark:after {
+		display: block;
+	}
+}

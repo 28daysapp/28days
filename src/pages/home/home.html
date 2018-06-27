@@ -1,0 +1,105 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="daysgreen">
+  	<ion-buttons left>
+	    <button ion-button icon-only (click)="loginpage()">
+	      <ion-icon name="log-in"></ion-icon>
+	    </button>
+	  </ion-buttons> 
+    <ion-title>
+      28DAYS
+    </ion-title>
+    <ion-buttons right>
+	    <button ion-button icon-only (click)="mypage()">
+	      <ion-icon name="settings"></ion-icon>
+	    </button>
+	  </ion-buttons> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div align="center" class="userprofile">
+		<button class="photo" (click)="changecharacter()">
+			<img src="{{photoURL}}">
+		</button>
+		<div>
+			<p class="username" (click)="changename()">{{username}}</p>
+		</div>
+		<button class="greeting" (click)="changegreeting()">
+			<p>
+				{{ greeting }}
+			</p>
+		</button>
+		<ul class="vertical-buttons">
+			<li>
+				<button (click)="test()">
+					<img src="assets/test.png">
+				</button>
+			</li>
+			<li>
+				<button (click)="diary()">
+					<img src="assets/diary.png">
+				</button>
+			</li>
+			<li>
+				<button (click)="emotionbasket()">
+					<img src="assets/basket.png">
+				</button>
+			</li>
+		</ul>
+	</div>
+	<div align="center" class="mainmenu">
+		<ul>
+			<li>
+				<button (click)="community()">
+					다른 사람의 고민을 엿볼까요?<br>
+					<p>커뮤니티</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="supporter()">
+					마음이 맞는 사람과 이야기 할까요?<br>
+					<p>1:1 서포터</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="post()">
+					정신건강 관련 정보가 궁금하세요?<br>
+					<p>포스트</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="meditate()">
+					내 마음을 달래볼까요?<br>
+					<p>명상하기</p>
+				</button>
+			</li>
+		</ul>
+	</div>
+
+	<div align="center" class="gogo">
+		<button (click)="gogo()">
+			<img src="assets/gogo.png">
+		</button>
+	</div>
+
+	<div class="modal" *ngIf="showmodal">
+	    <div class="modal-inner">
+	      <form #modal="ngForm" (ngSubmit)="modalhandler(modal)" novalidate>
+	        <p>인사말 관리</p>
+	        <ion-input class="tx" type="text" name="greeting" [(ngModel)]="greeting" required></ion-input>
+	        <button type="reset" (click)="dismissModal()">
+	          취소
+	        </button> 
+	        <button type="submit">
+	          확인
+	        </button>
+	      </form>
+	    </div>
+	</div>
+</ion-content>

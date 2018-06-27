@@ -1,0 +1,44 @@
+<!--
+  Generated template for the GogosupporterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>고고</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #content>
+
+	<ul>
+    <li *ngFor="let msg of chatmessages">
+    	<div class="clearfix">
+		    <img *ngIf="msg.showimage" src="assets/gogo.png">
+	    	<p class="bubble buddy" [ngClass]="{setblack: msg.setblack}" *ngIf="msg.gogo">{{msg.message}}</p>
+	    	<p class="bubble me" *ngIf="!msg.gogo">{{msg.message}}</p>
+	    </div>
+  	</li>
+  </ul>
+
+</ion-content>
+
+<ion-footer>
+
+  <div class="btn1" *ngIf="showbtn1">
+    <button (click)="button1()">
+      그렇구나.
+    </button>
+  </div>
+
+  <div class="btn1" *ngIf="showbtn2">
+    <button (click)="button2()">
+      알았어!
+    </button>
+  </div>
+
+</ion-footer>

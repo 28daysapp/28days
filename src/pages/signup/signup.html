@@ -1,0 +1,70 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>회원가입</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="cardsbg">
+
+	<ion-card>
+    <ion-card-content>
+
+    	<form [formGroup]="signupForm" novalidate>
+    		<h4>이름(별명)</h4>
+        <ion-input formControlName="name" type="text" placeholder="28DAYS (8글자까지 입력)"
+        	[class.invalid]="(!signupForm.controls.name.valid && signupForm.controls.name.dirty) || (signupForm.controls.name.valid && !usernameAvailable)"
+        	(keyup)="checkUsername()"></ion-input>
+      	<p class="error-message" *ngIf="!signupForm.controls.name.valid && signupForm.controls.name.dirty">
+          8글자 이하로 만들어주세요!
+        </p>
+    		<p class="error-message" *ngIf="signupForm.controls.name.valid && !usernameAvailable">
+          이미 사용 중인 이름입니다!
+        </p>
+      	<h4>이메일 주소</h4>
+        <ion-input formControlName="email" type="email" placeholder="28days@gmail.com"
+        	[class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
+      	<p class="error-message" *ngIf="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
+          이메일 주소를 다시 확인해주세요!
+        </p>
+      	<h4>비밀번호</h4>
+        <ion-input formControlName="password" type="password" placeholder="8자리 이상 숫자, 문자 조합"
+        	[class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"></ion-input>
+      	<p class="error-message" *ngIf="!signupForm.controls.password.valid && signupForm.controls.password.dirty">
+          8자리 이상, 숫자와 문자를 조합해주세요!
+        </p>
+    		<h4>비밀번호 확인</h4>
+        <ion-input formControlName="passwordconfirm" type="password" placeholder="8자리 이상 숫자, 문자 조합"
+        	[class.invalid]="!signupForm.controls.passwordconfirm.valid && signupForm.controls.passwordconfirm.dirty"></ion-input>
+      	<p class="error-message" *ngIf="!signupForm.controls.passwordconfirm.valid && signupForm.controls.passwordconfirm.dirty">
+          비밀번호가 맞지 않습니다.
+        </p>
+        <h4>성별</h4>
+        <div class="btn2">
+          <button class="btn2_1" [class.greenbtn]="clickmale" (click)="setMale()">
+            남
+          </button>
+          <button [class.greenbtn]="clickfemale" (click)="setFemale()">
+            여
+          </button>
+        </div>
+        <h4>나이</h4>
+        <ion-input formControlName="age" type="number" placeholder="나이를 입력해주세요."></ion-input>
+    		<p class="prompt">28DAYS의 <span>이용약관</span> 및 <span>개인정보취급방침</span>에 동의합니다.</p>
+      	<button ion-button block color="daysgreen" (click)="signupUser()">
+          회원가입하기!
+        </button>
+      </form>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

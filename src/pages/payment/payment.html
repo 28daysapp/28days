@@ -1,0 +1,83 @@
+<!--
+  Generated template for the PaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>멤버십 결제하기</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card class="cards-bg">
+    <ion-card-content>
+      <div>
+        <p class="alignleft">{{ itemName + "" }}</p>
+        <p class="alignright">{{ itemPrice + "" }}원</p>
+      </div>
+      <div style="clear: both;"></div>
+      <ion-card class="cards-white">
+        <ion-card-content>
+          <p>혜택</p>
+          <p class="textcontent">28일 동안 선택한 서포터에게 횟수에 제한 없이 무제한으로 대화를 진행</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>  
+
+  <ion-card class="cards-bg">
+    <ion-card-content>
+      <p>쿠폰 적용</p>
+      <button></button>
+      <hr width="100%">
+      <div class="alignright">
+        <p>적용</p>
+        
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="cards-bg">
+    <ion-card-content>
+      <div>
+        <p class="alignleft">멤버십 금액</p>
+        <p class="alignright">{{ itemPrice + "" }}원</p>
+      </div>
+      <hr width="100%">
+      <div>
+        <p class="alignleft">할인 금액</p>
+        <p class="alignright">{{ discountPrice + "" }}원</p>
+      </div>
+      <hr width="100%">
+      <div>
+        <p class="alignleft green">결제 금액</p>
+        <p class="alignright green">{{ totalPrice + "" }}원</p>
+      </div>
+      <hr width="100%">
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="cards-bg">
+    <ion-card-content>
+      <p>결제 수단 선택</p>
+      <label class="methodContainer">카드 결제
+        <input type="radio" checked="checked" name="paymentMethod" value="card">
+        <span class="checkmark"></span>
+      </label>
+      <label class="methodContainer">무통장 입금
+        <input type="radio" name="paymentMethod" value="trans">
+        <span class="checkmark"></span>
+      </label>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button block color="daysgreen" (click)="payment()">
+    결제하기
+  </button>
+</ion-content>

@@ -1,0 +1,51 @@
+<!--
+  Generated template for the SupporterchatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>{{buddy.username}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content #content class="bg">
+
+  <ul>
+    <li *ngFor="let msg of gogomessages">
+      <div>
+        <img *ngIf="msg.showimage" src="assets/gogo.png">
+        <p class="bubble gogo" [ngClass]="{setblack: msg.setblack}">{{msg.message}}</p>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="chat">
+    <li *ngFor="let msg of chatmessages">
+    	<div *ngIf="msg.sentby == buddy.uid">
+		    <img *ngIf="msg.showprofileimage" src="{{buddy.photoURL}}">
+	    	<p class="bubble buddy">{{ msg.message }}</p>
+        <span class="timebuddy">{{ msg.timestamp | date:'hh:mm a' }}</span>
+      </div>
+      <div class="mymsg" *ngIf="msg.sentby != buddy.uid">
+        <span class="time">{{ msg.timestamp | date:'hh:mm a' }}</span>
+	    	<p class="bubble me">{{ msg.message }}</p>
+	    </div>
+  	</li>
+  </ul>
+
+</ion-content>
+
+<ion-footer *ngIf="showinput">
+
+  <form [formGroup]="inputForm" class="footerform">
+    <input formControlName="txt" type="text">
+    <button (click)="sendmessage()">
+      <img src="assets/send.png">
+    </button>
+  </form>
+
+</ion-footer>

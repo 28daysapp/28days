@@ -1,0 +1,43 @@
+page-community {
+
+	.text {
+		margin-top: 10px;
+		text-align: center;
+	}
+
+	.text p {
+		margin: 0px;
+		color: color($colors, textgray, base);
+	}
+
+	.buttons {
+		width: 100%;
+	}
+
+	.buttons td {
+		padding: 10px 0px;
+	}
+
+	.buttons div {
+		background-color: color($colors, daysgreen, base);
+		border-radius: 40px;
+		width: 80px;
+		height: 80px;
+	}
+
+	.buttons button {
+		height: inherit;
+		padding: 0px;
+		background-color: transparent;
+		display: table;
+	}
+
+	.buttons p {
+		margin: 0px;
+		color: white;
+		font-size: 12px;
+		display: table-cell;
+ 		vertical-align: middle;
+	}
+
+}

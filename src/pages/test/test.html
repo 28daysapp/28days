@@ -1,0 +1,50 @@
+<!--
+  Generated template for the TestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>자가진단</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+	<ion-card class="cards">
+    <ion-card-content>
+
+    	<h2>우울증 자가진단</h2>
+    	<p>PHQ-9 TEST는 우울증 자가진단을 위한 9가지 질문으로 이루어진 환자 건강 설문지입니다. 이를 통해 심각도를 5단계로 알아볼 수 있습니다.</p>
+    	<p class="warning">보다 정확한 내용은 전문의의 도움을 받아야 합니다.</p>
+
+    	<div class="align-right">
+	    	<button ion-button clear small color="daysgreen" (click)="depressiontest()">
+	    		자가진단 시작하기
+	    	</button>
+	    </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="cards">
+    <ion-card-content>
+
+    	<h2>불안 자가진단</h2>
+    	<p>STAI-X-1 TEST는 불안 자가진단을 위한 20가지 질문으로 이루어진 환자 건강 설문지입니다. 이를 통해 심각도를 4단계로 알아볼 수 있습니다.</p>
+    	<p class="warning">보다 정확한 내용은 전문의의 도움을 받아야 합니다.</p>
+
+    	<div class="align-right">
+	    	<button ion-button clear small color="daysgreen" (click)="anxietytest()">
+	    		자가진단 시작하기
+	    	</button>
+	    </div>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

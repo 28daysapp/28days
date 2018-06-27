@@ -1,0 +1,74 @@
+page-supporter {
+
+	.cards-bg {
+		background: color($colors, cardbggray, base);
+		border-radius: 10px;
+	}
+
+	ion-card-content {
+		padding: 10px 0px 0px !important;
+		text-align: center;
+	}
+
+	.cards-bg button {
+		border-top: 1px solid color($colors, dark, base);
+	}
+
+	.username {
+		border-radius: 25px;
+    background: color($colors, daysgreen, base);
+    padding: 5px 20px;
+    color: color($colors, white, base);
+    font-size: 130%;
+    font-weight: bold;
+    display: inline-block;
+	}
+
+	.level {
+		color: color($colors, daysgreen, base);
+	}
+
+	.greeting {
+		margin: 10px 0px 5px;
+		color: gray;
+		font-size: 13px;
+	}
+
+	.review {
+		border: none !important;
+		background: none;
+		color: black;
+		font-size: 14px;
+	}
+
+	.ratingcontainer {
+		margin-bottom: 20px;
+	}
+
+	.ratingcontainer div {
+		display: table;
+		text-align: center;
+	}
+
+	.ratingcontainer span {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.ratingstars {
+		display: inline;
+		list-style: none;
+		padding: 0px;
+		margin-left: 20px;
+	}
+
+	.ratingstars li {
+		display: inline-block;
+		margin: 2px;
+	}
+
+	.ratingstars img {
+		width: 25px;
+	}
+
+}

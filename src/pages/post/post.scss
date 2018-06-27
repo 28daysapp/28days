@@ -1,0 +1,72 @@
+page-post {
+
+	.table {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	.table tr {
+	}
+
+	.table td {
+		width: 50%;
+  	position: relative;
+	}
+
+	.table td:after {
+	  content: '';
+	  display: block;
+	  margin-top: 100%;
+	}
+
+	.table button {
+		position: absolute;
+	  top: 1px;
+	  bottom: 1px;
+	  left: 1px;
+	  right: 1px;
+	  padding: 0px;
+	}
+
+	.table img {
+		width: 100%;
+    height: 100%;
+    object-fit: cover;
+	}
+
+	.table div {
+		padding: 5px 30px 5px 12px;
+		background-color: rgba(0, 0, 0, 0.7);
+		position: absolute;
+		bottom: 0px;
+		height: 4em;
+		width: 100%;
+	}
+
+	.table p {
+		margin: 0px;
+		
+		color: white;
+		font-size: 14px;
+		white-space: pre-line;
+	}
+
+	/* styles for '...' */ 
+	.block-with-text {
+	  /* hide text if it more than N lines  */
+	  overflow: hidden;
+	  /* for set '...' in absolute position */
+	  position: relative; 
+	  /* use this value to count block height */
+	  line-height: 1.2em;
+	  /* max-height = line-height (1.2) * lines max number (3) */
+	  max-height: 2.4em; 
+	  /* fix problem when last visible word doesn't adjoin right side  */
+	  text-align: justify;
+	  
+	  /* */
+	  margin-right: -1em;
+	  padding-right: 1em;
+	}
+
+}

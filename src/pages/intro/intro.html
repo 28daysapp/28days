@@ -1,0 +1,143 @@
+<!--
+  Generated template for the IntroPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>28DAYS – Intro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #content>
+
+  <ul>
+    <li *ngFor="let msg of chatmessages">
+    	<div class="clearfix">
+		    <img *ngIf="msg.showimage" src="assets/gogo.png">
+	    	<p class="bubble buddy" [ngClass]="{setblack: msg.setblack}" *ngIf="msg.gogo">{{msg.message}}</p>
+	    	<p class="bubble me" *ngIf="!msg.gogo">{{msg.message}}</p>
+	    </div>
+  	</li>
+  </ul>
+
+  <div class="modal" *ngIf="showmodal">
+    <div class="modal-inner">
+      <form #modal="ngForm" (ngSubmit)="modalhandler(modal)" novalidate>
+        <p>복용 중인 약물의 이름</p>
+        <ion-input class="tx" placeholder="복용 중인 약물의 이름을 입력해주세요" type="text" name="mediname" ngModel required></ion-input>
+        <p>복용 중인 약물의 용량</p>
+        <div class="mg">
+          <ion-input class="tx" placeholder="복용 중인 약물의 용량을 입력해주세요" type="text" name="mediamount" ngModel required></ion-input>
+          <span>mg</span>
+        </div>
+        <p>약물 복용 주기</p>
+        <div>
+          <span *ngFor="let choice of modalchoices">
+            <ion-checkbox color="daysgreen" (click)="modalValue(choice)" name="time"></ion-checkbox>
+            <label>{{choice.label}}</label>
+          </span>
+        </div>
+        <button [disabled]="modal.form.invalid || modaltime.length == 0">
+          확인
+        </button>
+      </form>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+
+  <div class="btn1" *ngIf="showbtn1">
+    <button (click)="button1()">
+      와 그렇구나!
+    </button>
+  </div>
+
+  <div class="input1" *ngIf="showinput1">
+    <form #ip1="ngForm" (ngSubmit)="input1(ip1)" class="footerform" novalidate>
+      <input placeholder="이름을 입력해줘! (예: 길동)" type="text" name="text" ngModel required>
+      <button [disabled]="ip1.form.invalid">
+        <img src="assets/send.png">
+      </button>
+    </form>
+  </div>
+
+  <div class="btn2" *ngIf="showbtn2">
+    <button class="btn2_1" (click)="button2_1()">
+      불안해
+    </button>
+    <button (click)="button2_2()">
+      우울해
+    </button>
+  </div>
+
+  <div class="input1" *ngIf="showinput2">
+    <form #ip2="ngForm" (ngSubmit)="input2(ip2)" class="footerform" novalidate>
+      <input placeholder="몇 주 정도 됐는지 입력해줘! (예: 3)" type="text" name="text" ngModel required>
+      <button [disabled]="ip2.form.invalid">
+        <img src="assets/send.png">
+      </button>
+    </form>
+  </div>
+
+  <div class="input1" *ngIf="showinput3">
+    <form #ip3="ngForm" (ngSubmit)="input3(ip3)" class="footerform" novalidate>
+      <input placeholder="{{ depressoranxiety }}한 정도를 입력해줘! (예: 5)" type="text" name="text" ngModel required>
+      <button [disabled]="ip3.form.invalid">
+        <img src="assets/send.png">
+      </button>
+    </form>
+  </div>
+
+  <div class="btn2" *ngIf="showbtn3">
+    <button class="btn2_1" (click)="button3_1()">
+      응
+    </button>
+    <button (click)="button3_2()">
+      아니
+    </button>
+  </div>
+
+  <div class="btn2" *ngIf="showbtn4">
+    <button class="btn2_1" (click)="button4_1()">
+      응
+    </button>
+    <button (click)="button4_2()">
+      아니
+    </button>
+  </div>
+
+  <div class="btn2" *ngIf="showbtn5">
+    <button class="btn2_1" (click)="button5_1()">
+      응 해볼게!
+    </button>
+    <button (click)="button5_2()">
+      안 할래..
+    </button>
+  </div>
+
+  <div class="btn2" *ngIf="showbtn6">
+    <button class="btn2_1" (click)="button6_1()">
+      응 해볼게!
+    </button>
+    <button (click)="button6_2()">
+      안 할래..
+    </button>
+  </div>
+
+  <div class="btn2" *ngIf="showbtn7">
+    <button class="btn2_1" (click)="button7_1()">
+      그래, 해볼게!
+    </button>
+    <button (click)="button7_2()">
+      다음에 할게.
+    </button>
+  </div>
+
+</ion-footer>

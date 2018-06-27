@@ -1,0 +1,120 @@
+page-testanxiety {
+
+	.start {
+		background-color: color($colors, cardbggray, base);
+		border-radius: 10px;
+		box-shadow: 3px 3px 3px #808080;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+
+	.start h2 {
+		margin-bottom: 20px;
+	}
+
+	.start p {
+		color: color($colors, gray, base);
+		margin: 0px;
+	}
+
+	.start button {
+		background-color: transparent;
+		font-size: 17px;
+		font-weight: 600;
+		border-top: 1px solid #c0c0c0;
+		width: 100%;
+		padding: 20px 0px !important;
+	}
+
+	.outer {
+    display: table;
+    height: 100%;
+    width: 100%;
+	}
+
+	.middle {
+    display: table-cell;
+    vertical-align: middle;
+	}
+
+	.inner {
+    margin-left: auto;
+    margin-right: auto;
+	}
+
+	.question {
+		background-color: color($colors, cardbggray, base);
+		border-radius: 10px;
+		box-shadow: 3px 3px 3px #808080;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+
+	.question p {
+		color: color($colors, black, base);
+		margin: 0px;
+		padding: 0px 30px;
+		font-size: 14px;
+	}
+
+	.question button {
+		background-color: transparent;
+		font-size: 17px;
+		border-top: 1px solid #c0c0c0;
+		width: 100%;
+		padding: 20px 0px !important;
+	}
+
+	ul {
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.result {
+		background-color: color($colors, cardbggray, base);
+		border-radius: 10px;
+		box-shadow: 3px 3px 3px #808080;
+		width: 100%;
+		text-align: center;
+	}
+
+	.result .inner {
+		padding: 30px 20px 20px;
+	}
+
+	.result h2 {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+
+	.result p {
+		color: color($colors, gray, base);
+		margin: 0px;
+	}
+
+	.result .score {
+		margin-bottom: 10px;
+	}
+
+	.result button {
+		background-color: transparent;
+		font-size: 16px;
+		border-top: 1px solid #c0c0c0;
+		width: 100%;
+		padding: 20px 0px !important;
+	}
+
+	.result span {
+		color: #000;
+		font-size: 16px;
+	}
+
+	.result .ask {
+		color: #000;
+		margin-bottom: 10px;
+	}
+
+}

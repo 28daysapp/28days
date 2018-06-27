@@ -1,0 +1,39 @@
+<!--
+  Generated template for the CommunitywritePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="daysgreen">
+    <ion-title>글쓰기</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="header">
+		<p class="group">{{ title }}</p>
+		<p class="text">당신의 방식으로 표현해 보세요!</p>
+	</div>
+	<div>
+		<textarea [(ngModel)]="text"></textarea>
+	</div>
+	<div class="imagechooser">
+		<button class="gallery" (click)="openGallery()" *ngIf="!pick">
+			<div>
+				<ion-icon name="camera"></ion-icon>
+				<span>사진 업로드 또는 변경</span>
+			</div>
+		</button>
+		<button class="image" (click)="openGallery()" *ngIf="pick">
+			<img src="{{ fileURL }}">
+		</button>
+	</div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button full color="gray" (click)="write()">글 등록하기</button>
+</ion-footer>

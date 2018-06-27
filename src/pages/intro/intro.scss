@@ -1,0 +1,191 @@
+page-intro {
+
+  ion-content {
+    background-color: color($colors, bggreen, base) !important;
+  }
+
+	ul {
+		list-style-type: none;
+    margin: 0;
+    padding: 5px 0px 40px;
+  }
+
+  li {
+    padding: 0px 0px 3px;
+  }
+
+  ul img {
+  	float: left;
+  	position: absolute;
+  	width: 40px;
+  	height: 40px;
+  	margin: 2px 5px;
+  }
+
+  .bubble {
+  	display: inline-block;
+  	border-radius: 15px;
+  	box-shadow: 1px 1px 1px #b0b0b0;
+  	padding: 8px 10px;
+    font-size: 13px;
+    white-space: pre-line;
+  }
+
+  .buddy {
+    color: gray;
+  	position: relative;
+  	left: 55px;
+  	background-color: color($colors, white, base);
+  	margin: 0px 115px 3px 0px;
+  }
+
+  .me {
+  	float: right;
+  	background-color: color($colors, bubblegreen, base);
+  	color: white;
+  	margin: 0px 5px 3px 100px;
+  }
+
+  .clearfix {
+    overflow: hidden;
+	}
+
+  .setblack {
+    color: black !important;
+  }
+
+  .btn1 {
+    padding: 5px 15px;
+  }
+
+  .btn1 button {
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    padding: 10px 0px;
+    width: 100%;
+    background-color: color($colors, daysgreen, base);
+  }
+
+  .input1 {
+    background-color: #e8ede8;
+    padding: 3px 8px;
+  }
+
+  .input1 .footerform {
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 15px;
+    padding: 2px 2px 2px 10px !important;
+    width: 100%;
+    display: table;
+  }
+
+  .input1 .footerform input {
+    border-style: none;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 2px 5px 2px 0px;
+    width: 88%;
+  }
+
+  .input1 .footerform button {
+    padding: 0px;
+    display: table-cell;
+    vertical-align: middle;
+    float: right;
+    border-radius: 15px;
+    // border: 1px solid #000;
+  }
+
+  .input1 .footerform img {
+    height: 24px;
+    vertical-align: middle;
+  }
+
+  .btn2 {
+    padding: 5px 15px;
+    text-align: center;
+  }
+
+  .btn2 button {
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    padding: 10px 0px;
+    width: 46%;
+    background-color: color($colors, daysgreen, base);
+  }
+
+  .btn2 .btn2_1 {
+    margin-right: 15px;
+  }
+
+  .modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modal-inner {
+    background-color: white;
+    border-radius: 20px;
+    width: 90%;
+    padding: 10px 20px;
+    margin: 100px auto 0px;
+    text-align: center;
+    overflow: auto;
+  }
+
+  .modal p {
+    color: color($colors, daysgreen, base);
+  }
+
+  .modal .tx {
+    width: 100%;
+    border-bottom: 1px solid color($colors, dark, base);
+    font-size: 12px;
+  }
+
+  .modal span {
+    margin: 0px 10px;
+    display: inline-block;
+  }
+
+  .modal ion-checkbox {
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+  }
+
+  .modal button {
+    margin-top: 15px;
+    float: right;
+    color: color($colors, daysgreen, base);
+    font-size: 14px;
+  }
+
+  .modal .mg {
+    border-bottom: 1px solid color($colors, dark, base);
+    text-align: left;
+  }
+
+  .modal .mg ion-input {
+    width: 90%;
+    display: inline-block;
+    border: none;
+  }
+
+  .modal .mg span {
+    margin: 0px;
+    font-size: 11px;
+    position: relative;
+    top: 3px;
+  }
+
+}

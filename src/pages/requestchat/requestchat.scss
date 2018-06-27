@@ -1,0 +1,52 @@
+page-requestchat {
+
+	.bg {
+		background-color: #ecf2ed;
+	}
+
+	ion-list {
+		background-color: transparent !important;
+	}
+
+	.bottom-border {
+		border-bottom: 1px solid color($colors, bggray, base) !important;
+		padding: 7px !important;
+		background-color: transparent !important;
+	}
+
+	ion-avatar {
+		margin: 0px 8px 0px 0px !important;
+	}
+
+	ion-avatar img {
+		width: 60px !important;
+		height: 60px !important;
+	}
+
+	.msg {
+		margin: 3px 55px 0px 0px;
+		font-size: 12px;
+		line-height: 1.3em;
+		height: 2.6em;
+		white-space: pre-line;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: gray;
+	}
+
+	// ion-item remove padding
+	.label {
+  	margin: 0px;
+	}
+
+	.username {
+		font-size: 18px;
+		margin-bottom: 10px !important;
+	}
+
+	.time {
+		font-size: 12px;
+		color: gray;
+		float: right;
+	}
+}
