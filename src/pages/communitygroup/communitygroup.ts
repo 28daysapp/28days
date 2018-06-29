@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
+import { PopoverPage } from '../popover/popover';
 
 /**
  * Generated class for the CommunitygroupPage page.
@@ -20,8 +21,12 @@ export class CommunitygroupPage {
   title;
   posts;
   loading;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
-    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider) {
+  popover;
+  selectedData:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
+    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
+    public popoverCtrl: PopoverController, public viewCtrl: ViewController
+  ) {
     this.title = this.community.title;
   }
 
@@ -40,7 +45,7 @@ export class CommunitygroupPage {
 
   comment(post) {
     this.cocomment.initializecomment(post);
-  	this.navCtrl.push('CommunitycommentPage');
+    this.navCtrl.push('CommunitycommentPage');
   }
 
   like(post) {
@@ -58,7 +63,15 @@ export class CommunitygroupPage {
   }
 
   communitywrite() {
-  	this.navCtrl.push('CommunitywritePage');
+    this.navCtrl.push('CommunitywritePage');
   }
 
+  presentPopover(myEvnet){
+    let popover = this.popoverCtrl.create(
+       PopoverPage
+    );
+    popover.present({
+      ev : myEvnet
+    });
+  }
 }

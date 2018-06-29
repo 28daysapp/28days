@@ -80,6 +80,56 @@ export class CommunityProvider {
   	return promise;
   }
 
+  updatePost(txt, dataURL) {
+	var uid = firebase.auth().currentUser.uid;
+	var promise = new Promise((resolve) => {
+		var newPostRef = this.firecommunity.child(this.namecom).push();
+		var postId = newPostRef.key;
+		if (dataURL) {
+			var imageStore = this.firestore.ref('/community/' + this.namecom).child(postId);
+			imageStore.putString(dataURL, 'base64', {contentType: 'image/jpeg'}).then((savedImage) => {
+				newPostRef.set({
+					postid: postId,
+					uid: uid,
+					username: firebase.auth().currentUser.displayName,
+					text: txt,
+					url: savedImage.downloadURL,
+					timestamp: firebase.database.ServerValue.TIMESTAMP,
+					comment: 0,
+					like: 0
+				}).then(() => {
+					resolve(true);
+				});
+			});
+		} else {
+			newPostRef.set({
+				postid: postId,
+				uid: uid,
+				username: firebase.auth().currentUser.displayName,
+				text: txt,
+				url: null,
+				timestamp: firebase.database.ServerValue.TIMESTAMP,
+				comment: 0,
+				like: 0
+			}).then(() => {
+				resolve(true);
+			});
+		}
+	});
+	return promise;
+}
+/*
+communitydelete(firecommunity){
+	this.firecommunity.child(firebase.auth().currentUser.uid).child(this.currentUser)
+      .child('members').orderByChild('uid').equalTo(member.uid).once('value', (snapshot) => {
+        snapshot.ref.remove().then(() => {
+          this.firecommunity.child(User.uid).child(this.currentUser).remove().then(() => {
+            this.getintogroup(this.currentUser);
+          })
+        })
+      })
+}*/
+
   /* get all posts in firebase */
   getallposts() {
   	var uid = firebase.auth().currentUser.uid;

@@ -23,10 +23,12 @@ import { PostProvider } from '../providers/post/post';
 
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { PopoverPage } from '../pages/popover/popover';
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    PopoverPage
   ],
   providers: [
     StatusBar,
