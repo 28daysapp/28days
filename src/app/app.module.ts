@@ -28,8 +28,7 @@ import { PopoverPage } from '../pages/popover/popover';
 
 @NgModule({
   declarations: [
-    MyApp,
-    PopoverPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -39,8 +38,7 @@ import { PopoverPage } from '../pages/popover/popover';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    PopoverPage
+    MyApp
   ],
   providers: [
     StatusBar,

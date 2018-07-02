@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
-import { PopoverPage } from '../popover/popover';
 
 /**
  * Generated class for the CommunitygroupPage page.
@@ -68,7 +67,7 @@ export class CommunitygroupPage {
 
   presentPopover(myEvnet){
     let popover = this.popoverCtrl.create(
-       PopoverPage
+       'PopoverPage'
     );
     popover.present({
       ev : myEvnet

@@ -16,12 +16,14 @@ export class CommunitycommentProvider {
 	postid;
 	comments;
 	subcomments;
+	commentid;
   constructor(public community: CommunityProvider, public events: Events) {
   }
 
   initializecomment(post) {
   	this.post = post;
-  	this.postid = post.postid;
+	this.postid = post.postid;
+	this.commentid = post.commentid;
   }
 
   uploadcomment(txt) {
@@ -95,5 +97,14 @@ export class CommunitycommentProvider {
 	  });
 	  return promise;
   }
-
+  
+ remove(){
+	var promise = new Promise((resolve) => {
+		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ this.commentid }`).set(null);
+			this.community.deleteComment(this.post).then(() => {
+	  			resolve(true);
+	  		});
+	});
+	  return promise;
+ }
 }

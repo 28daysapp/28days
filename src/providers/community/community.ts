@@ -202,11 +202,23 @@ communitydelete(item){
   			this.firecommunity.child(`${ this.namecom }/${ post.postid }`).update({
 	  			comment: snapshot.val().comment + 1
 	  		}).then(() => {
-	  			resolve(true);
+	  			resolve(true);comment: snapshot.val().comment + 1
   			});
 	  	});
 	  });
 	  return promise;
+  }
+  deleteComment(post){
+	var promise = new Promise((resolve) => {
+		this.firecommunity.child(`${ this.namecom }/${ post.postid }`).once("value").then((snapshot) => {
+			this.firecommunity.child(`${ this.namecom }/${ post.postid }`).update({
+				comment: snapshot.val().comment - 1
+			}).then(() => {
+				resolve(true);
+			});
+		});
+	});
+	return promise;
   }
 
 }
