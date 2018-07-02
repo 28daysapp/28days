@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FirebaseListObservable} from 'angularfire2'; 
 //import { FirebaseListObservable } from "angularfire2/database"; 
 
 /**
@@ -23,7 +22,6 @@ export class CommunityfixPage {
 	text = '';
 	fileURL;
 	dataURL;
-	communitylist: FirebaseListObservable<any[]>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
   	private camera: Camera, public loadingCtrl: LoadingController) {
     this.title = this.community.title;
