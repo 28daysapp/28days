@@ -202,7 +202,7 @@ communitydelete(item){
   			this.firecommunity.child(`${ this.namecom }/${ post.postid }`).update({
 	  			comment: snapshot.val().comment + 1
 	  		}).then(() => {
-	  			resolve(true);comment: snapshot.val().comment + 1
+	  			resolve(true);
   			});
 	  	});
 	  });

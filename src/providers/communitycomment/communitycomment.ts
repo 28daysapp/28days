@@ -100,7 +100,7 @@ export class CommunitycommentProvider {
   
  remove(){
 	var promise = new Promise((resolve) => {
-		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ this.commentid }`).set(null);
+		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ this.commentid }`).remove();
 			this.community.deleteComment(this.post).then(() => {
 	  			resolve(true);
 	  		});
