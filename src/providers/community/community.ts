@@ -12,6 +12,7 @@ export class CommunityProvider {
 	firecommunity = firebase.database().ref('/community');
 	firelike = firebase.database().ref('/like');
 	firestore = firebase.storage();
+	fireid = firebase.database().ref('/users');
 	namecom;
 	namecomlist = [
 		'depression',
@@ -32,6 +33,7 @@ export class CommunityProvider {
 	];
 	posts;
   constructor() {
+	  
   }
 
   /* community provider initializer */
@@ -79,6 +81,56 @@ export class CommunityProvider {
   	});
   	return promise;
   }
+
+  updatePost(item) {
+	return this.firecommunity.update(item, );
+}
+
+ /* 
+  updatePost(txt, dataURL) {
+	var uid = firebase.auth().currentUser.uid;
+	var promise = new Promise((resolve) => {
+		var newPostRef = this.firecommunity.child(this.namecom).push();
+		var postId = newPostRef.key;
+		if (dataURL) {
+			var imageStore = this.firestore.ref('/community/' + this.namecom).child(postId);
+			imageStore.putString(dataURL, 'base64', {contentType: 'image/jpeg'}).then((savedImage) => {
+				newPostRef.set({
+					postid: postId,
+					uid: uid,
+					username: firebase.auth().currentUser.displayName,
+					text: txt,
+					url: savedImage.downloadURL,
+					timestamp: firebase.database.ServerValue.TIMESTAMP,
+					comment: 0,
+					like: 0
+				}).then(() => {
+					resolve(true);
+				});
+			});
+		} else {
+			newPostRef.set({
+				postid: postId,
+				uid: uid,
+				username: firebase.auth().currentUser.displayName,
+				text: txt,
+				url: null,
+				timestamp: firebase.database.ServerValue.TIMESTAMP,
+				comment: 0,
+				like: 0
+			}).then(() => {
+				resolve(true);
+			});
+		}
+	});
+	return promise;
+}
+
+*/
+
+communitydelete(item){
+	this.firecommunity.remove(item);
+}
 
   /* get all posts in firebase */
   getallposts() {

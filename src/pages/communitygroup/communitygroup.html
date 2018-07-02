@@ -26,7 +26,7 @@
 			<div class="post">
 				<div class="name">
 					<span>{{ post.username }}</span>
-					<button>
+					<button ion button icon-only (click) = "presentPopover($event)">
 						<ion-icon name="more" color="gray"></ion-icon>
 					</button>
 				</div>
