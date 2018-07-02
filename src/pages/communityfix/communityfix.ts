@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FirebaseListObservable} from 'angularfire2'; 
+//import { FirebaseListObservable } from "angularfire2/database"; 
 
 /**
  * Generated class for the CommunityfixPage page.
@@ -21,19 +23,26 @@ export class CommunityfixPage {
 	text = '';
 	fileURL;
 	dataURL;
+	communitylist: FirebaseListObservable<any[]>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
   	private camera: Camera, public loadingCtrl: LoadingController) {
     this.title = this.community.title;
   }
 
-  fix() {
-	  this.community.updatePost(this.text, this.dataURL).then(() => {
-	  	this.navCtrl.pop();
-	  });
+	/*
+  fix(item) {
+	  this.community.updatePost(item);
 	  let loading = this.loadingCtrl.create({
       dismissOnPageChange: true,
     });
     loading.present();
+	}
+	*/
+
+	fix(item) {
+	  this.community.updatePost(item).then(() => {
+			
+		});
   }
 
   openGallery() {

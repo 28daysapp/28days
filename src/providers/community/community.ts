@@ -12,6 +12,7 @@ export class CommunityProvider {
 	firecommunity = firebase.database().ref('/community');
 	firelike = firebase.database().ref('/like');
 	firestore = firebase.storage();
+	fireid = firebase.database().ref('/users');
 	namecom;
 	namecomlist = [
 		'depression',
@@ -32,6 +33,7 @@ export class CommunityProvider {
 	];
 	posts;
   constructor() {
+	  
   }
 
   /* community provider initializer */
@@ -80,6 +82,11 @@ export class CommunityProvider {
   	return promise;
   }
 
+  updatePost(item) {
+	return this.firecommunity.update(item, );
+}
+
+ /* 
   updatePost(txt, dataURL) {
 	var uid = firebase.auth().currentUser.uid;
 	var promise = new Promise((resolve) => {
@@ -118,17 +125,12 @@ export class CommunityProvider {
 	});
 	return promise;
 }
-/*
-communitydelete(firecommunity){
-	this.firecommunity.child(firebase.auth().currentUser.uid).child(this.currentUser)
-      .child('members').orderByChild('uid').equalTo(member.uid).once('value', (snapshot) => {
-        snapshot.ref.remove().then(() => {
-          this.firecommunity.child(User.uid).child(this.currentUser).remove().then(() => {
-            this.getintogroup(this.currentUser);
-          })
-        })
-      })
-}*/
+
+*/
+
+communitydelete(item){
+	this.firecommunity.remove(item);
+}
 
   /* get all posts in firebase */
   getallposts() {

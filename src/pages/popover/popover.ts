@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 
 /**
@@ -16,12 +16,16 @@ import { CommunityProvider } from '../../providers/community/community';
 })
 export class PopoverPage {
   item;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider) {
+  loading;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider, public loadingCtrl: LoadingController) {
   this.item = this.navParams.get('list');
   }
 
   communitydelete(item){
-   // this.community.communitydelete(item);
+  this.loading = this.loadingCtrl.create();
+  this.loading.present();
+  this.community.communitydelete(item);
+  this.loading.dismiss();
   }
 
   communityfix(){
