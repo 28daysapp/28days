@@ -195,6 +195,14 @@ export class HomePage {
       this.pleaselogin();
     }
   }
+  
+  search() {
+    if (this.user) {
+      this.navCtrl.push('SearchPage');
+    } else {
+      this.pleaselogin();
+    }
+  }
 
   test() {
     this.navCtrl.push('TestPage');

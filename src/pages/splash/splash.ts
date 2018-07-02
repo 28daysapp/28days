@@ -29,7 +29,7 @@ export class SplashPage {
           this.navCtrl.setRoot('IntroPage');
         }
       });
-		}, 1000);
+		}, 2000);
   }
 
 }
