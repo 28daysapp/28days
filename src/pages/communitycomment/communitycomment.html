@@ -22,6 +22,9 @@
 					<p class="name">{{ comment.username }}</p>
 					<p class="text">{{ comment.text }}</p>
 				</div>
+				<button ion button icon-only (click) = "presentPopover($event)">
+					<ion-icon name="more"></ion-icon>
+				</button>
 				<div class="btn">
 					<button (click)="showsubcomment(comment)">답글 달기<span *ngIf="comment.subcommentnum != 0"> - 답글 {{ comment.subcommentnum }}개</span></button>
 				</div>

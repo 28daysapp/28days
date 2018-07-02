@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, PopoverController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 
@@ -21,6 +21,7 @@ export class CommunitycommentPage {
 	comments;
   list_showsubcomment = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
+    public popoverCtrl: PopoverController,
   	public zone: NgZone, public cocomment: CommunitycommentProvider, public formBuilder: FormBuilder) {
     // this event is published when any changes related to firebase comment data happen in CommunitycommentProvider
   	this.events.subscribe('community-newcomment', () => {
@@ -96,6 +97,15 @@ export class CommunitycommentPage {
         comments[i].showsubcomment = true;
       }
     }
+  }
+
+  presentPopover(myEvnet){
+    let commentpopover = this.popoverCtrl.create(
+       'CommentpopoverPage'
+    );
+    commentpopover.present({
+      ev : myEvnet
+    });
   }
 
 }
