@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { ViewChild } from '@angular/core';
 import firebase from 'firebase';
+import { FirstRunPage } from '../pages';
+
 
 // firebase config
 export const firebaseConfig = {
@@ -22,12 +24,22 @@ export const firebaseConfig = {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   // set entry page of app
-  rootPage:any = 'SplashPage';
+  // rootPage:any = 'TabsPage';
+  rootPage = FirstRunPage;
 
-  constructor(public platform: Platform, 
-              public statusBar: StatusBar, 
-              public splashScreen: SplashScreen, 
-              // public push: Push, 
+  pages: any[] = [
+    { title: 'Community', component: 'CommunityPage' },
+    { title: 'Supporter', component: 'SupporterPage' },
+    { title: 'Tabs', component: 'TabsPage' },
+    { title: 'Gogohome', component: 'GogohomePage' },
+    { title: 'Home', component: 'HomePage' },
+    { title: 'My Page', component: 'MypagePage' }
+  ]
+
+  constructor(public platform: Platform,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              // public push: Push,
               public alertCtrl: AlertController) {
     firebase.initializeApp(firebaseConfig);
     platform.ready().then(() => {
@@ -94,4 +106,3 @@ export class MyApp {
   }
   */
 }
-

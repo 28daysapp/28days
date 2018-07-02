@@ -10,7 +10,7 @@
 	    <button ion-button icon-only (click)="loginpage()">
 	      <ion-icon name="log-in"></ion-icon>
 	    </button>
-	  </ion-buttons> 
+	  </ion-buttons>
     <ion-title>
       28DAYS
     </ion-title>
@@ -18,7 +18,7 @@
 	    <button ion-button icon-only (click)="mypage()">
 	      <ion-icon name="settings"></ion-icon>
 	    </button>
-	  </ion-buttons> 
+	  </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -82,11 +82,11 @@
 		</ul>
 	</div>
 
-	<div align="center" class="gogo">
+	<!-- <div align="center" class="gogo">
 		<button (click)="gogo()">
 			<img src="assets/gogo.png">
 		</button>
-	</div>
+	</div> -->
 
 	<div class="modal" *ngIf="showmodal">
 	    <div class="modal-inner">
@@ -95,7 +95,7 @@
 	        <ion-input class="tx" type="text" name="greeting" [(ngModel)]="greeting" required></ion-input>
 	        <button type="reset" (click)="dismissModal()">
 	          취소
-	        </button> 
+	        </button>
 	        <button type="submit">
 	          확인
 	        </button>
