@@ -26,6 +26,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { PopoverPage } from '../pages/popover/popover';
 //import { GroupProvider } from '../providers/group/group';
 
+//import { GroupProvider } from '../providers/group/group';
+
+import { Geolocation } from '@ionic-native/geolocation';
+
 @NgModule({
   declarations: [
     MyApp
@@ -47,6 +51,7 @@ import { PopoverPage } from '../pages/popover/popover';
     File,
     FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
     AuthProvider,
     UserProvider,
     ChatProvider,
