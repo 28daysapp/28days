@@ -208,6 +208,7 @@ communitydelete(item){
 	  });
 	  return promise;
   }
+  
   deleteComment(post){
 	var promise = new Promise((resolve) => {
 		this.firecommunity.child(`${ this.namecom }/${ post.postid }`).once("value").then((snapshot) => {

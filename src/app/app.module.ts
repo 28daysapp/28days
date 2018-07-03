@@ -23,7 +23,6 @@ import { PostProvider } from '../providers/post/post';
 
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { PopoverPage } from '../pages/popover/popover';
 //import { GroupProvider } from '../providers/group/group';
 
 @NgModule({

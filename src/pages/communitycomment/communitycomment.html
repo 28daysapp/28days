@@ -22,9 +22,20 @@
 					<p class="name">{{ comment.username }}</p>
 					<p class="text">{{ comment.text }}</p>
 				</div>
-				<button ion button icon-only (click) = "presentPopover($event)">
-					<ion-icon name="more"></ion-icon>
-				</button>
+				<button (click)="updatebutton(comment)">수정</button>
+				<button (click)="deletecomment(comment)">삭제</button>
+				<div *ngIf="comment.updatecomment">
+					
+					<div class="subcomment">
+							<form [formGroup]="updateForm" class="commentform">
+									<input formControlName="txt" type="text">
+											<button (click)="updatecomment(comment)">
+												<img src="assets/send.png">
+											</button>
+									
+								</form>
+					</div>
+				</div>
 				<div class="btn">
 					<button (click)="showsubcomment(comment)">답글 달기<span *ngIf="comment.subcommentnum != 0"> - 답글 {{ comment.subcommentnum }}개</span></button>
 				</div>
@@ -58,9 +69,10 @@
 
 	<form [formGroup]="commentForm" class="footerform">
 		<input formControlName="txt" type="text">
-		<button (click)="writeComment()">
-			<img src="assets/send.png">
-		</button>
+				<button (click)="writeComment()">
+					<img src="assets/send.png">
+				</button>
+		
 	</form>
 
 </ion-footer>
