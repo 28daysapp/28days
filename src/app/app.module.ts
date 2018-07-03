@@ -25,6 +25,10 @@ import { PostProvider } from '../providers/post/post';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
 
+//import { GroupProvider } from '../providers/group/group';
+
+import { Geolocation } from '@ionic-native/geolocation';
+
 @NgModule({
   declarations: [
     MyApp
@@ -46,6 +50,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     File,
     FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
     AuthProvider,
     UserProvider,
     ChatProvider,
