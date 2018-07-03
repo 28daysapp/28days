@@ -23,10 +23,8 @@ import { PostProvider } from '../providers/post/post';
 
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-<<<<<<< Updated upstream
-=======
+
 //import { GroupProvider } from '../providers/group/group';
->>>>>>> Stashed changes
 
 import { Geolocation } from '@ionic-native/geolocation';
 
