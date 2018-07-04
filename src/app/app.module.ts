@@ -20,11 +20,12 @@ import { EmotionProvider } from '../providers/emotion/emotion';
 import { CommunityProvider } from '../providers/community/community';
 import { CommunitycommentProvider } from '../providers/communitycomment/communitycomment';
 import { PostProvider } from '../providers/post/post';
+import { CommunityfixPage } from '../pages/communityfix/communityfix'
 
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { PopoverPage } from '../pages/popover/popover';
 //import { GroupProvider } from '../providers/group/group';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { PopoverPage } from '../pages/popover/popover';
     CommunityProvider,
     CommunitycommentProvider,
     PostProvider,
+    CommunityfixPage,
     // IamportService,
     InAppBrowser,
     //GroupProvider,

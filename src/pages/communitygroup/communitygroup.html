@@ -26,8 +26,11 @@
 			<div class="post">
 				<div class="name">
 					<span>{{ post.username }}</span>
-					<button ion button icon-only (click) = "presentPopover($event)">
-						<ion-icon name="more" color="gray"></ion-icon>
+					<button ion button icon-only (click) = "updatepost(post)">
+							<ion-icon name="more" color="gray"></ion-icon>
+						</button>
+					<button ion button icon-only (click) = "postdelete(post)">
+						<ion-icon name="trash" color="red"></ion-icon>
 					</button>
 				</div>
 				<div class="picture" *ngIf="post.url">
