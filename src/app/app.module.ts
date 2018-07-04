@@ -28,6 +28,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
+
 @NgModule({
   declarations: [
     MyApp
