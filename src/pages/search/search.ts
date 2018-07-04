@@ -1,7 +1,7 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { NavController, IonicPage, AlertController } from 'ionic-angular';
 
-import { Geolocation, GeolocationOptions, Geoposition, PositionError } from "@ionic-native/geolocation";
+import { Geolocation} from "@ionic-native/geolocation";
 
 declare var google;
 
@@ -12,67 +12,105 @@ declare var google;
 })
 export class SearchPage {
 
-  @ViewChild("map") mapElement : ElementRef;
-  private options : GeolocationOptions;
-  private currentPos : Geoposition;
-  private userLat : any; //User's latitude 
-  private userLong : any; // User's longitude
-  private map : any;
-  private alertCtrl : AlertController;
+  @ViewChild("map") 
+  mapElement : ElementRef;
 
+  map : any;
+  alertCtrl : AlertController;
+  latLng: any;
+  mapOptions: any;
+  markers: any;
+  isKM: any = 500;
+  isType: any = "";
+  places: Array<any>;
 
-  constructor(public navCtrl: NavController, private geolocation : Geolocation) {
-    this.generateTopics();
+  constructor(public navCtrl: NavController, private ngZone: NgZone, private geolocation : Geolocation) {
+    this.generatePlaces();
   }
 
-  topics: string[];
-
-  generateTopics() {
-    this.topics = [
-      "Topic 1",
-      "Topic 2",
-      "Topic 3",
-      "Map1",
-      "Hospital",
-      "Doctor"
-    ];
+  generatePlaces() {
+    // this.places2 = [
+    //   "정신과1",
+    //   "상담센터1",
+    //   "청소년상담센터"
+    // ];
   }
 
-  ionViewDidEnter() {
-    this.getUserPosition();
+  getPlaces(event: any) {
+    this.generatePlaces();
+    let searchVal = event.target.value;
+    if(searchVal && searchVal.trim() != '') {
+      this.places = this.places.filter((topic) => {
+        return (topic.toLowerCase().indexOf(searchVal.toLowerCase()) > -1);
+      })
+    }
   }
 
-  getUserPosition() {
-    this.options = {
-      enableHighAccuracy : false
-    };
+  ionViewDidLoad() {
+    this.loadMap();
+  }
 
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-      this.currentPos = pos;
-      console.log(pos);
+  loadMap(){
 
-      this.userLat = pos.coords.latitude;
-      this.userLong = pos.coords.longitude;
+    this.geolocation.getCurrentPosition().then((position) => {
 
-      this.addMap(pos.coords.latitude, pos.coords.longitude);
+      this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+     
+      this.mapOptions = {
+        center: this.latLng,
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }   
 
-    }, (err : PositionError) => {
-      console.log("Error : " + err.message);
+      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+
+    }, (err) => {
+      alert('err '+err);
     });
   }
 
-  addMap(lat, long) {
-    let latLng = new google.maps.LatLng(lat, long);
+ /*-----------------Find Nearby Place------------------------*/ 
 
-    let mapOptions = {
-      center : latLng,
-      zoom : 15,
-      mapTypeId : google.maps.MapTypeId.ROADMAP
+  nearbyPlace(){
+    this.loadMap();
+    this.markers = [];
+    let service = new google.maps.places.PlacesService(this.map);
+    service.nearbySearch({
+        location: this.latLng,
+        radius: this.isKM,
+        types: [this.isType]
+    }, (results, status) => {
+        this.callback(results, status);
+    });
+  }
+
+  callback(results, status) {
+    console.log("status: " + status);
+    console.log("google maps places: " + google.maps.places);
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        this.createMarker(results[i]);
+
+      }
     }
+  }
 
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+  createMarker(place){
+    var placeLoc = place;
+    console.log('placeLoc',placeLoc)
+    this.markers = new google.maps.Marker({
+        map: this.map,
+        position: place.geometry.location
+    });
 
-    this.addMarker();
+    let infowindow = new google.maps.InfoWindow();
+
+    google.maps.event.addListener(this.markers, 'click', () => {
+      this.ngZone.run(() => {
+        infowindow.setContent(place.name);
+        infowindow.open(this.map, this.markers);
+      });
+    });
   }
 
   addMarker() {
@@ -82,32 +120,21 @@ export class SearchPage {
       animation : google.maps.Animation.DROP,
       postiion : this.map.getCenter(),
       icon : userMarker
-    });
+  });
 
+  // google.maps.event.addListener(marker, "click", () => {
+  //     const messages = "Latitude : " + this.userLat + "<br>Longitude : " + this.userLong;
+  //     const alert = this.alertCtrl.create({
+  //       title: '현재 위치',
+  //       message : messages,
+  //       buttons: ['확인']
+  //     });
+  //     alert.present();
+  //   });
+  // }
 
-    console.log(marker.position);
-    console.log(this.userLat);
-    console.log(this.userLong);
-
-    google.maps.event.addListener(marker, "click", () => {
-      const messages = "Latitude : " + this.userLat + "<br>Longitude : " + this.userLong;
-      const alert = this.alertCtrl.create({
-        title: '현재 위치',
-        message : messages,
-        buttons: ['확인']
-      });
-      alert.present();
-    });
+  // listPlaces() {
+  //   this.navCtrl.push('PlacesPage');
+  // }
   }
-
-  getTopics(ev: any) {
-    this.generateTopics();
-    let serVal = ev.target.value;
-    if(serVal && serVal.trim() != '') {
-      this.topics = this.topics.filter((topic) => {
-        return (topic.toLowerCase().indexOf(serVal.toLowerCase()) > -1);
-      })
-    }
-  }
-
 }
