@@ -22,8 +22,10 @@
 					<p class="name">{{ comment.username }}</p>
 					<p class="text">{{ comment.text }}</p>
 				</div>
-				<button (click)="updatebutton(comment)">수정</button>
+			<span *ngIf="usercorrect(comment)">
+				<button  (click)="updatebutton(comment)">수정</button>
 				<button (click)="deletecomment(comment)">삭제</button>
+			</span>
 				<div *ngIf="comment.updatecomment">
 					
 					<div class="subcomment">
