@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, PopoverController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
+import firebase from 'firebase';
 
 /**
  * Generated class for the CommunitycommentPage page.
@@ -125,6 +126,13 @@ export class CommunitycommentPage {
 
   deletecomment(comment){
     this.cocomment.deletecomment(comment);
+  }
+
+  usercorrect(comment){
+    var correct = false;
+    if(firebase.auth().currentUser.uid == comment.uid)
+      correct = true;
+    return correct;
   }
 
 }
