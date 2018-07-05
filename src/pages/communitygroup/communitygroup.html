@@ -26,11 +26,11 @@
 			<div class="post">
 				<div class="name">
 					<span>{{ post.username }}</span>
-					<button ion button icon-only (click) = "updatepost(post)">
-							<ion-icon name="more" color="gray"></ion-icon>
+					<button (click) = "updatepost(post)">
+						수정 
 						</button>
-					<button ion button icon-only (click) = "postdelete(post)">
-						<ion-icon name="trash" color="red"></ion-icon>
+					<button (click) = "postdelete(post)">
+						삭제
 					</button>
 				</div>
 				<div class="picture" *ngIf="post.url">

@@ -84,13 +84,26 @@ export class CommunityProvider {
   	return promise;
   }
 
-updatePost(text) {
+updatePost(text, dataURL) {
 	var promise = new Promise((resolve) => {
-		this.firecommunity.child(`${ this.namecom }/${ this.post.postid }`).update({
-			text: text,
-		}).then(() => {
-			resolve(true);
-		});
+		if(dataURL){
+			var imageStore = this.firestore.ref('/community' + this.namecom).child(this.post.postid);
+			imageStore.putString(dataURL, 'base64', {contentType: 'image/jpeg'}).then((savedImage) => {
+			this.firecommunity.child(`${ this.namecom }/${ this.post.postid }`).update({
+				text: text,
+				url: savedImage.downloadURL
+			}).then(() => {
+				resolve(true);
+				});
+			});
+		}
+		else {
+			this.firecommunity.child(`${ this.namecom }/${ this.post.postid }`).update({
+				text: text
+			}).then(() => {
+				resolve(true);
+			});
+		}
 	});
 	return promise;
 }
@@ -184,6 +197,7 @@ postdelete(post){
 	  });
 	  return promise;
   }
+  
   deleteComment(post){
 	var promise = new Promise((resolve) => {
 		this.firecommunity.child(`${ this.namecom }/${ post.postid }`).once("value").then((snapshot) => {

@@ -16,11 +16,11 @@ import { CommunitycommentProvider } from '../../providers/communitycomment/commu
 export class CommentpopoverPage {
   item;
   constructor(public navCtrl: NavController, public navParams: NavParams,  public comment: CommunitycommentProvider) {
-    this.item = this.navParams.get('list');
+    
   }
 
-  commentdelete(){
-     this.comment.remove();
+  commentdelete(item){
+     //this.comment.deletecomment(item);
    }
  
    commentfix(){

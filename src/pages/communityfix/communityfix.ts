@@ -17,9 +17,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class CommunityfixPage {
 	title;
-	post;
+	post = this.community.post;
 	pick = false;
-	text = this.text;
+	txt = this.community.post.text;
 	fileURL;
 	dataURL;
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
@@ -27,8 +27,8 @@ export class CommunityfixPage {
     this.title = this.community.title;
   }
 
-	fix(text) {
-	  this.community.updatePost(text).then(() => {
+	fix(txt) {
+	  this.community.updatePost(txt, this.dataURL).then(() => {
 	  	this.navCtrl.pop();
 	  });
 	  let loading = this.loadingCtrl.create({
