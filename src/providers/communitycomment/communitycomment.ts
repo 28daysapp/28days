@@ -48,6 +48,16 @@ export class CommunitycommentProvider {
   	return promise;
   }
 
+  getallsubcomments(comment){
+	this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ comment.commentid.subcomment }`).on('value', (snapshot) => {
+		this.subcomments = [];
+		for (var i in snapshot.val()) {
+			this.subcomments.push(snapshot.val()[i]);
+		}
+		this.events.publish('community-newsubcomment');
+	});
+  }
+
   getallcomments() {
     // on function listens for data changes at a particular location
   	this.firecomment.child(`${ this.community.namecom }/${ this.postid }`).on('value', (snapshot) => {

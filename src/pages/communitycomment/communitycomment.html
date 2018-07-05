@@ -36,13 +36,14 @@
 								</form>
 					</div>
 				</div>
+				<!--
 				<div class="btn">
 					<button (click)="showsubcomment(comment)">답글 달기<span *ngIf="comment.subcommentnum != 0"> - 답글 {{ comment.subcommentnum }}개</span></button>
 				</div>
 			</div>
 			<div *ngIf="comment.showsubcomment">
 				<ul class="subcommentlist" *ngIf="comment.subcommentnum != 0">
-					<li *ngFor="let subcomment of JSONtoArray(comment.subcomment)">
+					<li *ngFor="let subcomment of subcomments">
 						<div class="subcomment">
 							<div class="bubble">
 								<p class="name">{{ subcomment.username }}</p>
@@ -58,8 +59,8 @@
 							<img src="assets/send.png">
 						</button>
 					</form>
-				</div>
-			</div>
+				</div> -->
+			</div> 
 		</li>
 	</ul>
 
