@@ -9,43 +9,8 @@
   
   <ion-content padding>
     <ion-searchbar (ionInput)="getTopics($event)"></ion-searchbar>
-    
-    <ion-item>
-        <ion-label>Select A Place</ion-label>
-            <ion-select [(ngModel)]="isType" (ionChange)="nearbyPlace()">
-            <ion-option value="">Select</ion-option>
-            <ion-option value="hospital">Hospital</ion-option>
-            <ion-option value="doctor">Doctor</ion-option>
-            <ion-option value="counseling center">Counseling Center</ion-option>
-
-            </ion-select>
-    </ion-item>
-
-    <ion-item>
-    <ion-label>Select Distance</ion-label>
-        <ion-select [(ngModel)]="isKM" (ionChange)="nearbyPlace()">
-        <ion-option value="500">Select</ion-option>
-            <ion-option value="2000">2 KM</ion-option>
-            <ion-option value="4000">4 KM</ion-option>
-            <ion-option value="6000">6 KM</ion-option>
-            <ion-option value="8000">8 KM</ion-option>
-        </ion-select>
-    </ion-item>
 
     <div #map id="map"></div>
-
-
-    <button (click)="listPlaces()">
-      병원 목록 보기
-    </button>
-
-    <button (click)="listPlaces()">
-      GIT TEST!!!!!!!!
-    </button>
-
-    <button (click)="listPlaces()">
-      GIT TEST!!!!!!!!222222
-    </button>
 
 
     <ion-list>
