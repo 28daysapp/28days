@@ -16,9 +16,12 @@ import { CommunitycommentProvider } from '../../providers/communitycomment/commu
   templateUrl: 'communitycomment.html',
 })
 export class CommunitycommentPage {
-	commentForm: FormGroup;
+  commentForm: FormGroup;
+  updateForm: FormGroup;
 	subcommentForm: FormGroup;
-	comments;
+  comments;
+  commentid;
+  commenttxt;
   list_showsubcomment = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public popoverCtrl: PopoverController,
@@ -28,6 +31,8 @@ export class CommunitycommentPage {
       this.comments = [];
       this.zone.run(() => {
         this.comments = this.cocomment.comments;
+        this.commentid = this.cocomment.commentid;
+        this.commenttxt = this.cocomment.text;
         this.setshowsubcomment(this.comments);
       });
     });
@@ -40,6 +45,7 @@ export class CommunitycommentPage {
     this.subcommentForm = formBuilder.group({
       txt: ['', Validators.required]
     });
+    
   }
 
   ionViewDidLoad() {
@@ -99,13 +105,22 @@ export class CommunitycommentPage {
     }
   }
 
-  presentPopover(myEvnet){
-    let commentpopover = this.popoverCtrl.create(
-       'CommentpopoverPage'
-    );
-    commentpopover.present({
-      ev : myEvnet
+  updatebutton(comment){
+    comment.updatecomment = true;
+    this.updateForm = this.formBuilder.group({
+      txt: [comment.text, Validators.required]
     });
+  }
+
+  updatecomment(comment){
+      var txt = this.updateForm.value.txt;
+      this.updateForm.reset();
+      //comment.updatecomment = false;
+      this.cocomment.updatecomment(comment,txt);
+  }
+
+  deletecomment(comment){
+    this.cocomment.deletecomment(comment);
   }
 
 }

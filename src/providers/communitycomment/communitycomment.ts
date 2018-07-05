@@ -17,13 +17,13 @@ export class CommunitycommentProvider {
 	comments;
 	subcomments;
 	commentid;
+	text;
   constructor(public community: CommunityProvider, public events: Events) {
   }
 
   initializecomment(post) {
   	this.post = post;
 	this.postid = post.postid;
-	this.commentid = post.commentid;
   }
 
   uploadcomment(txt) {
@@ -97,10 +97,21 @@ export class CommunitycommentProvider {
 	  });
 	  return promise;
   }
-  
- remove(){
+
+  updatecomment(comments,txt){
 	var promise = new Promise((resolve) => {
-		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ this.commentid }`).remove();
+		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${comments.commentid}`).update({
+			text: txt
+		}).then(() => {
+			resolve(true);
+		});
+	});
+	return promise;
+  }
+  
+  deletecomment(comment){
+	var promise = new Promise((resolve) => {
+		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${comment.commentid}`).remove();
 			this.community.deleteComment(this.post).then(() => {
 	  			resolve(true);
 	  		});

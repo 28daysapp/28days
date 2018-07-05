@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
+import firebase from 'firebase';
 /**
  * Generated class for the CommentpopoverPage page.
  *
@@ -21,6 +22,9 @@ export class CommentpopoverPage {
 
   commentdelete(item){
      //this.comment.deletecomment(item);
+
+     this.comment.deletecomment(item);
+
    }
  
    commentfix(){
