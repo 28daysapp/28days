@@ -9,11 +9,11 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class CommunityProvider {
+	namecom;
 	firecommunity = firebase.database().ref('/community');
 	firelike = firebase.database().ref('/like');
 	firestore = firebase.storage();
-	fireid = firebase.database().ref('/users');
-	namecom;
+	firecomment = firebase.database().ref('/communitycomment');
 	namecomlist = [
 		'depression',
 		'anxiety',
@@ -32,6 +32,7 @@ export class CommunityProvider {
 		'가정폭력 서포트 그룹'
 	];
 	posts;
+	post;
   constructor() {
 	  
   }
@@ -39,7 +40,8 @@ export class CommunityProvider {
   /* community provider initializer */
   initializecom(order) {
   	this.title = this.titlelist[order];
-  	this.namecom = this.namecomlist[order];
+	this.namecom = this.namecomlist[order];
+    this.posts = this.posts;
   }
 
   /* upload post to firebase */
@@ -82,42 +84,22 @@ export class CommunityProvider {
   	return promise;
   }
 
-  updatePost(item) {
-	return this.firecommunity.update(item, );
-}
-
- /* 
-  updatePost(txt, dataURL) {
-	var uid = firebase.auth().currentUser.uid;
+updatePost(text, dataURL) {
 	var promise = new Promise((resolve) => {
-		var newPostRef = this.firecommunity.child(this.namecom).push();
-		var postId = newPostRef.key;
-		if (dataURL) {
-			var imageStore = this.firestore.ref('/community/' + this.namecom).child(postId);
+		if(dataURL){
+			var imageStore = this.firestore.ref('/community' + this.namecom).child(this.post.postid);
 			imageStore.putString(dataURL, 'base64', {contentType: 'image/jpeg'}).then((savedImage) => {
-				newPostRef.set({
-					postid: postId,
-					uid: uid,
-					username: firebase.auth().currentUser.displayName,
-					text: txt,
-					url: savedImage.downloadURL,
-					timestamp: firebase.database.ServerValue.TIMESTAMP,
-					comment: 0,
-					like: 0
-				}).then(() => {
-					resolve(true);
+			this.firecommunity.child(`${ this.namecom }/${ this.post.postid }`).update({
+				text: text,
+				url: savedImage.downloadURL
+			}).then(() => {
+				resolve(true);
 				});
 			});
-		} else {
-			newPostRef.set({
-				postid: postId,
-				uid: uid,
-				username: firebase.auth().currentUser.displayName,
-				text: txt,
-				url: null,
-				timestamp: firebase.database.ServerValue.TIMESTAMP,
-				comment: 0,
-				like: 0
+		}
+		else {
+			this.firecommunity.child(`${ this.namecom }/${ this.post.postid }`).update({
+				text: text
 			}).then(() => {
 				resolve(true);
 			});
@@ -126,10 +108,17 @@ export class CommunityProvider {
 	return promise;
 }
 
-*/
-
-communitydelete(item){
-	this.firecommunity.remove(item);
+postdelete(post){
+	var promise = new Promise((resolve) => {
+	this.firecomment.child(`${ this.namecom }/${ post.postid }`).remove();
+	this.firecommunity.child(`${ this.namecom }/${ post.postid }`).remove().then(() => {
+	   this.firecommunity.child(`${ this.namecom }`).update({
+		   }).then(() => {
+	  			resolve(true);
+	  		});
+	 });
+	});
+   return promise;
 }
 
   /* get all posts in firebase */

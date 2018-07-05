@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 
+
 /**
  * Generated class for the CommunityPage page.
  *

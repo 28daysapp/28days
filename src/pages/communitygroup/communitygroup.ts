@@ -17,10 +17,12 @@ import { CommunitycommentProvider } from '../../providers/communitycomment/commu
 })
 export class CommunitygroupPage {
   @ViewChild('content') content: Content;
+  
   title;
   posts;
   loading;
   popover;
+  post;
   selectedData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
@@ -63,6 +65,24 @@ export class CommunitygroupPage {
 
   communitywrite() {
     this.navCtrl.push('CommunitywritePage');
+  }
+
+  postdelete(post){
+    this.community.postdelete(post).then(() => {
+      this.navCtrl.pop();
+    })
+    let loading = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    loading.present();
+  }
+
+  updatepost(post){
+    console.log(post);
+    this.community.post = post;
+    this.navCtrl.push('CommunityfixPage', {
+      text: post.text,
+    });
   }
 
   presentPopover(myEvnet){

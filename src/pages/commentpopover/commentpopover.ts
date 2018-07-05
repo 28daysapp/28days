@@ -21,7 +21,10 @@ export class CommentpopoverPage {
   }
 
   commentdelete(item){
+     //this.comment.deletecomment(item);
+
      this.comment.deletecomment(item);
+
    }
  
    commentfix(){
