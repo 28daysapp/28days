@@ -84,7 +84,7 @@ export class CommunityProvider {
   	return promise;
   }
 
-updatePost(text, dataURL) {
+  updatePost(text, dataURL) {
 	var promise = new Promise((resolve) => {
 		if(dataURL){
 			var imageStore = this.firestore.ref('/community' + this.namecom).child(this.post.postid);

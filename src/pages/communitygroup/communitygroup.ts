@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
+import firebase from 'firebase';
 
 /**
  * Generated class for the CommunitygroupPage page.
@@ -17,7 +18,8 @@ import { CommunitycommentProvider } from '../../providers/communitycomment/commu
 })
 export class CommunitygroupPage {
   @ViewChild('content') content: Content;
-  
+  fireusers = firebase.database().ref('/users');
+  firecommunity = firebase.database().ref('/community');
   title;
   posts;
   loading;
@@ -83,6 +85,14 @@ export class CommunitygroupPage {
     this.navCtrl.push('CommunityfixPage', {
       text: post.text,
     });
+  }
+
+  usercorrect(post){
+    var correct = false;
+    if(firebase.auth().currentUser.uid == post.uid){
+      correct = true;
+    }
+    return correct;
   }
 
   presentPopover(myEvnet){

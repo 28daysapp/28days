@@ -26,12 +26,14 @@
 			<div class="post">
 				<div class="name">
 					<span>{{ post.username }}</span>
+					<div *ngIf="usercorrect(post)">
 					<button (click) = "updatepost(post)">
 						수정 
 						</button>
 					<button (click) = "postdelete(post)">
 						삭제
 					</button>
+				</div>
 				</div>
 				<div class="picture" *ngIf="post.url">
 					<img src="{{ post.url }}">
