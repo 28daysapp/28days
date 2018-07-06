@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, PopoverController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
+import firebase from 'firebase';
 
 /**
  * Generated class for the CommunitycommentPage page.
@@ -20,6 +21,7 @@ export class CommunitycommentPage {
   updateForm: FormGroup;
 	subcommentForm: FormGroup;
   comments;
+  subcomments;
   commentid;
   commenttxt;
   list_showsubcomment = [];
@@ -29,6 +31,7 @@ export class CommunitycommentPage {
     // this event is published when any changes related to firebase comment data happen in CommunitycommentProvider
   	this.events.subscribe('community-newcomment', () => {
       this.comments = [];
+      this.subcomments = [];
       this.zone.run(() => {
         this.comments = this.cocomment.comments;
         this.commentid = this.cocomment.commentid;
@@ -55,6 +58,7 @@ export class CommunitycommentPage {
   ionViewWillLeave(){
     console.log('ionViewWillLeave - Communitycomment');
     this.events.unsubscribe('community-newcomment');
+    this.events.unsubscribe('community-newsubcomment');
     this.cocomment.stoplistencomments();
   }
 
@@ -79,7 +83,8 @@ export class CommunitycommentPage {
     } else {
     	comment.showsubcomment = true;
       // push commentid to list of subcomments which were opened
-      this.list_showsubcomment.push(comment.commentid);
+      //this.list_showsubcomment.push(comment.commentid);
+      this.cocomment.getallsubcomments(comment);
     }
   }
 
@@ -92,9 +97,9 @@ export class CommunitycommentPage {
   	}
   }
 
-  // JSONtoArray(json) {
-  // 	return Object.keys(json).map(function(k) { return json[k] });
-  // }
+   /*JSONtoArray(json) {
+   	return Object.keys(json).map(function(k) { return json[k] });
+   }*/
 
   /* set previous state about whether subcomments were shown or not */
   setshowsubcomment(comments) {
@@ -121,6 +126,13 @@ export class CommunitycommentPage {
 
   deletecomment(comment){
     this.cocomment.deletecomment(comment);
+  }
+
+  usercorrect(comment){
+    var correct = false;
+    if(firebase.auth().currentUser.uid == comment.uid)
+      correct = true;
+    return correct;
   }
 
 }

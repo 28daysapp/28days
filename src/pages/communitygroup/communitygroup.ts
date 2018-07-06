@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
+import firebase from 'firebase';
 
 /**
  * Generated class for the CommunitygroupPage page.
@@ -17,10 +18,13 @@ import { CommunitycommentProvider } from '../../providers/communitycomment/commu
 })
 export class CommunitygroupPage {
   @ViewChild('content') content: Content;
+  fireusers = firebase.database().ref('/users');
+  firecommunity = firebase.database().ref('/community');
   title;
   posts;
   loading;
   popover;
+  post;
   selectedData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
@@ -63,6 +67,32 @@ export class CommunitygroupPage {
 
   communitywrite() {
     this.navCtrl.push('CommunitywritePage');
+  }
+
+  postdelete(post){
+    this.community.postdelete(post).then(() => {
+      this.navCtrl.pop();
+    })
+    let loading = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+    loading.present();
+  }
+
+  updatepost(post){
+    console.log(post);
+    this.community.post = post;
+    this.navCtrl.push('CommunityfixPage', {
+      text: post.text,
+    });
+  }
+
+  usercorrect(post){
+    var correct = false;
+    if(firebase.auth().currentUser.uid == post.uid){
+      correct = true;
+    }
+    return correct;
   }
 
   presentPopover(myEvnet){

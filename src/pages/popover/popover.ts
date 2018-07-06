@@ -22,10 +22,7 @@ export class PopoverPage {
   }
 
   communitydelete(item){
-  this.loading = this.loadingCtrl.create();
-  this.loading.present();
-  this.community.communitydelete(item);
-  this.loading.dismiss();
+
   }
 
   communityfix(){
