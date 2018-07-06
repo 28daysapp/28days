@@ -15,13 +15,13 @@ export class SearchPage {
 
   @ViewChild("map") mapElement : ElementRef;
 
-  map : any;
-  alertCtrl : AlertController;
-  latLng: any;
-  mapOptions: any;
-  markers: any;
+  private map : any;
+  private alertCtrl : AlertController;
+  private latLng: any;
+  private mapOptions: any;
+  private markers: any;
 
-  places: Array<any>;
+  private places: Array<any>;
 
   constructor(public navCtrl: NavController, private ngZone: NgZone, private geolocation : Geolocation) {
     
@@ -52,13 +52,21 @@ export class SearchPage {
     });
   }
 
+  counselingMap() {
+    console.log("counseling");
+  }
+
+  psychiatricMap() {
+    console.log("psychiatric");
+  }
+
  /*-----------------Search Place by Text------------------------*/   
   searchByText(location) {
     let service = new google.maps.places.PlacesService(this.map);
     service.textSearch({
       location: location,
-      query: "상담센터",
-      radius: '500'
+      query: "정신과",
+      radius: '0'
     }, (results, status) => {
       this.callback(results, status);
     });
@@ -70,8 +78,6 @@ export class SearchPage {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
         this.createMarker(results[i]);
-        this.generatePlaces();        
-        console.log(results[i].name);
       }
     }
   }
@@ -80,19 +86,8 @@ export class SearchPage {
     this.places = [];
   }
 
-  getPlaces(event: any) {
-    this.generatePlaces();
-    let searchVal = event.target.value;
-    if(searchVal && searchVal.trim() != '') {
-      this.places = this.places.filter((topic) => {
-        return (topic.toLowerCase().indexOf(searchVal.toLowerCase()) > -1);
-      })
-    }
-  }
 
   createMarker(place){
-    var placeLoc = place;
-    console.log('placeLoc',placeLoc)
     this.markers = new google.maps.Marker({
         map: this.map,
         position: place.geometry.location
@@ -105,16 +100,6 @@ export class SearchPage {
         infowindow.setContent(place.name);
         infowindow.open(this.map, this.markers);
       });
-    });
-  }
-
-  addMarker() {
-    var userMarker = "assets/imgs/custom_icon.png";
-    var marker = new google.maps.Marker({
-      map : this.map,
-      animation : google.maps.Animation.DROP,
-      postiion : this.map.getCenter(),
-      icon : userMarker
     });
   }
 

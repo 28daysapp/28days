@@ -3,15 +3,13 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>Search Page</ion-title>
+      <ion-title>도움을 받아보세요!</ion-title>
     </ion-navbar>
   </ion-header>
   
   <ion-content padding>
-    <ion-searchbar (ionInput)="getTopics($event)"></ion-searchbar>
 
     <div #map id="map"></div>
-
 
     <ion-list>
       <ion-item *ngFor="let place of places">
