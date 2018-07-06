@@ -6,13 +6,53 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>supporter-popover</ion-title>
+  <ion-navbar color="daysgreen">
+    <ion-title> 1:1 서포트 </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+<div class="align-center">
+
+  <h4> 누구를 <br> 선택하시겠어요? </h4>
+</div>
+
+  <ion-card class="cards">
+    <ion-card-content>
+
+    <div class="align-center">
+      <h1>서포터</h1>
+      <p>고민과 경험을 <br>공유할 수 있는 <br> 또래 지지자</p>
+    </div>
+
+      <div class="align-center">
+        <button ion-button block color="daysgreen" (click)="supportertest()">
+          피어 서포터 연결
+        </button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="cards">
+      <ion-card-content>
+
+        <div class="align-center">
+          <h1>상담사</h1>
+          <p>상담 센터에 <br>종사하는 <br>심리치료 전문가</p>
+        </div>
+
+      <div class="align-center">
+        <button ion-button block color="daysgreen" (click)="counselortest()">
+          전문 상담사 연결
+        </button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
 
 </ion-content>

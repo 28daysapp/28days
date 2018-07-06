@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SupporterPopoverPage page.
+ * Generated class for the OnofflinePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,24 +10,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-supporter-popover',
-  templateUrl: 'supporter-popover.html',
+  selector: 'page-onoffline',
+  templateUrl: 'onoffline.html',
 })
-export class SupporterPopoverPage {
+export class OnofflinePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SupporterPopoverPage');
+    console.log('ionViewDidLoad OnofflinePage');
   }
 
-  supportertest() {
-    this.navCtrl.push('SupporterPage');
+  onlineload() {
+    this.navCtrl.push('SupporterPopoverPage');
   }
 
-  // counselortest() {
-  //   this.navCtrl.push('CounselorPage');
+  // searchload() {
+  //   this.navCtrl.push('SearchPage');
   // }
 
 }
