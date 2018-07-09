@@ -27,7 +27,7 @@ export class OnofflinePage {
   }
 
   // searchload() {
-  //   this.navCtrl.push('SearchPage');
+  //   this.navCtrl.push('SearchhelpPage');
   // }
 
 }
