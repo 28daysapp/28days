@@ -80,10 +80,9 @@ export class CommunitygroupPage {
   }
 
   updatepost(post){
-    console.log(post);
     this.community.post = post;
     this.navCtrl.push('CommunityfixPage', {
-      text: post.text,
+     //text: post.text,
     });
   }
 
