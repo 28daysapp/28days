@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ChartsModule } from 'ng2-charts';
+import { HttpModule } from '@angular/http';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -25,9 +26,8 @@ import { CommunityfixPage } from '../pages/communityfix/communityfix'
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
-
+import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
-
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ChartsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,6 +62,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     CommunityfixPage,
     // IamportService,
     InAppBrowser,
+    SearchPage,
     //GroupProvider,
   ]
 })

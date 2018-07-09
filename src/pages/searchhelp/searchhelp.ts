@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 /**
  * Generated class for the CommunityPage page.
@@ -23,12 +23,15 @@ export class SearchhelpPage {
     }
 
     counseling() {
-      this.navCtrl.push('SearchPage');
+      this.navCtrl.push('SearchPage', {
+        location: "c"
+      });
     }
 
     psychiatric() {
-      this.navCtrl.push('SearchPage');
+      this.navCtrl.push('SearchPage', {
+        location: "p"
+      });
     }
-
 
 }

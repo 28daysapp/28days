@@ -11,11 +11,37 @@
 
     <div #map id="map"></div>
 
-    <ion-list>
-      <ion-item *ngFor="let place of places">
-        {{ place }}
+    <ion-card *ngFor="let place of places">
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{ place.url }}">
+        </ion-avatar>
+        {{ place.name }}
+        <p>{{ place.address }}</p>
       </ion-item>
-    </ion-list>
+    
+      <ion-card-content>
+        <p>{{ place.description }}</p>
+      </ion-card-content>
+    
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 추천</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4 Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    
+    </ion-card>
+
   </ion-content>
   
 
