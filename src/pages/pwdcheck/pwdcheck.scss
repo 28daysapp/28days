@@ -1,0 +1,56 @@
+page-pwdcheck {
+
+	.cardsbg {
+		background: color($colors, bggray, base);
+	}
+
+	ion-card {
+		border-radius: 10px !important;
+		background-color: white !important;
+	}
+
+	ion-card-content {
+		border-radius: 10px;
+		padding: 0px !important;
+	}
+
+	form {
+    padding: 15px;
+  }
+
+	ion-input {
+		border-bottom: 1px solid color($colors, dark, base);
+	}
+
+	.email {
+		margin-bottom: 15px;
+	}
+
+	.invalid {
+    border-bottom: 1px solid color($colors, danger, base);
+  }
+
+	.error-message {
+		margin: 3px 0px 0px;
+		color: color($colors, gray, base) !important;
+		font-size: 80%;
+	}
+
+	.pwreset {
+		margin: 10px 0px 3px;
+	}
+
+	.prompt {
+		border-top: 1px solid color($colors, gray, base);
+		color: color($colors, gray, base) !important;
+		text-align: center;
+		padding: 10px 0px;
+		font-size: 13px;
+	}
+
+	.signup {
+		margin: 0px 15px 15px;
+	}
+
+}
+

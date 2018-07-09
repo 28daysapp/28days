@@ -82,4 +82,7 @@ export class MyprofilePage {
     this.greeting = this.origGreeting;
   }
 
+  pwdcheck(){
+    this.navCtrl.push('PwdcheckPage');
+  }
 }

@@ -96,4 +96,16 @@ export class UserProvider {
     return promise;
   }
 
+  updatePassword(password){
+    var uid = firebase.auth().currentUser.uid;
+    var promise = new Promise((resolve) => {
+      this.fireusers.child(uid).update({
+        password: password
+      }).then(() => {
+        resolve(true);
+      });
+    });
+    return promise;
+  }
+
 }

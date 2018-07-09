@@ -19,7 +19,7 @@ export class CommunityfixPage {
 	title;
 	post = this.community.post;
 	pick = false;
-	txt = this.community.post.text;
+	text = this.community.post.text;
 	fileURL;
 	dataURL;
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
@@ -27,8 +27,8 @@ export class CommunityfixPage {
     this.title = this.community.title;
   }
 
-	fix(txt) {
-	  this.community.updatePost(txt, this.dataURL).then(() => {
+	fix(text) {
+	  this.community.updatePost(text, this.dataURL).then(() => {
 	  	this.navCtrl.pop();
 	  });
 	  let loading = this.loadingCtrl.create({
