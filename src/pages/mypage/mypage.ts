@@ -176,6 +176,13 @@ export class MypagePage {
       this.pleaselogin();
     }
   }
+  mypost(){
+    if (this.user) {
+      this.navCtrl.push('MypostPage');
+    } else {
+      this.pleaselogin();
+    }
+  }
   mysetting(){
     if (this.user) {
       this.navCtrl.push('MysettingPage');

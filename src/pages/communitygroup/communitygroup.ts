@@ -70,13 +70,12 @@ export class CommunitygroupPage {
   }
 
   postdelete(post){
-    this.community.postdelete(post).then(() => {
-      this.navCtrl.pop();
-    })
-    let loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
+    this.community.postdelete(post);
+       this.community.getallposts().then((posts) => {
+      this.posts = posts;
+      this.content.scrollToTop(0);
+      this.loading.dismiss();
     });
-    loading.present();
   }
 
   updatepost(post){
