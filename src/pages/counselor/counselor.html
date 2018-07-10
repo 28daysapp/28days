@@ -1,5 +1,5 @@
 <!--
-  Generated template for the SupporterPage page.
+  Generated template for the CounselorPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="jade">
-    <ion-title>1:1 서포터</ion-title>
+    <ion-title>전문 상담사</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,7 +18,7 @@
   <ion-card class="cards-bg" *ngIf="loadComplete">
     <ion-card-content>
 
-    	<br><br><p class="username">{{ user.username }}</p>
+    	<p class="username">{{ user.username }}</p>
 
       <p class="level">서포터 – Lv.1</p>
 
@@ -64,7 +64,7 @@
     	<button ion-button full clear color="black" (click)="sendRequest()">
     		채팅 요청하기
     	</button>
-    	<button ion-button full clear color="jade" (click)="nextSupporter()">
+    	<button ion-button full clear color="daysgreen" (click)="nextSupporter()">
     		다른 서포터 찾기
     	</button>
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SupporterPopoverPage page.
+ * Generated class for the CounselorPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,24 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-supporter-popover',
-  templateUrl: 'supporter-popover.html',
+  selector: 'page-counselor',
+  templateUrl: 'counselor.html',
 })
-export class SupporterPopoverPage {
+export class CounselorPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SupporterPopoverPage');
-  }
-
-  supportertest() {
-    this.navCtrl.push('SupporterPage');
-  }
-
-  counselortest() {
-    this.navCtrl.push('CounselorPage');
+    console.log('ionViewDidLoad CounselorPage');
   }
 
 }
