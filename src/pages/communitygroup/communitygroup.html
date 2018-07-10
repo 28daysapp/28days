@@ -10,7 +10,14 @@
 		<ion-title>{{ title }}</ion-title>
 	</ion-navbar>
 
+	<ion-searchbar (ionInput)="getItems()"></ion-searchbar>
+		<ion-list>
+  			<ion-item *ngFor="let item of items">{{ post }}</ion-item>
+		</ion-list>
+
 </ion-header>
+
+
 
 <ion-content #content>
 
@@ -19,6 +26,11 @@
 			<div class="post">
 				<div class="name">
 					<span>{{ post.username }}</span>
+					<div *ngIf="reportuser(post)">
+						<button (click) = "reportpost(post)">
+							신고
+						</button>
+					</div>
 					<div *ngIf="usercorrect(post)">
 					<button (click) = "updatepost(post)">
 						수정 

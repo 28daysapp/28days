@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController  } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
@@ -25,10 +25,11 @@ export class CommunitygroupPage {
   loading;
   popover;
   post;
+  value;
   selectedData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
-    public popoverCtrl: PopoverController, public viewCtrl: ViewController
+    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController
   ) {
     this.title = this.community.title;
   }
@@ -91,6 +92,54 @@ export class CommunitygroupPage {
       correct = true;
     }
     return correct;
+  }
+
+  reportuser(post){
+    var correct = true;
+    if(firebase.auth().currentUser.uid == post.uid){
+      correct = false;
+    }
+    return correct;
+  }
+
+  reportpost(post){
+    if(post.value == false){
+      let alert = this.alertCtrl.create({
+        title: '',
+        message: '이미 신고가 들어갔습니다.',
+        buttons: [
+          {
+            text: '확인',
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      this.community.getallposts().then((posts) => {
+        this.posts = posts;
+        this.content.scrollToTop(0);
+        this.loading.dismiss();
+      });
+    }
+    else{
+      this.community.reportpost(post);
+      let alert = this.alertCtrl.create({
+        title: '완료',
+        message: '정상적으로 신고가 완료됐습니다.',
+        buttons: [
+          {
+            text: '확인',
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      this.community.getallposts().then((posts) => {
+        this.posts = posts;
+        this.content.scrollToTop(0);
+        this.loading.dismiss();
+      });
+    }
   }
 
   presentPopover(myEvnet){
