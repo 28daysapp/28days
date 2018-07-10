@@ -147,7 +147,7 @@ export class CommunityProvider {
 				resolve(true);
 			});
 		});
-		if(post.report = 1){
+		if(post.report == 2){
 			this.firecomment.child(`${ this.namecom }/${ post.postid }`).remove();
 			this.firecommunity.child(`${ this.namecom }/${ post.postid }`).remove().then(() => {
 			   this.firecommunity.child(`${ this.namecom }`).update({
