@@ -21,6 +21,7 @@ import { CommunityProvider } from '../providers/community/community';
 import { CommunitycommentProvider } from '../providers/communitycomment/communitycomment';
 import { PostProvider } from '../providers/post/post';
 import { CommunityfixPage } from '../pages/communityfix/communityfix'
+import { MyProvider } from '../providers/my/my'
 
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -60,6 +61,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     CommunityProvider,
     CommunitycommentProvider,
     PostProvider,
+    MyProvider,
     CommunityfixPage,
     // IamportService,
     InAppBrowser,
