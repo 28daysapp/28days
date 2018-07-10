@@ -56,7 +56,7 @@ export class SearchPage {
 
   searchByText() {
 
-    if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과"){
+    if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과") {
       let request = {
         location: this.latLng,
         radius: '500',
@@ -66,7 +66,7 @@ export class SearchPage {
 
       let service = new google.maps.places.PlacesService(this.map);
       service.textSearch(request, (results, status) => {
-        
+
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             this.places = results;

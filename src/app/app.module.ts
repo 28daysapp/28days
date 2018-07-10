@@ -30,6 +30,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 
+
 @NgModule({
   declarations: [
     MyApp
