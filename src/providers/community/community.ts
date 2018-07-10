@@ -35,6 +35,8 @@ export class CommunityProvider {
 	];
 	posts;
 	post;
+	value;
+	report;
 	constructor(public my: MyProvider) {
 
 	}
@@ -66,7 +68,9 @@ export class CommunityProvider {
 						comment: 0,
 						like: 0,
 						title: this.title,
-						namecom: this.namecom
+						namecom: this.namecom,
+						value: true,
+						report: 0
 					}).then(() => {
 						this.my.addmypost(uid, this.namecom, postId, time).then(() => {
 							resolve(true);
@@ -84,7 +88,9 @@ export class CommunityProvider {
 					comment: 0,
 					like: 0,
 					title: this.title,
-					namecom: this.namecom
+					namecom: this.namecom,
+					value: true,
+					report: 0
 				}).then(() => {
 					this.my.addmypost(uid, this.namecom, postId, time).then(() => {
 						resolve(true);
@@ -129,6 +135,26 @@ export class CommunityProvider {
 				resolve(true);
 			});
 		});
+		return promise;
+	}
+
+	reportpost(post){
+		var promise = new Promise((resolve) => {
+			this.firecommunity.child(`${ this.namecom }/${ post.postid }`).update({
+				report: post.report + 1,
+				value: false
+			}).then(() => {
+				resolve(true);
+			});
+		});
+		if(post.report = 1){
+			this.firecomment.child(`${ this.namecom }/${ post.postid }`).remove();
+			this.firecommunity.child(`${ this.namecom }/${ post.postid }`).remove().then(() => {
+			   this.firecommunity.child(`${ this.namecom }`).update({
+				   }).then(() => {
+					  });
+			 });
+		}
 		return promise;
 	}
 
