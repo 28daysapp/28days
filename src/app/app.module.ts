@@ -50,7 +50,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     Camera,
     File,
     FilePath,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation,
     AuthProvider,
     UserProvider,
@@ -62,8 +62,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CommunityfixPage,
     // IamportService,
     InAppBrowser,
-    SearchPage,
+    SearchPage
     //GroupProvider,
   ]
 })
-export class AppModule {}
+export class AppModule { }

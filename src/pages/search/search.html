@@ -1,47 +1,46 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>도움을 받아보세요!</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
 
-    <div #map id="map"></div>
+<ion-content padding>
 
-    <ion-card *ngFor="let place of places">
+  <ion-searchbar (click)="presentAreaModal()"></ion-searchbar>
 
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="{{ place.url }}">
-        </ion-avatar>
-        {{ place.name }}
-        <p>{{ place.address }}</p>
-      </ion-item>
-    
-      <ion-card-content>
-        <p>{{ place.description }}</p>
-      </ion-card-content>
-    
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 추천</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
-          </button>
-        </ion-col>
-      </ion-row>
-    
-    </ion-card>
+  <div #map id="map"></div>
 
-  </ion-content>
-  
+  <ion-card *ngFor="let place of places">
 
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ place.url }}">
+      </ion-avatar>
+      {{ place.name }}
+      <p>{{ place.address }}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>{{ place.description }}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 추천</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>위치 선택</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar input placeholder="예) 혜화동, 서울역, 분당구 성남시" [(ngModel)]="area" name="area" (submit)="enterArea()"></ion-searchbar>
+
+  <button ion-button color="green" full type="submit" (click)="enterArea()">찾기</button>
+  <button ion-button color="danger" full (click)="dismiss()">닫기</button>
+</ion-content>

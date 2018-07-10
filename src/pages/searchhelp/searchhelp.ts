@@ -15,23 +15,23 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class SearchhelpPage {
 
-    params: Object;
-    pushPage: any;
+  params: Object;
+  pushPage: any;
 
-    constructor(public navCtrl: NavController) {
-      
-    }
+  constructor(public navCtrl: NavController) {
 
-    counseling() {
-      this.navCtrl.push('SearchPage', {
-        location: "c"
-      });
-    }
+  }
 
-    psychiatric() {
-      this.navCtrl.push('SearchPage', {
-        location: "p"
-      });
-    }
+  counseling() {
+    this.navCtrl.push('SearchPage', {
+      type: "c"
+    });
+  }
+
+  psychiatric() {
+    this.navCtrl.push('SearchPage', {
+      type: "p"
+    });
+  }
 
 }
