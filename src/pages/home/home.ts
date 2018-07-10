@@ -196,9 +196,9 @@ export class HomePage {
     }
   }
   
-  search() {
+  searchhelp() {
     if (this.user) {
-      this.navCtrl.push('SearchPage');
+      this.navCtrl.push('SearchhelpPage');
     } else {
       this.pleaselogin();
     }

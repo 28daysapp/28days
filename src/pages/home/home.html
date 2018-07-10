@@ -19,45 +19,39 @@
 
 <ion-content>
 	<div align="center" class="mainmenu">
-    <ul>
-  		<button (click)="test()">
-        <img src="assets/test.png">
-        <br>내 상태를 확인해볼까요?<br>
-        <p>자가진단</p>
-  		</button>
-			<button (click)="diary()">
-        <img src="assets/diary.png">
-        <br>오늘 하루를 기록해봐요<br>
-        <p>다이어리</p>
-			</button>
-			<button (click)="emotionbasket()">
-				<img src="assets/basket.png">
-        <br>불필요한 감정을 버려봐요<br>
-        <p>쓰레기통</p>
-			</button>
-      <button (click)="community()">
-        <img src="assets/breathe.png">
-        <br>숨을 크게 쉬어보아요<br>
-        <p>숨쉬기</p>
-      </button>
-      <button (click)="post()">
-        <img src="assets/post.png">
-        <br>정신건강이 궁금하시나요?<br>
-        <p>포스트</p>
-      </button>
-      <button (click)="meditate()">
-        <img src="assets/meditate.png">
-        <br>내 마음을 달래볼까요?<br>
-        <p>명상하기</p>
-      </button>
-      <li>
-        <button (click)="search()">
-          병원이나 상담센터를 검색해보시겠어요?<br>
-          <p>검색하기</p>
-        </button>
-      </li>
-    </ul>
-  </div>
+		<ul>
+			<li>
+				<button (click)="community()">
+					다른 사람의 고민을 엿볼까요?<br>
+					<p>커뮤니티</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="supporter()">
+					마음이 맞는 사람과 이야기 할까요?<br>
+					<p>1:1 서포터</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="post()">
+					정신건강 관련 정보가 궁금하세요?<br>
+					<p>포스트</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="meditate()">
+					내 마음을 달래볼까요?<br>
+					<p>명상하기</p>
+				</button>
+			</li>
+			<li>
+				<button (click)="searchhelp()">
+					병원이나 상담센터를 검색해보시겠어요?<br>
+					<p>검색하기</p>
+				</button>
+			</li>
+		</ul>
+	</div>
 
 <!--
 	<div align="center" class="gogo">

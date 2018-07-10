@@ -1,4 +1,51 @@
 <ion-header>
+<<<<<<< HEAD
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-searchbar (click)="presentAreaModal()"></ion-searchbar>
+
+  <div #map id="map"></div>
+
+  <ion-card *ngFor="let place of places">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ place.icon }}">
+      </ion-avatar>
+      {{ place.name }}
+      <p>{{ place.formatted_address }}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>{{ place.place_id }}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="star"></ion-icon>
+          <div>별점: {{ place.rating }}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>
+=======
     <ion-navbar>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -10,12 +57,50 @@
   <ion-content padding>
     <ion-searchbar (ionInput)="getTopics($event)"></ion-searchbar>
     
+    <ion-item>
+        <ion-label>Select A Place</ion-label>
+            <ion-select [(ngModel)]="isType" (ionChange)="nearbyPlace()">
+            <ion-option value="">Select</ion-option>
+            <ion-option value="hospital">Hospital</ion-option>
+            <ion-option value="doctor">Doctor</ion-option>
+            <ion-option value="counseling center">Counseling Center</ion-option>
+
+            </ion-select>
+    </ion-item>
+
+    <ion-item>
+    <ion-label>Select Distance</ion-label>
+        <ion-select [(ngModel)]="isKM" (ionChange)="nearbyPlace()">
+        <ion-option value="500">Select</ion-option>
+            <ion-option value="2000">2 KM</ion-option>
+            <ion-option value="4000">4 KM</ion-option>
+            <ion-option value="6000">6 KM</ion-option>
+            <ion-option value="8000">8 KM</ion-option>
+        </ion-select>
+    </ion-item>
+
     <div #map id="map"></div>
 
+
+    <button (click)="listPlaces()">
+      병원 목록 보기
+    </button>
+
+    <button (click)="listPlaces()">
+      GIT TEST!!!!!!!!
+    </button>
+
+    <button (click)="listPlaces()">
+      GIT TEST!!!!!!!!222222
+    </button>
+
+
     <ion-list>
-      <ion-item *ngFor="let topic of topics">
-        {{ topic }}
+      <ion-item *ngFor="let place of places">
+        {{ place }}
       </ion-item>
     </ion-list>
   </ion-content>
   
+
+>>>>>>> 89227ba2487d4c66e9ced9f70ff04220f71a659c
