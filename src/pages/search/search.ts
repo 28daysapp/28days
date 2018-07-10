@@ -1,6 +1,5 @@
-import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
-import { Http } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
@@ -24,21 +23,14 @@ export class SearchPage {
   marker: any;
   text: string;
   query: string;
-  places;
+  places: any;
   placeId: string;
   url: string;
   area: any;
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private ngZone: NgZone,
-    public http: Http,
-    private geolocation: Geolocation,
-    public modalController: ModalController,
-  ) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, ) {
     this.text = this.navParams.get('type');
+    this.area = this.navParams.get('area');
     this.places = [];
   }
 
@@ -64,36 +56,39 @@ export class SearchPage {
 
   searchByText() {
 
-    if (this.text === "c" ? this.query = "천안시 상담센터" : this.query = "천안시 정신과"){      
+    if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과"){
       let request = {
         location: this.latLng,
         radius: '500',
-        query: this.query,
+        query: this.area + " " + this.query,
         language: 'ko'
       };
 
       let service = new google.maps.places.PlacesService(this.map);
-      service.textSearch(request, this.callback);
-    }
+      service.textSearch(request, (results, status) => {
+        
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (let i = 0; i < results.length; i++) {
+            this.places = results;
+          }
+        } else {
+          console.log("Status error: " + status);
+        }
 
+      }, (error) => {
+        console.log("Error: " + error);
+      });
+      console.log(this.places);
+    }
   }
 
-  callback(results, status) {
 
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-      for (let i = 0; i < results.length; i++) {
-        console.log(results[i]);
-        this.places = results[i];
-      }
-    } else {
-      console.log("Status error: " + status);
-    }
-  }
 
   presentAreaModal() {
     let areaModal = this.modalController.create('SearchAreaPage');
     areaModal.present();
   }
+
 
   // createMarker(places){
   //   this.marker = new google.maps.Marker({
@@ -109,7 +104,7 @@ export class SearchPage {
   //   });
   // }
 
-    // callback(results, status) {
+  // callback(results, status) {
   // if (status === google.maps.places.PlacesServiceStatus.OK) {
   //   for (var i = 0; i < results.length; i++) {
   //     this.createMarker(results[i]);
@@ -118,7 +113,7 @@ export class SearchPage {
   // }
   // }
 
-    // createMarker(place) {
+  // createMarker(place) {
   //   this.marker = new google.maps.Marker({
   //     map: this.map,
   //     position: place.geometry.location
@@ -161,20 +156,20 @@ export class SearchPage {
   // }
 
 
-      // if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과")
-      // console.log("6: 여기는??" + this.text);
-      //   service.textSearch({
-      //     place: place,
-      //     query: this.query,
-      //     radius: '100',
-      //     language: 'ko'
-      //   }, (results, status) => {
-      //     this.callback(results, status);
-      //   }, (error) => {
-      //     console.log("Error: " + error);
-      //   });
-    
-  
+  // if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과")
+  // console.log("6: 여기는??" + this.text);
+  //   service.textSearch({
+  //     place: place,
+  //     query: this.query,
+  //     radius: '100',
+  //     language: 'ko'
+  //   }, (results, status) => {
+  //     this.callback(results, status);
+  //   }, (error) => {
+  //     console.log("Error: " + error);
+  //   });
+
+
 
 
   // callback(place, status) {

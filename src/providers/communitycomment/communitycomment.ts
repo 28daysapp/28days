@@ -23,7 +23,7 @@ export class CommunitycommentProvider {
 
   initializecomment(post) {
   	this.post = post;
-	this.postid = post.postid;
+	 this.postid = post.postid;
   }
 
   uploadcomment(txt) {

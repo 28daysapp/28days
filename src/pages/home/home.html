@@ -5,54 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="daysgreen">
+  <ion-navbar color="jade">
   	<ion-buttons left>
 	    <button ion-button icon-only (click)="loginpage()">
 	      <ion-icon name="log-in"></ion-icon>
 	    </button>
 	  </ion-buttons>
     <ion-title>
-      28DAYS
+      COCONUT
     </ion-title>
-    <ion-buttons right>
-	    <button ion-button icon-only (click)="mypage()">
-	      <ion-icon name="settings"></ion-icon>
-	    </button>
-	  </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-	<div align="center" class="userprofile">
-		<button class="photo" (click)="changecharacter()">
-			<img src="{{photoURL}}">
-		</button>
-		<div>
-			<p class="username" (click)="changename()">{{username}}</p>
-		</div>
-		<button class="greeting" (click)="changegreeting()">
-			<p>
-				{{ greeting }}
-			</p>
-		</button>
-		<ul class="vertical-buttons">
-			<li>
-				<button (click)="test()">
-					<img src="assets/test.png">
-				</button>
-			</li>
-			<li>
-				<button (click)="diary()">
-					<img src="assets/diary.png">
-				</button>
-			</li>
-			<li>
-				<button (click)="emotionbasket()">
-					<img src="assets/basket.png">
-				</button>
-			</li>
-		</ul>
-	</div>
 	<div align="center" class="mainmenu">
 		<ul>
 			<li>
@@ -88,7 +53,8 @@
 		</ul>
 	</div>
 
-	<!-- <div align="center" class="gogo">
+<!--
+	<div align="center" class="gogo">
 		<button (click)="gogo()">
 			<img src="assets/gogo.png">
 		</button>

@@ -21,10 +21,12 @@ export class SearchAreaPage {
   }
 
   enterArea() {
-    this.viewController.dismiss({
-      area: this.area
-    });
-    this.navCtrl.push('SearchPage', this.area);
+    this.viewController.dismiss().then(() => {
+      this.navCtrl.push('SearchPage', {
+        area: this.area
+      });
+	  });
+
   }
 
   dismiss() {

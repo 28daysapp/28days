@@ -16,21 +16,21 @@
 
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{ place.url }}">
+        <img src="{{ place.icon }}">
       </ion-avatar>
       {{ place.name }}
-      <p>{{ place.address }}</p>
+      <p>{{ place.formatted_address }}</p>
     </ion-item>
 
     <ion-card-content>
-      <p>{{ place.description }}</p>
+      <p>{{ place.place_id }}</p>
     </ion-card-content>
 
     <ion-row>
       <ion-col>
         <button ion-button icon-start clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 추천</div>
+          <ion-icon name="star"></ion-icon>
+          <div>별점: {{ place.rating }}</div>
         </button>
       </ion-col>
       <ion-col>

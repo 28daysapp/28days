@@ -7,7 +7,7 @@ export const MainPage = 'TabsPage';
 
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = 'HomePage';
-export const Tab2Root = 'SupporterPage';
+export const Tab2Root = 'OnofflinePage';
 export const Tab3Root = 'GogohomePage';
 export const Tab4Root = 'CommunityPage';
 export const Tab5Root = 'MypagePage';
