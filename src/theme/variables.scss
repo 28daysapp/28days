@@ -124,5 +124,33 @@ $toolbar-md-title-text-color: color($colors, primary);
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+// @import "roboto";
+// @import "noto-sans";
+
+@font-face {
+  font-family: "Modern Life";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../assets/fonts/modernlife/TlabModernLifeB.ttf")
+}
+
+@font-face {
+  font-family: "Modern Life";
+  font-style: normal;
+  font-weight: lighter;
+  src: url("../assets/fonts/modernlife/TlabModernLifeL.ttf")
+}
+
+@font-face {
+  font-family: "Modern Life";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/modernlife/TlabModernLifeM.ttf")
+}
+
+$font-family-base: "Modern Life";
+
+h1, h2, h3, h4, h5, p, body, title, header, label, button, span, div, tab-button, ion-tab, ion-card, ion-title, toolbar-title, searchbar-input {
+  font-family: "Modern Life" !important;
+  font-weight: normal !important;
+}
