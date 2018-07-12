@@ -1,21 +1,47 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Search Page</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-searchbar (ionInput)="getTopics($event)"></ion-searchbar>
-    
-    <div #map id="map"></div>
+  <ion-navbar color="jade">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
 
-    <ion-list>
-      <ion-item *ngFor="let topic of topics">
-        {{ topic }}
-      </ion-item>
-    </ion-list>
-  </ion-content>
-  
+<ion-content class="card-page">
+
+  <ion-searchbar (click)="presentAreaModal()"></ion-searchbar>
+
+  <div #map id="map"></div>
+
+  <ion-card *ngFor="let place of places">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ place.icon }}">
+      </ion-avatar>
+      <div class="card-title"> {{ place.name }}</div>
+
+      <p>{{ place.formatted_address }}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>{{ place.place_id }}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="star"></ion-icon>
+          <div>별점: {{ place.rating }}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

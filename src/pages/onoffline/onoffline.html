@@ -5,40 +5,26 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar color="jade">
+  <ion-navbar>
     <ion-title>1:1 서포트</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
 
-  <div class="align-center">
+  <div class="title">
     <h4> 어떤 서포트를 <br>원하시나요? </h4>
   </div>
 
-    <ion-card class="cards">
+    <ion-card text-center (click)="onlineload()">
       <ion-card-content>
-
-        <div class="align-center">
-          <button ion-button full center large color="jade" (click)="onlineload()">
             온라인<br>서포트
-          </button>
-        </div>
-
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="cards">
+    <ion-card text-center>
         <ion-card-content>
-
-          <div class="align-center">
-            <button ion-button full center large color="jade" (click)="searchpage()">
             오프라인<br>서포트
-            </button>
-          </div>
-
       </ion-card-content>
     </ion-card>
 

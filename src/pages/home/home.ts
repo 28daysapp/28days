@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, AlertController, LoadingController, Slides } from 'ionic-angular';
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
@@ -19,6 +19,9 @@ import { NavParams, ModalController } from 'ionic-angular';
   templateUrl: 'home.html',
 })
 export class HomePage {
+
+  @ViewChild(Slides) slides: Slides;
+
   /* Initialize variables */
   loading;
   user;
@@ -196,9 +199,9 @@ export class HomePage {
     }
   }
   
-  search() {
+  searchhelp() {
     if (this.user) {
-      this.navCtrl.push('SearchPage');
+      this.navCtrl.push('SearchhelpPage');
     } else {
       this.pleaselogin();
     }
@@ -259,6 +262,18 @@ export class HomePage {
   dismissModal() {
     this.showmodal = false;
     this.greeting = this.origGreeting;
+  }
+
+  counseling() {
+    this.navCtrl.push('SearchPage', {
+      type: "c"
+    });
+  }
+
+  psychiatric() {
+    this.navCtrl.push('SearchPage', {
+      type: "p"
+    });
   }
 
 }

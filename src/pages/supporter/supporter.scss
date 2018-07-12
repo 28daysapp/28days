@@ -16,7 +16,7 @@ page-supporter {
 
 	.username {
 		border-radius: 25px;
-    background: color($colors, jade, base);
+    background: color($colors, primary, base);
     padding: 5px 20px;
     color: color($colors, white, base);
     font-size: 130%;
@@ -25,7 +25,7 @@ page-supporter {
 	}
 
 	.level {
-		color: color($colors, jade, base);
+		color: color($colors, primary, base);
 	}
 
 	.greeting {

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="daysgreen">
+  <ion-navbar color>
     <ion-title>전문 상담사</ion-title>
   </ion-navbar>
 
@@ -17,46 +17,22 @@
 
   <ion-card class="cards-bg" *ngIf="loadComplete">
     <ion-card-content>
-      <p align="center" class="userprofile">
+      <!-- <p align="center" class="userprofile">
+      //상담사 프로필 사진 설정할 것
         <button class="photo" (click)="changecharacter()">
   			<img src="{{photoURL}}">
   		</button>
-    </p>
+      </p> -->
     	<p class="username">{{ user.username }}</p>
-      <!-- <p class="level">서포터 – Lv.1</p> -->
       <p class="greeting">안녕하세요! [{{ user.username }}] 상담사입니다.<br>함께 나아가요!</p>
 
       <button class="review">리뷰보기</button>
 
       <div class="ratingcontainer" align="center">
         <div>
-          <span>응답시간</span>
+          <span>평점</span>
           <ul class="ratingstars">
             <li *ngFor="let rating of ratingsA">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
-        </div>
-        <div>
-          <span>공감능력</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsB">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
-        </div>
-        <div>
-          <span>도움정도</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsC">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
-        </div>
-        <div>
-          <span>프로정신</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsD">
               <img src="{{ rating.src }}">
             </li>
           </ul>

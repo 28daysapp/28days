@@ -1,8 +1,7 @@
 page-supporter-popover {
 
   .cards {
-    background: color($colors, cardbggray, base);
-    border: 1px solid color($colors, jade, base);
+    border: 1px solid color($colors, primary, base);
     width: 40%;
     display: inline-block;
     margin-top: 10px;
@@ -22,6 +21,7 @@ page-supporter-popover {
   h4 {
     margin-top: 80px;
     margin-bottom: 15px;
+    color: color($colors, primary, base);
   }
 
   .align-center {

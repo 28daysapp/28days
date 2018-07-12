@@ -85,7 +85,7 @@ export class CounselorPage {
 
   sendRequest() {
     this.chat.initializebuddy(this.userprofiles[this.count]);
-    this.navCtrl.push('CounselorPage').then(() => {
+    this.navCtrl.push('CounselorchatPage').then(() => {
       var index = this.viewCtrl.index;
       this.navCtrl.remove(index);
     });

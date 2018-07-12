@@ -1,26 +1,42 @@
 page-onoffline {
 
-  .cards {
-    background: color($colors, jade, base);
-    border: 1px solid color($colors, jade, base);
-    width: 40%;
-    height: 35%;
-    display: inline-block;
-    margin-top: 20px;
-    margin-left: 22px;
-    margin-right: 3px;
-    margin-bottom: 20px;
-  }
-
-  h4 {
-    margin-top: 100px;
-    margin-bottom: 10px;
-  }
-
-  .align-center {
+  .title {
     text-align: center;
-    border: 0px clear color($colors, jade, base);
-    border-color: transparent;
-    margin-top: 45px;
+    padding: 20% 0 0 0;
+
+        h4 {
+        color: color($colors, primary);
+    }
+
   }
+
+  // .title {
+  //   text-align: center;
+  //   margin-top: 20%;
+  //   font-weight: 900;
+
+  //   h4 {
+  //     margin-top: 100px;
+  //     margin-bottom: 10px;
+  //     color: color($colors, primary);
+  //   }
+
+  // }
+
+  // .cards {
+  //   background: color($colors, white, base);
+  //   border: 0;
+  //   width: 40%;
+  //   height: 35%;
+  //   box-shadow: 1px 1px 1px #b0b0b0;
+  //   display: inline-block;
+
+  // }
+
+  // ion-card-content {
+  //   display: inline-flex;
+  //   vertical-align: middle;
+  // }
+
+
 }

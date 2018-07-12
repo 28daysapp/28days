@@ -41,7 +41,7 @@ page-gogohome {
 
   .me {
   	float: right;
-  	background-color: color($colors, bubblegreen, base);
+  	background-color: color($colors, primary, base);
   	color: white;
   	margin: 0px 5px 3px 100px;
   }
@@ -62,10 +62,10 @@ page-gogohome {
     border-radius: 10px;
     font-weight: 500;
     font-size: 15px;
-    color: white;
+    color: color($colors, white, base);;
     padding: 10px 0px;
     width: 100%;
-    background-color: color($colors, daysgreen, base);
+    background-color: color($colors, primary, base);
   }
 
 }

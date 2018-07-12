@@ -1,0 +1,93 @@
+page-mypost {
+    ul {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+        height: 100%;
+      }
+  
+      .post {
+        padding: 10px;
+      }
+  
+      .name {
+        overflow: auto;
+        margin-bottom: 5px;
+        display: table;
+        width: 100%;
+      }
+  
+      .name span {
+        display: table-cell;
+        vertical-align: middle;
+      }
+  
+      .name button {
+        float: right;
+        padding: 0px;
+      }
+  
+      .name ion-icon {
+        padding: 0px;
+        font-size: 30px;
+      }
+  
+      .picture {
+        height: 250px;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+  
+      .picture img {
+        max-height: 100%;
+      }
+  
+      .group-time {
+        margin-bottom: 5px;
+      }
+  
+      .group {
+        color: color($colors, primary);
+      }
+  
+      .time {
+        font-size: 12px;
+        float: right;
+      }
+  
+      .text {
+        margin-bottom: 5px;
+      }
+  
+      .text p {
+        margin: 0px;
+        white-space: pre-line;
+      }
+  
+      .comment-like img {
+        height: 16px;
+        margin-right: 6px;
+      }
+  
+      .comment-like div {
+        display: table;
+      }
+  
+      .comment-like span {
+        font-size: 12px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+  
+      .comment-like button {
+          background-color: transparent;
+      }
+  
+      .comment {
+        margin-right: 10px;
+      }
+  
+      li {
+        border-bottom: 1px solid #c0c0c0;
+      }
+}
