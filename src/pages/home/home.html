@@ -5,21 +5,65 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="jade">
-  	<ion-buttons left>
-	    <button ion-button icon-only (click)="loginpage()">
-	      <ion-icon name="log-in"></ion-icon>
-	    </button>
-	  </ion-buttons>
-    <ion-title>
-      COCONUT
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-buttons left>
+			<button ion-button icon-only (click)="loginpage()">
+				<ion-icon name="log-in"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title color="jade">
+			COCONUT
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-	<div align="center" class="mainmenu">
-		<ul>
+
+	<div class="message">
+		<ion-slides class="slides" autoplay="5000" loop="true" speed="1000">
+			<ion-slide>
+				<p>
+					상담센터/정신과 후기를 남겨주세요. <br> 
+					당신은 소비자입니다.
+				</p>
+			</ion-slide>
+			<ion-slide>
+				<p>커뮤니티에서 자신과 비슷한 경험자들과 이야기 해보세요!</p>
+			</ion-slide>
+			<ion-slide>
+				<p>전문가의 도움이 필요하신가요?</p>
+			</ion-slide>
+		</ion-slides>
+	</div>
+
+	<div id="searchbar">
+		<ion-searchbar placeholder="상담센터/정신과 찾아보기" (click)="searchhelp()"></ion-searchbar>
+	</div>
+
+	<ion-card>
+		<ion-card-header class="title" (click)="counseling()">
+			상담센터 찾아보기
+		</ion-card-header>
+		<ion-card-content (click)="counseling()">
+			이야기를 들어줄 사람이 필요할 때!
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header class="title" (click)="psychiatric()">
+			정신과 찾아보기
+		</ion-card-header>
+		<ion-card-content (click)="psychiatric()">
+			치료가 필요하다고 생각될 때!
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>
+
+
+
+
+<!-- <ul>
 			<li>
 				<button (click)="community()">
 					다른 사람의 고민을 엿볼까요?<br>
@@ -50,8 +94,8 @@
 					<p>검색하기</p>
 				</button>
 			</li>
-		</ul>
-	</div>
+		</ul> -->
+
 
 <!--
 	<div align="center" class="gogo">
@@ -60,7 +104,7 @@
 		</button>
 	</div> -->
 
-	<div class="modal" *ngIf="showmodal">
+<!-- <div class="modal" *ngIf="showmodal">
 	    <div class="modal-inner">
 	      <form #modal="ngForm" (ngSubmit)="modalhandler(modal)" novalidate>
 	        <p>인사말 관리</p>
@@ -73,5 +117,4 @@
 	        </button>
 	      </form>
 	    </div>
-	</div>
-</ion-content>
+	</div> -->

@@ -6,9 +6,16 @@
 -->
 <ion-header>
 
-	<ion-navbar color="daysgreen">
+	<ion-navbar>
 		<ion-title>{{ title }}</ion-title>
+		<ion-buttons right>
+				<button ion-button icon-only (click)="communitywrite()">
+					<ion-icon name="create"></ion-icon>
+				</button>
+			</ion-buttons>
 	</ion-navbar>
+
+
 
 	<ion-searchbar (ionInput)="getItems()"></ion-searchbar>
 		<ion-list>
@@ -44,7 +51,7 @@
 					<img src="{{ post.url }}">
 				</div>
 				<div class="group-time">
-					<span class="group">{{ title }}</span>
+					<span class="group"></span>
 					<span class="time">{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
 				</div>
 				<div class="text">
@@ -69,7 +76,3 @@
 	</ul>
 
 </ion-content>
-
-<ion-footer>
-	<button ion-button full color="gray" (click)="communitywrite()">글쓰기</button>
-</ion-footer>

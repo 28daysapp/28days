@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="jade">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="card-page">
 
   <ion-searchbar (click)="presentAreaModal()"></ion-searchbar>
 
@@ -18,7 +18,8 @@
       <ion-avatar item-start>
         <img src="{{ place.icon }}">
       </ion-avatar>
-      {{ place.name }}
+      <div class="card-title"> {{ place.name }}</div>
+
       <p>{{ place.formatted_address }}</p>
     </ion-item>
 

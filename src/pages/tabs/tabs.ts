@@ -23,11 +23,11 @@ export class TabsPage {
   tab4Root: any = Tab4Root;
   tab5Root: any = Tab5Root;
 
-  tab1Title = " Home ";
-  tab2Title = " 1:1 ";
-  tab3Title = " ";
-  tab4Title = " Community ";
-  tab5Title = " My Page ";
+  tab1Title = "홈";
+  tab2Title = "1:1";
+  tab3Title = "고고";
+  tab4Title = "커뮤니티";
+  tab5Title = "마이페이지";
 
   // customicon = "../assets/gogo.png";
 
