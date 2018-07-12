@@ -33,7 +33,11 @@ page-communitygroup {
 	  overflow: auto;
 	  margin-bottom: 5px;
 	  display: table;
-	  width: 100%;
+		width: 100%;
+		
+		span {
+			color: color($colors, primary);
+		}
 	}
 
 	.name span {

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ChartsModule } from 'ng2-charts';
+import { HttpModule } from '@angular/http';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -26,9 +27,7 @@ import { MyProvider } from '../providers/my/my'
 // import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
-
-//import { GroupProvider } from '../providers/group/group';
-
+import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 
 
@@ -40,7 +39,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ChartsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +52,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     Camera,
     File,
     FilePath,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation,
     AuthProvider,
     UserProvider,
@@ -65,7 +65,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CommunityfixPage,
     // IamportService,
     InAppBrowser,
+    SearchPage
     //GroupProvider,
   ]
 })
-export class AppModule {}
+export class AppModule { }

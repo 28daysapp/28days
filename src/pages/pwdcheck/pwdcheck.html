@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="daysgreen">
+  <ion-navbar>
     <ion-title>계정 확인</ion-title>
   </ion-navbar>
 
@@ -24,7 +24,7 @@
     <p class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
       8자리 이상, 숫자와 문자를 조합해주세요!
     </p>
-    <button ion-button block color="daysgreen" (click)="checkpwd(email)">
+    <button ion-button block color="primary" (click)="checkpwd(email)">
       확인
     </button>
   </form>

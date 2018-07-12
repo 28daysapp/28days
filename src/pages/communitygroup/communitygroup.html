@@ -6,8 +6,13 @@
 -->
 <ion-header>
 
-	<ion-navbar color="daysgreen">
+	<ion-navbar>
 		<ion-title>{{ title }}</ion-title>
+		<ion-buttons right>
+				<button ion-button icon-only (click)="communitywrite()">
+					<ion-icon name="create"></ion-icon>
+				</button>
+			</ion-buttons>
 	</ion-navbar>
 	<div class="search-button">
 	<ion-searchbar [(ngModel)]="tag" placeholder="Search"></ion-searchbar>
@@ -67,7 +72,3 @@
 	</ul>
 
 </ion-content>
-
-<ion-footer>
-	<button ion-button full color="gray" (click)="communitywrite()">글쓰기</button>
-</ion-footer>

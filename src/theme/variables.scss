@@ -34,8 +34,8 @@ $list-background-color: transparent;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary:    #00A86B,
+  secondary:  #49BF96,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
@@ -50,8 +50,10 @@ $colors: (
   textgray:   #808080,
   bordergray: #c0c0c0,
   jade: #00A86B,
-  paris: #50C878
+  paris: #50C878,
 );
+
+
 
 
 // App iOS Variables
@@ -59,12 +61,15 @@ $colors: (
 // iOS only Sass variables can go here
 $text-input-ios-margin-top: 5px;
 $text-input-ios-margin-bottom: 5px;
-$alert-ios-button-text-color: color($colors, daysgreen, base);
+$alert-ios-button-text-color: color($colors, primary, base);
 $alert-ios-button-font-size: 14px;
 $alert-ios-title-font-size: 16px;
 $alert-ios-head-padding-bottom: 16px;
 $radio-ios-icon-width: 20px;
 $radio-ios-icon-height: 20px;
+$searchbar-ios-padding-horizontal: 8px;
+$searchbar-ios-input-search-icon-color: color($colors, primary);
+$toolbar-ios-title-text-color: color($colors, primary);
 
 
 
@@ -74,7 +79,7 @@ $radio-ios-icon-height: 20px;
 $text-input-md-margin-top: 5px;
 $text-input-md-margin-bottom: 5px;
 $alert-md-border-radius: 10px;
-$alert-md-button-text-color: color($colors, daysgreen, base);
+$alert-md-button-text-color: color($colors, primary, base);
 $alert-md-title-font-size: 16px;
 $alert-md-message-font-size: 13px;
 $alert-md-message-padding-bottom: 6px;
@@ -82,6 +87,12 @@ $alert-md-message-text-color: #111;
 $checkbox-md-icon-size: 18px;
 $checkbox-md-icon-border-radius: 50%;
 $checkbox-md-icon-checkmark-width: 1px;
+$searchbar-md-padding-top: 0;
+$searchbar-md-padding-end: 2px;
+$searchbar-md-padding-bottom: 0;
+$searchbar-md-padding-start: 2px;
+$searchbar-md-input-search-icon-color: color($colors, primary);
+$toolbar-md-title-text-color: color($colors, primary);
 
 
 
@@ -113,5 +124,33 @@ $checkbox-md-icon-checkmark-width: 1px;
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+// @import "roboto";
+// @import "noto-sans";
+
+@font-face {
+  font-family: "Modern Life";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../assets/fonts/modernlife/TlabModernLifeB.ttf")
+}
+
+@font-face {
+  font-family: "Modern Life";
+  font-style: normal;
+  font-weight: lighter;
+  src: url("../assets/fonts/modernlife/TlabModernLifeL.ttf")
+}
+
+@font-face {
+  font-family: "Modern Life";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/modernlife/TlabModernLifeM.ttf")
+}
+
+$font-family-base: "Modern Life";
+
+h1, h2, h3, h4, h5, p, body, title, header, label, button, span, div, tab-button, ion-tab, ion-card, ion-title, toolbar-title, searchbar-input {
+  font-family: "Modern Life" !important;
+  font-weight: normal !important;
+}
