@@ -26,8 +26,8 @@ export class SupporterPopoverPage {
     this.navCtrl.push('SupporterPage');
   }
 
-  // counselortest() {
-  //   this.navCtrl.push('CounselorPage');
-  // }
+  counselortest() {
+    this.navCtrl.push('CounselorPage');
+  }
 
 }
