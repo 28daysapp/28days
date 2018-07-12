@@ -19,6 +19,10 @@ export class CommunitywritePage {
 	title;
 	pick = false;
 	text = '';
+	posttitle = '';
+	tag1 = '';
+	tag2 = '';
+	tag3 = '';
 	fileURL;
 	dataURL;
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
@@ -27,7 +31,7 @@ export class CommunitywritePage {
   }
 
   write() {
-	  this.community.uploadPost(this.text, this.dataURL).then(() => {
+	  this.community.uploadPost(this.text, this.dataURL, this.posttitle, this.tag1, this.tag2, this.tag3).then(() => {
 	  	this.navCtrl.pop();
 	  });
 	  let loading = this.loadingCtrl.create({

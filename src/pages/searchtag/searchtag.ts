@@ -5,7 +5,7 @@ import { CommunitycommentProvider } from '../../providers/communitycomment/commu
 import firebase from 'firebase';
 
 /**
- * Generated class for the CommunitygroupPage page.
+ * Generated class for the SearchtagPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,10 +13,10 @@ import firebase from 'firebase';
 
 @IonicPage()
 @Component({
-  selector: 'page-communitygroup',
-  templateUrl: 'communitygroup.html',
+  selector: 'page-searchtag',
+  templateUrl: 'searchtag.html',
 })
-export class CommunitygroupPage {
+export class SearchtagPage {
   @ViewChild('content') content: Content;
   fireusers = firebase.database().ref('/users');
   firecommunity = firebase.database().ref('/community');
@@ -26,26 +26,29 @@ export class CommunitygroupPage {
   popover;
   post;
   value;
-  tag = '';
+  tag = this.community.tag;
   selectedData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController
   ) {
-    this.title = this.community.title;
   }
 
   ionViewDidLoad() {
+    console.log('ionViewDidLoad SearchtagPage');
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(){
+    
     this.loading = this.loadingCtrl.create();
     this.loading.present();
-    this.community.getallposts().then((posts) => {
+    this.community.getsearchposts(this.tag).then((posts) => {
       this.posts = posts;
       this.content.scrollToTop(0);
       this.loading.dismiss();
     });
+    
+    //this.community.getsearchposts(tag);
   }
 
   comment(post) {
@@ -128,55 +131,35 @@ export class CommunitygroupPage {
         buttons: [
           {
             text: '확인',
-            handler: () => {
-              this.community.getallposts().then((posts) => {
-                this.posts = posts;
-                this.content.scrollToTop(0);
-                this.loading.dismiss();
-              });
-            }
-          }
-        ]
-      });
-      alert.present();
-    }
-    else{
-      let alert = this.alertCtrl.create({
-        title: '확인',
-        message: '정말 게시물을 신고하시겠습니까?.',
-        buttons: [
-          {
-            text: '확인',
-            handler: () => {
-              this.community.reportpost(post);
-              this.community.getallposts().then((posts) => {
-                this.posts = posts;
-                this.content.scrollToTop(0);
-                this.loading.dismiss();
-              });
-            }
-          },
-          {
-            text: '아니요',
             role: 'cancel'
           }
         ]
       });
       alert.present();
+      this.community.getallposts().then((posts) => {
+        this.posts = posts;
+        this.content.scrollToTop(0);
+        this.loading.dismiss();
+      });
     }
-  }
-
-  searchtag(tag){
-    this.community.tag = tag;
-    this.navCtrl.push("SearchtagPage", {tag: this.tag});
-  }
-
-  presentPopover(myEvnet){
-    let popover = this.popoverCtrl.create(
-       'PopoverPage'
-    );
-    popover.present({
-      ev : myEvnet
-    });
+    else{
+      this.community.reportpost(post);
+      let alert = this.alertCtrl.create({
+        title: '완료',
+        message: '정상적으로 신고가 완료됐습니다.',
+        buttons: [
+          {
+            text: '확인',
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      this.community.getallposts().then((posts) => {
+        this.posts = posts;
+        this.content.scrollToTop(0);
+        this.loading.dismiss();
+      });
+    }
   }
 }

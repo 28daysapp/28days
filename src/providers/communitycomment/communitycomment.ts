@@ -12,18 +12,22 @@ import { Events } from 'ionic-angular';
 @Injectable()
 export class CommunitycommentProvider {
 	firecomment = firebase.database().ref('/communitycomment');
-	post;
+	post = this.community.post;
 	postid;
 	comments;
 	subcomments;
 	commentid;
 	text;
+	posttext = '';
+	posttitle = '';
   constructor(public community: CommunityProvider, public events: Events) {
   }
 
   initializecomment(post) {
   	this.post = post;
-	 this.postid = post.postid;
+	this.postid = post.postid;
+	this.posttitle = post.posttitle;
+	this.posttext = post.posttext;
   }
 
   uploadcomment(txt) {

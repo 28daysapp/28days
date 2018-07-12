@@ -14,14 +14,10 @@
 				</button>
 			</ion-buttons>
 	</ion-navbar>
-
-
-
-	<ion-searchbar (ionInput)="getItems()"></ion-searchbar>
-		<ion-list>
-  			<ion-item *ngFor="let item of items">{{ post }}</ion-item>
-		</ion-list>
-
+	<div class="search-button">
+	<ion-searchbar [(ngModel)]="tag" placeholder="Search"></ion-searchbar>
+	<button class="button" (click)="searchtag(tag)">검색</button>
+	</div>
 </ion-header>
 
 
@@ -31,39 +27,19 @@
 	<ul>
 		<li *ngFor="let post of posts">
 			<div class="post">
-				<div class="name">
-					<span>{{ post.username }}</span>
-					<div *ngIf="reportuser(post)">
-						<button (click) = "reportpost(post)">
-							신고
-						</button>
-					</div>
-					<div *ngIf="usercorrect(post)">
-					<button (click) = "updatepost(post)">
-						수정 
-						</button>
-					<button (click) = "postdelete(post)">
-						삭제
-					</button>
-				</div>
-				</div>
+
 				<div class="picture" *ngIf="post.url">
 					<img src="{{ post.url }}">
 				</div>
 				<div class="group-time">
-					<span class="group"></span>
+					<button class="group" (click)="comment(post)">{{ post.posttitle }}</button>
 					<span class="time">{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
 				</div>
-				<div class="text">
-					<p>{{ post.text }}</p>
-				</div>
-				<div class="comment-like">
-					<button class="comment" (click)="comment(post)">
+				<div class="comment-like">			
 						<div>
 							<img src="assets/comment.png">
 							<span>{{ post.comment }}</span>
 						</div>
-					</button>
 					<button class="like" (click)="like(post)">
 						<div>
 							<img src="{{ post.likesrc }}">
@@ -71,6 +47,26 @@
 						</div>
 					</button>
 				</div>
+				<div class="tag">
+					<button>#{{post.tag1}}</button>
+					<button>#{{post.tag2}}</button>
+					<button>#{{post.tag3}}</button>
+				</div>
+				<div class="name">
+						<div *ngIf="reportuser(post)">
+							<button (click) = "reportpost(post)">
+								신고
+							</button>
+						</div>
+						<div *ngIf="usercorrect(post)">
+						<button (click) = "updatepost(post)">
+							수정 
+							</button>
+						<button (click) = "postdelete(post)">
+							삭제
+						</button>
+					</div>
+					</div>
 			</div>
 		</li>
 	</ul>

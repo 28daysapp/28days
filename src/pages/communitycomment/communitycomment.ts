@@ -1,8 +1,10 @@
-import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, PopoverController} from 'ionic-angular';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, PopoverController, LoadingController, Content, ViewController, AlertController  } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
+import { CommunityProvider } from '../../providers/community/community';
+
 
 /**
  * Generated class for the CommunitycommentPage page.
@@ -17,6 +19,7 @@ import firebase from 'firebase';
   templateUrl: 'communitycomment.html',
 })
 export class CommunitycommentPage {
+  @ViewChild('content') content: Content;
   commentForm: FormGroup;
   updateForm: FormGroup;
 	subcommentForm: FormGroup;
@@ -24,12 +27,19 @@ export class CommunitycommentPage {
   subcomments;
   commentid;
   commenttxt;
+  loading;
+  posts;
+  post = this.community.post;
+  title;
   list_showsubcomment = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
-    public popoverCtrl: PopoverController,
-  	public zone: NgZone, public cocomment: CommunitycommentProvider, public formBuilder: FormBuilder) {
+    public popoverCtrl: PopoverController, private community: CommunityProvider,
+    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
+    public viewCtrl: ViewController, public alertCtrl: AlertController,
+  	public zone: NgZone, public formBuilder: FormBuilder) {
+    this.title = this.community.title;
     // this event is published when any changes related to firebase comment data happen in CommunitycommentProvider
-  	this.events.subscribe('community-newcomment', () => {
+    this.events.subscribe('community-newcomment', () => {
       this.comments = [];
       this.subcomments = [];
       this.zone.run(() => {
@@ -49,6 +59,10 @@ export class CommunitycommentPage {
       txt: ['', Validators.required]
     });
     
+  }
+
+  ionViewWillEnter() {
+
   }
 
   ionViewDidLoad() {

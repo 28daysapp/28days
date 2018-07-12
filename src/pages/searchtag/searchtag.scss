@@ -1,4 +1,4 @@
-page-communitygroup {
+page-searchtag {
 
 	ul {
 	  list-style-type: none;
@@ -33,11 +33,7 @@ page-communitygroup {
 	  overflow: auto;
 	  margin-bottom: 5px;
 	  display: table;
-		width: 100%;
-		
-		span {
-			color: color($colors, primary);
-		}
+	  width: 100%;
 	}
 
 	.name span {
