@@ -9,3 +9,6 @@ export const FirstRunPage = 'TabsPage'
 
 ## supporter-popover
 온라인 선택 시, 서포터와 상담사 중 선택할 수 있는 페이지
+
+## counselor
+온라인 서포트>전문 상담사 연결> 전문가와 상담할 수 있는 페이지
