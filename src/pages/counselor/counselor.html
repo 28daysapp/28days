@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="jade">
+  <ion-navbar color="daysgreen">
     <ion-title>전문 상담사</ion-title>
   </ion-navbar>
 
@@ -17,12 +17,14 @@
 
   <ion-card class="cards-bg" *ngIf="loadComplete">
     <ion-card-content>
-
+      <p align="center" class="userprofile">
+        <button class="photo" (click)="changecharacter()">
+  			<img src="{{photoURL}}">
+  		</button>
+    </p>
     	<p class="username">{{ user.username }}</p>
-
-      <p class="level">서포터 – Lv.1</p>
-
-      <p class="greeting">안녕하세요! [{{ user.username }}]입니다.<br>함께 나아가요!</p>
+      <!-- <p class="level">서포터 – Lv.1</p> -->
+      <p class="greeting">안녕하세요! [{{ user.username }}] 상담사입니다.<br>함께 나아가요!</p>
 
       <button class="review">리뷰보기</button>
 
@@ -65,7 +67,7 @@
     		채팅 요청하기
     	</button>
     	<button ion-button full clear color="daysgreen" (click)="nextSupporter()">
-    		다른 서포터 찾기
+    		다른 상담사 찾기
     	</button>
 
     </ion-card-content>

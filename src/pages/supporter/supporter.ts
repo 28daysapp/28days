@@ -27,7 +27,7 @@ export class SupporterPage {
   ratingsD;
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
-  	
+
   }
 
   ionViewDidLoad() {
@@ -87,7 +87,7 @@ export class SupporterPage {
 
   makeRating(num) {
     var ratings = [];
-    for (var i = 1; i < 6; i++) { 
+    for (var i = 1; i < 6; i++) {
       var rating: any = {};
       if (i <= num) {
         rating.src = 'assets/star-full.png';

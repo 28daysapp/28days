@@ -10,13 +10,30 @@ page-counselor {
   		text-align: center;
   	}
 
+    .userprofile {
+  		padding: 0px 0px 10px !important;
+  	}
+
+  	.userprofile .photo {
+  		width: 50%;
+  		height: 50%;
+
+  		margin: 10px 0 5px !important;
+  		padding: 0px !important;
+  	}
+    // 
+    // .userprofile button {
+  	// 	background-color: white;
+  	// }
+
+
   	.cards-bg button {
   		border-top: 1px solid color($colors, dark, base);
   	}
 
   	.username {
   		border-radius: 25px;
-      background: color($colors, daysgreen, base);
+      background: color($colors, jade, base);
       padding: 5px 20px;
       color: color($colors, white, base);
       font-size: 130%;
@@ -24,9 +41,9 @@ page-counselor {
       display: inline-block;
   	}
 
-  	.level {
-  		color: color($colors, daysgreen, base);
-  	}
+  	// .level {
+  	// 	color: color($colors, jade, base);
+  	// }
 
   	.greeting {
   		margin: 10px 0px 5px;
