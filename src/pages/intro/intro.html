@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="daysgreen">
+  <ion-navbar>
     <ion-title>28DAYS – Intro</ion-title>
   </ion-navbar>
 
@@ -38,7 +38,7 @@
         <p>약물 복용 주기</p>
         <div>
           <span *ngFor="let choice of modalchoices">
-            <ion-checkbox color="daysgreen" (click)="modalValue(choice)" name="time"></ion-checkbox>
+            <ion-checkbox color="primary" (click)="modalValue(choice)" name="time"></ion-checkbox>
             <label>{{choice.label}}</label>
           </span>
         </div>

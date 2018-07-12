@@ -6,4 +6,33 @@ page-search {
     //     margin-top: 2em;
     //     margin-bottom: 2em;
     // }
+
+    #title {
+        color: color($colors, primary);
+    }
+
+    .card-page {
+
+        ion-card {
+          position: relative;
+          text-align: center;
+        }
+      
+        .card-title {
+          position: relative;
+          font-size: 1.0em;
+          width: 70%;
+          font-weight: bold;
+          color: color($colors, primary);
+        }
+      
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 52%;
+          width: 100%;
+          color: #fff;
+        }
+      
+      }
 }

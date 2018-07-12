@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="daysgreen">
+  <ion-navbar>
     <ion-title>비밀번호 변경</ion-title>
   </ion-navbar>
 
@@ -29,7 +29,7 @@
       <p class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
         8자리 이상, 숫자와 문자를 조합해주세요!
       </p>
-      <button ion-button block color="daysgreen" (click)="changepwd(password)">
+      <button ion-button block color="primary" (click)="changepwd(password)">
         확인
       </button>
     </form>

@@ -22,7 +22,7 @@ export class GogohomePage implements AfterViewChecked {
 	answers1 = [
 		'얘기해봐~',
 		'그렇구나~',
-		'그래~!'
+		'그래!!'
 	];
 	answers2 = [
 		'그렇긴 해',

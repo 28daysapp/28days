@@ -3,14 +3,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>도움을 받아보세요!</ion-title>
+    <ion-title class="title">도움을 받아보세요!</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-card>
-    <ion-card-header (click)="counseling()">
+    <ion-card-header class="title" (click)="counseling()">
       상담센터 찾아보기
     </ion-card-header>
     <ion-card-content (click)="counseling()">
@@ -19,7 +19,7 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header (click)="psychiatric()">
+    <ion-card-header class="title" (click)="psychiatric()">
       정신과 찾아보기
     </ion-card-header>
     <ion-card-content (click)="psychiatric()">
