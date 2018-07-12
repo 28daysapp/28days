@@ -37,6 +37,9 @@ export class CommunityProvider {
 	post;
 	value;
 	report;
+	text;
+	posttitle;
+	tag;
 	constructor(public my: MyProvider) {
 
 	}
@@ -49,7 +52,7 @@ export class CommunityProvider {
 	}
 
 	/* upload post to firebase */
-	uploadPost(txt, dataURL) {
+	uploadPost(txt, dataURL, posttitle, tag1, tag2, tag3) {
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			var newPostRef = this.firecommunity.child(this.namecom).push();
@@ -59,6 +62,7 @@ export class CommunityProvider {
 				var imageStore = this.firestore.ref('/community/' + this.namecom).child(postId);
 				imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 					newPostRef.set({
+						posttitle: posttitle,
 						postid: postId,
 						uid: uid,
 						username: firebase.auth().currentUser.displayName,
@@ -70,7 +74,10 @@ export class CommunityProvider {
 						title: this.title,
 						namecom: this.namecom,
 						value: true,
-						report: 0
+						report: 0,
+						tag1: tag1,
+						tag2: tag2,
+						tag3: tag3,
 					}).then(() => {
 						this.my.addmypost(uid, this.namecom, postId, time).then(() => {
 							resolve(true);
@@ -79,6 +86,7 @@ export class CommunityProvider {
 				});
 			} else {
 				newPostRef.set({
+					posttitle: posttitle,
 					postid: postId,
 					uid: uid,
 					username: firebase.auth().currentUser.displayName,
@@ -90,7 +98,10 @@ export class CommunityProvider {
 					title: this.title,
 					namecom: this.namecom,
 					value: true,
-					report: 0
+					report: 0,
+					tag1: tag1,
+					tag2: tag2,
+					tag3: tag3,
 				}).then(() => {
 					this.my.addmypost(uid, this.namecom, postId, time).then(() => {
 						resolve(true);
@@ -101,26 +112,17 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	updatePost(text, dataURL) {
+	updatePost(text, posttitle, tag1, tag2, tag3) {
 		var promise = new Promise((resolve) => {
-			if (dataURL) {
-				var imageStore = this.firestore.ref('/community' + this.namecom).child(this.post.postid);
-				imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
-					this.firecommunity.child(`${this.namecom}/${this.post.postid}`).update({
-						text: text,
-						url: savedImage.downloadURL
-					}).then(() => {
-						resolve(true);
-					});
-				});
-			}
-			else {
 				this.firecommunity.child(`${this.namecom}/${this.post.postid}`).update({
-					text: text
+					posttitle: posttitle,
+					text: text,
+					tag1: tag1,
+					tag2: tag2,
+					tag3: tag3
 				}).then(() => {
 					resolve(true);
 				});
-			}
 		});
 		return promise;
 	}
@@ -189,6 +191,48 @@ export class CommunityProvider {
 		return promise;
 	}
 
+	getsearchposts(tag){
+		var uid = firebase.auth().currentUser.uid;
+		var promise = new Promise((resolve) => {
+			this.firecommunity.child(this.namecom).orderByChild('timestamp').once("value").then((snapshot) => {
+				this.firelike.child(`${uid}/${this.namecom}`).once("value").then((likesnapshot) => {
+					
+					var likepostid = [];
+					likesnapshot.forEach((childSnapshot) => {
+						likepostid.push(childSnapshot.key);
+					});
+					var posts = [];
+					snapshot.forEach((childSnapshot) => {
+						var post = childSnapshot.val();
+
+						// if user liked this post, set like img to full heart
+						// else, set like img to empty heart
+						if (likepostid.indexOf(post.postid) != -1) {
+							post.likesrc = "assets/like-full.png";
+						} else {
+							post.likesrc = "assets/like.png";
+						}
+						if(post.tag1 == tag){
+							posts.push(post);
+						}
+						else if(post.tag2 == tag){
+							posts.push(post);
+						}
+						else if(post.tag3 == tag){
+							posts.push(post);
+						}
+						else{
+							
+						}
+					});
+					posts.reverse();
+					resolve(posts);
+				
+				});
+			});
+		});
+		return promise;
+	}
 
 	/* when user click like of a post, save timestamp and add 1 to the number of like of a post */
 	setLike(post) {
