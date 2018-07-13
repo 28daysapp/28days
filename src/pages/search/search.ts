@@ -28,7 +28,7 @@ export class SearchPage {
   url: string;
   area: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController ) {
     this.text = this.navParams.get('type');
     this.area = this.navParams.get('area');
     this.places = [];

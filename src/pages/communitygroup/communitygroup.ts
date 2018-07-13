@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the CommunitygroupPage page.
@@ -20,6 +21,7 @@ export class CommunitygroupPage {
   @ViewChild('content') content: Content;
   fireusers = firebase.database().ref('/users');
   firecommunity = firebase.database().ref('/community');
+  user;
   title;
   posts;
   loading;
@@ -27,15 +29,17 @@ export class CommunitygroupPage {
   post;
   value;
   tag = '';
-  selectedData:any;
+  selectedData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
-    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController
+    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public auth: AuthProvider, public alertCtrl: AlertController
   ) {
     this.title = this.community.title;
   }
 
   ionViewDidLoad() {
+    // check if user already logged-in
+    this.user = firebase.auth().currentUser;
   }
 
   ionViewWillEnter() {
@@ -47,6 +51,8 @@ export class CommunitygroupPage {
       this.loading.dismiss();
     });
   }
+
+
 
   comment(post) {
     this.community.post = post;
@@ -72,14 +78,14 @@ export class CommunitygroupPage {
     this.navCtrl.push('CommunitywritePage');
   }
 
-  postdelete(post){
+  postdelete(post) {
     let alert = this.alertCtrl.create({
       title: '경고',
       message: '정말 삭제하시겠습니까?',
       buttons: [
         {
           text: '예',
-          handler: () =>{
+          handler: () => {
             this.community.postdelete(post);
             this.community.getallposts().then((posts) => {
               this.posts = posts;
@@ -97,31 +103,31 @@ export class CommunitygroupPage {
     alert.present();
   }
 
-  updatepost(post){
+  updatepost(post) {
     this.community.post = post;
     this.navCtrl.push('CommunityfixPage', {
-     //text: post.text,
+      //text: post.text,
     });
   }
 
-  usercorrect(post){
+  usercorrect(post) {
     var correct = false;
-    if(firebase.auth().currentUser.uid == post.uid){
+    if (firebase.auth().currentUser.uid == post.uid) {
       correct = true;
     }
     return correct;
   }
 
-  reportuser(post){
+  reportuser(post) {
     var correct = true;
-    if(firebase.auth().currentUser.uid == post.uid){
+    if (firebase.auth().currentUser.uid == post.uid) {
       correct = false;
     }
     return correct;
   }
 
-  reportpost(post){
-    if(post.value == false){
+  reportpost(post) {
+    if (post.value == false) {
       let alert = this.alertCtrl.create({
         title: '',
         message: '이미 신고가 들어갔습니다.',
@@ -140,7 +146,7 @@ export class CommunitygroupPage {
       });
       alert.present();
     }
-    else{
+    else {
       let alert = this.alertCtrl.create({
         title: '확인',
         message: '정말 게시물을 신고하시겠습니까?.',
@@ -166,17 +172,17 @@ export class CommunitygroupPage {
     }
   }
 
-  searchtag(tag){
+  searchtag(tag) {
     this.community.tag = tag;
-    this.navCtrl.push("SearchtagPage", {tag: this.tag});
+    this.navCtrl.push("SearchtagPage", { tag: this.tag });
   }
 
-  presentPopover(myEvnet){
+  presentPopover(myEvnet) {
     let popover = this.popoverCtrl.create(
-       'PopoverPage'
+      'PopoverPage'
     );
     popover.present({
-      ev : myEvnet
+      ev: myEvnet
     });
   }
 }

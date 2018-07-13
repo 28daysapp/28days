@@ -102,6 +102,37 @@ export class MypagePage {
     }
   }
 
+  loginpage() {
+    if (this.user) {
+      let alert = this.alertCtrl.create({
+        title: '이미 로그인되어 있습니다.',
+        message: '28days에서 로그아웃하시겠습니까?',
+        buttons: [
+          {
+            text: '확인',
+            handler: () => {
+              // log out from firebase auth service and remove previous cache about user credential
+              this.auth.logoutUser().then(() => {
+                this.storage.remove('localcred').then(() => {
+                  this.navCtrl.setRoot('HomePage', {}, {animate: true, direction: 'forward'});
+                });
+              });
+            }
+          },
+          {
+            text: '취소',
+            role: 'cancel',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    } else {
+      this.navCtrl.push('LoginPage');
+    }
+  }
+
   changecharacter() {
     if (this.user) {
       this.navCtrl.push('CharacterPage');

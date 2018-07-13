@@ -35,7 +35,7 @@ export class HomePage {
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController) {
     // Receive message from push notifications
     if (params.data.message) {
-      console.log('message: ' + params.data.message);  
+      console.log('message: ' + params.data.message);
     }
   }
 
@@ -55,7 +55,7 @@ export class HomePage {
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
       this.photoURL = this.user.photoURL;
-      
+
       this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
         console.log("user profile");
         console.log(JSON.stringify(userprofile));
@@ -96,37 +96,6 @@ export class HomePage {
           });
         }
       });
-    }
-  }
-
-  loginpage() {
-    if (this.user) {
-      let alert = this.alertCtrl.create({
-        title: '이미 로그인되어 있습니다.',
-        message: '28days에서 로그아웃하시겠습니까?',
-        buttons: [
-          {
-            text: '확인',
-            handler: () => {
-              // log out from firebase auth service and remove previous cache about user credential
-              this.auth.logoutUser().then(() => {
-                this.storage.remove('localcred').then(() => {
-                  this.navCtrl.setRoot(HomePage);
-                });
-              });
-            }
-          },
-          {
-            text: '취소',
-            role: 'cancel',
-            handler: () => {
-            }
-          }
-        ]
-      });
-      alert.present();
-    } else {
-      this.navCtrl.push('LoginPage');
     }
   }
 
@@ -198,13 +167,9 @@ export class HomePage {
       this.pleaselogin();
     }
   }
-  
+
   searchhelp() {
-    if (this.user) {
-      this.navCtrl.push('SearchhelpPage');
-    } else {
-      this.pleaselogin();
-    }
+    this.navCtrl.push('SearchhelpPage');
   }
 
   test() {
@@ -256,7 +221,7 @@ export class HomePage {
   modalhandler(modal) {
     this.greeting = modal.value.greeting;
     this.showmodal = false;
-    this.userProvider.updateGreeting(modal.value.greeting).then(() => {});
+    this.userProvider.updateGreeting(modal.value.greeting).then(() => { });
   }
 
   dismissModal() {
