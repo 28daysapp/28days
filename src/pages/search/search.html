@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="jade">
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -11,6 +11,7 @@
   <ion-searchbar (click)="presentAreaModal()"></ion-searchbar>
 
   <div #map id="map"></div>
+  <ion-spinner ios name="bubbles"></ion-spinner>
 
   <ion-card *ngFor="let place of places">
 
