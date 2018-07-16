@@ -16,7 +16,6 @@ export class SearchPage {
 
   map: any;
   service: any;
-  infowindow: any;
 
   latLng: any;
   mapOptions: any;
@@ -24,11 +23,11 @@ export class SearchPage {
   text: string;
   query: string;
   places: any;
-  placeId: string;
+  details: any;
   url: string;
   area: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController) {
     this.text = this.navParams.get('type');
     this.area = this.navParams.get('area');
     this.places = [];
@@ -66,7 +65,6 @@ export class SearchPage {
 
       let service = new google.maps.places.PlacesService(this.map);
       service.textSearch(request, (results, status) => {
-
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
@@ -78,7 +76,7 @@ export class SearchPage {
       }, (error) => {
         console.log("Error: " + error);
       });
-      console.log(this.places);
+
     }
   }
 
@@ -86,7 +84,19 @@ export class SearchPage {
 
   presentAreaModal() {
     let areaModal = this.modalController.create('SearchAreaPage');
+    areaModal.onDidDismiss(data => {
+      console.log(data);
+      this.area = data.area;
+
+
+    })
     areaModal.present();
+  }
+
+  placeDetail(place) {
+    this.navCtrl.push('PlaceDetailPage', {
+      place: place
+    });
   }
 
 
