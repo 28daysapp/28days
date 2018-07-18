@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+import { ReviewProvider } from '../../providers/review/review';
+import firebase from 'firebase';
 
 declare var google;
 
@@ -13,6 +14,9 @@ export class PlaceDetailPage {
 
   @ViewChild("map") mapElement: ElementRef;
 
+  fireusers = firebase.database().ref('/users');
+  firecommunity = firebase.database().ref('/community');
+  user: any;
   map: any;
   place: any;
   address: string;
@@ -24,17 +28,15 @@ export class PlaceDetailPage {
   mapOptions: any;
   latLng
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public loadingCtrl: LoadingController) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+    this.user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlaceDetailPage');
-
-
     this.getGoogleInfo();
   }
-  
+
   getGoogleInfo() {
     this.place = this.navParams.get('place');
     this.name = this.place.name;
@@ -50,22 +52,15 @@ export class PlaceDetailPage {
       placeId: this.placeId,
       fields: ['formatted_phone_number', 'formatted_address', 'opening_hours', 'website', 'photo', 'price_level']
     }
-    
-    console.log("나오나?1111111111111");
+
     let service = new google.maps.places.PlacesService(this.map);
     service.getDetails(request, (results, status) => {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
-        console.log("나오나?22222222222");
-        console.log(results);
         this.phone = results.formatted_phone_number;
         this.website = results.website;
-
-        console.log("por que no sale??? " + this.phone + " " + this.website);
-
       } else {
         console.log("Status error: " + status);
       }
-
     }, (error) => {
       console.log("Error: " + error);
     });
@@ -76,17 +71,10 @@ export class PlaceDetailPage {
   }
 
   reviewWrite() {
-    this.navCtrl.push('ReviewWritePage');
+    console.log("placeId"+this.placeId);
+    this.navCtrl.push('ReviewWritePage', {
+      placeId: this.placeId
+    });
   }
-
-
-
-  // presentLoading() {
-  //   const loader = this.loadingCtrl.create({
-  //     content: "리뷰를 가져오고 있어요!",
-  //     duration: 2000
-  //   });
-  //   loader.present();
-  // }
 
 }

@@ -20,15 +20,10 @@ export class SearchAreaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public viewController: ViewController) {
   }
 
-  // enterArea() {
-  //   this.navCtrl.setRoot('SearchPage', {
-  //     { area: this.area }
-  //   });
-  // }
-
   dismiss() {
     let data = { area: this.area };
     this.viewController.dismiss(data);
+
   }
 
 }

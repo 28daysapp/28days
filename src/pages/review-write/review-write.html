@@ -15,27 +15,13 @@
 
 <ion-content padding>
     <div class="header">
-      <p class="group">{{ name }}</p>
-      <p class="text">당신의 방식으로 표현해 보세요!</p>
+      <p class="group">{{ placeName }}</p>
+      <p class="text">서비스가 어땠는지 이야기해주세요</p>
     </div>
     <div class="area">
-      <textarea class="area1" [(ngModel)]="reviewTitle" placeholder="제목"></textarea>
       <textarea class="area2" [(ngModel)]="text" placeholder="내용"></textarea>
-      <textarea class="area3" [(ngModel)]="tag1" placeholder="태그1"></textarea>
-      <textarea class="area3" [(ngModel)]="tag2" placeholder="태그2"></textarea>
-      <textarea class="area3" [(ngModel)]="tag3" placeholder="태그3"></textarea>
     </div>
-    <div class="imagechooser">
-      <button class="gallery" (click)="openGallery()" *ngIf="!pick">
-        <div>
-          <ion-icon name="camera"></ion-icon>
-          <span>사진 업로드 또는 변경</span>
-        </div>
-      </button>
-      <button class="image" (click)="openGallery()" *ngIf="pick">
-        <img src="{{ fileURL }}">
-      </button>
-    </div>
+
   </ion-content>
   
   <ion-footer>

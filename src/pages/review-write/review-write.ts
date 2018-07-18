@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { ReviewProvider } from '../../providers/review/review';
+import firebase from 'firebase';
 
-/**
- * Generated class for the ReviewWritePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +11,34 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ReviewWritePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user;
+  placeId;
+  text;
+  placeName;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public review: ReviewProvider, public loadingCtrl: LoadingController) {
+    this.placeId = this.navParams.get('placeId');
+    this.user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewWritePage');
+  }
+
+  write() {
+
+    let loading = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+
+    loading.present();
+
+	  this.review.writeReview(this.placeId, this.text).then(() => {
+      console.log("여기까진 오냐???")
+	  	this.navCtrl.pop();
+    });
+    
+
   }
 
 }

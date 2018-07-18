@@ -16,7 +16,6 @@ export class SearchPage {
 
   map: any;
   service: any;
-
   latLng: any;
   mapOptions: any;
   marker: any;
@@ -85,10 +84,10 @@ export class SearchPage {
   presentAreaModal() {
     let areaModal = this.modalController.create('SearchAreaPage');
     areaModal.onDidDismiss(data => {
-      console.log(data);
       this.area = data.area;
-
-
+      this.navCtrl.push('SearchPage', {
+        area: this.area
+      });
     })
     areaModal.present();
   }
@@ -98,129 +97,5 @@ export class SearchPage {
       place: place
     });
   }
-
-
-  // createMarker(places){
-  //   this.marker = new google.maps.Marker({
-  //     map: this.map,
-  //     position: places.geometry.location
-  //   });
-
-  //   this.infowindow = new google.maps.InfoWindow();
-
-  //   google.maps.event.addListener(this.marker, 'click', () => {
-  //       this.infowindow.setContent(places.location, places.name);
-  //       this.infowindow.open(this.map, this.marker);
-  //   });
-  // }
-
-  // callback(results, status) {
-  // if (status === google.maps.places.PlacesServiceStatus.OK) {
-  //   for (var i = 0; i < results.length; i++) {
-  //     this.createMarker(results[i]);
-  //     this.placeDetails(results[i]);
-  //   }
-  // }
-  // }
-
-  // createMarker(place) {
-  //   this.marker = new google.maps.Marker({
-  //     map: this.map,
-  //     position: place.geometry.location
-  //   });
-
-  //   let infowindow = new google.maps.InfoWindow();
-
-  //   console.log("this marker: " + this.marker);
-  //   google.maps.event.addListener(this.marker, 'click', () => {
-  //     this.ngZone.run(() => {
-  //       infowindow.setContent(place.name);
-  //       infowindow.open(this.map, this.marker);
-  //     });
-  //   });
-  // }
-
-
-
-  /*-----------------Search place by Text------------------------*/
-  // searchByText(place) {
-  //   console.log("4: " + place);
-  //   let service = new google.maps.places.PlacesService(this.map);
-
-  //   let request = {
-  //     location: place,
-  //     radius: '500',
-  //     query: '상담센터'
-  //   };
-
-  //   service.textSearch(request, (place, status) => {
-  //     if (status == google.maps.places.PlacesServiceStatus.OK) {
-  //       console.log("formatted address: " + place.formatted_address);
-  //       console.log("geometry: " + place.geometry.location);
-  //       console.log("name: " + place.name);
-  //       console.log("place id: " + place.place_id);
-  //       console.log("vicinity: " + place.vicinity);
-  //       // createMarker(place);
-  //     }
-  //   }
-  // }
-
-
-  // if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과")
-  // console.log("6: 여기는??" + this.text);
-  //   service.textSearch({
-  //     place: place,
-  //     query: this.query,
-  //     radius: '100',
-  //     language: 'ko'
-  //   }, (results, status) => {
-  //     this.callback(results, status);
-  //   }, (error) => {
-  //     console.log("Error: " + error);
-  //   });
-
-
-
-
-  // callback(place, status) {
-  //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-  //     console.log("formatted address: " + place.formatted_address);
-  //     console.log("geometry: " + place.geometry.location);
-  //     console.log("name: " + place.name);
-  //     console.log("place id: " + place.place_id);
-  //     console.log("vicinity: " + place.vicinity);
-  //     createMarker(place);
-  //   }
-  // }
-
-
-
-  // generateplaces() {
-  //   this.places = [];
-  // }
-
-
-
-
-  // placeDetails(place) {
-
-  //   this.placeId = place.place_id;
-  //   console.log("place id: " + this.placeId);
-
-  //   var xhr = new XMLHttpRequest();
-  //   console.log("What's this: " + xhr.open('GET', 'https://maps.googleapis.com/maps/api/place/details/output?key=AIzaSyDq8tjTYhMTCmAeltpK7J8IaQ83ofsqFCU&placeId=' + this.placeId));
-
-  //   this.url = "https://maps.googleapis.com/maps/api/place/details/output?key=AIzaSyDq8tjTYhMTCmAeltpK7J8IaQ83ofsqFCU&placeId=" + this.placeId;
-
-  //   this.http.get(this.url).subscribe(data => {
-  //       console.log("From the function: " + data);
-  //   }, (err) => {
-  //     console.log("Error: " + err);
-  //   });
-
-  //   this.places.push({
-  //     name: place.name
-  //   });
-  // }
 
 }
