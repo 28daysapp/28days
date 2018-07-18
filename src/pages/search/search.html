@@ -11,9 +11,9 @@
   <ion-searchbar (click)="presentAreaModal()"></ion-searchbar>
 
   <div #map id="map"></div>
-  <ion-spinner ios name="bubbles"></ion-spinner>
+  <!-- <ion-spinner ios></ion-spinner> -->
 
-  <ion-card *ngFor="let place of places">
+  <ion-card *ngFor="let place of places" (click)="placeDetail(place)">
 
     <ion-item>
       <ion-avatar item-start>
@@ -22,23 +22,26 @@
       <div class="card-title"> {{ place.name }}</div>
 
       <p>{{ place.formatted_address }}</p>
+
+      <div *ngFor="let detail of details">
+          <p>{{ detail.website }}</p>
+      </div>  
     </ion-item>
 
     <ion-card-content>
-      <p>{{ place.place_id }}</p>
     </ion-card-content>
 
     <ion-row>
       <ion-col>
         <button ion-button icon-start clear small>
           <ion-icon name="star"></ion-icon>
-          <div>별점: {{ place.rating }}</div>
+          <div>평점: </div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-start clear small>
           <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
+          <div>리뷰</div>
         </button>
       </ion-col>
     </ion-row>

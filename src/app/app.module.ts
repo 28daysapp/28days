@@ -29,6 +29,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
 import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ReviewProvider } from '../providers/review/review';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CommunityfixPage,
     // IamportService,
     InAppBrowser,
-    SearchPage
+    SearchPage,
+    ReviewProvider
     //GroupProvider,
   ]
 })
