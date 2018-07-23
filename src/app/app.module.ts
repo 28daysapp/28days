@@ -31,6 +31,8 @@ import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReviewProvider } from '../providers/review/review';
 
+import { FCM } from '@ionic-native/fcm'
+
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { ReviewProvider } from '../providers/review/review';
     // IamportService,
     InAppBrowser,
     SearchPage,
-    ReviewProvider
+    ReviewProvider,
+    FCM
     //GroupProvider,
   ]
 })

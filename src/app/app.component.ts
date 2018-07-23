@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ViewChild } from '@angular/core';
 import firebase from 'firebase';
 import { FirstRunPage } from '../pages';
+import { FCM } from '@ionic-native/fcm'
 
 
 // firebase config
@@ -40,7 +41,9 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     // public push: Push,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private fcm: FCM
+  ) {
     firebase.initializeApp(firebaseConfig);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -48,6 +51,31 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       // this.initPushNotification();
+
+      if (this.platform.is('cordova')) {
+        //Notifications
+        fcm.subscribeToTopic('all');
+        fcm.getToken().then(token => {
+          console.log("Token: " + token);
+        })
+        fcm.onNotification().subscribe(data => {
+          if (data.wasTapped) {
+            console.log("Received in background");
+          } else {
+            console.log("Received in foreground");
+          };
+        })
+        fcm.onTokenRefresh().subscribe(token => {
+          console.log(token);
+        });
+        //end notifications.
+
+      }
+
+
+      statusBar.styleDefault();
+      splashScreen.hide();
+
     });
   }
   /*
