@@ -1,0 +1,79 @@
+<!--
+  Generated template for the SupporterreviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<script>
+
+</script>
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>supporterreview</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="reviewwrite()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #content>
+  <ul>
+    <li *ngFor="let review of reviews">
+      <div class="post">
+        <div class="comment-like">
+          <div class="like">
+            <br>답장시간
+            <img src="assets/star-full.png"> {{review.rating1}}
+            <br>체리능력
+            <img src="assets/star-full.png"> {{review.rating2}}
+            <br> 호호능력
+            <img src="assets/star-full.png"> {{review.rating3}}
+            <br>만딩늘보
+            <img src="assets/star-full.png"> {{review.rating4}}
+          </div>
+        </div>
+        <!--
+         <div class="comment-like">
+            <div class="like">
+                답장시간
+                <ul class="like">
+                    <li *ngFor="let rating of ratingsA">
+                      <img src="{{ rating.src }}">
+                    </li>
+                  </ul>
+                <br>공감능력
+                <ul class="like">
+                    <li *ngFor="let rating of ratingsB">
+                      <img src="{{ rating.src }}">
+                    </li>
+                  </ul>
+                <br>만딩능력
+                <ul class="like">
+                    <li *ngFor="let rating of ratingsC">
+                      <img src="{{ rating.src }}">
+                    </li>
+                  </ul>
+                <br>호호능력
+                <ul class="like">
+                    <li *ngFor="let rating of ratingsD">
+                      <img src="{{ rating.src }}">
+                    </li>
+                  </ul>
+              </div>
+            -->
+        <div class="group-time">
+          <span class="time">{{ review.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
+        </div>
+        {{review.comment}}
+      </div>
+    </li>
+  </ul>
+
+</ion-content>
