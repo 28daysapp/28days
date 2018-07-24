@@ -1,0 +1,96 @@
+<!--
+  Generated template for the SupporterreviewwritePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>리뷰쓰기</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="like">
+    답장시간
+    <button class="like" (click)="like(0,0)">
+      <img src="{{ likesrc[0][0] }}">
+    </button>
+    <button class="like" (click)="like(0,1)">
+      <img src="{{ likesrc[0][1] }}">
+    </button>
+    <button class="like" (click)="like(0,2)">
+      <img src="{{ likesrc[0][2] }}">
+    </button>
+    <button class="like" (click)="like(0,3)">
+      <img src="{{ likesrc[0][3] }}">
+    </button>
+    <button class="like" (click)="like(0,4)">
+      <img src="{{ likesrc[0][4] }}">
+    </button>
+    <br>공감능력
+    <button class="like" (click)="like(1,0)">
+      <img src="{{ likesrc[1][0] }}">
+    </button>
+    <button class="like" (click)="like(1,1)">
+      <img src="{{ likesrc[1][1] }}">
+    </button>
+    <button class="like" (click)="like(1,2)">
+      <img src="{{ likesrc[1][2] }}">
+    </button>
+    <button class="like" (click)="like(1,3)">
+      <img src="{{ likesrc[1][3] }}">
+    </button>
+    <button class="like" (click)="like(1,4)">
+      <img src="{{ likesrc[1][4] }}">
+    </button>
+    <br>만딩능력
+    <button class="like" (click)="like(2,0)">
+      <img src="{{ likesrc[2][0] }}">
+    </button>
+    <button class="like" (click)="like(2,1)">
+      <img src="{{ likesrc[2][1] }}">
+    </button>
+    <button class="like" (click)="like(2,2)">
+      <img src="{{ likesrc[2][2] }}">
+    </button>
+    <button class="like" (click)="like(2,3)">
+      <img src="{{ likesrc[2][3] }}">
+    </button>
+    <button class="like" (click)="like(2,4)">
+      <img src="{{ likesrc[2][4] }}">
+    </button>
+    <br>호호능력
+    <button class="like" (click)="like(3,0)">
+      <img src="{{ likesrc[3][0] }}">
+    </button>
+    <button class="like" (click)="like(3,1)">
+      <img src="{{ likesrc[3][1] }}">
+    </button>
+    <button class="like" (click)="like(3,2)">
+      <img src="{{ likesrc[3][2] }}">
+    </button>
+    <button class="like" (click)="like(3,3)">
+      <img src="{{ likesrc[3][3] }}">
+    </button>
+    <button class="like" (click)="like(3,4)">
+      <img src="{{ likesrc[3][4] }}">
+    </button>
+  </div>
+
+  <div class="area">
+    <textarea class="txtreview" [(ngModel)]="text"></textarea>
+  </div>
+
+
+
+
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button full color="gray" (click)="reviewwrite()">글 등록하기</button>
+</ion-footer>

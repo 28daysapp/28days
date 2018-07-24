@@ -29,6 +29,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
 import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
+import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
 
 
@@ -67,6 +68,7 @@ import { ReviewProvider } from '../providers/review/review';
     // IamportService,
     InAppBrowser,
     SearchPage,
+    SupporterProvider,
     ReviewProvider
     //GroupProvider,
   ]

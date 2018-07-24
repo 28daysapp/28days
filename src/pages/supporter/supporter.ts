@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
+import { SupporterProvider } from '../../providers/supporter/supporter'
 
 /**
  * Generated class for the SupporterPage page.
@@ -15,29 +16,31 @@ import { ChatProvider } from '../../providers/chat/chat';
   templateUrl: 'supporter.html',
 })
 export class SupporterPage {
-	userprofiles;
-	user;
-	count;
-	usernum;
+  userprofiles;
+  user;
+  count;
+  usernum;
   loading;
   loadComplete = false;
   ratingsA;
   ratingsB;
   ratingsC;
   ratingsD;
+  reviewrating;
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-    public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+    public supporter: SupporterProvider) {
 
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.loading = this.loadingCtrl.create();
     this.loading.present();
-  	this.count = 0;
+    this.count = 0;
     this.chat.getallusersExceptbuddy().then((res) => {
       console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(res));
-    	this.userprofiles = res;
-    	this.usernum = this.userprofiles.length;
+      this.userprofiles = res;
+      this.usernum = this.userprofiles.length;
       if (this.usernum == 0) {
         let alert = this.alertCtrl.create({
           title: '대화 가능한 서포터가 없습니다.',
@@ -55,26 +58,58 @@ export class SupporterPage {
         });
         alert.present();
       } else {
+
         this.user = this.userprofiles[this.count];
-        this.ratingsA = this.makeRating(0);
-        this.ratingsB = this.makeRating(0);
-        this.ratingsC = this.makeRating(0);
-        this.ratingsD = this.makeRating(0);
-        this.loadComplete = true;
+        console.log(this.user.uid)
+        this.supporter.getreviewrating(this.user.uid).then((reviewrating) => {
+          this.reviewrating = reviewrating;
+          if (this.reviewrating == null) {
+            this.ratingsA = this.makeRating(0);
+            this.ratingsB = this.makeRating(0);
+            this.ratingsC = this.makeRating(0);
+            this.ratingsD = this.makeRating(0);
+          } else {
+            this.ratingsA = this.makeRating(this.reviewrating.ratingA / this.reviewrating.count);
+            this.ratingsB = this.makeRating(this.reviewrating.ratingB / this.reviewrating.count);
+            this.ratingsC = this.makeRating(this.reviewrating.ratingC / this.reviewrating.count);
+            this.ratingsD = this.makeRating(this.reviewrating.ratingD / this.reviewrating.count);
+          }
+          this.loadComplete = true;
+        });
+        this.loading.dismiss();
       }
-      this.loading.dismiss();
     });
+  }
+
+  ionViewDidLoad() {
+    
   }
 
   nextSupporter() {
     if (this.usernum <= 1) {
       return;
     }
-  	this.count++;
-  	if (this.count == this.usernum) {
-  		this.count = 0;
-  	}
-  	this.user = this.userprofiles[this.count];
+    this.count++;
+    if (this.count == this.usernum) {
+      this.count = 0;
+    }
+    this.user = this.userprofiles[this.count];
+    console.log(this.user.uid)
+    this.supporter.getreviewrating(this.user.uid).then((reviewrating) => {
+      this.reviewrating = reviewrating;
+      if (this.reviewrating == null) {
+        this.ratingsA = this.makeRating(0);
+        this.ratingsB = this.makeRating(0);
+        this.ratingsC = this.makeRating(0);
+        this.ratingsD = this.makeRating(0);
+      } else {
+        this.ratingsA = this.makeRating(this.reviewrating.ratingA / this.reviewrating.count);
+        this.ratingsB = this.makeRating(this.reviewrating.ratingB / this.reviewrating.count);
+        this.ratingsC = this.makeRating(this.reviewrating.ratingC / this.reviewrating.count);
+        this.ratingsD = this.makeRating(this.reviewrating.ratingD / this.reviewrating.count);
+      }
+      this.loadComplete = true;
+    });
   }
 
   sendRequest() {
@@ -85,7 +120,9 @@ export class SupporterPage {
     });
   }
 
+
   makeRating(num) {
+    console.log('hi' + num);
     var ratings = [];
     for (var i = 1; i < 6; i++) {
       var rating: any = {};
@@ -98,6 +135,13 @@ export class SupporterPage {
     }
     // console.log(JSON.stringify(ratings));
     return ratings;
+  }
+
+  supporterreview(user) {
+    this.navCtrl.push('SupporterreviewPage',
+      {
+        user: user
+      });
   }
 
 }
