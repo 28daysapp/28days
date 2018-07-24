@@ -30,6 +30,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
+import { ReviewProvider } from '../providers/review/review';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { SupporterProvider } from '../providers/supporter/supporter';
     // IamportService,
     InAppBrowser,
     SearchPage,
-    SupporterProvider
+    SupporterProvider,
+    ReviewProvider
     //GroupProvider,
   ]
 })

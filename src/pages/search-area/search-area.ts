@@ -20,17 +20,10 @@ export class SearchAreaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public viewController: ViewController) {
   }
 
-  enterArea() {
-    this.viewController.dismiss().then(() => {
-      this.navCtrl.push('SearchPage', {
-        area: this.area
-      });
-	  });
-
-  }
-
   dismiss() {
-    this.viewController.dismiss();
+    let data = { area: this.area };
+    this.viewController.dismiss(data);
+
   }
 
 }

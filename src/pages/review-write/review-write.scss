@@ -1,0 +1,58 @@
+page-review-write {
+	.header {
+		// border: 1px solid #000;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.header p {
+		// border: 1px solid #f00;
+		margin: 0px 0px 5px;
+	}
+
+	.header .group {
+		color: color($colors, primary, base);
+		font-weight: 600;
+	}
+
+	.header .text {
+		color: color($colors, textgray, base);
+	}
+
+    .area {
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.area .area1 {
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 100%;
+		height: 40px;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+
+	.area .area2 {
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 100%;
+		height: 150px;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+
+	.area .area3 {
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 32%;
+		height: 40px;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+
+	ion-footer button {
+  	margin: 0px !important;
+  }
+
+}
