@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.4.0",
+    "@ionic-native/fcm": "^4.10.0",
     "@ionic-native/file": "^4.5.3",
     "@ionic-native/file-path": "^4.5.3",
     "@ionic-native/geolocation": "^4.9.0",
@@ -33,6 +34,7 @@
     "angularfire2": "5.0.0-rc.4",
     "chart.js": "^2.7.1",
     "cordova-android": "7.1.0",
+    "cordova-browser": "5.0.3",
     "cordova-ios": "4.5.4",
     "cordova-plugin-add-swift-support": "^1.7.1",
     "cordova-plugin-camera": "^4.0.1",
@@ -51,6 +53,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-sqlite-storage": "^2.2.0",
     "firebase": "4.8.0",
+    "firebase-admin": "^5.13.0",
     "iamport-ionic-kcp": "^0.9.5",
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
@@ -89,7 +92,8 @@
       "cordova-plugin-fcm": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

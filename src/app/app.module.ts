@@ -32,6 +32,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
 
+import { FCM } from '@ionic-native/fcm'
+
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { ReviewProvider } from '../providers/review/review';
     InAppBrowser,
     SearchPage,
     SupporterProvider,
-    ReviewProvider
+    ReviewProvider,
+    FCM
     //GroupProvider,
   ]
 })

@@ -3,7 +3,7 @@
     <name>28days</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://137.68.247.64:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -100,5 +100,7 @@
         <variable name="SENDER_ID" value="209011208541" />
     </plugin>
     <allow-navigation href="http://137.68.247.64:8100" />
+    <allow-navigation href="http://137.68.247.29:8100" />
     <engine name="android" spec="7.1.0" />
+    <engine name="browser" spec="5.0.3" />
 </widget>
