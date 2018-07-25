@@ -1,0 +1,82 @@
+page-supporterreviewwrite {
+
+	.like {
+		// border: 1px solid #000;
+		text-align: center;
+		margin-bottom: 10px;
+		background-color: white;
+	}
+	.like img {
+		width: 15px;
+	}
+
+	.header p {
+		// border: 1px solid #f00;
+		margin: 0px 0px 5px;
+	}
+
+	.header .group {
+		color: color($colors, primary, base);
+		font-weight: 600;
+	}
+
+	.header .text {
+		color: color($colors, textgray, base);
+	}
+
+    .area {
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.area .txtreview {
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 100%;
+		height: 150px;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+	.imagechooser {
+		padding: 5px;
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 100%;
+		// line-height: 100px;
+		text-align: center;
+	}
+
+	.imagechooser .gallery {
+		border-radius: 20px;
+		background-color: color($colors, cardbggray, base);
+		padding: 5px 20px;
+		margin: 30px 0px;
+	}
+
+	.imagechooser div {
+		display: table;
+	}
+
+	.imagechooser ion-icon {
+		font-size: 20px;
+		margin-right: 5px;
+	}
+
+	.imagechooser span {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.imagechooser img {
+		max-width: 100%;
+	}
+
+	.imagechooser .image {
+		padding: 0px !important;
+	}
+
+	ion-footer button {
+  	margin: 0px !important;
+  }
+
+}
