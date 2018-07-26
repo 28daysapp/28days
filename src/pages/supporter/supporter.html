@@ -9,66 +9,23 @@
   <ion-navbar>
     <ion-title>1:1 서포터</ion-title>
   </ion-navbar>
-
+  <div class="search-button">
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  </div>
 </ion-header>
 
 
 <ion-content padding>
-
-  <ion-card class="cards-bg" *ngIf="loadComplete">
-    <ion-card-content>
-
-    	<br><br><p class="username">{{ user.username }}</p>
-
-      <p class="level">서포터 – Lv.1</p>
-
-      <p class="greeting">안녕하세요! [{{ user.username }}]입니다.<br>함께 나아가요!</p>
-
-      <button class="review" (click)="supporterreview(user)">리뷰보기</button>
-
-      <div class="ratingcontainer" align="center">
-        <div>
-          <span>응답시간</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsA">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
+  <ion-list>
+    <ion-item *ngFor="let user of userList">
+      <div class="list">
+        <div class="profilephoto">
+          <img src="{{user.photoURL}}">
         </div>
-        <div>
-          <span>공감능력</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsB">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
-        </div>
-        <div>
-          <span>도움정도</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsC">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
-        </div>
-        <div>
-          <span>프로정신</span>
-          <ul class="ratingstars">
-            <li *ngFor="let rating of ratingsD">
-              <img src="{{ rating.src }}">
-            </li>
-          </ul>
-        </div>
+        <div class="name">{{user.username}}</div>
       </div>
+    </ion-item>
+  </ion-list>
 
-    	<button ion-button full clear color="black" (click)="sendRequest()">
-    		채팅 요청하기
-    	</button>
-    	<button ion-button full clear color="primary" (click)="nextSupporter()">
-    		다른 서포터 찾기
-    	</button>
-
-    </ion-card-content>
-  </ion-card>
 
 </ion-content>

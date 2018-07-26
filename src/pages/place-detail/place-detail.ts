@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { ReviewProvider } from '../../providers/review/review';
 import firebase from 'firebase';
 
 declare var google;

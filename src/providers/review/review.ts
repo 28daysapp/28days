@@ -37,28 +37,5 @@ export class ReviewProvider {
     return promise;
   }
 
-  getReviews() {
-
-  }
-
-  getsearchposts(tag){
-		var uid = firebase.auth().currentUser.uid;
-		var promise = new Promise((resolve) => {
-			this.fireReview.child(``).orderByChild('timestamp').once("value").then((snapshot) => {
-				
-			});
-		});
-		return promise;
-	}
-
-
-  // this.firecomment.child(`${ this.community.namecom }/${ this.postid }`).on('value', (snapshot) => {
-  //   this.comments = [];
-  //   for (var i in snapshot.val()) {
-  //     this.comments.push(snapshot.val()[i]);
-  //   }
-  //   this.events.publish('community-newcomment');
-  // });
-
 
 }
