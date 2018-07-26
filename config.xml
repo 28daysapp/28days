@@ -3,7 +3,7 @@
     <name>28days</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://137.68.247.64:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -101,5 +101,6 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
+    <allow-navigation href="http://137.68.247.216:8100" />
     <engine name="android" spec="7.1.0" />
 </widget>
