@@ -1,7 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Content } from 'ionic-angular';
 import { ReviewProvider } from '../../providers/review/review';
 import firebase from 'firebase';
+import { UserProvider } from '../../providers/user/user';
+import { Storage } from '@ionic/storage';
+import { AuthProvider } from '../../providers/auth/auth';
 
 declare var google;
 
@@ -13,7 +16,6 @@ declare var google;
 export class PlaceDetailPage {
 
   @ViewChild("map") mapElement: ElementRef;
-
   fireusers = firebase.database().ref('/users');
   firecommunity = firebase.database().ref('/community');
   user: any;
@@ -26,15 +28,25 @@ export class PlaceDetailPage {
   placeId: string;
   service: any;
   mapOptions: any;
-  latLng
+  latLng: any;
+  posts: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public auth: AuthProvider, public userProvider: UserProvider,
+    public storage: Storage, public alertCtrl: AlertController, public review: ReviewProvider) {
     this.user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlaceDetailPage');
     this.getGoogleInfo();
+  }
+
+  ionViewWillEnter() {
+    this.review.getReviews(this.placeId).then((posts) => {
+      this.posts = posts;
+      console.log(this.posts)
+      console.log(this.posts[0]);
+    });
   }
 
   getGoogleInfo() {
@@ -66,15 +78,37 @@ export class PlaceDetailPage {
     });
   }
 
-  getReviews() {
+  reviewWrite() {
+    if (this.user) {
+      this.navCtrl.push('ReviewWritePage', {
+        placeId: this.placeId
+      });
+    } else {
+      this.pleaselogin();
+    }
 
   }
 
-  reviewWrite() {
-    console.log("placeId"+this.placeId);
-    this.navCtrl.push('ReviewWritePage', {
-      placeId: this.placeId
+  pleaselogin() {
+    let alert = this.alertCtrl.create({
+      title: '로그인 후 사용하실 수 있습니다.',
+      message: '28days에 로그인하시겠습니까?',
+      buttons: [
+        {
+          text: '확인',
+          handler: () => {
+            this.navCtrl.push('LoginPage');
+          }
+        },
+        {
+          text: '취소',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
     });
+    alert.present();
   }
 
 }

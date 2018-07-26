@@ -108,4 +108,8 @@ export class UserProvider {
     return promise;
   }
 
+  addToken() {
+    var uid = firebase.auth().currentUser.uid;
+  }
+
 }
