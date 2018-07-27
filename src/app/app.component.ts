@@ -52,7 +52,7 @@ export class MyApp {
       splashScreen.hide();
       // this.initPushNotification();
 
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
         //Notifications
         fcm.subscribeToTopic('all');
         fcm.getToken().then(token => {
