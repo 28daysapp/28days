@@ -1,74 +1,56 @@
 page-supporter {
 
-	.cards-bg {
-		background: color($colors, cardbggray, base);
-		border-radius: 10px;
-	}
+	
+	ion-list {
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+		height: 100%;
+	  }
 
-	ion-card-content {
-		padding: 10px 0px 0px !important;
-		text-align: center;
+	  ion-item {
+		border-bottom: 1px solid #c0c0c0;
+		padding: 2px;
+		margin: 2px;
+	  }
+	  .name {
+		float: left;
+		padding-top: 5px;
 	}
+	.list {
+		padding: 10px;
+	  }
 
-	.cards-bg button {
-		border-top: 1px solid color($colors, dark, base);
-	}
-
-	.username {
-		border-radius: 25px;
-    background: color($colors, primary, base);
-    padding: 5px 20px;
-    color: color($colors, white, base);
-    font-size: 130%;
-    font-weight: bold;
-    display: inline-block;
-	}
-
-	.level {
-		color: color($colors, primary, base);
-	}
-
-	.greeting {
-		margin: 10px 0px 5px;
-		color: gray;
-		font-size: 13px;
-	}
-
-	.review {
-		border: none !important;
-		background: none;
-		color: black;
-		font-size: 14px;
-	}
-
-	.ratingcontainer {
-		margin-bottom: 20px;
-	}
-
-	.ratingcontainer div {
+	  .profilephoto {
+		float: left;
+		padding: 5px;
+	  }
+	  .profilephoto img{
+		height: 30px;
+		margin-right: 6px;
+	  }
+/*
+	  .ratingstars img {
+		height: 16px;
+		margin-right: 6px;
+	  }
+  
+	  .ratingstars div {
 		display: table;
-		text-align: center;
-	}
-
-	.ratingcontainer span {
+	  }
+  
+	  .ratingstars span {
+		font-size: 12px;
 		display: table-cell;
 		vertical-align: middle;
-	}
-
-	.ratingstars {
-		display: inline;
-		list-style: none;
-		padding: 0px;
-		margin-left: 20px;
-	}
-
-	.ratingstars li {
-		display: inline-block;
-		margin: 2px;
-	}
-
-	.ratingstars img {
-		width: 25px;
-	}
-
+	  }
+  
+	  .ratingstars button {
+		  background-color: transparent;
+	  }
+  
+	  .ratingstars {
+		margin-right: 10px;
+	  }
+	  */
 }

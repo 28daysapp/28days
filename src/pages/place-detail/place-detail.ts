@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ReviewProvider } from '../../providers/review/review';
 import firebase from 'firebase';
 import { UserProvider } from '../../providers/user/user';
