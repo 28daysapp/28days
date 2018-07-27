@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "5.0.3",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.4.0",
-    "@ionic-native/fcm": "^4.10.0",
+    "@ionic-native/fcm": "^4.10.1",
     "@ionic-native/file": "^4.5.3",
     "@ionic-native/file-path": "^4.5.3",
     "@ionic-native/geolocation": "^4.9.0",
@@ -38,8 +38,8 @@
     "cordova-browser": "5.0.3",
     "cordova-ios": "4.5.4",
     "cordova-plugin-add-swift-support": "^1.7.2",
-    "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-advanced-http": "^1.11.1",
+    "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-customurlscheme": "git+https://github.com/EddyVerbruggen/Custom-URL-scheme.git",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-fcm": "^2.1.2",
@@ -48,6 +48,7 @@
     "cordova-plugin-firebase": "^0.1.25",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-iamport-kcp": "~0.9.1",
+    "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-inappbrowser-url-scheme": "git+https://github.com/iamport/cordova-plugin-inappbrowser.git",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-splashscreen": "^4.0.3",
@@ -91,7 +92,8 @@
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
-      "cordova-plugin-fcm": {}
+      "cordova-plugin-fcm": {},
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "android",
