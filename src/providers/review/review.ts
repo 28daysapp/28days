@@ -76,5 +76,4 @@ export class ReviewProvider {
   //   this.events.publish('community-newcomment');
   // });
 
-
 }

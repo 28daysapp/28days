@@ -45,7 +45,6 @@ export class SupporterreviewPage {
     this.supporter.getallreview(this.user.uid).then((reviews) => {
       this.reviews = reviews;
       console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
-      this.content.scrollToTop(0);
     });
     this.loading.dismiss();
   }
