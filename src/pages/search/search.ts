@@ -19,7 +19,7 @@ export class SearchPage {
   latLng: any;
   mapOptions: any;
   marker: any;
-  text: string;
+  type: string;
   query: string;
   places: any;
   details: any;
@@ -27,7 +27,7 @@ export class SearchPage {
   area: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController) {
-    this.text = this.navParams.get('type');
+    this.type = this.navParams.get('type');
     this.area = this.navParams.get('area');
     this.places = [];
   }
@@ -53,13 +53,19 @@ export class SearchPage {
   }
 
   searchByText() {
-
-    if (this.text === "c" ? this.query = "상담센터" : this.query = "정신과") {
+    console.log(this.type);
+    if (this.type == null) {
+      this.type = this.navParams.get('type');
+    }
+    if (this.type === "c" ? this.query = "심리상담센터" : this.query = "정신과") {
+      console.log(this.query)
+      console.log(this.area);
       let request = {
         location: this.latLng,
         radius: '500',
         query: this.area + " " + this.query,
-        language: 'ko'
+        language: 'ko',
+        type: ["hospital", "health", "doctor"]
       };
 
       let service = new google.maps.places.PlacesService(this.map);
@@ -67,6 +73,7 @@ export class SearchPage {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
+            console.log(this.places[i].types)
           }
         } else {
           console.log("Status error: " + status);
@@ -82,11 +89,15 @@ export class SearchPage {
 
 
   presentAreaModal() {
-    let areaModal = this.modalController.create('SearchAreaPage');
+    let areaModal = this.modalController.create('SearchAreaPage', {
+      type: this.type
+    });
     areaModal.onDidDismiss(data => {
       this.area = data.area;
+      this.type = data.type;
       this.navCtrl.push('SearchPage', {
-        area: this.area
+        area: this.area,
+        type: this.type
       });
     })
     areaModal.present();

@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController, Slides, Platform } from 'ionic-angular';
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
 import { NavParams, ModalController } from 'ionic-angular';
+import { FCM } from '../../../node_modules/@ionic-native/fcm';
+// import { HTTP } from '@ionic-native/http';
 
 /**
  * Generated class for the HomePage page.
@@ -31,8 +33,10 @@ export class HomePage {
   greeting;
   origGreeting;
   showmodal = false;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
-    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController) {
+  token;
+  fireusers = firebase.database().ref('/users');
+  constructor(public navCtrl: NavController, public platform: Platform, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
+    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public fcm: FCM) {
     // Receive message from push notifications
     if (params.data.message) {
       console.log('message: ' + params.data.message);
@@ -48,9 +52,21 @@ export class HomePage {
     // set defualt user photo
     this.photoURL = 'assets/profile0.png';
 
+
+    if (this.platform.is('cordova')) {
+      // FCM!!!!!!!!!1
+      this.getInitToken();
+      // this.sendTestMessage();
+      // HEHEHEHE
+
+    }
+
+
+
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
+
       // user already logged-in
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
@@ -98,6 +114,46 @@ export class HomePage {
       });
     }
   }
+
+  // onTokenRefresh() {
+  //   this.user = firebase.auth().currentUser;
+  //   if (this.user) {
+  //     this.fcm.getToken().then(token => {
+  //       console.log("HomePage Token: " + token);
+  //       var uid = firebase.auth().currentUser.uid;
+  //       var promise = new Promise((resolve) => {
+  //         this.fireusers.child(uid).update({
+  //           token: token
+  //         }).then(() => {
+  //           resolve(true);
+  //         });
+  //       });
+  //       return promise;
+  //     })
+  //   }
+  // }
+
+  getInitToken() {
+    this.user = firebase.auth().currentUser;
+    console.log("this user 나와야지이ㅣ" + this.user);
+    this.token = this.fcm.getToken();
+    this.token.then(token => {
+      console.log("HomePage Token: " + token);
+      var uid = firebase.auth().currentUser.uid;
+      console.log("UID: " + uid)
+      var promise = new Promise((resolve) => {
+        this.fireusers.child(uid).update({
+          token: this.token
+        }).then(() => {
+          resolve(true);
+        });
+      });
+      return promise;
+    })
+  }
+
+
+
 
   mypage() {
     if (this.user) {
@@ -240,5 +296,6 @@ export class HomePage {
       type: "p"
     });
   }
+
 
 }

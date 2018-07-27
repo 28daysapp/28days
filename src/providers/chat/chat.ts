@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
+import { FCM } from '../../../node_modules/@ionic-native/fcm';
+
 
 /*
   Generated class for the ChatProvider provider.
@@ -15,7 +17,7 @@ export class ChatProvider {
   fireusers = firebase.database().ref('/users');
   buddy;
   chatmessages;
-  constructor(public user: UserProvider, public events: Events) {
+  constructor(public user: UserProvider, public events: Events, public fcm: FCM) {
   }
 
   getallusersExceptbuddy() {

@@ -4,6 +4,7 @@ import { ChatProvider } from '../../providers/chat/chat';
 import { SupporterProvider } from '../../providers/supporter/supporter'
 import { UserProvider } from '../../providers/user/user'
 import firebase from 'firebase';
+import { FCM } from '../../../node_modules/@ionic-native/fcm';
 
 /**
  * Generated class for the SupporterPage page.
@@ -24,16 +25,14 @@ export class SupporterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public supporter: SupporterProvider, public userp: UserProvider
+
+    public supporter: SupporterProvider, public userp: UserProvider, public fcm: FCM
   ) {
 
     this.UserRef = firebase.database().ref('/users');
 
     console.log("1");
-
-
   }
-
   getItems(searchbar) {
     // Reset items back to all of the items
     this.initializeItems();

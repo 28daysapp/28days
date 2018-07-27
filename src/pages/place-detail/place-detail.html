@@ -33,13 +33,14 @@
     리뷰
   </div>
 
-  <ion-list>
+  <ion-list *ngFor="let post of posts">
     <ion-item>
       <ion-thumbnail item-start>
         <img src="../../assets/postwriter.png">
       </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
+      <h4>{{ post.text }}</h4>
+      <span>{{ post.username }}</span>
+      <span>{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
       <button ion-button clear item-end>View</button>
     </ion-item>
   </ion-list>
