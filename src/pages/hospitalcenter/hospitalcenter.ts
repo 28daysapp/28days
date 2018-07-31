@@ -1,8 +1,8 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+// import { Geolocation } from '@ionic-native/geolocation';
 
-declare var google;
+// declare var google;
 
 /**
  * Generated class for the HospitalcenterPage page.
