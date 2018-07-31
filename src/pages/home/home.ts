@@ -46,7 +46,7 @@ export class HomePage {
     this.loading = this.loadingCtrl.create();
     this.loading.present();
 
-    this.getToken();
+    // this.getToken();
 
 
     // set defualt user photo
