@@ -54,6 +54,7 @@
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-sqlite-storage": "^2.3.3",
+    "cordova-support-google-services": "^1.2.0",
     "firebase": "4.8.0",
     "firebase-admin": "^5.13.0",
     "iamport-ionic-kcp": "^0.9.5",
@@ -89,7 +90,8 @@
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {}
+      "cordova-plugin-fcm-with-dependecy-updated": {},
+      "cordova-support-google-services": {}
     },
     "platforms": [
       "browser",

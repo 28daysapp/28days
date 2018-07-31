@@ -24,6 +24,7 @@ export class HomePage {
   @ViewChild(Slides) slides: Slides;
 
   /* Initialize variables */
+  fireusers = firebase.database().ref('/users');
   loading;
   user;
   userprofile;
@@ -32,6 +33,7 @@ export class HomePage {
   greeting;
   origGreeting;
   showmodal = false;
+  token;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public fcm: FCM) {
     // Receive message from push notifications
@@ -45,9 +47,6 @@ export class HomePage {
     // present loading
     this.loading = this.loadingCtrl.create();
     this.loading.present();
-
-    this.getToken();
-
 
     // set defualt user photo
     this.photoURL = 'assets/profile0.png';
@@ -104,12 +103,40 @@ export class HomePage {
   }
 
   getToken() {
-
+    console.log("get token start");
     if (this.user) {
+      console.log("token logged in")
+      var uid = firebase.auth().currentUser.uid;
       this.fcm.getToken().then(token => {
         console.log("HomePage Token: " + token);
-      })
+        this.token = token;
+        var promise = new Promise((resolve) => { 
+          this.fireusers.child(uid).update({
+            token: this.token
+          });
+          resolve(true);
+        });
+        return promise;
+      }) 
     }
+    console.log("get token end");
+  }
+
+  deleteToken() {
+    console.log("delete token start");
+    if (this.user) {
+      console.log("token logged in")
+      var uid = firebase.auth().currentUser.uid;
+      this.fcm.getToken().then(token => { 
+        this.token = token;
+      });
+      var promise = new Promise((resolve) => { 
+        this.fireusers.child(`${uid}/token`).remove();
+        resolve(true);
+      });
+      return promise;
+    }
+    console.log("delete token end");
   }
 
 

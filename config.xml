@@ -102,6 +102,16 @@
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
+    <plugin name="cordova-support-google-services" spec="^1.2.0" />
+    <allow-navigation href="http://137.68.247.22:8103" />
+    <allow-navigation href="http://137.68.247.22:8104" />
+    <allow-navigation href="http://137.68.247.22:8105" />
+    <allow-navigation href="http://137.68.247.22:8106" />
+    <allow-navigation href="http://137.68.247.22:8107" />
+    <allow-navigation href="http://137.68.247.22:8108" />
+    <allow-navigation href="http://137.68.247.22:8100" />
+    <allow-navigation href="http://137.68.247.22:8101" />
+    <allow-navigation href="http://137.68.247.22:8102" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>
