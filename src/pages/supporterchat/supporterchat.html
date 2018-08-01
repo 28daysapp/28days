@@ -36,11 +36,9 @@
 	    </div>
   	</li>
   </ul>
-
 </ion-content>
 
-<ion-footer *ngIf="showinput">
-
+<ion-footer>
   <form [formGroup]="inputForm" class="footerform">
     <input formControlName="txt" type="text">
     <button (click)="sendmessage()">
