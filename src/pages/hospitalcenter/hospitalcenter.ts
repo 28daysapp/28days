@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+// import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // import { Geolocation } from '@ionic-native/geolocation';
 
 // declare var google;
