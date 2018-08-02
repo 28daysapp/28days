@@ -4,7 +4,6 @@ import { ChatProvider } from '../../providers/chat/chat';
 import { SupporterProvider } from '../../providers/supporter/supporter'
 import { UserProvider } from '../../providers/user/user'
 import firebase from 'firebase';
-import { FCM } from '../../../node_modules/@ionic-native/fcm';
 
 /**
  * Generated class for the SupporterPage page.
@@ -25,60 +24,68 @@ export class SupporterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-
-    public supporter: SupporterProvider, public userp: UserProvider, public fcm: FCM
+    public supporter: SupporterProvider, public userp: UserProvider
   ) {
-
     this.UserRef = firebase.database().ref('/users');
-
-    console.log("1");
   }
   getItems(searchbar) {
     // Reset items back to all of the items
     this.initializeItems();
-  
+
     // set q to the value of the searchbar
     var q = searchbar.srcElement.value;
-  
-  
+
+
     // if the value is an empty string don't filter the items
     if (!q) {
       return;
     }
-  
+
     this.userList = this.userList.filter((v) => {
-      if(v.username && q || v.uid && q) {
+      if (v.username && q || v.uid && q) {
         if (v.username.toLowerCase().indexOf(q.toLowerCase()) > -1 || v.uid.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
         return false;
       }
     });
-  
+
     console.log(q, this.userList.length);
-  
   }
 
 
   initializeItems(): void {
-    console.log("2");
     this.userList = this.loadedUserList;
   }
   ionViewWillEnter() {
-    console.log("3");
     this.UserRef.on('value', userList => {
       let users = [];
       userList.forEach(user => {
         users.push(user.val());
         return false;
       });
-      console.log("4");
       this.userList = users;
       this.loadedUserList = users;
     });
   }
-
-  /*
+  supporterreview(user) {
+    this.navCtrl.push('SupporterreviewPage',
+      {
+        user: user
+      });
+  }
+  
+}
+/*
+  sendRequest() {
+    this.chat.initializebuddy(this.userList);
+    this.navCtrl.push('SupporterchatPage').then(() => {
+      var index = this.viewCtrl.index;
+      this.navCtrl.remove(index);
+    });
+  }
+}
+  
     ionViewWillEnter() {
       this.loading = this.loadingCtrl.create();
       this.loading.present();
@@ -135,10 +142,6 @@ export class SupporterPage {
       }
     });
   }*/
-
-  ionViewDidLoad() {
-
-  }
   /*
     nextSupporter() {
       if (this.usernum <= 1) {
@@ -167,16 +170,8 @@ export class SupporterPage {
       });
     }
   */
+
   /*
-    sendRequest() {
-      this.chat.initializebuddy(this.userprofiles[this.count]);
-      this.navCtrl.push('SupporterchatPage').then(() => {
-        var index = this.viewCtrl.index;
-        this.navCtrl.remove(index);
-      });
-    }
-  
-  
     makeRating(num) {
       console.log('hi' + num);
       var ratings = [];
@@ -200,4 +195,3 @@ export class SupporterPage {
         });
     }
   */
-}

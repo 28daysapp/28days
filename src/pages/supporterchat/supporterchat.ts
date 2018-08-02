@@ -1,6 +1,7 @@
 import { Component, AfterViewChecked, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
+import { FcmProvider } from '../../providers/fcm/fcm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
@@ -21,7 +22,7 @@ export class SupporterchatPage implements AfterViewChecked {
   gogomessages;
 	chatmessages;
   showinput = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider, public fcmProvider: FcmProvider,
   	public events: Events, public zone: NgZone, public formBuilder: FormBuilder) {
     console.log('SupporterchatPage - constructor');
   	this.buddy = this.chat.buddy;
@@ -47,6 +48,9 @@ export class SupporterchatPage implements AfterViewChecked {
   ionViewDidLoad() {
     console.log('SupporterchatPage - ionViewDidLoad');
     this.chat.checkstart().then((isstart) => {
+
+      this.fcmProvider.sendFcm(this.buddy);
+
       if (isstart) {
         this.gogomessages = [];
         this.gogomsg('서포터에게 채팅을 요청했어!\n확인 후 Push 알림을 줄 거야~!', true).then(() => {

@@ -3,9 +3,12 @@ import { IonicPage, NavController, AlertController, LoadingController, Slides } 
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
+import { FcmProvider } from '../../providers/fcm/fcm';
 import { Storage } from '@ionic/storage';
 import { NavParams, ModalController } from 'ionic-angular';
-import { FCM } from '../../../node_modules/@ionic-native/fcm';
+
+import { Http } from '@angular/http';
+
 
 /**
  * Generated class for the HomePage page.
@@ -34,12 +37,17 @@ export class HomePage {
   origGreeting;
   showmodal = false;
   token;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
-    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public fcm: FCM) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
+    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http) {
     // Receive message from push notifications
     if (params.data.message) {
       console.log('message: ' + params.data.message);
     }
+    
+    http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
+    .subscribe((data) => {
+      console.log('data', data);
+    })
   }
 
   ionViewDidLoad() {
@@ -50,6 +58,7 @@ export class HomePage {
 
     // set defualt user photo
     this.photoURL = 'assets/profile0.png';
+
 
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
@@ -103,40 +112,16 @@ export class HomePage {
   }
 
   getToken() {
-    console.log("get token start");
-    if (this.user) {
-      console.log("token logged in")
-      var uid = firebase.auth().currentUser.uid;
-      this.fcm.getToken().then(token => {
-        console.log("HomePage Token: " + token);
-        this.token = token;
-        var promise = new Promise((resolve) => { 
-          this.fireusers.child(uid).update({
-            token: this.token
-          });
-          resolve(true);
-        });
-        return promise;
-      }) 
-    }
-    console.log("get token end");
+      this.fcmProvider.getToken(this.user);
+
   }
 
   deleteToken() {
-    console.log("delete token start");
-    if (this.user) {
-      console.log("token logged in")
-      var uid = firebase.auth().currentUser.uid;
-      this.fcm.getToken().then(token => { 
-        this.token = token;
-      });
-      var promise = new Promise((resolve) => { 
-        this.fireusers.child(`${uid}/token`).remove();
-        resolve(true);
-      });
-      return promise;
-    }
-    console.log("delete token end");
+    this.fcmProvider.deleteToken(this.user);
+  }
+
+  sendFCM() {
+    this.fcmProvider.sendFcm(this.user);
   }
 
 
