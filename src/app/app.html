@@ -1,1 +1,62 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+
+  <!-- logged out menu -->
+  <ion-menu id="loggedOutMenu"[content]="content">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>대시보드</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="outer-content">
+      <ion-list>
+        <ion-list-header>
+          설정
+        </ion-list-header>
+          <button ion-item *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+            <ion-icon item-start [name]="p.icon"></ion-icon>
+            {{p.title}}
+          </button>
+        </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- logged in menu -->
+  <ion-menu id="loggedInMenu" [content]="content">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>대시보드</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="outer-content">
+
+      <ion-list>
+        <ion-list-header>
+          마이 페이지
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+          <ion-icon item-start [name]="p.icon"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          설정
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
+          <ion-icon item-start [name]="p.icon"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="true" main name="app"></ion-nav>
+
+</ion-split-pane>
