@@ -37,6 +37,7 @@ export class HomePage {
   origGreeting;
   showmodal = false;
   token;
+  count;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http) {
     // Receive message from push notifications
@@ -44,10 +45,7 @@ export class HomePage {
       console.log('message: ' + params.data.message);
     }
     
-    http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
-    .subscribe((data) => {
-      console.log('data', data);
-    })
+
   }
 
   ionViewDidLoad() {
@@ -112,8 +110,7 @@ export class HomePage {
   }
 
   getToken() {
-      this.fcmProvider.getToken(this.user);
-
+    this.fcmProvider.getToken(this.user);
   }
 
   deleteToken() {
@@ -121,8 +118,13 @@ export class HomePage {
   }
 
   sendFCM() {
-    this.fcmProvider.sendFcm(this.user);
+    // this.fcmProvider.sendFcm(this.user);
+    this.http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
+    .subscribe((data) => {
+      console.log('data', data);
+    })
   }
+
 
 
   mypage() {
