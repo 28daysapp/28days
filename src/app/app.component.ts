@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
-import { AlertController, Nav, Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { MenuController, AlertController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { ViewChild } from '@angular/core';
 import firebase from 'firebase';
 import { FirstRunPage } from '../pages';
+import { FCM } from '@ionic-native/fcm';
+// import { AuthProvider } from '../providers/auth/auth';
+// import { UserProvider } from '../providers/user/user';
+// import { Storage } from '@ionic/storage';
 
 
 // firebase config
@@ -18,11 +21,23 @@ export const firebaseConfig = {
   messagingSenderId: "209011208541"
 };
 
+export interface PageInterface {
+  title: string;
+  component: any;
+  icon: string;
+  logsOut?: boolean;
+}
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+
+  user;
+  userprofile;
+  username;
+  menu;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   rootPage = FirstRunPage;
@@ -35,12 +50,34 @@ export class MyApp {
     { title: 'Home', component: 'HomePage' },
     { title: 'My Page', component: 'MypagePage' }
   ]
+  appPages: PageInterface[] = [
+    { title: '내가 쓴 글', component: 'MychatsPage', icon: 'calendar' },
+    //not yet made
+    // { title: '충전소', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'contacts' },
+    { title: '보관함', component: 'MydepositoryPage', icon: 'map' },
+    { title: '결제 내역', component: 'PaymentPage', icon: 'information-circle' }
+  ];
+  loggedInPages: PageInterface[] = [
+    // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
+    { title: '비밀번호 바꾸기', component: 'PwdchangePage', icon: 'help' },
+    { title: '로그아웃', component: 'LoginPage', icon: 'log-out', logsOut: true }
+  ];
+  loggedOutPages: PageInterface[] = [
+    { title: '로그인', component: 'LoginPage', icon: 'log-in' },
+    { title: '회원가입', component: 'SignupPage', icon: 'person-add' }
+  ];
 
-  constructor(public platform: Platform,
+  constructor(
+    public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     // public push: Push,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public fcm: FCM,
+    // public auth: AuthProvider,
+    // public userProvider: UserProvider,
+    // public storage: Storage,
+  ) {
     firebase.initializeApp(firebaseConfig);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -48,8 +85,89 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       // this.initPushNotification();
+
+      if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
+        //Notifications
+        fcm.subscribeToTopic('all');
+        fcm.getToken().then(token => {
+          console.log("Token: " + token);
+        })
+        fcm.onNotification().subscribe(data => {
+          if (data.wasTapped) {
+            console.log("Received in background");
+          } else {
+            console.log("Received in foreground");
+          };
+        })
+        fcm.onTokenRefresh().subscribe(token => {
+          console.log(token);
+        });
+        //end notifications.
+      }
+      // this.user = firebase.auth().currentUser;
+      // this.user.hasLoggedIn().then((hasLoggedIn) => {
+      //   this.enableMenu(hasLoggedIn === true);
+      // });
+      // this.enableMenu(true);
+
+      // statusBar.styleDefault();
+      // splashScreen.hide();
     });
   }
+
+  openPage(page: PageInterface) {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    // navigate to the new page if it is not the current page
+    this.nav.setRoot(page.component);
+
+    if (page.logsOut === true) {
+      // Give the menu time to close before changing to logged out
+      this.user.logout();
+    }
+  }
+
+  enableMenu(loggedIn: boolean) {
+
+    this.menu.enable(loggedIn, 'loggedInMenu');
+    this.menu.enable(!loggedIn, 'loggedOutMenu');
+  }
+
+  // loginpage() {
+  //   if (this.user) {
+  //     let alert = this.alertCtrl.create({
+  //       title: '이미 로그인되어 있습니다.',
+  //       message: '28days에서 로그아웃하시겠습니까?',
+  //       buttons: [
+  //         {
+  //           text: '확인',
+  //           handler: () => {
+  //             // log out from firebase auth service and remove previous cache about user credential
+  //             this.auth.logoutUser().then(() => {
+  //               this.storage.remove('localcred').then(() => {
+  //                 this.navCtrl.setRoot(HomePage);
+  //               });
+  //             });
+  //           }
+  //         },
+  //         {
+  //           text: '취소',
+  //           role: 'cancel',
+  //           handler: () => {
+  //           }
+  //         }
+  //       ]
+  //     });
+  //     alert.present();
+  //   } else {
+  //     this.navCtrl.push('LoginPage');
+  //   }
+  // }
+
+  // isActive(page: PageInterface) {
+  //   let childNav = this.nav.getActiveChildNavs()[0];
+  // }
+
   /*
     initPushNotification() {
       if (!this.platform.is('cordova')) {
@@ -68,12 +186,12 @@ export class MyApp {
         windows: {}
       };
       const pushObject: PushObject = this.push.init(options);
-  
+
       pushObject.on('registration').subscribe((data: any) => {
         console.log('device token -> ' + data.registrationId);
         //TODO - send device token to server
       });
-  
+
       pushObject.on('notification').subscribe((data: any) => {
         console.log('message -> ' + data.message);
         // if user using app and push notification comes
@@ -101,7 +219,7 @@ export class MyApp {
           console.log('Push notification clicked');
         }
       });
-  
+
       pushObject.on('error').subscribe(error => console.error('Error with Push plugin' + error));
     }
     */

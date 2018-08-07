@@ -4,6 +4,7 @@ import { ReviewProvider } from '../../providers/review/review';
 import firebase from 'firebase';
 
 
+
 @IonicPage()
 @Component({
   selector: 'page-review-write',
@@ -16,7 +17,8 @@ export class ReviewWritePage {
   text;
   placeName;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public review: ReviewProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public review: ReviewProvider, public loadingCtrl: LoadingController,
+  ) {
     this.placeId = this.navParams.get('placeId');
     this.user = firebase.auth().currentUser;
   }
@@ -27,17 +29,18 @@ export class ReviewWritePage {
 
   write() {
 
-    let loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
+    // let loading = this.loadingCtrl.create({
+    //   dismissOnPageChange: true,
+    // });
+
+    // loading.present();
+
+
+    this.review.writeReview(this.placeId, this.text).then(() => {
+      this.navCtrl.pop();
     });
 
-    loading.present();
 
-	  this.review.writeReview(this.placeId, this.text).then(() => {
-      console.log("여기까진 오냐???")
-	  	this.navCtrl.pop();
-    });
-    
 
   }
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 
+
+
 /*
   Generated class for the UserProvider provider.
 
@@ -9,15 +11,23 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class UserProvider {
+
   fireusers = firebase.database().ref('/users');
   fireusernames = firebase.database().ref('/usernames');
+  
   constructor() {
+    
   }
+
 
 	checkUsername(username: string) {
   	username = username.toLowerCase();
     return this.fireusernames.child(username).once("value");
- 	}
+   }
+   
+   searchuser(){
+     
+   }
 
  	updateUserprofile(username: string, gender: string, age) {
     var uid = firebase.auth().currentUser.uid;
@@ -106,6 +116,10 @@ export class UserProvider {
       });
     });
     return promise;
+  }
+
+  addToken() {
+    var uid = firebase.auth().currentUser.uid;
   }
 
 }

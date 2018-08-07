@@ -31,7 +31,8 @@ import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
-import { CommunitysubProvider } from '../providers/communitysub/communitysub';
+
+import { FCM } from '@ionic-native/fcm'
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { CommunitysubProvider } from '../providers/communitysub/communitysub';
     SearchPage,
     SupporterProvider,
     ReviewProvider,
-    CommunitysubProvider
+    FCM
+
     //GroupProvider,
   ]
 })

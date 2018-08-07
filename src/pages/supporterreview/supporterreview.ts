@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
 import { SupporterProvider } from '../../providers/supporter/supporter';
+import { ChatProvider } from '../../providers/chat/chat';
 
 /**
  * Generated class for the SupporterreviewPage page.
@@ -27,7 +28,7 @@ export class SupporterreviewPage {
   reviewnum;
   count;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider,public chat: ChatProvider,
     public loadingCtrl: LoadingController, public popoverCtrl: PopoverController, public viewCtrl: ViewController,
     public alertCtrl: AlertController
   ) {
@@ -39,13 +40,12 @@ export class SupporterreviewPage {
     console.log('ionViewDidLoad SupporterreviewPage');
   }
 
-  ionViewWillEnter() {console.log('ionViewDidLoad SupporterreviewPag2e');
+  ionViewWillEnter() {
     this.loading = this.loadingCtrl.create();
     this.loading.present();
     this.supporter.getallreview(this.user.uid).then((reviews) => {
       this.reviews = reviews;
       console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
-      this.content.scrollToTop(0);
     });
     this.loading.dismiss();
   }
@@ -55,6 +55,14 @@ export class SupporterreviewPage {
       {
         user: this.user
       });
+  }
+
+  sendRequest() {
+    this.chat.initializebuddy(this.user);
+    this.navCtrl.push('SupporterchatPage').then(() => {
+      var index = this.viewCtrl.index;
+      this.navCtrl.remove(index);
+    });
   }
 
   makeRating(num) {

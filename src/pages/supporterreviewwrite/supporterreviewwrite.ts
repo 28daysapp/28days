@@ -48,7 +48,7 @@ export class SupporterreviewwritePage {
     for(var i = num; i < 5; i++){
       this.likesrc[item][i] = 'assets/star.png';
     }
-    for(var i = num; i >= 0; i--){
+    for(i = num; i >= 0; i--){
       this.likesrc[item][i] = 'assets/star-full.png';
     }
     this.rating[item] = num+1;

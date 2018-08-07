@@ -24,10 +24,10 @@ export class TabsPage {
   tab5Root: any = Tab5Root;
 
   tab1Title = "홈";
-  tab2Title = "1:1";
-  tab3Title = "고고";
-  tab4Title = "커뮤니티";
-  tab5Title = "마이페이지";
+  tab2Title = "병원/센터";
+  tab3Title = "채팅";
+  tab4Title = "온라인상담";
+  tab5Title = "커뮤니티";
 
   // customicon = "../assets/gogo.png";
 
