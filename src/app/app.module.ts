@@ -73,6 +73,7 @@ import { FCM } from '@ionic-native/fcm'
     SupporterProvider,
     ReviewProvider,
     FCM
+
     //GroupProvider,
   ]
 })

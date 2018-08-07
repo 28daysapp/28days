@@ -33,7 +33,11 @@ page-searchtag {
 	  overflow: auto;
 	  margin-bottom: 5px;
 	  display: table;
-	  width: 100%;
+		width: 100%;
+		
+		span {
+			color: color($colors, primary);
+		}
 	}
 
 	.name span {
@@ -42,7 +46,8 @@ page-searchtag {
 	}
 
 	.name button {
-	  float: right;
+		float: right;
+		background-color: transparent;
 	  padding: 0px;
 	}
 
@@ -75,8 +80,8 @@ page-searchtag {
 	  font-size: 15px;
 	}
 
-	.time {
-	  font-size: 12px;
+	.anonymity {
+	  font-size: 10px;
 	  float: right;
 	}
 
@@ -136,4 +141,35 @@ page-searchtag {
 	.search-button .button{
 		
 	}
+		
+.buttons {
+	width: 100%;
+}
+
+.buttons td {
+	padding: 10px 0px;
+}
+
+.buttons div {
+	background-color: color($colors, primary, base);
+	border-radius: 40px;
+	width: 80px;
+	height: 80px;
+}
+
+.buttons button {
+	height: inherit;
+	padding: 0px;
+	background-color: transparent;
+	display: table;
+}
+
+.buttons p {
+	margin: 0px;
+	color: white;
+	font-size: 12px;
+	display: table-cell;
+	 vertical-align: middle;
+}
+
 }

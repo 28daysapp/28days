@@ -6,87 +6,128 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>커뮤니티</ion-title>
-  </ion-navbar>
+		<ion-navbar>
+				<ion-title>커뮤니티</ion-title>
+				<ion-buttons right>
+						<button ion-button icon-only (click)="communitywrite()">
+							글쓰기
+						</button>
+					</ion-buttons>
+			</ion-navbar>
+			
+			<div class="search-button">
+			<ion-searchbar [(ngModel)]="tag" placeholder="Search"></ion-searchbar>
+			<button class="button" (click)="searchtag(tag)">검색</button>
+			</div>
+			
+	</ion-header>
+	
+	<ion-content>
+		
+		<table class="buttons">
+			<tr>
+				<td align="center">
+					<div>
+						<button (click)=searchtag(this.community.taglist[0])>#우울</button>
+					</div>
+				</td>
+				<td align="center">
+					<div>
+							<button (click)=searchtag(this.community.taglist[1])>#불안</button>
+					</div>
+				</td>
+				<td align="center">
+					<div>
+						<button (click)=searchtag(this.community.taglist[2])>#초조</button>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<div>
+							<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
+					</div>
+				</td>
+				<td align="center">
+					<div>
+							<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
+					</div>
+				</td>
+				<td align="center">
+					<div>
+							<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
+					</div>
+				</td>
+			</tr>
+		</table>
 
-</ion-header>
+		<!-- 가로로 정렬 및 버튼 꾸미기 -->
+		<div>
+			<li *ngFor="let mosttag of mosttag1">
+				<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
+			</li>
+		</div>	
+		<!-- 가로로 정렬 및 버튼 꾸미기 -->
 
+		<ul>
+				<li *ngFor="let post of posts">
+					<div class="post">
+		
+						<div class="group-time" >
+								<button class="group" (click)="comment(post)">
+									{{ post.posttitle }}
+								</button>
+								<div *ngIf="urlcheck(post)">
+									<img src="assets/diary11.png">
+								</div>
+						</div>
+						<div class="name">
+								<div *ngIf="reportuser(post)">
+									<button (click) = "reportpost(post)">
+										신고
+									</button>
+								</div>
+								<div *ngIf="usercorrect(post)">
+								<button (click) = "updatepost(post)">
+									수정 
+									</button>
+								<button (click) = "postdelete(post)">
+									삭제
+								</button>
+							</div>
+						</div>
+						<div class="post">
+							<span class="">{{ post.text }}</span>
+						</div>
+						<div class="comment-like">	
+							<button>
+								<div>
+									<img src="assets/comment.png">
+									<span>{{ post.comment }}</span>
+								</div>
+							</button>	
+							<button class="like" (click)="like(post)">
+								<div>
+									<img src="{{ post.likesrc }}">
+									<span>{{ post.like }}</span>
+								</div>
+							</button>
+						</div>
+						<div class="tag">
+							<button (click)=searchtag(post.tag1)>#{{post.tag1}}</button>
+						</div>
+						<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
+						<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
+					</div>
+				</li>
 
-<ion-content>
+				<div showWhen="android" class="search-button">
+						<button class="button" (click)="doInfinite_android()">더 보기</button>
+				</div>
+				<div showWhen="ios" class="search-button">
+						<button class="button" (click)="doInfinite_ios()">더 보기</button>
+				</div>
 
-	<div class="text">
-		<p>
-			자신의 경험에 대해 얘기하고<br>
-			서로가 가진 노하우를 공유해보아요!
-		</p>
-	</div>
-
-	<table class="buttons">
-	  <tr>
-	    <td align="center">
-	    	<div>
-	    		<button (click)="depress()">
-		    		<p>
-				    	우울증<br>
-							서포트 그룹
-				    </p>
-			  	</button>
-		    </div>
-	    </td>
-	    <td align="center">
-	    	<div>
-	    		<button (click)="anxiety()">
-		    		<p>
-				    	불안장애<br>
-							서포트 그룹
-				    </p>
-			  	</button>
-		    </div>
-	    </td>
-	    <td align="center">
-	    	<div (click)="schizo()">
-	    		<button>
-		    		<p>
-				    	조현병<br>
-							서포트 그룹
-				    </p>
-			  	</button>
-		    </div>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td align="center">
-	    	<div>
-	    		<button (click)="trauma()">
-		    		<p>
-				    	트라우마<br>
-							서포트 그룹
-				    </p>
-			  	</button>
-		    </div>
-	    </td>
-	    <td align="center">
-	    	<div>
-	    		<button (click)="school()">
-		    		<p>
-				    	학교폭력<br>
-							서포트 그룹
-				    </p>
-			  	</button>
-		    </div>
-	    </td>
-	    <td align="center">
-	    	<div>
-	    		<button (click)="family()">
-		    		<p>
-				    	가정폭력<br>
-							서포트 그룹
-				    </p>
-			  	</button>
-		    </div>
-	    </td>
-	  </tr>
-	</table>
-
-</ion-content>
+			</ul>
+	
+	</ion-content>
