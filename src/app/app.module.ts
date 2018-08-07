@@ -31,6 +31,7 @@ import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
+import { CommunitysubProvider } from '../providers/communitysub/communitysub';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ReviewProvider } from '../providers/review/review';
     InAppBrowser,
     SearchPage,
     SupporterProvider,
-    ReviewProvider
+    ReviewProvider,
+    CommunitysubProvider
     //GroupProvider,
   ]
 })

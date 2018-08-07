@@ -27,7 +27,9 @@ export class SearchtagPage {
   post;
   value;
   tag = this.community.tag;
+  mosttag1;
   selectedData:any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController
@@ -39,10 +41,13 @@ export class SearchtagPage {
   }
 
   ionViewWillEnter(){
-    
+    this.community.tagcount(this.tag).then((mosttag1) => {
+      console.log(mosttag1);
+      this.mosttag1 = mosttag1;
+    });
     this.loading = this.loadingCtrl.create();
     this.loading.present();
-    this.community.getsearchposts(this.tag).then((posts) => {
+    this.community.searchtag(this.tag).then((posts) => {
       this.posts = posts;
       this.content.scrollToTop(0);
       this.loading.dismiss();
@@ -84,9 +89,8 @@ export class SearchtagPage {
           text: '예',
           handler: () =>{
             this.community.postdelete(post);
-            this.community.getallposts().then((posts) => {
+            this.community.searchtag(this.tag).then((posts) => {
               this.posts = posts;
-              this.content.scrollToTop(0);
               this.loading.dismiss();
             });
           }
@@ -105,6 +109,17 @@ export class SearchtagPage {
     this.navCtrl.push('CommunityfixPage', {
      //text: post.text,
     });
+  }
+
+  changeAnonymity(post){
+    var correct = false;
+    if(post.anonymity == true){
+      correct = true;
+    }
+    else if(post.anonymity == false){
+      correct = false;
+    }
+    return correct;
   }
 
   usercorrect(post){
@@ -161,5 +176,28 @@ export class SearchtagPage {
         this.loading.dismiss();
       });
     }
+  }
+
+  doInfiniteSearch_android(tag) {
+    this.community.tag = tag;
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    this.community.doInfiniteSearch(tag).then((posts) => {
+      this.posts = posts;
+      let d = this.content.getContentDimensions();
+      this.content.scrollTo(0, d.scrollHeight - 20);
+      this.loading.dismiss();
+    });
+  }
+
+  doInfiniteSearch_ios(tag) {
+    this.community.tag = tag;
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    this.community.doInfiniteSearch(tag).then((posts) => {
+      this.posts = posts;
+      this.content.scrollToBottom();
+      this.loading.dismiss();
+    });
   }
 }

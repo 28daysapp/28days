@@ -32,7 +32,7 @@ export class CommunitycommentProvider {
 
   uploadcomment(txt) {
   	var promise = new Promise((resolve) => {
-  		var newCommentRef = this.firecomment.child(`${ this.community.namecom }/${ this.postid }`).push();
+  		var newCommentRef = this.firecomment.child(`${ this.postid }`).push();
   		var commentid = newCommentRef.key;
   		newCommentRef.set({
 	  		postid: this.postid,
@@ -53,7 +53,7 @@ export class CommunitycommentProvider {
   }
 
   getallsubcomments(comment){
-	this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ comment.commentid.subcomment }`).on('value', (snapshot) => {
+	this.firecomment.child(`${ this.postid }/${ comment.commentid.subcomment }`).on('value', (snapshot) => {
 		this.subcomments = [];
 		for (var i in snapshot.val()) {
 			this.subcomments.push(snapshot.val()[i]);
@@ -64,7 +64,7 @@ export class CommunitycommentProvider {
 
   getallcomments() {
     // on function listens for data changes at a particular location
-  	this.firecomment.child(`${ this.community.namecom }/${ this.postid }`).on('value', (snapshot) => {
+  	this.firecomment.child(`${ this.postid }`).on('value', (snapshot) => {
   		this.comments = [];
   		for (var i in snapshot.val()) {
   			this.comments.push(snapshot.val()[i]);
@@ -75,12 +75,12 @@ export class CommunitycommentProvider {
 
   stoplistencomments() {
     // off function detaches a callback previously attached with on()
-    this.firecomment.child(`${ this.community.namecom }/${ this.postid }`).off();
+    this.firecomment.child(`${ this.postid }`).off();
   }
 
   uploadSubcomment(commentid, txt) {
   	var promise = new Promise((resolve) => {
-  		var newSubcommentRef = this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ commentid }/subcomment`).push();
+  		var newSubcommentRef = this.firecomment.child(`${ this.postid }/${ commentid }/subcomment`).push();
   		var subcommentid = newSubcommentRef.key;
   		newSubcommentRef.set({
 	  		subcommentid: subcommentid,
@@ -101,8 +101,8 @@ export class CommunitycommentProvider {
   /* add 1 to the number of subcomments of a comment */
   addSubcomment(commentid) {
   	var promise = new Promise((resolve) => {
-  		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ commentid }`).once("value").then((snapshot) => {
-  			this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${ commentid }`).update({
+  		this.firecomment.child(`${ this.postid }/${ commentid }`).once("value").then((snapshot) => {
+  			this.firecomment.child(`${ this.postid }/${ commentid }`).update({
 	  			subcommentnum: snapshot.val().subcommentnum + 1
 	  		}).then(() => {
 	  			resolve(true);
@@ -114,7 +114,7 @@ export class CommunitycommentProvider {
 
   updatecomment(comments,txt){
 	var promise = new Promise((resolve) => {
-		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${comments.commentid}`).update({
+		this.firecomment.child(`${ this.postid }/${comments.commentid}`).update({
 			text: txt
 		}).then(() => {
 			resolve(true);
@@ -125,7 +125,7 @@ export class CommunitycommentProvider {
   
   deletecomment(comment){
 	var promise = new Promise((resolve) => {
-		this.firecomment.child(`${ this.community.namecom }/${ this.postid }/${comment.commentid}`).remove();
+		this.firecomment.child(`${ this.postid }/${comment.commentid}`).remove();
 			this.community.deleteComment(this.post).then(() => {
 	  			resolve(true);
 	  		});
