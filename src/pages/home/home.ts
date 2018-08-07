@@ -6,7 +6,6 @@ import { UserProvider } from '../../providers/user/user';
 import { FcmProvider } from '../../providers/fcm/fcm';
 import { Storage } from '@ionic/storage';
 import { NavParams, ModalController } from 'ionic-angular';
-
 import { Http } from '@angular/http';
 
 
@@ -44,8 +43,6 @@ export class HomePage {
     if (params.data.message) {
       console.log('message: ' + params.data.message);
     }
-    
-
   }
 
   ionViewDidLoad() {
@@ -61,6 +58,8 @@ export class HomePage {
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
+      this.fcmProvider.getToken(this.user);
+
       // user already logged-in
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
@@ -83,6 +82,8 @@ export class HomePage {
             this.user = user;
             this.username = this.user.displayName;
             this.photoURL = this.user.photoURL;
+
+            this.fcmProvider.getToken(this.user);
 
             this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
               console.log("user profile");
@@ -119,10 +120,10 @@ export class HomePage {
 
   sendFCM() {
     // this.fcmProvider.sendFcm(this.user);
-    this.http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
-    .subscribe((data) => {
-      console.log('data', data);
-    })
+    // this.http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
+    // .subscribe((data) => {
+    //   console.log('data', data);
+    // })
   }
 
 

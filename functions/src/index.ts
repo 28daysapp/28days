@@ -3,31 +3,52 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-exports.test = functions.https.onRequest((req, res) => {
-    res.send("Test passed");
-});
+// exports.sendNotifications = functions.database.ref('/chats').onWrite((event) => {
 
-exports.sendMessage = functions.https.onRequest((req, res) => {
+
+//     // if (event.data.previous.val() ) {
+//     //     return;
+//     // }
+
+//     if (!event.data.exists()) {
+//         return;
+//     }
+
+//     const NOTIFICATION_SNAPSHOT = event.data;
+//     const payload = {
+//         notification: {
+//             title: `상담 요청이 왔어요!`,
+//             body: '비슷한 아픔을 가진 분의 이야기를 들어주세요'
+//         }
+//     };
+//     console.info(payload);
+
+//     return admin.database().ref('/tokens').once('value').then((data) => {
+//         if (!data.val() ) return;
+
+//         const snapshot = data.val();
+//         const tokens = [];
+//         for (let key in snapshot) {
+//             tokens.push (snapshot[key].token)
+//         }
+
+//         return admin.messaging().sendToDevice(tokens, payload);
+//     })
+// });
+
+exports.chatNotification = functions.https.onRequest((req, res) => {
     // This registration token comes from the client FCM SDKs.
-    const registrationToken = ['cYlfOL54Y6M:APA91bE3HanryF5jEbyp9iW2kmw6oBksETvYClC5Uae3NgmsG-p32Cbo_N2srswaw0rlHPeZhiRlfAg7e39zi1G2jaTRDhYMu3k1n0AxzW7_aYEKtvENFWYjH5wNPSAKyvTB76PJaruKoI5f44pO-LUDiiEDSiTtaQ'];
+    const registrationToken = req.token;
+    console.info("REQUESTDA!!!!: " + req)
 
-    // See documentation on defining a message payload.
+
+    // registrationToken = 'cG13HBX8tns:APA91bHKBIDrhvEbb1msLri15uCLy8f3o_ohTMy0x-EQ3YhwCl_Idh2tjf8CV0qoIS5I4mqGB29p95eEuRntsj8iMQ0yLkLdGef1CWDjMU1ZMMnqUGVtJEiwmqXKhG24O6sjm2EuxsfHaQEaSKuvXLPPkhlyWNBQfg';
+
     const payload = {
-        // android: {
-        //     ttl: 3600 * 1000, // 1 hour in milliseconds
-        //     priority: 'normal',
-        //     notification: {
-        //       title: '$GOOG up 1.43% on the day',
-        //       body: '$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.',
-        //       icon: 'stock_ticker_update',
-        //       color: '#f45342'
-        //     }
-        //   },
         notification: {
-            title: 'You have a new follower!',
-            body: `I am following you.`,
+            title: '상담 요청이 왔어요!',
+            body: '비슷한 아픔을 가진 분의 이야기를 들어주세요',
           }
-        // token: registrationToken
     };
 
     // Send a message to the device corresponding to the provided
@@ -40,15 +61,8 @@ exports.sendMessage = functions.https.onRequest((req, res) => {
         .catch((error) => {
             console.log('Error sending message:', error);
         });
+
+    
 });
 
-exports.countUsers = functions.https.onRequest((req, res) => {
-    const db = admin.database();
-    const ref = db.ref("/users");
-  
-    ref.once("value", function(snapshot) {
-        const count = snapshot.numChildren();
-        res.status(200).json({ count: count });
-    });
-  });
 

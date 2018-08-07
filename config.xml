@@ -3,7 +3,7 @@
     <name>28days</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://137.68.247.22:8101" />
+    <content original-src="index.html" src="http://137.68.247.45:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -113,6 +113,11 @@
     <allow-navigation href="http://137.68.247.22:8102" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
+    <allow-navigation href="http://137.68.247.45:8101" />
+    <allow-navigation href="http://137.68.247.45:8100" />
+    <allow-navigation href="http://137.68.247.45:8103" />
+    <allow-navigation href="http://137.68.247.45:8104" />
+    <allow-navigation href="http://137.68.247.45:8102" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>
