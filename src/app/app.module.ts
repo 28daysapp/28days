@@ -78,6 +78,7 @@ import { OperatorProvider } from '../providers/operator/operator';
     ReviewProvider,
     FCM,
     OperatorProvider
+
     //GroupProvider,
   ]
 })

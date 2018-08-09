@@ -19,10 +19,9 @@ export class MyProvider {
   constructor() {
   }
 
-  addmypost(uid, namecom, postid, time) {
+  addmypost(uid, postid, time) {
     var promise = new Promise((resolve) => {
       this.firemypost.child(`${uid}/${postid}`).set({//firemypost에 값 넣기
-        namecom: namecom,
         postid: postid,
         timestamp: time
       }).then(() => {
