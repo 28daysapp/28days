@@ -4,28 +4,35 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <ion-title>1:1 서포트</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-
-  <div class="content">
-    <h4> 어떤 서포트를 <br>원하시나요? </h4>
-  </div>
-
-    <ion-card text-center (click)="onlineload()">
-      <ion-card-content>
-            온라인<br>서포트
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card text-center>
-        <ion-card-content>
-            오프라인<br>서포트
-      </ion-card-content>
-    </ion-card>
-
-</ion-content>
+<ion-header no-border>
+    <ion-navbar no-border>
+      <ion-title class="title">서포터/상담사</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border>
+        <ion-searchbar (ionInput)="getItems($event)" placeholder="검색"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content no-border>
+    <!-- Segment in content -->
+    <ion-segment [(ngModel)]="type" (ionChange)="getList()">
+        <ion-segment-button value="Supporter">
+          Supporter
+        </ion-segment-button>
+        <ion-segment-button value="Counselor">
+          Counselor
+        </ion-segment-button>
+      </ion-segment>
+    <button (click)="gooperator()">개발자 임시 페이지</button>
+  <ion-list>
+    <ion-item *ngFor="let user of userList" (click)="supporterreview(user)">
+      <div class="list">
+        <div class="profilephoto">
+          <img src="{{user.photoURL}}">
+        </div>
+        <div class="name">{{user.username}}</div>
+      </div>
+    </ion-item>
+  </ion-list>
+   
+  </ion-content>

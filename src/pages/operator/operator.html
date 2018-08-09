@@ -1,0 +1,29 @@
+<!--
+  Generated template for the OperatorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar hide-nav-bar="true">
+    <ion-title>operator</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <button (click)="getalluser()">모든 유저 정보 보기</button>
+    <ion-list>
+        <ion-item *ngFor="let user of list">
+          <div class="list">
+            <div class="name">{{user.username}}</div>
+            {{user.uid}} <br>
+            <button (click)="changeTypeGeneral(user)"> 일반 </button>
+            <button (click)="changeTypeSupporter(user)"> 서포터 </button>
+            <button (click)="changeTypeCounselor(user)"> 상담사 </button>
+            <button (click)="changeTypeOperator(user)"> 관리자 </button>
+            </div>
+        </ion-item>
+      </ion-list>
+</ion-content>
