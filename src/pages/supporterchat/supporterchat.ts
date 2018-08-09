@@ -1,7 +1,8 @@
 import { Component, AfterViewChecked, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Content, TextInput } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 /**
  * Generated class for the SupporterchatPage page.
@@ -13,16 +14,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'page-supporterchat',
   templateUrl: 'supporterchat.html',
+  providers: [Keyboard]
 })
 export class SupporterchatPage implements AfterViewChecked {
-	@ViewChild('content') content: Content;
+  @ViewChild('content') content: Content;
+  @ViewChild('focusInput') myInput : TextInput;
   inputForm: FormGroup;
 	buddy;
   gogomessages;
-	chatmessages;
+  chatmessages;
+  inputMessage: any;
   showinput = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder) {
+  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder,public keyboard: Keyboard) {
     console.log('SupporterchatPage - constructor');
   	this.buddy = this.chat.buddy;
     this.events.subscribe('newmessage', () => {
@@ -78,10 +82,13 @@ export class SupporterchatPage implements AfterViewChecked {
   }
 
   sendmessage() {
-    if (this.inputForm.valid) {
-      var txt = this.inputForm.value.txt;
-      this.inputForm.reset();
-      // if-else for testing only
+    if (this.inputMessage) {
+      var txt = this.inputMessage;
+      this.inputMessage = '';
+      this.keyboard.show();
+      this.myInput.setFocus();
+      
+        
       
       if (txt == 'pay') {
         this.payMembership();
