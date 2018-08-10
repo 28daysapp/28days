@@ -100,4 +100,18 @@ export class SupporterProvider {
     return promise;
   }
 
+  getsumrating(supporterid) {
+    var sum;
+    this.getreviewrating(supporterid).then((reviewrating) => {
+      this.reviewrating = reviewrating;
+      if (this.reviewrating == null) {
+        return 0
+      }
+      else {
+        sum = this.reviewrating.ratingA + this.reviewrating.ratingB + this.reviewrating.ratingC + this.reviewrating.ratingD
+        sum = sum + (this.reviewrating.count * 4);
+        return sum;
+      }
+    });
+  }
 }

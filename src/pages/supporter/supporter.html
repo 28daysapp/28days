@@ -6,15 +6,13 @@
 -->
 
 <ion-header>
-  <ion-navbar>
-    <ion-title>1:1 서포터</ion-title>
-  </ion-navbar>
-  <div class="search-button">
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  </div>
+    <div class="search-button">
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      </div>
 </ion-header>
 
 <ion-content padding>
+  <button (click)="gooperator()">개발자 임시 페이지</button>
   <ion-list>
     <ion-item *ngFor="let user of userList" (click)="supporterreview(user)">
       <div class="list">

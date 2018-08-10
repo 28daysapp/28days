@@ -15,15 +15,12 @@
 
 <ion-content padding>
 	<div class="header">
-		<p class="group">{{ title }}</p>
 		<p class="text">당신의 방식으로 표현해 보세요!</p>
 	</div>
 	<div class="area">
-		<textarea class="area1" [(ngModel)]="posttitle" placeholder="제목"></textarea>
+		<textarea class="area1" [(ngModel)]="title" placeholder="제목"></textarea>
 		<textarea class="area2" [(ngModel)]="text" placeholder="내용"></textarea>
-		<textarea class="area3" [(ngModel)]="tag1" placeholder="태그1"></textarea>
-		<textarea class="area3" [(ngModel)]="tag2" placeholder="태그2"></textarea>
-		<textarea class="area3" [(ngModel)]="tag3" placeholder="태그3"></textarea>
+		<textarea class="area3" [(ngModel)]="tag1" placeholder="태그"></textarea>
 	</div>
 	<div class="imagechooser">
 		<button class="gallery" (click)="openGallery()" *ngIf="!pick">
@@ -36,6 +33,12 @@
 			<img src="{{ fileURL }}">
 		</button>
 	</div>
+	<ion-list>
+			<ion-item>
+				<ion-label>익명으로 글쓰기</ion-label>
+				<ion-checkbox [(ngModel)]="anonymity"></ion-checkbox>
+			</ion-item>
+		</ion-list>
 </ion-content>
 
 <ion-footer>

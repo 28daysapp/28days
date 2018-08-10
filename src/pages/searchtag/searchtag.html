@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>검색결과</ion-title>
+      <ion-title>"{{ this.community.tag }}" 검색결과</ion-title>
     </ion-navbar>
 
   </ion-header>
@@ -16,52 +16,66 @@
   
   <ion-content #content>
   
-    <ul>
-      <li *ngFor="let post of posts">
-        <div class="post">
-  
-          <div class="picture" *ngIf="post.url">
-            <img src="{{ post.url }}">
-          </div>
-          <div class="group-time">
-            <button class="group" (click)="comment(post)">{{ post.posttitle }}</button>
-            <span class="time">{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
-          </div>
-          <div class="comment-like">			
-              <div>
-                <img src="assets/comment.png">
-                <span>{{ post.comment }}</span>
-              </div>
-            <button class="like" (click)="like(post)">
-              <div>
-                <img src="{{ post.likesrc }}">
-                <span>{{ post.like }}</span>
-              </div>
-            </button>
-          </div>
-          <div class="tag">
-            <button>#{{post.tag1}}</button>
-            <button>#{{post.tag2}}</button>
-            <button>#{{post.tag3}}</button>
-          </div>
-          <div class="name">
-              <div *ngIf="reportuser(post)">
-                <button (click) = "reportpost(post)">
-                  신고
-                </button>
-              </div>
-              <div *ngIf="usercorrect(post)">
-              <button (click) = "updatepost(post)">
-                수정 
-                </button>
-              <button (click) = "postdelete(post)">
-                삭제
-              </button>
-            </div>
-            </div>
-        </div>
-      </li>
-    </ul>
-  
-  </ion-content>
-  
+		<ul>
+					<li *ngFor="let mosttag of mosttag1">
+						<span>{{ mosttag.tagcnt }}개를 찾았습니다.</span>
+					</li>
+
+				<li *ngFor="let post of posts">
+					<div class="post">
+		
+						<div class="group-time">
+								<button class="group" (click)="comment(post)">
+									{{ post.posttitle }}
+								</button>
+						</div>
+						<div class="name">
+								<div *ngIf="reportuser(post)">
+									<button (click) = "reportpost(post)">
+										신고
+									</button>
+								</div>
+								<div *ngIf="usercorrect(post)">
+								<button (click) = "updatepost(post)">
+									수정 
+									</button>
+								<button (click) = "postdelete(post)">
+									삭제
+								</button>
+							</div>
+						</div>
+						<div class="post">
+							<span class="">{{ post.text }}</span>
+						</div>
+						<div class="comment-like">	
+							<button>
+								<div>
+									<img src="assets/comment.png">
+									<span>{{ post.comment }}</span>
+								</div>
+							</button>	
+							<button class="like" (click)="like(post)">
+								<div>
+									<img src="{{ post.likesrc }}">
+									<span>{{ post.like }}</span>
+								</div>
+							</button>
+						</div>
+						<div class="tag">
+							<span >#{{post.tag1}}</span>
+						</div>
+						<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
+						<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
+					</div>
+				</li>
+
+				<div showWhen="android" class="search-button">
+					<button class="button" (click)="doInfiniteSearch_android(tag)">더 보기</button>
+				</div>
+				<div showWhen="ios" class="search-button">
+					<button class="button" (click)="doInfiniteSearch_ios(tag)">더 보기</button>
+				</div>
+
+				</ul>
+	
+	</ion-content>
