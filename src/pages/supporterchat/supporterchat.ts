@@ -83,7 +83,7 @@ export class SupporterchatPage implements AfterViewChecked {
   }
 
   activateFirebaseFunction() {
-    this.fcmProvider.sendNotification();
+    // this.fcmProvider.sendNotification();
 
   }
 
