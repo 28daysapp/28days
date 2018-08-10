@@ -18,6 +18,7 @@ export class CommunityProvider {
 	firecomment = firebase.database().ref('/communitycomment');
 	firereport = firebase.database().ref('/report');
 	firetag = firebase.database().ref('/tag');
+	user = firebase.database().ref('/users');
 	taglist = [
 		'우울',
 		'불안',
@@ -26,11 +27,11 @@ export class CommunityProvider {
 		'학교폭력',
 		'가정폭력'
 	];
-	mosttaglist = [];
 	title;
 	posts;
 	post;
 	report;
+	uids;
 	tag;
 	tags;
 	limit: number = 0;
@@ -50,7 +51,7 @@ export class CommunityProvider {
 	}
 
 	/* upload post to firebase */
-	uploadPost(title, txt, dataURL, tag1, anonymity) {
+	uploadPost(title, txt, dataURL, tag1, anonymity, photo) {
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			var newPostRef = this.firecommunity.push();
@@ -59,8 +60,8 @@ export class CommunityProvider {
 			if(anonymity){
 				console.log(anonymity);
 			if (dataURL) {
-				var imageStore = this.firestore.ref('/community/').child(postId);
-				imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+				var imageStore1 = this.firestore.ref('/community/').child(postId);
+				imageStore1.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 					newPostRef.set({
 						postid: postId,
 						posttitle: title,
@@ -75,6 +76,7 @@ export class CommunityProvider {
 						tag1: tag1,
 						urlcheck: true,
 						anonymity: true,
+						photoURL: photo
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);
@@ -115,6 +117,7 @@ export class CommunityProvider {
 					report: 0,
 					tag1: tag1,
 					anonymity: true,
+					photoURL: photo
 				}).then(() => {
 					this.my.addmypost(uid, postId, time).then(() => {
 						resolve(true);
@@ -144,8 +147,8 @@ export class CommunityProvider {
 			} else{
 				console.log("else");
 				if (dataURL) {
-					var imageStore = this.firestore.ref('/community/').child(postId);
-					imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+					var imageStore2 = this.firestore.ref('/community/').child(postId);
+					imageStore2.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 						newPostRef.set({
 							postid: postId,
 							posttitle: title,
@@ -160,6 +163,7 @@ export class CommunityProvider {
 							tag1: tag1,
 							urlcheck: true,
 							anonymity: false,
+							photoURL: photo
 						}).then(() => {
 							this.my.addmypost(uid, postId, time).then(() => {
 								resolve(true);
@@ -200,6 +204,7 @@ export class CommunityProvider {
 						report: 0,
 						tag1: tag1,
 						anonymity: false,
+						photoURL: photo
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);
@@ -228,6 +233,23 @@ export class CommunityProvider {
 					}
 			}
 			});
+		return promise;
+	}
+
+	photo(){
+		var uid = firebase.auth().currentUser.uid;
+		var promise = new Promise((resolve) => {
+			this.user.child('uid').equalTo(uid).once("value").then((snapshot) => {
+				var myphoto = [];
+				snapshot.forEach((childSnapshot) => {
+					var photo = childSnapshot.val();
+
+					myphoto.push(photo);
+				});
+				myphoto.reverse();
+				resolve(myphoto);
+			});
+		});
 		return promise;
 	}
 
@@ -303,41 +325,36 @@ export class CommunityProvider {
 	}
 
 	reportpost(post){
+		console.log("test");
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.getreport(post).then((report) => {
 				this.report = report;
-				if(this.report == null){
-					console.log('if');
-					this.firereport.child(`${post.postid}`).set({
-						uid: uid,
-						reportcnt: 1,
-					}).then(() => {
-						resolve(true);
-					});
-				}
-				else{
-					console.log('else');
-					this.firereport.child(`${post.postid}`).set({
-						uid: uid,
-						reportcnt: this.report.reportcnt + 1
-					}).then(() => {
-						resolve(true);
-					});
-					if(this.report.reportcnt == 20){
-						this.firecomment.child(`${ post.postid }`).remove();
-						this.firecommunity.child(`${ post.postid }`).remove().then(() => {
-							this.firereport.child(`${uid}`).remove().then(() => {
-								
-							})
-						   this.firecommunity.update({
-							   }).then(() => {
-								  });
-						 });
+					if(this.report == null){
+						this.firereport.child(`${post.postid}`).update({
+							reportcnt: 1,
+						}).then(() => {
+							resolve(true);
+						});
 					}
-				}
+					else{
+						if(this.uids.uid != uid){
+							this.firereport.child(`${post.postid}`).update({
+								reportcnt: this.report.reportcnt + 1,
+							}).then(() => {
+								resolve(true);
+							});
+						}
+						else{
+
+						}
+						if(this.report.reportcnt == 20){
+							this.postdelete(post);
+							this.firereport.child(`${post.postid}`).remove();
+						}
+					}
+				})
 			})
-		})
 		return promise;
 	}
 

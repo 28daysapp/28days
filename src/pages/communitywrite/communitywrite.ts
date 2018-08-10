@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { CommunityPage } from '../community/community';
+//import { CommunityPage } from '../community/community';
 
 /**
  * Generated class for the CommunitywritePage page.
@@ -31,6 +31,7 @@ export class CommunitywritePage {
   }
 
   write() {
+	  var photo = this.community.photo();
 		if(this.title == '' || this.text == '' || this.tag1 == ''){
 			let alert = this.alertCtrl.create({
 				title: '알림',
@@ -44,10 +45,10 @@ export class CommunitywritePage {
 			})
 			alert.present();
 		}
-		else if(this.title.length > 20){
+		else if(this.title.length > 50){
 			let alert = this.alertCtrl.create({
 				title: '알림',
-				message: '제목의 길이는 최대 20자 입니다.',
+				message: '제목의 길이는 최대 50자 입니다.',
 				buttons: [
 					{
 						text:'확인',
@@ -71,7 +72,7 @@ export class CommunitywritePage {
 			alert.present();
 		}
 		else{
-	  	this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity).then(() => {
+	  	this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity, photo).then(() => {
 	  		this.navCtrl.pop();
 	  	});
 	  	let loading = this.loadingCtrl.create({

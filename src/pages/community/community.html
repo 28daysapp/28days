@@ -16,60 +16,30 @@
 			</ion-navbar>
 			
 			<div class="search-button">
-			<ion-searchbar [(ngModel)]="tag" placeholder="Search"></ion-searchbar>
-			<button class="button" (click)="searchtag(tag)">검색</button>
+			<ion-searchbar class="searchbar" [(ngModel)]="tag" placeholder="태그를 검색해보세요!" (change)="searchtag(tag)"></ion-searchbar>
+			<!-- <input type="text" class="searchbar" [(ngModel)]="tag" placeholder="태그를 검색해보세요!"> -->
+			<!-- <button class="button" (click)="searchtag(tag)">검색</button> -->
 			</div>
-			
+
 	</ion-header>
-	
+
 	<ion-content>
-		
-		<table class="buttons">
-			<tr>
-				<td align="center">
-					<div>
-						<button (click)=searchtag(this.community.taglist[0])>#우울</button>
-					</div>
-				</td>
-				<td align="center">
-					<div>
-							<button (click)=searchtag(this.community.taglist[1])>#불안</button>
-					</div>
-				</td>
-				<td align="center">
-					<div>
-						<button (click)=searchtag(this.community.taglist[2])>#초조</button>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					<div>
-							<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
-					</div>
-				</td>
-				<td align="center">
-					<div>
-							<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
-					</div>
-				</td>
-				<td align="center">
-					<div>
-							<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
-					</div>
-				</td>
-			</tr>
-		</table>
-
-		<!-- 가로로 정렬 및 버튼 꾸미기 -->
-		<div>
-			<li *ngFor="let mosttag of mosttag1">
-				<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
-			</li>
-		</div>	
-		<!-- 가로로 정렬 및 버튼 꾸미기 -->
-
-		<ul>
+		<ul style="list-style:none; padding-left:0px;" class="smalltag">
+				<span class="bigtag">
+					<button (click)=searchtag(this.community.taglist[0])>#우울</button>
+					<button (click)=searchtag(this.community.taglist[1])>#불안</button>
+					<button (click)=searchtag(this.community.taglist[2])>#초조</button>
+					<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
+					<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
+					<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
+					<li *ngFor="let mosttag of mosttag1">
+						<span class="setting">
+							<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
+						</span>
+					</li>
+				</span>
+			</ul>
+		<ul style="list-style:none; padding-left:0px;" class="postclass">
 				<li *ngFor="let post of posts">
 					<div class="post">
 		
@@ -81,51 +51,36 @@
 									<img src="assets/diary11.png">
 								</div>
 						</div>
-						<div class="name">
-								<div *ngIf="reportuser(post)">
-									<button (click) = "reportpost(post)">
-										신고
-									</button>
-								</div>
-								<div *ngIf="usercorrect(post)">
-								<button (click) = "updatepost(post)">
-									수정 
-									</button>
-								<button (click) = "postdelete(post)">
-									삭제
-								</button>
-							</div>
-						</div>
-						<div class="post">
-							<span class="">{{ post.text }}</span>
-						</div>
-						<div class="comment-like">	
-							<button>
-								<div>
-									<img src="assets/comment.png">
-									<span>{{ post.comment }}</span>
-								</div>
-							</button>	
-							<button class="like" (click)="like(post)">
-								<div>
-									<img src="{{ post.likesrc }}">
-									<span>{{ post.like }}</span>
-								</div>
-							</button>
+						<div class="posttext">
+							<div class="posttext">{{ post.text }}</div>
 						</div>
 						<div class="tag">
-							<button (click)=searchtag(post.tag1)>#{{post.tag1}}</button>
+								<button (click)=searchtag(post.tag1)>#{{post.tag1}}</button>
 						</div>
-						<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
-						<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
+							<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
+							<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
+						<table class="co-li" style="width:100%">
+							<td align="center" style="width: 50%">
+								<tr class="comment-like">	
+									<button class="like" (click)="like(post)">
+										<img src="{{ post.likesrc }}">
+										<span>{{ post.like }}</span>
+									</button>
+								</tr>
+							</td>
+							<td align="center" style="width: 50%">
+								<tr class="comment-like">
+									<button class="like">
+										<img src="assets/comment.png">
+										<span>{{ post.comment }}</span>
+									</button>
+								</tr>
+							</td>
+						</table>
 					</div>
 				</li>
-
-				<div showWhen="android" class="search-button">
-						<button class="button" (click)="doInfinite_android()">더 보기</button>
-				</div>
-				<div showWhen="ios" class="search-button">
-						<button class="button" (click)="doInfinite_ios()">더 보기</button>
+				<div class="search-button">
+						<button class="button" (click)="doInfinite()">더 보기</button>
 				</div>
 
 			</ul>

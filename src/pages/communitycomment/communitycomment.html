@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>게시글</ion-title>
+    <ion-title>커뮤니티</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,21 +16,58 @@
 <ion-content padding class="CommunityfixPage">
 	
 	<ul>
-		<p class="posttext">{{ post.text }}</p>
-		<p class="posttag1">#{{ post.tag1 }}</p>
+		<span class="posttitle">{{ post.posttitle }}</span>
+		<br>
+		<div class="username">{{ post.username }}
+			<span class="button" style="float:right" *ngIf="reportuser(post)">
+				<button (click) = "reportpost(post)">신고</button>
+			</span>
+			<span  class="button" style="float:right" *ngIf="usercorrect(post)">
+				<button (click) = "updatepost(post)">수정</button>
+				<button (click) = "postdelete(post)">삭제</button>
+			</span>
+		</div>
+
+		<div class="posttext" style="width:100%">{{ post.text }}</div>
+
+		<div class="posttag1">#{{ post.tag1 }}
+			<span class="time" style="float:right">{{ post.timestamp | date:'MM.dd a hh:mm' }}</span>
+		</div>
 		<div class="picture" *ngIf="post.url">
 			<img src="{{ post.url }}">
 		</div>
-		
+
+		<table class="co-li" style="width:100%">
+			<td align="center" style="width: 50%">
+				<tr class="comment-like">	
+					<button class="like" (click)="like(post)">
+						<img src="{{ post.likesrc }}">
+						<span>{{ post.like }}</span>
+					</button>
+				</tr>
+			</td>
+			<td align="center" style="width: 50%">
+				<tr class="comment-like">
+					<button class="like">
+						<img src="assets/comment.png">
+						<span>{{ post.comment }}</span>
+					</button>
+				</tr>
+			</td>
+		</table>
+
 		<li *ngFor="let comment of comments">
 			<div class="comment">
-				<div class="bubble">
-					<p class="name">{{ comment.username }}</p>
-					<p class="text">{{ comment.text }}</p>
+				<div class="comment-line1">{{ comment.username }}
+					<span class="time" style="float:right">{{ comment.timestamp | date:'MM.dd a hh:mm' }}</span>
 				</div>
-			<span *ngIf="usercorrect(comment)">
+			<p class="text">{{ comment.text }}</p>
+			<span class="button" *ngIf="usercorrect_cmt(comment)">
 				<button  (click)="updatebutton(comment)">수정</button>
 				<button (click)="deletecomment(comment)">삭제</button>
+			</span>
+			<span class="button" *ngIf="reportuser_cmt(comment)">
+				<button (click)="reportcomment(comment)">신고</button>
 			</span>
 				<div *ngIf="comment.updatecomment">
 					
@@ -44,7 +81,34 @@
 								</form>
 					</div>
 				</div>
-				<!--
+		
+	<!--
+		<li *ngFor="let comment of comments">
+			<div class="comment">
+				<div class="bubble">
+					<p class="name">{{ comment.username }}</p>
+					<p class="text">{{ comment.text }}</p>
+				</div>
+			<span *ngIf="usercorrect_cmt(comment)">
+				<button  (click)="updatebutton(comment)">수정</button>
+				<button (click)="deletecomment(comment)">삭제</button>
+			</span>
+			<span *ngIf="reportuser_cmt(comment)">
+				<button (click)="reportcomment(comment)">신고</button>
+			</span>
+				<div *ngIf="comment.updatecomment">
+					
+					<div class="subcomment">
+							<form [formGroup]="updateForm" class="commentform">
+									<input formControlName="txt" type="text">
+											<button (click)="updatecomment(comment)">
+												<img src="assets/send.png">
+											</button>
+									
+								</form>
+					</div>
+				</div>
+			
 				<div class="btn">
 					<button (click)="showsubcomment(comment)">답글 달기<span *ngIf="comment.subcommentnum != 0"> - 답글 {{ comment.subcommentnum }}개</span></button>
 				</div>
@@ -78,8 +142,8 @@
 
 	<form [formGroup]="commentForm" class="footerform">
 		<input formControlName="txt" type="text">
-				<button (click)="writeComment()">
-					<img src="assets/send.png">
+				<button (click)="writeComment()" style="float:right">
+					게시
 				</button>
 		
 	</form>
