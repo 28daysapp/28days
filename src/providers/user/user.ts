@@ -14,7 +14,7 @@ export class UserProvider {
 
   fireusers = firebase.database().ref('/users');
   fireusernames = firebase.database().ref('/usernames');
-  
+  photo;
   constructor() {
     
   }
