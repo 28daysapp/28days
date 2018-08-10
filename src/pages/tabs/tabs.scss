@@ -6,12 +6,156 @@ page-tabs {
     background-image: url('../assets/gogo.png');
   }
 
-  .tabs .tab-item .icon.Coco{
+  .tabs .tab-item .tabIcon{
   background-repeat: no-repeat;
   background-position: 100%;
   height: 100%;
   background-image: url("../assets/gogo.png");
   background-size:contain;
 }
+
+// .tabbar, .tabs-ios, .tabs-md , .tabs-wp{
+//     .tab-button-icon {
+//         background-repeat:no-repeat;
+//         background-position: center;
+//         height:24px;
+//         width:24px;
+//         background-size:contain;
+//         -webkit-background-size: contain;
+//         -moz-background-size: contain;
+//         -o-background-size: contain;
+//         &:before {
+//             display:none;
+//         }
+//     }
+// }
+
+// .tabs-ios {
+//   a[aria-selected=false]{
+//     .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label="home"] {
+//       background-image: url(../../assets/imgs/home.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label="hos"] {
+//       background-image: url(../../assets/imgs/hos.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label="chat"] {
+//       background-image: url(../../assets/imgs/chat.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label="supporter"] {
+//       background-image: url(../../assets/imgs/supporter.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label="community"] {
+//       background-image: url(../../assets/imgs/community.png);
+//     }
+//
+//   }
+//  a[aria-selected=true] {
+//    //führ eventuellen text
+//    //span {
+//       //color: #f00; //whatever colour you want to use for the text
+//     //}
+//
+//     .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label="home"] {
+//       background-image: url(../../assets/imgs/home-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label="hos"] {
+//       background-image: url(../../assets/imgs/hos-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label="chat"] {
+//       background-image: url(../../assets/imgs/chat-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label="supporter"] {
+//       background-image: url(../../assets/imgs/supporter-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label="community] {
+//       background-image: url(../../assets/imgs/community-on.png);
+//     }
+//   }
+// }
+//
+// .tabs-md {
+//   a[aria-selected=false]{
+//     .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label="home"] {
+//       background-image: url(../assets/imgs/home.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
+//       background-image: url(../assets/imgs/hos.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
+//       background-image: url(../assets/imgs/chat.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
+//       background-image: url(../assets/imgs/supporter.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
+//       background-image: url(../assets/imgs/community.png);
+//     }
+//   }
+//
+//  a[aria-selected=true] {
+//    //führ eventuellen text
+//    //span {
+//       //color: #f00; //whatever colour you want to use for the text
+//     //}
+//     .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label="home"] {
+//       background-image: url(../assets/imgs/home-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
+//       background-image: url(../assets/imgs/hos-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
+//       background-image: url(../assets/imgs/chat-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
+//       background-image: url(../assets/imgs/supporter-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
+//       background-image: url(../assets/imgs/community-on.png);
+//     }
+//   }
+// }
+//
+// .tabs-wp {
+//   a[aria-selected=false]{
+//     .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label="home"] {
+//       background-image: url(../assets/imgs/home.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
+//       background-image: url(../assets/imgs/hos.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
+//       background-image: url(../assets/imgs/chat.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
+//       background-image: url(../assets/imgs/supporter.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
+//       background-image: url(../assets/imgs/community.png);
+//     }
+//   }
+//
+//  a[aria-selected=true] {
+//    //führ eventuellen text
+//    //span {
+//       //color: #f00; //whatever colour you want to use for the text
+//     //}
+//     .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label="home"] {
+//       background-image: url(../assets/imgs/home-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
+//       background-image: url(../assets/imgs/hos-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
+//       background-image: url(../assets/imgs/chat-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
+//       background-image: url(../assets/imgs/supporter-on.png);
+//     }
+//     .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
+//       background-image: url(../assets/imgs/community-on.png);
+//     }
+//   }
+// }
+
 
 }
