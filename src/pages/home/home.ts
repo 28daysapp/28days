@@ -58,7 +58,9 @@ export class HomePage {
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
-      this.fcmProvider.getToken(this.user);
+
+      // this.fcmProvider.getToken(this.user);
+      // this.fcmProvider.handleTokenRefresh();
 
       // user already logged-in
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
@@ -108,14 +110,6 @@ export class HomePage {
         }
       });
     }
-  }
-
-  getToken() {
-    this.fcmProvider.getToken(this.user);
-  }
-
-  deleteToken() {
-    this.fcmProvider.deleteToken(this.user);
   }
 
   sendFCM() {

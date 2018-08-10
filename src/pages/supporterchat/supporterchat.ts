@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angu
 import { ChatProvider } from '../../providers/chat/chat';
 import { FcmProvider } from '../../providers/fcm/fcm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map'
 
 /**
  * Generated class for the SupporterchatPage page.
@@ -16,19 +14,19 @@ import 'rxjs/add/operator/map'
 @Component({
   selector: 'page-supporterchat',
   templateUrl: 'supporterchat.html'
-  
+
 })
 export class SupporterchatPage implements AfterViewChecked {
-	@ViewChild('content') content: Content;
+  @ViewChild('content') content: Content;
   inputForm: FormGroup;
-	buddy;
+  buddy;
   gogomessages;
-	chatmessages;
+  chatmessages;
   showinput = false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider, public fcmProvider: FcmProvider,
-  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder,  public http: Http) {
+    public events: Events, public zone: NgZone, public formBuilder: FormBuilder) {
     console.log('SupporterchatPage - constructor');
     this.buddy = this.chat.buddy;
     console.log(this.buddy.username);
@@ -41,15 +39,13 @@ export class SupporterchatPage implements AfterViewChecked {
     this.inputForm = formBuilder.group({
       txt: ['', Validators.required]
     });
-
-    const subscribeButton = document.getElementById('subscribe');
   }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
 
-  scrollToBottom(){
+  scrollToBottom() {
     this.content.scrollToBottom(0);
   }
 
@@ -57,7 +53,8 @@ export class SupporterchatPage implements AfterViewChecked {
     console.log('SupporterchatPage - ionViewDidLoad');
     this.chat.checkstart().then((isstart) => {
 
-      this.sendNotification(this.buddy);
+      // this.fcmProvider.storeBuddyToken(this.buddy)
+      // this.fcmProvider.storeBothTokens(this.buddy);
 
       if (isstart) {
         this.gogomessages = [];
@@ -84,50 +81,36 @@ export class SupporterchatPage implements AfterViewChecked {
     // this.chat.getallmessages();
   }
 
-  ionViewWillLeave(){
+  activateFirebaseFunction() {
+    this.fcmProvider.sendNotification();
+
+  }
+
+  ionViewWillLeave() {
     this.events.unsubscribe('newmessage');
     this.chat.stoplistenmessages();
   }
 
-  subscribeToNotifications() {
-    this.fcmProvider.firebaseMessaging.requestPermission()
-      .then(()=> this.fcmProvider.handleTokenRefresh())
-      .then(() => this.fcmProvider.checkSubscription())
-      .catch((err) => {
-        console.log("Error getting permission :(");
-      });
-  }
+  // subscribeToNotifications() {
+  //   this.fcmProvider.firebaseMessaging.requestPermission()
+  //     .then(() => this.fcmProvider.handleTokenRefresh())
+  //     .catch((err) => {
+  //       console.log("Error getting permission :(");
+  //     });
+  // }
 
   sendmessage() {
     if (this.inputForm.valid) {
       var txt = this.inputForm.value.txt;
       this.inputForm.reset();
       // if-else for testing only
-      
+
       if (txt == 'pay') {
         this.payMembership();
       } else {
         this.chat.sendmessage(txt);
       }
     }
-  }
-
-  sendNotification(buddy) {
-    let token = buddy.token;
-    // let params = new URLSearchParams();
-    // params.set('token', token);
-
-    let headers: Headers = new Headers();
-    headers.set('Content-Type', 'application/json');
-    headers.set("Access-Control-Allow-Origin", "*");
-
-    let body = {token: token};
-
-    this.http.post('https://us-central1-days-fd14f.cloudfunctions.net/chatNotification', JSON.stringify(body), { headers: headers })
-    .map(res => res.json)
-    .subscribe(data => {
-      console.log('sendNotification request Data: ', data);
-    })
   }
 
   createmsg(showimage, message, setblack) {
