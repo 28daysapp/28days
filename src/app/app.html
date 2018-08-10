@@ -14,7 +14,7 @@
         <ion-list-header>
           설정
         </ion-list-header>
-          <button ion-item *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+          <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
             <ion-icon item-start [name]="p.icon"></ion-icon>
             {{p.title}}
           </button>
