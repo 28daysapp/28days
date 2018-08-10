@@ -1,43 +1,185 @@
 page-community {
 
+	ul {
+	  list-style-type: none;
+	  padding: 0px;
+	  margin: 0px;
+	  height: 100%;
+	}
+
+	.post {
+	  padding: 10px;
+	}
+
+	.search {
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 100%;
+		height: 40px;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+
+	.tag {
+		padding: 5px;
+	}
+
+	.tag button{
+		float: left;
+		background-color: transparent;
+	}
+
+	.name {
+	  overflow: auto;
+	  margin-bottom: 5px;
+	  display: table;
+		width: 100%;
+		
+		span {
+			color: color($colors, primary);
+		}
+	}
+
+	.name span {
+	  display: table-cell;
+	  vertical-align: middle;
+	}
+
+	.name button {
+		float: right;
+		background-color: transparent;
+	  padding: 0px;
+	}
+
+	.name p {
+		float: left;
+		padding: 5px;
+	}
+
+	.name ion-icon {
+	  padding: 0px;
+	  font-size: 30px;
+	}
+
+	.picture {
+	  height: 250px;
+	  text-align: center;
+	  margin-bottom: 5px;
+	}
+
+	.picture img {
+	  max-height: 100%;
+	}
+
+	.group-time {
+	  margin-bottom: 5px;
+	}
+
+	.group-time button {
+		background-color: transparent;
+	  font-size: 15px;
+	}
+
+	.group-time img {
+	  height: 16px;
+	  margin-right: 6px;
+	}
+
+	.anonymity {
+	  font-size: 10px;
+	  float: right;
+	}
+
 	.text {
-		margin-top: 10px;
-		text-align: center;
+	  margin-bottom: 5px;
 	}
 
 	.text p {
-		margin: 0px;
-		color: color($colors, textgray, base);
+	  margin: 0px;
+	  white-space: pre-line;
 	}
 
-	.buttons {
-		width: 100%;
+	.comment-like img {
+	  height: 16px;
+	  margin-right: 6px;
 	}
 
-	.buttons td {
-		padding: 10px 0px;
+	.comment-like div {
+	  display: table;
 	}
 
-	.buttons div {
-		background-color: color($colors, primary, base);
-		border-radius: 40px;
-		width: 80px;
-		height: 80px;
+	.comment-like span {
+	  font-size: 12px;
+	  display: table-cell;
+	  vertical-align: middle;
 	}
 
-	.buttons button {
-		height: inherit;
-		padding: 0px;
+	.comment-like button {
 		background-color: transparent;
-		display: table;
 	}
 
-	.buttons p {
-		margin: 0px;
-		color: white;
-		font-size: 12px;
-		display: table-cell;
- 		vertical-align: middle;
+	.comment {
+	  margin-right: 10px;
 	}
+
+	li {
+	  border-bottom: 1px solid #c0c0c0;
+	}
+
+	ion-footer button {
+	  margin: 0px !important;
+	}
+	.search-button {
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.search-button .searcharea {
+		border: 1px solid color($colors, bordergray, base);
+		border-radius: 5px;
+		width: 70%;
+		height: 40px;
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+
+	.search-button .button{
+		
+	}
+		
+.buttons {
+	width: 100%;
+}
+
+.buttons td {
+	padding: 10px 0px;
+}
+
+.buttons div {
+	background-color: color($colors, primary, base);
+	border-radius: 40px;
+	width: 80px;
+	height: 80px;
+}
+
+.buttons button {
+	height: inherit;
+	padding: 0px;
+	background-color: transparent;
+	display: table;
+}
+
+.buttons p {
+	margin: 0px;
+	color: white;
+	font-size: 12px;
+	display: table-cell;
+	 vertical-align: middle;
+}
+
+.mosttag li{
+	display: inline-block;
+	margin: 2px;
+}
 
 }

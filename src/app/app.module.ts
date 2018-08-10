@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-import { HTTP } from '@ionic-native/http';
+import { Keyboard } from '@ionic-native/Keyboard';
 
 import { MyApp } from './app.component';
 
@@ -26,8 +26,9 @@ import { CommunitycommentProvider } from '../providers/communitycomment/communit
 import { PostProvider } from '../providers/post/post';
 import { CommunityfixPage } from '../pages/communityfix/communityfix'
 import { MyProvider } from '../providers/my/my'
+import { FcmProvider } from '../providers/fcm/fcm'
 
-// import { IamportService } from 'iamport-ionic-kcp';
+//import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
 import { SearchPage } from '../pages/search/search';
@@ -36,8 +37,7 @@ import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
 
 import { FCM } from '@ionic-native/fcm'
-import { FcmProvider } from '../providers/fcm/fcm';
-
+import { OperatorProvider } from '../providers/operator/operator';
 
 
 @NgModule({
@@ -46,6 +46,7 @@ import { FcmProvider } from '../providers/fcm/fcm';
   ],
   imports: [
     BrowserModule,
+    IonicModule,
     IonicModule.forRoot(MyApp),
     ChartsModule,
     IonicStorageModule.forRoot(),
@@ -60,6 +61,7 @@ import { FcmProvider } from '../providers/fcm/fcm';
     StatusBar,
     SplashScreen,
     Camera,
+    Keyboard,
     File,
     FilePath,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -80,7 +82,8 @@ import { FcmProvider } from '../providers/fcm/fcm';
     ReviewProvider,
     FCM,
     FcmProvider,
-    HTTP
+    OperatorProvider
+
     //GroupProvider,
   ]
 })

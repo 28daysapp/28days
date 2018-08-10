@@ -39,10 +39,11 @@
 </ion-content>
 
 <ion-footer>
-  <form [formGroup]="inputForm" class="footerform">
-    <input formControlName="txt" type="text">
+  <div class="footerform">
+    <ion-input #focusInput [(ngModel)]="inputMessage" placeholder="채팅입력...." > </ion-input>
     <button (click)="sendmessage()">
       <img src="assets/send.png">
     </button>
-  </form>
+  </div>
+
 </ion-footer>

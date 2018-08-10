@@ -16,11 +16,8 @@
 <ion-content padding class="CommunityfixPage">
 	
 	<ul>
-		<p class="posttitle">{{ post.posttitle }}</p>
 		<p class="posttext">{{ post.text }}</p>
-		<p class="posttag1">{{ post.tag1 }}</p>
-		<p class="posttag2">{{ post.tag2 }}</p>
-		<p class="posttag3">{{ post.tag3 }}</p>
+		<p class="posttag1">#{{ post.tag1 }}</p>
 		<div class="picture" *ngIf="post.url">
 			<img src="{{ post.url }}">
 		</div>

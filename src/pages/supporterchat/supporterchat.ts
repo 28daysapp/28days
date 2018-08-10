@@ -1,8 +1,9 @@
 import { Component, AfterViewChecked, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Content, TextInput } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { FcmProvider } from '../../providers/fcm/fcm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 /**
  * Generated class for the SupporterchatPage page.
@@ -13,20 +14,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @IonicPage()
 @Component({
   selector: 'page-supporterchat',
-  templateUrl: 'supporterchat.html'
-
+  templateUrl: 'supporterchat.html',
+  providers: [Keyboard]
 })
 export class SupporterchatPage implements AfterViewChecked {
   @ViewChild('content') content: Content;
+  @ViewChild('focusInput') myInput : TextInput;
   inputForm: FormGroup;
   buddy;
   gogomessages;
   chatmessages;
+  inputMessage: any;
   showinput = false;
-
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider, public fcmProvider: FcmProvider,
-    public events: Events, public zone: NgZone, public formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
+  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder, public keyboard: Keyboard, public fcmProvider: FcmProvider) {
     console.log('SupporterchatPage - constructor');
     this.buddy = this.chat.buddy;
     console.log(this.buddy.username);
@@ -100,11 +101,14 @@ export class SupporterchatPage implements AfterViewChecked {
   // }
 
   sendmessage() {
-    if (this.inputForm.valid) {
-      var txt = this.inputForm.value.txt;
-      this.inputForm.reset();
-      // if-else for testing only
-
+    if (this.inputMessage) {
+      var txt = this.inputMessage;
+      this.inputMessage = '';
+      this.keyboard.show();
+      this.myInput.setFocus();
+      
+        
+      
       if (txt == 'pay') {
         this.payMembership();
       } else {
