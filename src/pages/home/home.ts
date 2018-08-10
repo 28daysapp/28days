@@ -102,7 +102,7 @@ export class HomePage {
             if (username) {
               this.username = username;
             } else {
-              this.username = '28days';
+              this.username = '코코넛';
             }
             this.greeting = "안녕하세요! " + this.username + " 입니다. 함께 나아가요!"
             this.loading.dismiss();

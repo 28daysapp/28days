@@ -41,51 +41,51 @@ export class FcmProvider {
   }
 
   getToken(user) {
-    this.user = user;
-    console.log("get token start");
-    if (this.user) {
-      console.log("token logged in")
-      const uid = this.firebaseAuth.currentUser.uid;
+    // this.user = user;
+    // console.log("get token start");
+    // if (this.user) {
+    //   console.log("token logged in")
+    //   const uid = this.firebaseAuth.currentUser.uid;
       
-      this.firebaseUsers.child(`${uid}`).once('value').then((snapshot) => {
-        this.username = snapshot.val().username;
-      });
+    //   this.firebaseUsers.child(`${uid}`).once('value').then((snapshot) => {
+    //     this.username = snapshot.val().username;
+    //   });
 
-      this.fcm.getToken().then(token => {
-        this.token = token;
-        console.log("HomePage Token: " + token);
-        this.firebaseDatabase.ref(`/tokens/${uid}`).set({
-          token: this.token,
-          username: this.username
-        });
-        var promise = new Promise((resolve) => {
-          this.firebaseUsers.child(uid).update({
-            token: this.token
-          });
-          resolve(true);
-        });
+    //   this.fcm.getToken().then(token => {
+    //     this.token = token;
+    //     console.log("HomePage Token: " + token);
+    //     this.firebaseDatabase.ref(`/tokens/${uid}`).set({
+    //       token: this.token,
+    //       username: this.username
+    //     });
+    //     var promise = new Promise((resolve) => {
+    //       this.firebaseUsers.child(uid).update({
+    //         token: this.token
+    //       });
+    //       resolve(true);
+    //     });
 
 
-        return promise;
-      })
-    }
-    console.log("get token end");
+    //     return promise;
+    //   })
+    // }
+    // console.log("get token end");
   }
 
   deleteToken(user) {
-    this.user = user;
-    console.log("delete token start");
-    if (this.user) {
-      console.log("token logged in")
-      var uid = this.firebaseAuth.currentUser.uid;
-      this.firebaseDatabase.ref(`/tokens/${uid}`).remove();
-      var promise = new Promise((resolve) => {
-        this.firebaseUsers.child(`${uid}/token`).remove();
-        resolve(true);
-      });
-      return promise;
-    }
-    console.log("delete token end");
+    // this.user = user;
+    // console.log("delete token start");
+    // if (this.user) {
+    //   console.log("token logged in")
+    //   var uid = this.firebaseAuth.currentUser.uid;
+    //   this.firebaseDatabase.ref(`/tokens/${uid}`).remove();
+    //   var promise = new Promise((resolve) => {
+    //     this.firebaseUsers.child(`${uid}/token`).remove();
+    //     resolve(true);
+    //   });
+    //   return promise;
+    // }
+    // console.log("delete token end");
   }
 
   storeBuddyToken(buddy) {
@@ -102,8 +102,9 @@ export class FcmProvider {
     // var uid = firebase.auth().currentUser.uid;
     // const senderToken = this.fcm.getToken();
 
+    // 아 아래 코드로 했어야했는데ㅠ 경로 처음에 잘못넣었었음... 근데 이상하게 토큰 하나만 들어감
     // if(buddy.token) {
-    //   this.firebaseDatabase.ref(`chats/${uid}/tokens`).set({
+    //   this.firebaseDatabase.ref(`chats/${uid}/${buddy.token}`).set({
     //     tokens: [buddy.token, senderToken]
     //   })
     // }
