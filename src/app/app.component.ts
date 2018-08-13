@@ -6,10 +6,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 import { FirstRunPage } from '../pages';
 import { FCM } from '@ionic-native/fcm';
-// import { AuthProvider } from '../providers/auth/auth';
-// import { UserProvider } from '../providers/user/user';
-// import { Storage } from '@ionic/storage';
+import { AuthProvider } from '../providers/auth/auth';
+import { Storage } from '@ionic/storage';
 
+
+export interface PageInterface {
+  title: string;
+  component: any;
+  icon: string;
+  logsOut?: boolean;
+};
 
 // firebase config
 export const firebaseConfig = {
@@ -21,23 +27,14 @@ export const firebaseConfig = {
   messagingSenderId: "209011208541"
 };
 
-export interface PageInterface {
-  title: string;
-  component: any;
-  icon: string;
-  logsOut?: boolean;
-}
-
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   user;
   userprofile;
   username;
-  menu;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   rootPage = FirstRunPage;
@@ -46,12 +43,11 @@ export class MyApp {
     { title: 'Community', component: 'CommunityPage' },
     { title: 'Supporter', component: 'SupporterPage' },
     { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Gogohome', component: 'GogohomePage' },
     { title: 'Home', component: 'HomePage' },
     { title: 'My Page', component: 'MypagePage' }
   ]
   appPages: PageInterface[] = [
-    { title: '내가 쓴 글', component: 'MychatsPage', icon: 'calendar' },
+    { title: '내가 쓴 글', component: 'MypostPage', icon: 'calendar' },
     //not yet made
     // { title: '충전소', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'contacts' },
     { title: '보관함', component: 'MydepositoryPage', icon: 'map' },
@@ -60,7 +56,7 @@ export class MyApp {
   loggedInPages: PageInterface[] = [
     // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
     { title: '비밀번호 바꾸기', component: 'PwdchangePage', icon: 'help' },
-    { title: '로그아웃', component: 'LoginPage', icon: 'log-out', logsOut: true }
+    { title: '로그아웃', component: 'TabsPage', icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: '로그인', component: 'LoginPage', icon: 'log-in' },
@@ -71,20 +67,22 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
+    public menu: MenuController,
     // public push: Push,
     public alertCtrl: AlertController,
     public fcm: FCM,
-    // public auth: AuthProvider,
     // public userProvider: UserProvider,
-    // public storage: Storage,
+    public auth: AuthProvider,
+    public storage: Storage,
   ) {
     firebase.initializeApp(firebaseConfig);
+    this.user = firebase.auth().currentUser;
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+    //   // Okay, so the platform is ready and our plugins are available.
+    //   // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      // this.initPushNotification();
+    //   // this.initPushNotification();
 
       if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
         //Notifications
@@ -104,65 +102,28 @@ export class MyApp {
         });
         //end notifications.
       }
-      // this.user = firebase.auth().currentUser;
-      // this.user.hasLoggedIn().then((hasLoggedIn) => {
-      //   this.enableMenu(hasLoggedIn === true);
-      // });
-      // this.enableMenu(true);
-
-      // statusBar.styleDefault();
-      // splashScreen.hide();
     });
-  }
+    // this.pleaselogin();
+}
 
   openPage(page: PageInterface) {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
-
-    if (page.logsOut === true) {
+    if (page.title == '로그아웃') {
       // Give the menu time to close before changing to logged out
-      this.user.logout();
+      this.auth.logoutUser();
     }
+      this.nav.push(page.component);
+    
   }
 
-  enableMenu(loggedIn: boolean) {
+    // if (page.logsOut === true) {
+    //   // Give the menu time to close before changing to logged out
+    //   this.user.logout();
+    // }
 
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
 
-  // loginpage() {
-  //   if (this.user) {
-  //     let alert = this.alertCtrl.create({
-  //       title: '이미 로그인되어 있습니다.',
-  //       message: '28days에서 로그아웃하시겠습니까?',
-  //       buttons: [
-  //         {
-  //           text: '확인',
-  //           handler: () => {
-  //             // log out from firebase auth service and remove previous cache about user credential
-  //             this.auth.logoutUser().then(() => {
-  //               this.storage.remove('localcred').then(() => {
-  //                 this.navCtrl.setRoot(HomePage);
-  //               });
-  //             });
-  //           }
-  //         },
-  //         {
-  //           text: '취소',
-  //           role: 'cancel',
-  //           handler: () => {
-  //           }
-  //         }
-  //       ]
-  //     });
-  //     alert.present();
-  //   } else {
-  //     this.navCtrl.push('LoginPage');
-  //   }
-  // }
 
   // isActive(page: PageInterface) {
   //   let childNav = this.nav.getActiveChildNavs()[0];
@@ -224,3 +185,4 @@ export class MyApp {
     }
     */
 }
+

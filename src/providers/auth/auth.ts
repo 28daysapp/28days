@@ -9,7 +9,7 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class AuthProvider {
-  
+
   constructor() {
   }
 

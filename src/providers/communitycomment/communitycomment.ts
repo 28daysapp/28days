@@ -12,6 +12,7 @@ import { Events } from 'ionic-angular';
 @Injectable()
 export class CommunitycommentProvider {
 	firecomment = firebase.database().ref('/communitycomment');
+	firecmtreport = firebase.database().ref('/commentreport');
 	post = this.community.post;
 	postid;
 	comments;
@@ -20,6 +21,7 @@ export class CommunitycommentProvider {
 	text;
 	posttext = '';
 	posttitle = '';
+	cmtreport;
   constructor(public community: CommunityProvider, public events: Events) {
   }
 
@@ -132,4 +134,49 @@ export class CommunitycommentProvider {
 	});
 	  return promise;
  }
+
+ reportcomment(comment){
+	console.log("test");
+	var uid = firebase.auth().currentUser.uid;
+	var promise = new Promise((resolve) => {
+		this.getreport(comment).then((cmtreport) => {
+			this.cmtreport = cmtreport;
+				if(this.cmtreport == null){
+					this.firecmtreport.child(`${comment.commentid}`).update({
+						reportcnt: 1,
+					}).then(() => {
+						resolve(true);
+					});
+				}
+				else{
+					if(this.cmtreport.uid != uid){
+						this.firecmtreport.child(`${comment.commentid}`).update({
+							reportcnt: this.cmtreport.reportcnt + 1,
+						}).then(() => {
+							resolve(true);
+						});
+					}
+					else{
+
+					}
+					if(this.cmtreport.reportcnt == 20){
+						this.deletecomment(comment);
+						this.firecmtreport.child(`${comment.commentid}`).remove();
+					}
+				}
+			})
+		})
+	return promise;
+}
+
+	getreport(comment) {
+	var promise = new Promise((resolve) => {
+		var report;
+		this.firecmtreport.child(`${comment.commentid}`).once("value").then((snapshot) => {
+			report = snapshot.val();
+			resolve(report);
+		});
+	});
+	return promise;
+}
 }

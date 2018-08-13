@@ -178,19 +178,7 @@ export class SearchtagPage {
     }
   }
 
-  doInfiniteSearch_android(tag) {
-    this.community.tag = tag;
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
-    this.community.doInfiniteSearch(tag).then((posts) => {
-      this.posts = posts;
-      let d = this.content.getContentDimensions();
-      this.content.scrollTo(0, d.scrollHeight - 20);
-      this.loading.dismiss();
-    });
-  }
-
-  doInfiniteSearch_ios(tag) {
+  doInfiniteSearch(tag) {
     this.community.tag = tag;
     this.loading = this.loadingCtrl.create();
     this.loading.present();

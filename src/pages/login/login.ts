@@ -49,7 +49,7 @@ export class LoginPage {
           email: this.loginForm.value.email,
           password: this.loginForm.value.password
         });
-        this.navCtrl.setRoot('HomePage');
+        this.navCtrl.setRoot('TabsPage');
       }, (error) => {
         console.log(JSON.stringify(error));
         var message;

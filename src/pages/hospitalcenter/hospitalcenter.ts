@@ -1,6 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MenuController } from 'ionic-angular';
+import firebase from 'firebase';
+// import { IonicPage, NavController, NavParams } from 'ionic-angular';
+// import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -24,14 +28,28 @@ export class HospitalcenterPage {
   details: any;
   url: string;
   area: string;
+  user;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, public menu: MenuController) {
     this.places = [];
   }
 
 
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad HospitalcenterPage');
+
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
+    }
+    else {
+      this.menu.enable(true, 'loggedOutMenu');
+      this.menu.enable(false, 'loggedInMenu');
+    }
+
 
     this.loadMap();
 
@@ -44,8 +62,8 @@ export class HospitalcenterPage {
       console.log("여긴 못오고?");
 
       this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-  // If Google Api current location is disabled, default location is Seoul City Hall
-      if(!position) {
+      // If Google Api current location is disabled, default location is Seoul City Hall
+      if (!position) {
         this.latLng = new google.maps.LatLng(37.532600, 127.024612)
       }
 
@@ -73,7 +91,7 @@ export class HospitalcenterPage {
       console.log(this.area);
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
       console.log("latlng다 이놈아: " + this.latLng)
-      if(!this.area) {
+      if (!this.area) {
         this.area = "서울";
       }
       let request = {
@@ -127,6 +145,10 @@ export class HospitalcenterPage {
 
   sort() {
     console.log("sort clicked")
+    
   }
 
+
 }
+
+

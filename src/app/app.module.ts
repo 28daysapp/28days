@@ -11,7 +11,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-import { Keyboard } from '@ionic-native/Keyboard';
 
 import { MyApp } from './app.component';
 
@@ -51,7 +50,7 @@ import { OperatorProvider } from '../providers/operator/operator';
     ChartsModule,
     IonicStorageModule.forRoot(),
     HttpModule,
-    HttpClientModule
+    HttpClientModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,7 +60,6 @@ import { OperatorProvider } from '../providers/operator/operator';
     StatusBar,
     SplashScreen,
     Camera,
-    Keyboard,
     File,
     FilePath,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

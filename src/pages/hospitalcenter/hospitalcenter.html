@@ -5,13 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-  <ion-navbar no-border>
-    <ion-title class="title">병원/센터</ion-title>
-    <ion-buttons right>
-      <button ion-button icon-only (click)="sort()">
-        정렬
-      </button>
-    </ion-buttons>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>병원/센터</ion-title>
+    
+
+      <ion-buttons right>
+  
+        <button ion-button icon-only >
+          정렬
+        </button>
+      </ion-buttons>
   </ion-navbar>
   <ion-toolbar no-border>
     <ion-searchbar (ionInput)="getItems($event)" placeholder="검색"></ion-searchbar>
@@ -28,9 +34,6 @@
       정신과
     </ion-segment-button>
   </ion-segment>
-
-  DF?DF?
-
 
   <div #map id="map"></div>
   <!-- <ion-spinner ios></ion-spinner> -->

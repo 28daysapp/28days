@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, Content, Popove
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
-
+import { MenuController } from 'ionic-angular';
 /**
  * Generated class for the CommunitygroupPage page.
  *
@@ -31,9 +31,10 @@ export class CommunityPage {
   tag = '';
   tags;
   mosttag1;
+  user;
   //anonymity = this.community.changeAnonymity;
   selectedData:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
+  constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController,
   ) {
@@ -45,6 +46,15 @@ export class CommunityPage {
 
   
   ionViewWillEnter() {
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
+  }
+  else{
+    this.menu.enable(true, 'loggedOutMenu');
+    this.menu.enable(false, 'loggedInMenu');
+  }
     this.community.mosttag().then((mosttag1) => {
       console.log(mosttag1);
       this.mosttag1 = mosttag1;
@@ -88,7 +98,11 @@ export class CommunityPage {
       message: '정말 삭제하시겠습니까?',
       buttons: [
         {
-          text: '예',
+          text: '취소',
+          role: 'cancel'
+        },
+        {
+          text: '확인',
           handler: () =>{
             this.community.postdelete(post);
             this.community.getallposts().then((posts) => {
@@ -96,10 +110,6 @@ export class CommunityPage {
               this.loading.dismiss();
             });
           }
-        },
-        {
-          text: '아니요',
-          role: 'cancel'
         }
       ]
     });
@@ -151,16 +161,95 @@ export class CommunityPage {
   reportpost(post){
     let alert = this.alertCtrl.create({
       title: '',
-      message: '정말 게시물을 신고하시겠습니까?',
+      message: '신고항목',
       buttons: [
         {
-          text: '확인',
+          text: '비방/욕설',
           handler: () => {
               this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
           }
         },
         {
-          text: '아니요',
+          text: '게시글/댓글 도배',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '불법성 광고/홍보',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '개인정보/저작권 침해',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '기타',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '취소',
           role: 'cancel'
         }
       ]
@@ -173,19 +262,7 @@ export class CommunityPage {
     this.navCtrl.push("SearchtagPage", {tag: this.tag});
   }
 
-  doInfinite_ios() { // 스크롤이 움직이지 않고 아래로 리스트 생성
-    console.log("ios");
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
-    this.community.onInfiniteScroll().then((posts) => {
-      this.posts = posts;
-      this.content.scrollToBottom();
-      this.loading.dismiss();
-    });
-  }
-
-  doInfinite_android() { // 다음 10개의 게시물 중 제일 위에 위치한 게시물의 스크롤에서부터 리스트 생성 
-    console.log("android");
+  doInfinite() { // 다음 10개의 게시물 중 제일 위에 위치한 게시물의 스크롤에서부터 리스트 생성 
     this.loading = this.loadingCtrl.create();
     this.loading.present();
     this.community.onInfiniteScroll().then((posts) => {
@@ -195,4 +272,5 @@ export class CommunityPage {
       this.loading.dismiss();
     });
   }
+
 }
