@@ -50,7 +50,7 @@ import { OperatorProvider } from '../providers/operator/operator';
     ChartsModule,
     IonicStorageModule.forRoot(),
     HttpModule,
-    HttpClientModule
+    HttpClientModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
