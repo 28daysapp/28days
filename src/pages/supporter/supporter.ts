@@ -18,6 +18,9 @@ import firebase from 'firebase';
   templateUrl: 'supporter.html',
 })
 export class SupporterPage {
+  type = 'supporter';
+  
+  firesupporterreviewsum = firebase.database().ref('/supporterreviewsum');
   public userList: Array<any>;
   public loadedUserList: Array<any>;
   public UserRef: firebase.database.Reference;
@@ -52,7 +55,26 @@ export class SupporterPage {
 
     console.log(q, this.userList.length);
   }
-
+/*
+  ratingsum(user){
+    console.log(user.username+"-1");
+    var sum;
+    var reviewrating;
+    this.firesupporterreviewsum.child(user.uid).once("value").then((snapshot) => {
+      reviewrating = snapshot.val();
+      console.log(reviewrating+"-3");
+      if (reviewrating == null) {
+        return 0;
+      }
+      else {
+        sum = reviewrating.ratingA + reviewrating.ratingB + reviewrating.ratingC + reviewrating.ratingD
+        sum = sum + (reviewrating.count * 4);
+        console.log(sum+"-2");
+        return sum;
+      }
+    });
+  }
+*/
 
   initializeItems(): void {
     this.userList = this.loadedUserList;
@@ -73,6 +95,9 @@ export class SupporterPage {
       {
         user: user
       });
+  }
+  gooperator(){
+    this.navCtrl.push('OperatorPage');
   }
   
 }

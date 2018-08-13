@@ -21,7 +21,6 @@ export class PaymentPage {
   discountPrice;
   totalPrice;
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
-    this.init()
     this.itemName = navParams.get("itemName");
     this.itemPrice = navParams.get("itemPrice");
 
