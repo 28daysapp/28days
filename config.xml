@@ -86,7 +86,6 @@
     <allow-navigation href="http://137.68.247.216:8100" />
     <allow-navigation href="http://137.68.247.64:8100" />
     <allow-navigation href="http://137.68.247.29:8100" />
-    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.1" />
@@ -101,7 +100,9 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <allow-navigation href="http://137.68.247.152:8101" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
 </widget>

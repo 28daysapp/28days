@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
-
+import { MenuController } from 'ionic-angular';
+import firebase from 'firebase';
 /**
  * Generated class for the MychatsPage page.
  *
@@ -14,8 +15,8 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
   templateUrl: 'mychats.html',
 })
 export class MychatsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public appCtrl: App) {
+  user;
+  constructor(public menu: MenuController,public navCtrl: NavController, public navParams: NavParams, public appCtrl: App) {
   }
 
   requestchatpage() {
@@ -25,5 +26,17 @@ export class MychatsPage {
   requestedchatpage() {
   	this.appCtrl.getRootNavs()[0].push('RequestedchatPage');
   }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HospitalcenterPage');
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
+  }
+  else{
+    this.menu.enable(true, 'loggedOutMenu');
+    this.menu.enable(false, 'loggedInMenu');
+  }
+}
 
 }

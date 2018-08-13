@@ -2,7 +2,6 @@ import { Component, AfterViewChecked, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content, TextInput } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Keyboard } from '@ionic-native/keyboard';
 
 /**
  * Generated class for the SupporterchatPage page.
@@ -13,8 +12,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 @IonicPage()
 @Component({
   selector: 'page-supporterchat',
-  templateUrl: 'supporterchat.html',
-  providers: [Keyboard]
+  templateUrl: 'supporterchat.html'
 })
 export class SupporterchatPage implements AfterViewChecked {
   @ViewChild('content') content: Content;
@@ -26,7 +24,7 @@ export class SupporterchatPage implements AfterViewChecked {
   inputMessage: any;
   showinput = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder,public keyboard: Keyboard) {
+  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder) {
     console.log('SupporterchatPage - constructor');
   	this.buddy = this.chat.buddy;
     this.events.subscribe('newmessage', () => {
@@ -85,7 +83,6 @@ export class SupporterchatPage implements AfterViewChecked {
     if (this.inputMessage) {
       var txt = this.inputMessage;
       this.inputMessage = '';
-      this.keyboard.show();
       this.myInput.setFocus();
       
         

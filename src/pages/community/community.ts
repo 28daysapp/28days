@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, Content, Popove
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
-
+import { MenuController } from 'ionic-angular';
 /**
  * Generated class for the CommunitygroupPage page.
  *
@@ -31,9 +31,10 @@ export class CommunityPage {
   tag = '';
   tags;
   mosttag1;
+  user;
   //anonymity = this.community.changeAnonymity;
   selectedData:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
+  constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController,
   ) {
@@ -45,6 +46,15 @@ export class CommunityPage {
 
   
   ionViewWillEnter() {
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
+  }
+  else{
+    this.menu.enable(true, 'loggedOutMenu');
+    this.menu.enable(false, 'loggedInMenu');
+  }
     this.community.mosttag().then((mosttag1) => {
       console.log(mosttag1);
       this.mosttag1 = mosttag1;

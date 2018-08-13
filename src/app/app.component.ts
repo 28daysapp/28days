@@ -37,7 +37,6 @@ export class MyApp {
   user;
   userprofile;
   username;
-  menu;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   rootPage = FirstRunPage;
@@ -71,6 +70,7 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
+    public menu: MenuController,
     // public push: Push,
     public alertCtrl: AlertController,
     public fcm: FCM,
@@ -79,6 +79,7 @@ export class MyApp {
     // public storage: Storage,
   ) {
     firebase.initializeApp(firebaseConfig);
+    
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -119,19 +120,13 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
-
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
       this.user.logout();
     }
+    this.nav.push(page.component);
   }
 
-  enableMenu(loggedIn: boolean) {
-
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
 
   // loginpage() {
   //   if (this.user) {
