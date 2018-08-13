@@ -268,10 +268,7 @@ export class CommunitycommentPage {
           text: '확인',
           handler: () =>{
             this.community.postdelete(post);
-            this.community.getallposts().then((posts) => {
-              this.posts = posts;
-              this.loading.dismiss();
-            });
+            this.navCtrl.pop();
           }
         }
       ]

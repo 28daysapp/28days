@@ -44,10 +44,10 @@ page-communitywrite {
 	}
 
 	.area .area3 {
-		border: 1px solid color($colors, bordergray, base);
+		border: solid 1px #d8d8d8;
 		border-radius: 5px;
-		width: 32%;
-		height: 40px;
+		width: 100%;
+		height: 44px;
 		margin-bottom: 10px;
 		padding: 10px;
 	}
@@ -77,14 +77,15 @@ page-communitywrite {
 		margin-right: 5px;
 	}
 
-	.imagechooser span {
+	.imgchooser span {
 		display: table-cell;
 		vertical-align: middle;
 	}
 
 	.imagechooser img {
-		max-width: 100%;
-	}
+		width: 70px;
+		height: 70px;
+	  }
 
 	.imagechooser .image {
 		padding: 0px !important;
@@ -94,4 +95,73 @@ page-communitywrite {
   	margin: 0px !important;
   }
 
+  // 추가추가
+
+  	.anonymitywrite{
+		font-family: AppleSDGothicNeo;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #4a4a4a;
+	}
+
+	.area1 ::placeholder{
+		font-family: AppleSDGothicNeo;
+		font-size: 18px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #9b9b9b;
+	}
+
+	.area2 ::placeholder{
+		font-family: AppleSDGothicNeo;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: 1.43;
+		letter-spacing: normal;
+		color: #9b9b9b;
+	}
+
+	.area3 ::placeholder{
+		font-family: AppleSDGothicNeo;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #d8d8d8;
+	  }
+
+	.tag-image button{
+		height: 58px;
+		background-color: transparent;
+	}
+
+	.tag-image .tag{
+		background-color: transparent;
+		object-fit: contain;
+	}
+
+	.tag-image span{
+		background-color: transparent;
+		font-family: AppleSDGothicNeo;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #4a4a4a;
+	}
+
+	
 }

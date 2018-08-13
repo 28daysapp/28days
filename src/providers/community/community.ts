@@ -51,7 +51,7 @@ export class CommunityProvider {
 	}
 
 	/* upload post to firebase */
-	uploadPost(title, txt, dataURL, tag1, anonymity, photo) {
+	uploadPost(title, txt, dataURL, tag1, anonymity) {
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			var newPostRef = this.firecommunity.push();
@@ -76,11 +76,11 @@ export class CommunityProvider {
 						tag1: tag1,
 						urlcheck: true,
 						anonymity: true,
-						photoURL: photo
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);
 						}).then(() => {
+							if(tag1 != ''){
 							this.gettag(tag1).then((tags) => {
 								this.tags = tags;
 								if(this.tags == null){
@@ -100,6 +100,7 @@ export class CommunityProvider {
 									});
 								}
 							})
+						}
 						})
 					});
 				});
@@ -117,12 +118,12 @@ export class CommunityProvider {
 					report: 0,
 					tag1: tag1,
 					anonymity: true,
-					photoURL: photo
 				}).then(() => {
 					this.my.addmypost(uid, postId, time).then(() => {
 						resolve(true);
 					})
 				}).then(() => {
+					if(tag1 != ''){
 					this.gettag(tag1).then((tags) => {
 						this.tags = tags;
 						if(this.tags == null){
@@ -142,6 +143,7 @@ export class CommunityProvider {
 							});
 						}
 					})
+				}
 				})
 				}
 			} else{
@@ -163,11 +165,11 @@ export class CommunityProvider {
 							tag1: tag1,
 							urlcheck: true,
 							anonymity: false,
-							photoURL: photo
 						}).then(() => {
 							this.my.addmypost(uid, postId, time).then(() => {
 								resolve(true);
 							}).then(() => {
+								if(tag1 != ''){
 								this.gettag(tag1).then((tags) => {
 									this.tags = tags;
 									if(this.tags == null){
@@ -187,6 +189,7 @@ export class CommunityProvider {
 										});
 									}
 								})
+							}
 							})
 						});
 					});
@@ -204,12 +207,12 @@ export class CommunityProvider {
 						report: 0,
 						tag1: tag1,
 						anonymity: false,
-						photoURL: photo
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);
 						})
 					}).then(() => {
+						if(tag1 != ''){
 						this.gettag(tag1).then((tags) => {
 							this.tags = tags;
 							if(this.tags == null){
@@ -229,6 +232,7 @@ export class CommunityProvider {
 								});
 							}
 						})
+					}
 					})
 					}
 			}
@@ -236,6 +240,7 @@ export class CommunityProvider {
 		return promise;
 	}
 
+	/*
 	photo(){
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
@@ -252,7 +257,8 @@ export class CommunityProvider {
 		});
 		return promise;
 	}
-
+	*/
+	
 	mosttag(){
 		this.check = 6;
 		var promise = new Promise((resolve) => {
@@ -307,6 +313,7 @@ export class CommunityProvider {
 			this.firecommunity.child(`${post.postid}`).remove().then(() => {
 				this.firereport.child(`${uid}`).remove().then(() => {
 					this.firemypost.child(`${uid}/${post.postid}`).remove().then(() => {
+						if(post.tag1 != ''){
 						this.gettag(post.tag1).then((tags) => {
 							this.tags = tags;
 								this.firetag.child(`${post.tag1}`).update({
@@ -315,6 +322,7 @@ export class CommunityProvider {
 									resolve(true);
 								});
 						});
+					}
 					})
 				});
 			}).then(() => {

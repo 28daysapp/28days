@@ -43,14 +43,14 @@
 				<li *ngFor="let post of posts">
 					<div class="post">
 		
-						<div class="group-time" >
+						<span class="group-time" >
 								<button class="group" (click)="comment(post)">
 									{{ post.posttitle }}
 								</button>
-								<div *ngIf="urlcheck(post)">
-									<img src="assets/diary11.png">
-								</div>
-						</div>
+								<span *ngIf="urlcheck(post)">
+									<img src="assets/gallery.png">
+								</span>
+						</span>
 						<div class="posttext">
 							<div class="posttext">{{ post.text }}</div>
 						</div>
