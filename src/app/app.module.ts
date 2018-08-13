@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ChartsModule } from 'ng2-charts';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,6 +25,7 @@ import { CommunitycommentProvider } from '../providers/communitycomment/communit
 import { PostProvider } from '../providers/post/post';
 import { CommunityfixPage } from '../pages/communityfix/communityfix'
 import { MyProvider } from '../providers/my/my'
+import { FcmProvider } from '../providers/fcm/fcm'
 
 //import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -46,7 +49,8 @@ import { OperatorProvider } from '../providers/operator/operator';
     IonicModule.forRoot(MyApp),
     ChartsModule,
     IonicStorageModule.forRoot(),
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,6 +79,7 @@ import { OperatorProvider } from '../providers/operator/operator';
     SupporterProvider,
     ReviewProvider,
     FCM,
+    FcmProvider,
     OperatorProvider
 
     //GroupProvider,

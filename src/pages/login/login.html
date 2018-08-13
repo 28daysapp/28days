@@ -19,7 +19,7 @@
 
     	<form [formGroup]="loginForm" novalidate>
       	<h4>이메일 주소</h4>
-        <ion-input class="email" formControlName="email" type="email" placeholder="28days@gmail.com"></ion-input>
+        <ion-input class="email" formControlName="email" type="email" placeholder="mentalhealthkorea@gmail.com"></ion-input>
       	<h4>비밀번호</h4>
         <ion-input formControlName="password" type="password" placeholder="8자리 이상 숫자, 문자 조합"
         	[class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>
@@ -34,7 +34,7 @@
         </button>
       </form>
 
-    	<p class="prompt">아직 28DAYS에 가입을 안 하셨나요?<br>28DAYS와 함께<br>마음의 고민을 떨쳐내요!</p>
+    	<p class="prompt">아직 COCONUTS에 가입을 안 하셨나요?<br>COCONUTS와 함께<br>마음의 고민을 떨쳐내요!</p>
 
       <div class="signup">
       	<button ion-button block color="primary" (click)="signup()">

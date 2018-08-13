@@ -142,11 +142,263 @@ export class CommunitycommentPage {
     this.cocomment.deletecomment(comment);
   }
 
-  usercorrect(comment){
+  usercorrect_cmt(comment){
     var correct = false;
     if(firebase.auth().currentUser.uid == comment.uid)
       correct = true;
     return correct;
+  }
+
+  reportuser_cmt(comment){
+    var correct = true;
+    if(firebase.auth().currentUser.uid == comment.uid)
+      correct = false;
+    return correct;
+  }
+
+  reportcomment(comment){
+    let alert = this.alertCtrl.create({
+      title: '',
+      message: '신고항목',
+      buttons: [
+        {
+          text: '비방/욕설',
+          handler: () => {
+              this.cocomment.reportcomment(comment);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '게시글/댓글 도배',
+          handler: () => {
+              this.cocomment.reportcomment(comment);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '불법성 광고/홍보',
+          handler: () => {
+              this.cocomment.reportcomment(comment);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '개인정보/저작권 침해',
+          handler: () => {
+              this.cocomment.reportcomment(comment);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '기타',
+          handler: () => {
+              this.cocomment.reportcomment(comment);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '취소',
+          role: 'cancel'
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  postdelete(post){
+    let alert = this.alertCtrl.create({
+      title: '경고',
+      message: '정말 삭제하시겠습니까?',
+      buttons: [
+        {
+          text: '취소',
+          role: 'cancel'
+        },
+        {
+          text: '확인',
+          handler: () =>{
+            this.community.postdelete(post);
+            this.community.getallposts().then((posts) => {
+              this.posts = posts;
+              this.loading.dismiss();
+            });
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  updatepost(post){
+    this.community.post = post;
+    this.navCtrl.push('CommunityfixPage', {
+      
+    });
+  }
+
+  usercorrect(post){
+    var correct = false;
+    if(firebase.auth().currentUser.uid == post.uid){
+      correct = true;
+    }
+    return correct;
+  }
+
+  reportuser(post){
+    var correct = true;
+    if(firebase.auth().currentUser.uid == post.uid){
+      correct = false;
+    }
+    return correct;
+  }
+
+  reportpost(post){
+    let alert = this.alertCtrl.create({
+      title: '',
+      message: '신고항목',
+      buttons: [
+        {
+          text: '비방/욕설',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '게시글/댓글 도배',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '불법성 광고/홍보',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '개인정보/저작권 침해',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '기타',
+          handler: () => {
+              this.community.reportpost(post);
+              let alert = this.alertCtrl.create({
+                title: '신고항목',
+                message: '정상적으로 신고가 접수되었습니다',
+                buttons: [
+                  {
+                    text: '확인',
+                    role: 'cancel'
+                  }
+                ]
+              })
+              alert.present();
+          }
+        },
+        {
+          text: '취소',
+          role: 'cancel'
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

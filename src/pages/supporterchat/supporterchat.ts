@@ -1,6 +1,7 @@
 import { Component, AfterViewChecked, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content, TextInput } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
+import { FcmProvider } from '../../providers/fcm/fcm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
@@ -18,15 +19,16 @@ export class SupporterchatPage implements AfterViewChecked {
   @ViewChild('content') content: Content;
   @ViewChild('focusInput') myInput : TextInput;
   inputForm: FormGroup;
-	buddy;
+  buddy;
   gogomessages;
   chatmessages;
   inputMessage: any;
   showinput = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder) {
+  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder, public keyboard: Keyboard, public fcmProvider: FcmProvider) {
     console.log('SupporterchatPage - constructor');
-  	this.buddy = this.chat.buddy;
+    this.buddy = this.chat.buddy;
+    console.log(this.buddy.username);
     this.events.subscribe('newmessage', () => {
       this.chatmessages = [];
       this.zone.run(() => {
@@ -42,13 +44,17 @@ export class SupporterchatPage implements AfterViewChecked {
     this.scrollToBottom();
   }
 
-  scrollToBottom(){
+  scrollToBottom() {
     this.content.scrollToBottom(0);
   }
 
   ionViewDidLoad() {
     console.log('SupporterchatPage - ionViewDidLoad');
     this.chat.checkstart().then((isstart) => {
+
+      // this.fcmProvider.storeBuddyToken(this.buddy)
+      // this.fcmProvider.storeBothTokens(this.buddy);
+
       if (isstart) {
         this.gogomessages = [];
         this.gogomsg('서포터에게 채팅을 요청했어!\n확인 후 Push 알림을 줄 거야~!', true).then(() => {
@@ -74,10 +80,23 @@ export class SupporterchatPage implements AfterViewChecked {
     // this.chat.getallmessages();
   }
 
-  ionViewWillLeave(){
+  activateFirebaseFunction() {
+    // this.fcmProvider.sendNotification();
+
+  }
+
+  ionViewWillLeave() {
     this.events.unsubscribe('newmessage');
     this.chat.stoplistenmessages();
   }
+
+  // subscribeToNotifications() {
+  //   this.fcmProvider.firebaseMessaging.requestPermission()
+  //     .then(() => this.fcmProvider.handleTokenRefresh())
+  //     .catch((err) => {
+  //       console.log("Error getting permission :(");
+  //     });
+  // }
 
   sendmessage() {
     if (this.inputMessage) {

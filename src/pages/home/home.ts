@@ -3,9 +3,11 @@ import { IonicPage, NavController, AlertController, LoadingController, Slides, M
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
+import { FcmProvider } from '../../providers/fcm/fcm';
 import { Storage } from '@ionic/storage';
 import { NavParams, ModalController } from 'ionic-angular';
-import { FCM } from '../../../node_modules/@ionic-native/fcm';
+import { Http } from '@angular/http';
+
 
 /**
  * Generated class for the HomePage page.
@@ -24,6 +26,7 @@ export class HomePage {
   @ViewChild(Slides) slides: Slides;
 
   /* Initialize variables */
+  fireusers = firebase.database().ref('/users');
   loading;
   user;
   userprofile;
@@ -32,8 +35,10 @@ export class HomePage {
   greeting;
   origGreeting;
   showmodal = false;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
-    public menu: MenuController ,public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public fcm: FCM) {
+  token;
+  count;
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
+    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http, public menu: MenuController) {
     // Receive message from push notifications
     if (params.data.message) {
       console.log('message: ' + params.data.message);
@@ -46,15 +51,17 @@ export class HomePage {
     this.loading = this.loadingCtrl.create();
     this.loading.present();
 
-    // this.getToken();
-
-
     // set defualt user photo
     this.photoURL = 'assets/profile0.png';
+
 
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
+
+      // this.fcmProvider.getToken(this.user);
+      // this.fcmProvider.handleTokenRefresh();
+
       // user already logged-in
       this.menu.enable(true, 'loggedInMenu');
       this.menu.enable(false, 'loggedOutMenu');
@@ -82,6 +89,8 @@ export class HomePage {
             this.username = this.user.displayName;
             this.photoURL = this.user.photoURL;
 
+            this.fcmProvider.getToken(this.user);
+
             this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
               console.log("user profile");
               console.log(JSON.stringify(userprofile));
@@ -97,7 +106,7 @@ export class HomePage {
             if (username) {
               this.username = username;
             } else {
-              this.username = '28days';
+              this.username = '코코넛';
             }
             this.greeting = "안녕하세요! " + this.username + " 입니다. 함께 나아가요!"
             this.loading.dismiss();
@@ -107,14 +116,14 @@ export class HomePage {
     }
   }
 
-  getToken() {
-
-    if (this.user) {
-      this.fcm.getToken().then(token => {
-        console.log("HomePage Token: " + token);
-      })
-    }
+  sendFCM() {
+    // this.fcmProvider.sendFcm(this.user);
+    // this.http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
+    // .subscribe((data) => {
+    //   console.log('data', data);
+    // })
   }
+
 
 
   mypage() {
