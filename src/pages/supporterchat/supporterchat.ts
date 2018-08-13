@@ -25,7 +25,7 @@ export class SupporterchatPage implements AfterViewChecked {
   inputMessage: any;
   showinput = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder, public keyboard: Keyboard, public fcmProvider: FcmProvider) {
+  	public events: Events, public zone: NgZone, public formBuilder: FormBuilder, public fcmProvider: FcmProvider) {
     console.log('SupporterchatPage - constructor');
     this.buddy = this.chat.buddy;
     console.log(this.buddy.username);

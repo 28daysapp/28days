@@ -47,7 +47,7 @@ export class MyApp {
     { title: 'My Page', component: 'MypagePage' }
   ]
   appPages: PageInterface[] = [
-    { title: '내가 쓴 글', component: 'MychatsPage', icon: 'calendar' },
+    { title: '내가 쓴 글', component: 'MypostPage', icon: 'calendar' },
     //not yet made
     // { title: '충전소', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'contacts' },
     { title: '보관함', component: 'MydepositoryPage', icon: 'map' },
@@ -56,7 +56,7 @@ export class MyApp {
   loggedInPages: PageInterface[] = [
     // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
     { title: '비밀번호 바꾸기', component: 'PwdchangePage', icon: 'help' },
-    { title: '로그아웃', component: 'LoginPage', icon: 'log-out', logsOut: true }
+    { title: '로그아웃', component: 'TabsPage', icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
     { title: '로그인', component: 'LoginPage', icon: 'log-in' },
@@ -76,6 +76,7 @@ export class MyApp {
     public storage: Storage,
   ) {
     firebase.initializeApp(firebaseConfig);
+    this.user = firebase.auth().currentUser;
     platform.ready().then(() => {
     //   // Okay, so the platform is ready and our plugins are available.
     //   // Here you can do any higher level native things you might need.
@@ -102,30 +103,25 @@ export class MyApp {
         //end notifications.
       }
     });
-
-    this.user = firebase.auth().currentUser;
-    if (this.user) {
-      this.enableMenu(true);
-    }
     // this.pleaselogin();
 }
 
   openPage(page: PageInterface) {
     // close the menu when clicking a link from the menu
-    this.menuCtrl.close();
+    this.menu.close();
     // navigate to the new page if it is not the current page
-    if (page.logsOut === true) {
+    if (page.title == '로그아웃') {
       // Give the menu time to close before changing to logged out
-      this.user.logout();
+      this.auth.logoutUser();
     }
-    this.nav.push(page.component);
+      this.nav.push(page.component);
+    
   }
 
     // if (page.logsOut === true) {
     //   // Give the menu time to close before changing to logged out
     //   this.user.logout();
     // }
-  }
 
 
 
@@ -189,3 +185,4 @@ export class MyApp {
     }
     */
 }
+
