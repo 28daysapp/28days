@@ -3,7 +3,7 @@
     <name>28days</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://137.68.247.45:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -121,4 +121,5 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://137.68.246.201:8100" />
 </widget>
