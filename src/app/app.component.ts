@@ -33,7 +33,8 @@ export const firebaseConfig = {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   user;
-  // menuCtrl;
+  userprofile;
+  username;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   rootPage = FirstRunPage;
@@ -66,7 +67,7 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public menuCtrl: MenuController,
+    public menu: MenuController,
     // public push: Push,
     public alertCtrl: AlertController,
     public fcm: FCM,
@@ -75,7 +76,6 @@ export class MyApp {
     public storage: Storage,
   ) {
     firebase.initializeApp(firebaseConfig);
-
     platform.ready().then(() => {
     //   // Okay, so the platform is ready and our plugins are available.
     //   // Here you can do any higher level native things you might need.
@@ -114,7 +114,12 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menuCtrl.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    if (page.logsOut === true) {
+      // Give the menu time to close before changing to logged out
+      this.user.logout();
+    }
+    this.nav.push(page.component);
+  }
 
     // if (page.logsOut === true) {
     //   // Give the menu time to close before changing to logged out
@@ -122,32 +127,6 @@ export class MyApp {
     // }
   }
 
-  enableMenu(loggedIn: boolean) {
-    this.menuCtrl.enable(loggedIn, 'loggedInMenu');
-    this.menuCtrl.enable(!loggedIn, 'loggedOutMenu');
-  }
-
-  pleaselogin() {
-    let alert = this.alertCtrl.create({
-      title: '로그인 후 사용하실 수 있습니다.',
-      message: '28days에 로그인하시겠습니까?',
-      buttons: [
-        {
-          text: '확인',
-          handler: () => {
-            this.nav.push('LoginPage');
-          }
-        },
-        {
-          text: '취소',
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
 
 
   // isActive(page: PageInterface) {

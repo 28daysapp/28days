@@ -4,7 +4,7 @@ import { ChatProvider } from '../../providers/chat/chat';
 import { SupporterProvider } from '../../providers/supporter/supporter'
 import { UserProvider } from '../../providers/user/user'
 import firebase from 'firebase';
-
+import { MenuController } from 'ionic-angular';
 
 /**
  * Generated class for the OnofflinePage page.
@@ -27,8 +27,9 @@ export class OnofflinePage {
   public CounselorRef: firebase.database.Reference;
 
   q;
+  user;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
+  constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
     public supporter: SupporterProvider, public userp: UserProvider) {
 
@@ -39,6 +40,15 @@ export class OnofflinePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnofflinePage');
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
+  }
+  else{
+    this.menu.enable(true, 'loggedOutMenu');
+    this.menu.enable(false, 'loggedInMenu');
+  }
   }
 
   getItems(searchbar) {
@@ -118,6 +128,7 @@ export class OnofflinePage {
 
 
   ionViewWillEnter() {
+    
     if (this.type == 'Supporter') {
       this.SupporterRef.on('value', userList => {
         let users = [];

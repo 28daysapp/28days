@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController, Slides, MenuController } from 'ionic-angular';
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
@@ -38,7 +38,7 @@ export class HomePage {
   token;
   count;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
-    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http) {
+    public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http, public menu: MenuController) {
     // Receive message from push notifications
     if (params.data.message) {
       console.log('message: ' + params.data.message);
@@ -63,6 +63,8 @@ export class HomePage {
       // this.fcmProvider.handleTokenRefresh();
 
       // user already logged-in
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
       this.photoURL = this.user.photoURL;
@@ -75,6 +77,8 @@ export class HomePage {
         this.loading.dismiss();
       })
     } else {
+      this.menu.enable(true, 'loggedOutMenu');
+      this.menu.enable(false, 'loggedInMenu');
       // check if cache info exists in local storage
       this.storage.get('localcred').then((localcred) => {
         if (localcred) {
