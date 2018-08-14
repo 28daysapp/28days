@@ -21,7 +21,6 @@ export class CommunitywritePage {
 	pick = false;
 	text = '';
 	tag1 = '';
-	tags = this.community.tags;
 	anonymity: boolean;
 	tagcorrect = false;
 	fileURL;
@@ -34,8 +33,7 @@ export class CommunitywritePage {
   write() {
 		if(this.title == '' || this.text == ''){
 			let alert = this.alertCtrl.create({
-				title: '알림',
-				message: '제목과 내용은 필수 항목입니다.',
+				title: '제목과 내용은 필수 항목입니다.',
 				buttons: [
 					{
 						text:'확인',
@@ -47,8 +45,7 @@ export class CommunitywritePage {
 		}
 		else if(this.title.length > 50){
 			let alert = this.alertCtrl.create({
-				title: '알림',
-				message: '제목의 길이는 최대 50자 입니다.',
+				title: '제목의 길이는 최대 50자 입니다.',
 				buttons: [
 					{
 						text:'확인',
@@ -60,8 +57,7 @@ export class CommunitywritePage {
 		}
 		else if(this.text.length > 500){
 			let alert = this.alertCtrl.create({
-				title: '알림',
-				message: '내용의 길이는 최대 500자 입니다.',
+				title: '내용의 길이는 최대 500자 입니다.',
 				buttons: [
 					{
 						text:'확인',

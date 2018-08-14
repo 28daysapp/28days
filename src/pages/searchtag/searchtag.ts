@@ -119,6 +119,14 @@ export class SearchtagPage {
     return correct;
   }
 
+  tagcheck(tag){
+    var correct = false;
+    if(tag != ''){
+      correct = true;
+    }
+    return correct;
+  }
+
   changeAnonymity(post){
     var correct = false;
     if(post.anonymity == true){

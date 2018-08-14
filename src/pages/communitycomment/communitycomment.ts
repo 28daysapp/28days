@@ -22,7 +22,10 @@ export class CommunitycommentPage {
   @ViewChild('content') content: Content;
   commentForm: FormGroup;
   updateForm: FormGroup;
-	subcommentForm: FormGroup;
+  subcommentForm: FormGroup;
+  public UserRef: firebase.database.Reference;
+  public userList: Array<any>;
+  public loadedUserList: Array<any>;
   comments;
   subcomments;
   commentid;
@@ -31,12 +34,14 @@ export class CommunitycommentPage {
   posts;
   post = this.community.post;
   title;
+  tag = '';
   list_showsubcomment = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public popoverCtrl: PopoverController, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public viewCtrl: ViewController, public alertCtrl: AlertController,
   	public zone: NgZone, public formBuilder: FormBuilder) {
+    this.UserRef = firebase.database().ref('/users');
     this.title = this.community.title;
     // this event is published when any changes related to firebase comment data happen in CommunitycommentProvider
     this.events.subscribe('community-newcomment', () => {
@@ -61,8 +66,20 @@ export class CommunitycommentPage {
     
   }
 
-  ionViewWillEnter() {
+  initializeItems(): void {
+    this.userList = this.loadedUserList;
+  }
 
+  ionViewWillEnter() {
+    this.UserRef.on('value', userList => {
+      let users = [];
+      userList.forEach(user => {
+        users.push(user.val());
+        return false;
+      });
+      this.userList = users;
+      this.loadedUserList = users;
+    });
   }
 
   ionViewDidLoad() {
@@ -139,7 +156,24 @@ export class CommunitycommentPage {
   }
 
   deletecomment(comment){
-    this.cocomment.deletecomment(comment);
+    let alert = this.alertCtrl.create({
+      cssClass: 'deleteAlert',
+      
+      message: '정말 삭제하시겠습니까?',
+      buttons: [
+        {
+          text: '확인',
+          handler: () =>{
+            this.cocomment.deletecomment(comment);
+          }
+        },
+        {
+          text: '취소',
+          role: 'cancel'
+        },
+      ]
+    });
+    alert.present();
   }
 
   usercorrect_cmt(comment){
@@ -156,16 +190,39 @@ export class CommunitycommentPage {
     return correct;
   }
 
+  photomatch(user){
+    var correct = false;
+    var uid = firebase.auth().currentUser.uid;
+    if(user.uid == uid){
+      correct = true;
+    }
+    return correct;
+  }
+
+  tagcheck(tag){
+    var correct = false;
+    if(tag != ''){
+      correct = true;
+    }
+    return correct;
+  }
+
+  searchtag(tag){
+    this.community.tag = tag;
+    this.navCtrl.push("SearchtagPage", {tag: this.tag});
+  }
+
   reportcomment(comment){
     let alert = this.alertCtrl.create({
-      title: '',
-      message: '신고항목',
+      cssClass: 'reportAlert',
+      title: '신고항목',
       buttons: [
         {
           text: '비방/욕설',
           handler: () => {
               this.cocomment.reportcomment(comment);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -183,6 +240,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.cocomment.reportcomment(comment);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -200,6 +258,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.cocomment.reportcomment(comment);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -217,6 +276,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.cocomment.reportcomment(comment);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -234,6 +294,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.cocomment.reportcomment(comment);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -257,20 +318,20 @@ export class CommunitycommentPage {
 
   postdelete(post){
     let alert = this.alertCtrl.create({
-      title: '경고',
+      cssClass: 'deleteAlert',
       message: '정말 삭제하시겠습니까?',
       buttons: [
-        {
-          text: '취소',
-          role: 'cancel'
-        },
         {
           text: '확인',
           handler: () =>{
             this.community.postdelete(post);
             this.navCtrl.pop();
           }
-        }
+        },
+        {
+          text: '취소',
+          role: 'cancel'
+        },
       ]
     });
     alert.present();
@@ -301,6 +362,7 @@ export class CommunitycommentPage {
 
   reportpost(post){
     let alert = this.alertCtrl.create({
+      cssClass: 'reportAlert',
       title: '',
       message: '신고항목',
       buttons: [
@@ -309,6 +371,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.community.reportpost(post);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -326,6 +389,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.community.reportpost(post);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -343,6 +407,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.community.reportpost(post);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -360,6 +425,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.community.reportpost(post);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -377,6 +443,7 @@ export class CommunitycommentPage {
           handler: () => {
               this.community.reportpost(post);
               let alert = this.alertCtrl.create({
+                cssClass: 'reportComplete',
                 title: '신고항목',
                 message: '정상적으로 신고가 접수되었습니다',
                 buttons: [
@@ -396,6 +463,21 @@ export class CommunitycommentPage {
       ]
     });
     alert.present();
+  }
+
+  imgexpansion(post){
+    this.navCtrl.push('ImgexpansionPage', { post : post });
+  }
+
+  changeAnonymity(post){
+    var correct = false;
+    if(post.anonymity == true){
+      correct = true;
+    }
+    else if(post.anonymity == false){
+      correct = false;
+    }
+    return correct;
   }
 
 }

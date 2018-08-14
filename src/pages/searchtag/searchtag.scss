@@ -57,14 +57,21 @@ page-searchtag {
 	}
 
 	.tag {
+		margin-top: 15px;
 		font-family: AppleSDGothicNeo;
 		font-size: 12px;
-		font-weight: bold;
+		font-weight: normal;
 		font-style: normal;
 		font-stretch: normal;
 		line-height: normal;
 		letter-spacing: normal;
 		color: #55b26e;
+		padding-top: 10px;
+	}
+
+	.tag div{
+		float: left;
+		background-color: transparent;
 	}
 
 	.name {
@@ -162,10 +169,6 @@ page-searchtag {
 
 	.comment {
 	  margin-right: 10px;
-	}
-
-	li .post{
-	  border-bottom: 1px solid #c0c0c0;
 	}
 
 	.co-li {
