@@ -2,13 +2,49 @@ page-searchtag {
 
 	ul {
 	  list-style-type: none;
-	  padding: 0px;
-	  margin: 0px;
-	  height: 100%;
+		padding: 0px;
+		padding-top: 30px;
+		margin: 0px;
+	  //height: 100%;
+	}
+
+	.posttext .posttext.posttext div.posttext{
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: box; 
+		margin-top:1px; 
+		max-height:80px; 
+		overflow:hidden; 
+		vertical-align:top; 
+		text-overflow: ellipsis; 
+		word-break:break-all; 
+		-webkit-box-orient:vertical; 
+		-webkit-line-clamp:2;
+		font-family: AppleSDGothicNeo;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #9b9b9b;
+		padding-top: 10px;
+	}
+
+	.anonymity {
+		float: right;
+		font-family: AppleSDGothicNeo;
+		font-size: 10px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #9b9b9b;
 	}
 
 	.post {
-	  padding: 10px;
+	  padding: 15px;
 	}
 
 	.search {
@@ -21,10 +57,19 @@ page-searchtag {
 	}
 
 	.tag {
-		padding: 5px;
+		margin-top: 15px;
+		font-family: AppleSDGothicNeo;
+		font-size: 12px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #55b26e;
+		padding-top: 10px;
 	}
 
-	.tag button{
+	.tag div{
 		float: left;
 		background-color: transparent;
 	}
@@ -94,6 +139,10 @@ page-searchtag {
 	  white-space: pre-line;
 	}
 
+	.comment-like .like{
+		background-color: #f7f7f7;
+	}
+
 	.comment-like img {
 	  height: 16px;
 	  margin-right: 6px;
@@ -104,9 +153,14 @@ page-searchtag {
 	}
 
 	.comment-like span {
-	  font-size: 12px;
-	  display: table-cell;
-	  vertical-align: middle;
+		font-family: AppleSDGothicNeo;
+		font-size: 12px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #000000;
 	}
 
 	.comment-like button {
@@ -117,31 +171,28 @@ page-searchtag {
 	  margin-right: 10px;
 	}
 
-	li {
-	  border-bottom: 1px solid #c0c0c0;
+	.co-li {
+		background-color: #f7f7f7;
+	}
+
+	.tagcount{
+		//width: 76px;
+		height: 24px;
+		font-family: AppleSDGothicNeo;
+		font-size: 20px;
+		font-weight: 500;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #000000;
 	}
 
 	ion-footer button {
 	  margin: 0px !important;
 	}
-	.search-button {
-		text-align: center;
-		margin-bottom: 10px;
-	}
-
-	.search-button .searcharea {
-		border: 1px solid color($colors, bordergray, base);
-		border-radius: 5px;
-		width: 70%;
-		height: 40px;
-		margin-bottom: 10px;
-		padding: 10px;
-	}
-
-	.search-button .button{
 		
-	}
-		
+/*
 .buttons {
 	width: 100%;
 }
@@ -164,12 +215,28 @@ page-searchtag {
 	display: table;
 }
 
+
 .buttons p {
 	margin: 0px;
 	color: white;
 	font-size: 12px;
 	display: table-cell;
 	 vertical-align: middle;
+}
+*/
+
+.search-button button.button{
+	//vertical-align: middle;
+	text-align: center;
+  font-family: AppleSDGothicNeo;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+	color: #000000;
+	background-color: transparent;
 }
 
 }

@@ -111,6 +111,22 @@ export class SearchtagPage {
     });
   }
 
+  urlcheck(post){
+    var correct = false;
+    if(post.urlcheck == true){
+      correct = true;
+    }
+    return correct;
+  }
+
+  tagcheck(tag){
+    var correct = false;
+    if(tag != ''){
+      correct = true;
+    }
+    return correct;
+  }
+
   changeAnonymity(post){
     var correct = false;
     if(post.anonymity == true){
@@ -184,7 +200,8 @@ export class SearchtagPage {
     this.loading.present();
     this.community.doInfiniteSearch(tag).then((posts) => {
       this.posts = posts;
-      this.content.scrollToBottom();
+      let d = this.content.getContentDimensions();
+      this.content.scrollTo(0, d.scrollHeight - 20);
       this.loading.dismiss();
     });
   }

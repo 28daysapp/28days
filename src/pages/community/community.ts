@@ -92,30 +92,6 @@ export class CommunityPage {
     this.navCtrl.push('CommunitywritePage');
   }
 
-  postdelete(post){
-    let alert = this.alertCtrl.create({
-      title: '경고',
-      message: '정말 삭제하시겠습니까?',
-      buttons: [
-        {
-          text: '취소',
-          role: 'cancel'
-        },
-        {
-          text: '확인',
-          handler: () =>{
-            this.community.postdelete(post);
-            this.community.getallposts().then((posts) => {
-              this.posts = posts;
-              this.loading.dismiss();
-            });
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
   changeAnonymity(post){
     var correct = false;
     if(post.anonymity == true){
@@ -133,6 +109,36 @@ export class CommunityPage {
       correct = true;
     }
     return correct;
+  }
+
+  tagcheck(tag){
+    var correct = false;
+    if(tag != ''){
+      correct = true;
+    }
+    return correct;
+  }
+
+  /*
+  postdelete(post){
+    let alert = this.alertCtrl.create({
+      title: '경고',
+      message: '정말 삭제하시겠습니까?',
+      buttons: [
+        {
+          text: '취소',
+          role: 'cancel'
+        },
+        {
+          text: '확인',
+          handler: () =>{
+            this.community.postdelete(post);
+
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   updatepost(post){
@@ -256,6 +262,7 @@ export class CommunityPage {
     });
     alert.present();
   }
+  */
 
   searchtag(tag){
     this.community.tag = tag;

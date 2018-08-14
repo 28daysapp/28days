@@ -238,6 +238,7 @@ page-communitycomment {
 	  }
 
 	div.posttag1{
+
 		margin-top: 30px;
 		font-family: AppleSDGothicNeo;
 		font-size: 12px;
@@ -247,6 +248,10 @@ page-communitycomment {
 		line-height: normal;
 		letter-spacing: normal;
 		color: #000000;
+	}
+
+	div.posttag1 button{
+		background-color: transparent;
 	}
 
 	div.posttag1 span.time{
@@ -294,4 +299,54 @@ page-communitycomment {
 		letter-spacing: normal;
 		color: #000000;
 	}
+
+	button img{
+		width: 70px;
+		height: 70px;
+		background-color: transparent;
+	  }
+ 
+		/* Alert Css??
+	.reportAlert{
+		border-radius: 9px;
+		background-color: #ffffff;
+		border: solid 1px #d8d8d8;
+		title{
+			color: #55b26e;
+			text-align: center;
+		}
+		button{
+			color: #000000;
+			text-align: center;
+		}
+	}
+
+	.reportComplete{
+		border-radius: 9px;
+		background-color: #ffffff;
+		border: solid 1px #d8d8d8;
+		title{
+			color: #55b26e;
+			text-align: center;
+		}
+		button{
+			color: #000000;
+			text-align: center;
+		}
+	}
+
+	.deleteAlert{
+		border-radius: 9px;
+		background-color: #ffffff;
+		border: solid 1px #d8d8d8;
+		title{
+			color: #55b26e;
+			text-align: center;
+		}
+		button{
+			color: #000000;
+			text-align: center;
+		}
+	}
+	*/
 }

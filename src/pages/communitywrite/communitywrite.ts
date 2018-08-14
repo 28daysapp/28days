@@ -21,8 +21,8 @@ export class CommunitywritePage {
 	pick = false;
 	text = '';
 	tag1 = '';
-	tags = this.community.tags;
 	anonymity: boolean;
+	tagcorrect = false;
 	fileURL;
 	dataURL;
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
@@ -31,11 +31,9 @@ export class CommunitywritePage {
   }
 
   write() {
-	  var photo = this.community.photo();
-		if(this.title == '' || this.text == '' || this.tag1 == ''){
+		if(this.title == '' || this.text == ''){
 			let alert = this.alertCtrl.create({
-				title: '알림',
-				message: '제목, 내용, 태그를 모두 기입해주세요.',
+				title: '제목과 내용은 필수 항목입니다.',
 				buttons: [
 					{
 						text:'확인',
@@ -47,8 +45,7 @@ export class CommunitywritePage {
 		}
 		else if(this.title.length > 50){
 			let alert = this.alertCtrl.create({
-				title: '알림',
-				message: '제목의 길이는 최대 50자 입니다.',
+				title: '제목의 길이는 최대 50자 입니다.',
 				buttons: [
 					{
 						text:'확인',
@@ -60,8 +57,7 @@ export class CommunitywritePage {
 		}
 		else if(this.text.length > 500){
 			let alert = this.alertCtrl.create({
-				title: '알림',
-				message: '내용의 길이는 최대 500자 입니다.',
+				title: '내용의 길이는 최대 500자 입니다.',
 				buttons: [
 					{
 						text:'확인',
@@ -72,7 +68,7 @@ export class CommunitywritePage {
 			alert.present();
 		}
 		else{
-	  	this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity, photo).then(() => {
+	  	this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity).then(() => {
 	  		this.navCtrl.pop();
 	  	});
 	  	let loading = this.loadingCtrl.create({
@@ -100,5 +96,9 @@ export class CommunitywritePage {
 		 	// Handle error
 		 	console.log('openGallery error : ' + err.toString());
 		});
-	}	
+	}
+	
+	addtag(){
+		this.tagcorrect = true;
+	}
 }
