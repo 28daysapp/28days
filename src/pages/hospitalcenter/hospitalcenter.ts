@@ -30,12 +30,15 @@ export class HospitalcenterPage {
   area: string;
   user;
 
+  matches;
+  selected;
+  loadingPlaces;
+  apiProvider;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, public menu: MenuController) {
     this.places = [];
   }
-
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HospitalcenterPage');
@@ -56,8 +59,7 @@ export class HospitalcenterPage {
   }
 
   loadMap() {
-    console.log("로드맵엔 들어오는데");
-
+    // this.geolocatio이 안돼서 임의로 기본 위치는 서울
     // this.geolocation.getCurrentPosition().then((position) => {
     //   console.log("여긴 못오고?");
 
@@ -95,18 +97,26 @@ export class HospitalcenterPage {
     console.log("THIS MAP: " + this.map);
 
 
-    this.searchByText();
+    this.searchByText(this.area);
 
     return;
   }
 
-  searchByText() {
-    console.log('여기는 나오냐?')
+  searchByText(input) {
+
+    if(!input) {
+      this.area = "서울";
+    } else {
+      this.area = input.srcElement.value;
+    }
+    console.log("Query " + this.area);
+
+
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
       console.log(this.query)
       console.log(this.area);
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-      console.log("latlng다 이놈아: " + this.latLng)
+      console.log("latlng: " + this.latLng)
       if (!this.area) {
         this.area = "서울";
       }
@@ -118,20 +128,21 @@ export class HospitalcenterPage {
         type: ["hospital", "health", "doctor"]
       };
 
-      // let service = new google.maps.places.PlacesService(this.map);
-      // service.textSearch(request, (results, status) => {
-      //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-      //     for (let i = 0; i < results.length; i++) {
-      //       this.places = results;
-      //       console.log(results);
-      //     }
-      //   } else {
-      //     console.log("Status error: " + status);
-      //   }
+      let service = new google.maps.places.PlacesService(this.map);
+      service.textSearch(request, (results, status) => {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (let i = 0; i < results.length; i++) {
+            this.places = results;
+          }
+          console.log(results)
+        } else {
+          console.log("Status error: " + status);
+        }
 
-      // }, (error) => {
-      //   console.log("Error: " + error);
-      // });
+      }, (error) => {
+        console.log("Error: " + error);
+      });
+      console.log("Photo reference: " + this.places.reference);
 
     }
   }
@@ -154,9 +165,9 @@ export class HospitalcenterPage {
   }
 
   placeDetail(place) {
-    // this.navCtrl.push('PlaceDetailPage', {
-    //   place: place
-    // });
+    this.navCtrl.push('PlaceDetailPage', {
+      place: place
+    });
   }
 
   sort() {
