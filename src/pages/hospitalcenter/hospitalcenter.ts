@@ -58,27 +58,43 @@ export class HospitalcenterPage {
   loadMap() {
     console.log("로드맵엔 들어오는데");
 
-    this.geolocation.getCurrentPosition().then((position) => {
-      console.log("여긴 못오고?");
+    // this.geolocation.getCurrentPosition().then((position) => {
+    //   console.log("여긴 못오고?");
 
-      this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      // If Google Api current location is disabled, default location is Seoul City Hall
-      if (!position) {
-        this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-      }
+    //   this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    //   // If Google Api current location is disabled, default location is Seoul City Hall
+    //   if (!position) {
+    //     this.latLng = new google.maps.LatLng(37.532600, 127.024612)
+    //   }
 
-      this.mapOptions = {
-        center: this.latLng,
-        zoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        streetViewControl: false
-      }
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-      console.log("THIS MAP: " + this.map);
-    }, (error) => {
-      console.log('Could not load the map: ' + error);
-    });
-    console.log("여기는???")
+    //   this.mapOptions = {
+    //     center: this.latLng,
+    //     zoom: 14,
+    //     mapTypeId: google.maps.MapTypeId.ROADMAP,
+    //     streetViewControl: false
+    //   }
+    //   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+    //   console.log("THIS MAP: " + this.map);
+    // }, (error) => {
+    //   console.log('Could not load the map: ' + error);
+    // });
+    // console.log("여기는???")
+
+    // If Google Api current location is disabled, default location is Seoul City Hall
+
+    this.latLng = new google.maps.LatLng(37.532600, 127.024612)
+    
+
+    this.mapOptions = {
+      center: this.latLng,
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      streetViewControl: false
+    }
+    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+    console.log("THIS MAP: " + this.map);
+
+
     this.searchByText();
 
     return;
