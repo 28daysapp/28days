@@ -18,7 +18,19 @@
 	<ul>
 		<span class="posttitle">{{ post.posttitle }}</span>
 		<br>
-		<div class="username">{{ post.username }}
+		<div class="username">
+			<span class="anonymity" *ngIf="changeAnonymity(post)">익명</span>
+			<span class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.username }}</span>
+			
+			<ion-item *ngFor="let user of userList">
+				<div class="list">
+				  <div class="profilephoto" *ngIf="photomatch(user)">
+					<img src="{{user.photoURL}}">
+				  </div>
+				  <div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.username }}</div>
+				</div>
+			</ion-item>
+			
 			<span class="button" style="float:right" *ngIf="reportuser(post)">
 				<button (click) = "reportpost(post)">신고</button>
 			</span>
@@ -27,16 +39,17 @@
 				<button (click) = "postdelete(post)">삭제</button>
 			</span>
 		</div>
-
 		<div class="posttext" style="width:100%">{{ post.text }}</div>
-
-		<div class="posttag1">#{{ post.tag1 }}
+		<br>
+		<div class="picture" *ngIf="post.url">
+			<button (click)="imgexpansion(post)">
+				<img src="{{ post.url }}">
+			</button>
+		</div>
+		<div class="posttag1">
+			<button (click)="searchtag(post.tag1)" *ngIf="tagcheck(post.tag1)">#{{ post.tag1 }}</button>
 			<span class="time" style="float:right">{{ post.timestamp | date:'MM.dd a hh:mm' }}</span>
 		</div>
-		<div class="picture" *ngIf="post.url">
-			<img src="{{ post.url }}">
-		</div>
-
 		<table class="co-li" style="width:100%">
 			<td align="center" style="width: 50%">
 				<tr class="comment-like">	
@@ -63,7 +76,7 @@
 				</div>
 			<p class="text">{{ comment.text }}</p>
 			<span class="button" *ngIf="usercorrect_cmt(comment)">
-				<button  (click)="updatebutton(comment)">수정</button>
+				<button (click)="updatebutton(comment)">수정</button>
 				<button (click)="deletecomment(comment)">삭제</button>
 			</span>
 			<span class="button" *ngIf="reportuser_cmt(comment)">
@@ -72,13 +85,12 @@
 				<div *ngIf="comment.updatecomment">
 					
 					<div class="subcomment">
-							<form [formGroup]="updateForm" class="commentform">
-									<input formControlName="txt" type="text">
-											<button (click)="updatecomment(comment)">
-												<img src="assets/send.png">
-											</button>
-									
-								</form>
+						<form [formGroup]="updateForm" class="footerform">
+							<input formControlName="txt" type="text">
+								<button (click)="updatecomment(comment)" style="float:right">
+									게시
+								</button>		
+						</form>
 					</div>
 				</div>
 		

@@ -111,6 +111,14 @@ export class CommunityPage {
     return correct;
   }
 
+  tagcheck(tag){
+    var correct = false;
+    if(tag != ''){
+      correct = true;
+    }
+    return correct;
+  }
+
   /*
   postdelete(post){
     let alert = this.alertCtrl.create({
