@@ -1,21 +1,57 @@
 page-hospitalcenter {
 
-  .search-button {
-		text-align: center;
-		margin-bottom: 10px;
-	}
+//   .search-button {
+// 		text-align: center;
+// 		margin-bottom: 10px;
+// 	}
 
-	.search-button .searcharea {
-		border: 1px solid color($colors, bordergray, base);
-		border-radius: 5px;
-		width: 70%;
-		height: 40px;
-		margin-bottom: 10px;
-		padding: 10px;
-	}
+// 	.search-button .searcharea {
+// 		border: 1px solid color($colors, bordergray, base);
+// 		border-radius: 5px;
+// 		width: 70%;
+// 		height: 40px;
+// 		margin-bottom: 10px;
+// 		padding: 10px;
+// 	}
 
-	.search-button .button{
+	// .search-button .button{
 
-	}
+	// }
+
+	#map {
+        width: 0;
+        // height: 80%;
+        // margin-top: 2em;
+        // margin-bottom: 2em;
+    }
+
+    #title {
+        color: color($colors, primary);
+    }
+
+    .card-page {
+
+        ion-card {
+          position: relative;
+          text-align: center;
+        }
+      
+        .card-title {
+          position: relative;
+          font-size: 1.0em;
+          width: 70%;
+          font-weight: bold;
+          color: color($colors, primary);
+        }
+      
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 52%;
+          width: 100%;
+          color: #fff;
+        }
+      
+      }
 
 }
