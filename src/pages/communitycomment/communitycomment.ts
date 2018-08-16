@@ -42,7 +42,6 @@ export class CommunitycommentPage {
     public viewCtrl: ViewController, public alertCtrl: AlertController,
     public zone: NgZone, public formBuilder: FormBuilder) {
     this.UserRef = firebase.database().ref('/users');
-    this.title = this.community.title;
     // this event is published when any changes related to firebase comment data happen in CommunitycommentProvider
     this.events.subscribe('community-newcomment', () => {
       this.comments = [];
