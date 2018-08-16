@@ -21,7 +21,7 @@ export class CommunityfixPage {
 	text = '';
 	tag1 = '';
 	constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
-		this.title = this.community.title;
+		
 	}
 
 	fix(title, text) {

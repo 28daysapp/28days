@@ -27,7 +27,7 @@ export class CommunitywritePage {
 	dataURL;
 	constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
 		private camera: Camera, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
-		this.title = this.community.title;
+		
 	}
 
 	write() { // communityfix와 동일
