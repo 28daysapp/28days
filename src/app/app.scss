@@ -15,6 +15,14 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.toolbar-background {
+  background-color: #ffffff;
+}
+
+.back {
+  background-color: color($colors, primary);
+}
+
 .title.title-md {
   position: absolute;
   left: 50%;
@@ -23,6 +31,11 @@
   height: 100%;
   width: 70%;
   text-align: center;
+}
+.toolbar-title-md{
+    color: color($colors, primary);
+    font-size: 18px;
+    font-weight: bold;
 }
 
 ion-icon {

@@ -7,33 +7,39 @@
 <ion-header no-border>
 	<ion-navbar no-border-bottom>
 		<button ion-button menuToggle>
-			<ion-icon name="menu"></ion-icon>
+			<img src="assets/menu.svg">
 		</button>
-		<ion-title color="primary">
+		<ion-title color="#fffff">
 			COCONUT
 		</ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content>
-
-	<div class="message">
-		<ion-slides class="slides" autoplay="4000" loop="true" speed="1000">
-			<ion-slide>
-				<p>
-					상담센터/정신과 후기를 남겨주세요. <br>
-					당신은 소비자입니다.
-				</p>
-			</ion-slide>
-			<ion-slide>
-				<p>커뮤니티에서 자신과 비슷한 경험자들과 이야기 해보세요!</p>
-			</ion-slide>
-			<ion-slide>
-				<p>전문가의 도움이 필요하신가요?</p>
-			</ion-slide>
-		</ion-slides>
+	<div class="profile">
+	<img src="{{photoURL}}" class="photo"> <span class="text">{{username}}</span>
 	</div>
 
+	<div class="dashboard"> 
+		<div class="part1">
+			<div class="p1">진행중인 온라인 상담</div>
+			<div class="p2">2</div>
+		</div>
+		<div class="part2"></div>
+		<div class="part3">
+			<div class="p1">보유넛츠</div>
+			<div class="p2">10</div>
+		</div>
+		<div class="part2"></div>
+		<div class="part4">
+			<img src="assets/bell.svg">
+		</div>
+		
+
+	</div>
+
+<!--
+	</div>
 	<ion-card>
 		<ion-card-header class="title" (click)="counseling()">
 			상담센터 찾아보기
@@ -52,12 +58,55 @@
 		</ion-card-content>
 	</ion-card>
 
+	
+
+-->
+
+
+<div class="div1"></div>
+<div class="message">
+		<ion-slides class="slides" autoplay="4000" loop="true" speed="1000">
+				<ion-slide>
+					<p>
+						상담센터/정신과 후기를 남겨주세요. <br>
+						당신은 소비자입니다.
+					</p>
+				</ion-slide>
+				<ion-slide>
+					<p>커뮤니티에서 자신과 비슷한 경험자들과 <br>
+						이야기 해보세요!</p>
+				</ion-slide>
+				<ion-slide>
+					<p>전문가의 도움이 필요하신가요?</p>
+				</ion-slide>
+			</ion-slides>
+	<img src="assets/combined-shape.svg" class="Combined-Shape">
+	<img src="assets/peanut.png" class="peanut">
+</div>
+
 </ion-content>
 
 
 
 
-<!-- <ul>
+<!--<div class="message">
+		<ion-slides class="slides" autoplay="4000" loop="true" speed="1000">
+			<ion-slide>
+				<p>
+					상담센터/정신과 후기를 남겨주세요. <br>
+					당신은 소비자입니다.
+				</p>
+			</ion-slide>
+			<ion-slide>
+				<p>커뮤니티에서 자신과 비슷한 경험자들과 이야기 해보세요!</p>
+			</ion-slide>
+			<ion-slide>
+				<p>전문가의 도움이 필요하신가요?</p>
+			</ion-slide>
+		</ion-slides>
+	</div>
+
+	<ul>
 			<li>
 				<button (click)="community()">
 					다른 사람의 고민을 엿볼까요?<br>
