@@ -25,6 +25,7 @@
   text-align: center;
 }
 
+
 // Media of at most the maximum breakpoint width. No query for the largest breakpoint.
 // Makes the @content apply to the given breakpoint and narrower.
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
@@ -35,6 +36,169 @@
     }
   } @else {
     @content;
+  }
+}
+
+.deleteAlert{
+  border-radius: 9px;
+  text-align: center;
+  border: solid 1px #d8d8d8;
+  button{
+    width: 50%;
+    margin: 0 !important;
+    text-align: left;
+    border-top: .55px solid #d8d8d8;
+  }
+  .alert-message {
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  button.alert-button:nth-child(1){
+    color: #55b26e;
+    text-align: left;
+  }
+  button.alert-button:nth-child(2){
+    color: #55b26e;
+    text-align: left;
+  }
+}
+
+.reportAlert{
+  border-radius: 9px;
+  border: solid 1px #d8d8d8;
+  text-align: center;
+  .alert-message{
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #55b26e;
+    text-align: center;
+  }
+  button{
+    width: 100%;
+    margin: 0 !important;
+    text-align: center;
+    border-top: .55px solid #d8d8d8;
+  }
+  button.alert-button:nth-child(1){
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    text-align: center;
+  }
+  button.alert-button:nth-child(2){
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    text-align: center;
+  }
+  button.alert-button:nth-child(3){
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;;
+    text-align: center;
+  }
+  button.alert-button:nth-child(4){
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    text-align: center;
+  }
+  button.alert-button:nth-child(5){
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    text-align: center;
+  }
+  button.alert-button:nth-child(6){
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #55b26e;
+  }
+}
+
+.reportComplete{
+  border-radius: 9px;
+  border: solid 1px #d8d8d8;
+  button{
+    width: 100%;
+    margin: 0 !important;
+    text-align: center;
+    border-top: .55px solid #d8d8d8;
+  }
+  .alert-title{
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #55b26e;
+  }
+  .alert-message{
+    font-family: AppleSDGothicNeo;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
+  button.alert-button:nth-child(1){
+    color: #55b26e;
+    text-align-last: center;
   }
 }
 

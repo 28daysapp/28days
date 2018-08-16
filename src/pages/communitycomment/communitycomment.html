@@ -6,43 +6,50 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>커뮤니티</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>커뮤니티</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="CommunityfixPage">
-	
+
 	<ul>
 		<span class="posttitle">{{ post.posttitle }}</span>
 		<br>
 		<div class="username">
 			<span class="anonymity" *ngIf="changeAnonymity(post)">익명</span>
+			<!-- communitywrite에서 익명 체크 시 username대신 익명으로 보임 -->
 			<span class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.username }}</span>
-			
+
+			<!-- 프로필사진 보이게하려다 포기
 			<ion-item *ngFor="let user of userList">
 				<div class="list">
-				  <div class="profilephoto" *ngIf="photomatch(user)">
-					<img src="{{user.photoURL}}">
+				  <div class="profilephoto">
+					<img src="{{this.user.photoURL}}">
+					<span class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.username }}</span>
 				  </div>
-				  <div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.username }}</div>
 				</div>
 			</ion-item>
-			
+			-->
+
 			<span class="button" style="float:right" *ngIf="reportuser(post)">
-				<button (click) = "reportpost(post)">신고</button>
+				<!-- 현재 계정 이외의 게시물에서만 보임 -->
+				<button (click)="reportpost(post)">신고</button>
 			</span>
-			<span  class="button" style="float:right" *ngIf="usercorrect(post)">
-				<button (click) = "updatepost(post)">수정</button>
-				<button (click) = "postdelete(post)">삭제</button>
+			<span class="button" style="float:right" *ngIf="usercorrect(post)">
+				<!-- 현재 계정의 게시물만 보임 -->
+				<button (click)="updatepost(post)">수정</button>
+				<button (click)="postdelete(post)">삭제</button>
 			</span>
 		</div>
 		<div class="posttext" style="width:100%">{{ post.text }}</div>
 		<br>
 		<div class="picture" *ngIf="post.url">
+			<!-- 업로드한 사진을 작게 보여줌 -->
 			<button (click)="imgexpansion(post)">
+				<!-- 사진 클릭시 사진을 확대한페이지로 이동 -->
 				<img src="{{ post.url }}">
 			</button>
 		</div>
@@ -51,8 +58,9 @@
 			<span class="time" style="float:right">{{ post.timestamp | date:'MM.dd a hh:mm' }}</span>
 		</div>
 		<table class="co-li" style="width:100%">
+			<!-- 좋아요와 댓글 갯수 table -->
 			<td align="center" style="width: 50%">
-				<tr class="comment-like">	
+				<tr class="comment-like">
 					<button class="like" (click)="like(post)">
 						<img src="{{ post.likesrc }}">
 						<span>{{ post.like }}</span>
@@ -70,31 +78,32 @@
 		</table>
 
 		<li *ngFor="let comment of comments">
+			<!-- 댓글 내가 안함 -->
 			<div class="comment">
 				<div class="comment-line1">{{ comment.username }}
 					<span class="time" style="float:right">{{ comment.timestamp | date:'MM.dd a hh:mm' }}</span>
 				</div>
-			<p class="text">{{ comment.text }}</p>
-			<span class="button" *ngIf="usercorrect_cmt(comment)">
-				<button (click)="updatebutton(comment)">수정</button>
-				<button (click)="deletecomment(comment)">삭제</button>
-			</span>
-			<span class="button" *ngIf="reportuser_cmt(comment)">
-				<button (click)="reportcomment(comment)">신고</button>
-			</span>
+				<p class="text">{{ comment.text }}</p>
+				<span class="button" *ngIf="usercorrect_cmt(comment)">
+					<button (click)="updatebutton(comment)">수정</button>
+					<button (click)="deletecomment(comment)">삭제</button>
+				</span>
+				<span class="button" *ngIf="reportuser_cmt(comment)">
+					<button (click)="reportcomment(comment)">신고</button>
+				</span>
 				<div *ngIf="comment.updatecomment">
-					
+
 					<div class="subcomment">
 						<form [formGroup]="updateForm" class="footerform">
 							<input formControlName="txt" type="text">
-								<button (click)="updatecomment(comment)" style="float:right">
-									게시
-								</button>		
+							<button (click)="updatecomment(comment)" style="float:right">
+								게시
+							</button>
 						</form>
 					</div>
 				</div>
-		
-	<!--
+
+				<!-- 뭔지 모름
 		<li *ngFor="let comment of comments">
 			<div class="comment">
 				<div class="bubble">
@@ -144,20 +153,20 @@
 						</button>
 					</form>
 				</div> -->
-			</div> 
+			</div>
 		</li>
 	</ul>
-
+	<br>
 </ion-content>
 
 <ion-footer>
 
 	<form [formGroup]="commentForm" class="footerform">
 		<input formControlName="txt" type="text">
-				<button (click)="writeComment()" style="float:right">
-					게시
-				</button>
-		
+		<button (click)="writeComment()" style="float:right">
+			게시
+		</button>
+
 	</form>
 
 </ion-footer>

@@ -27,7 +27,6 @@ export class CommunityProvider {
 		'학교폭력',
 		'가정폭력'
 	];
-	title;
 	posts;
 	post;
 	report;
@@ -38,6 +37,8 @@ export class CommunityProvider {
 	cnt: number = 0;
 	check: number = 0;
 	mosttag1: number = 0;
+	morepost: number = 0;
+	moresearch: number = 0;
 	constructor(public my: MyProvider) {
 
 	}
@@ -51,39 +52,82 @@ export class CommunityProvider {
 	}
 
 	/* upload post to firebase */
-	uploadPost(title, txt, dataURL, tag1, anonymity) {
+	uploadPost(title, txt, dataURL, tag1, anonymity) { // 게시글 firebase에 업로드
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			var newPostRef = this.firecommunity.push();
 			var time = firebase.database.ServerValue.TIMESTAMP;
 			var postId = newPostRef.key;
-			if(anonymity){
+			if (anonymity) { // 익명 체크의 경우
 				console.log(anonymity);
-			if (dataURL) {
-				var imageStore1 = this.firestore.ref('/community/').child(postId);
-				imageStore1.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+				if (dataURL) { // 사진이 있을 경우
+					var imageStore1 = this.firestore.ref('/community/').child(postId);
+					imageStore1.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+						newPostRef.set({
+							postid: postId,
+							posttitle: title,
+							uid: uid,
+							username: firebase.auth().currentUser.displayName,
+							text: txt,
+							url: savedImage.downloadURL,
+							timestamp: time,
+							comment: 0,
+							like: 0,
+							report: 0,
+							tag1: tag1,
+							urlcheck: true,
+							anonymity: true,
+						}).then(() => {
+							this.my.addmypost(uid, postId, time).then(() => {
+								resolve(true);
+							}).then(() => {
+								if (tag1 != '') {
+									this.gettag(tag1).then((tags) => {
+										this.tags = tags;
+										if (this.tags == null) {
+											this.firetag.child(`${tag1}`).set({
+												tag1: tag1,
+												tagcnt: 1,
+											}).then(() => {
+												resolve(true);
+											});
+										}
+										else {
+											this.firetag.child(`${tag1}`).set({
+												tag1: tag1,
+												tagcnt: this.tags.tagcnt + 1
+											}).then(() => {
+												resolve(true);
+											});
+										}
+									})
+								}
+							})
+						});
+					});
+				} else { // 사진이 없을 경우
 					newPostRef.set({
 						postid: postId,
 						posttitle: title,
 						uid: uid,
 						username: firebase.auth().currentUser.displayName,
 						text: txt,
-						url: savedImage.downloadURL,
+						url: null,
 						timestamp: time,
 						comment: 0,
 						like: 0,
 						report: 0,
 						tag1: tag1,
-						urlcheck: true,
 						anonymity: true,
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);
-						}).then(() => {
-							if(tag1 != ''){
+						})
+					}).then(() => {
+						if (tag1 != '') {
 							this.gettag(tag1).then((tags) => {
 								this.tags = tags;
-								if(this.tags == null){
+								if (this.tags == null) {
 									this.firetag.child(`${tag1}`).set({
 										tag1: tag1,
 										tagcnt: 1,
@@ -91,7 +135,7 @@ export class CommunityProvider {
 										resolve(true);
 									});
 								}
-								else{
+								else {
 									this.firetag.child(`${tag1}`).set({
 										tag1: tag1,
 										tagcnt: this.tags.tagcnt + 1
@@ -101,54 +145,11 @@ export class CommunityProvider {
 								}
 							})
 						}
-						})
-					});
-				});
-			} else {
-				newPostRef.set({
-					postid: postId,
-					posttitle: title,
-					uid: uid,
-					username: firebase.auth().currentUser.displayName,
-					text: txt,
-					url: null,
-					timestamp: time,
-					comment: 0,
-					like: 0,
-					report: 0,
-					tag1: tag1,
-					anonymity: true,
-				}).then(() => {
-					this.my.addmypost(uid, postId, time).then(() => {
-						resolve(true);
-					})
-				}).then(() => {
-					if(tag1 != ''){
-					this.gettag(tag1).then((tags) => {
-						this.tags = tags;
-						if(this.tags == null){
-							this.firetag.child(`${tag1}`).set({
-								tag1: tag1,
-								tagcnt: 1,
-							}).then(() => {
-								resolve(true);
-							});
-						}
-						else{
-							this.firetag.child(`${tag1}`).set({
-								tag1: tag1,
-								tagcnt: this.tags.tagcnt + 1
-							}).then(() => {
-								resolve(true);
-							});
-						}
 					})
 				}
-				})
-				}
-			} else{
+			} else { // 익명 체크가 아닌 경우
 				console.log("else");
-				if (dataURL) {
+				if (dataURL) { // 사진이 있을 경우
 					var imageStore2 = this.firestore.ref('/community/').child(postId);
 					imageStore2.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 						newPostRef.set({
@@ -169,31 +170,31 @@ export class CommunityProvider {
 							this.my.addmypost(uid, postId, time).then(() => {
 								resolve(true);
 							}).then(() => {
-								if(tag1 != ''){
-								this.gettag(tag1).then((tags) => {
-									this.tags = tags;
-									if(this.tags == null){
-										this.firetag.child(`${tag1}`).set({
-											tag1: tag1,
-											tagcnt: 1,
-										}).then(() => {
-											resolve(true);
-										});
-									}
-									else{
-										this.firetag.child(`${tag1}`).set({
-											tag1: tag1,
-											tagcnt: this.tags.tagcnt + 1
-										}).then(() => {
-											resolve(true);
-										});
-									}
-								})
-							}
+								if (tag1 != '') {
+									this.gettag(tag1).then((tags) => {
+										this.tags = tags;
+										if (this.tags == null) {
+											this.firetag.child(`${tag1}`).set({
+												tag1: tag1,
+												tagcnt: 1,
+											}).then(() => {
+												resolve(true);
+											});
+										}
+										else {
+											this.firetag.child(`${tag1}`).set({
+												tag1: tag1,
+												tagcnt: this.tags.tagcnt + 1
+											}).then(() => {
+												resolve(true);
+											});
+										}
+									})
+								}
 							})
 						});
 					});
-				} else {
+				} else { // 사진이 없을 경우
 					newPostRef.set({
 						postid: postId,
 						posttitle: title,
@@ -212,35 +213,35 @@ export class CommunityProvider {
 							resolve(true);
 						})
 					}).then(() => {
-						if(tag1 != ''){
-						this.gettag(tag1).then((tags) => {
-							this.tags = tags;
-							if(this.tags == null){
-								this.firetag.child(`${tag1}`).set({
-									tag1: tag1,
-									tagcnt: 1,
-								}).then(() => {
-									resolve(true);
-								});
-							}
-							else{
-								this.firetag.child(`${tag1}`).set({
-									tag1: tag1,
-									tagcnt: this.tags.tagcnt + 1
-								}).then(() => {
-									resolve(true);
-								});
-							}
-						})
-					}
+						if (tag1 != '') {
+							this.gettag(tag1).then((tags) => {
+								this.tags = tags;
+								if (this.tags == null) {
+									this.firetag.child(`${tag1}`).set({
+										tag1: tag1,
+										tagcnt: 1,
+									}).then(() => {
+										resolve(true);
+									});
+								}
+								else {
+									this.firetag.child(`${tag1}`).set({
+										tag1: tag1,
+										tagcnt: this.tags.tagcnt + 1
+									}).then(() => {
+										resolve(true);
+									});
+								}
+							})
+						}
 					})
-					}
+				}
 			}
-			});
+		});
 		return promise;
 	}
 
-	/*
+	/* 프로필 사진 가져오려다 망함
 	photo(){
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
@@ -258,18 +259,18 @@ export class CommunityProvider {
 		return promise;
 	}
 	*/
-	
-	mosttag(){
+
+	mosttag() { // 가장 많은 태그 6개
 		this.check = 6;
 		var promise = new Promise((resolve) => {
-			this.firetag.orderByChild('tagcnt').limitToLast(this.check).once("value").then((snapshot) =>{
+			this.firetag.orderByChild('tagcnt').limitToLast(this.check).once("value").then((snapshot) => {
 				var mosttag1 = [];
 				snapshot.forEach((childSnapshot) => {
 					var mosttags = childSnapshot.val();
 
 					mosttag1.push(mosttags);
 				});
-				
+
 				mosttag1.reverse();
 				resolve(mosttag1);
 			});
@@ -277,16 +278,16 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	tagcount(tag){
+	tagcount(tag) { // 태그 갯수 세줌
 		var promise = new Promise((resolve) => {
-			this.firetag.orderByChild('tag1').equalTo(tag).once("value").then((snapshot) =>{
+			this.firetag.orderByChild('tag1').equalTo(tag).once("value").then((snapshot) => {
 				var mosttag1 = [];
 				snapshot.forEach((childSnapshot) => {
 					var mosttags = childSnapshot.val();
 
 					mosttag1.push(mosttags);
 				});
-				
+
 				mosttag1.reverse();
 				resolve(mosttag1);
 			});
@@ -294,35 +295,35 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	updatePost(title, text) {
+	updatePost(title, text) { // 게시글 수정
 		var promise = new Promise((resolve) => {
-				this.firecommunity.child(`${this.post.postid}`).update({
-					posttitle: title,
-					text: text,
-				}).then(() => {
-					resolve(true);
-				});
+			this.firecommunity.child(`${this.post.postid}`).update({
+				posttitle: title,
+				text: text,
+			}).then(() => {
+				resolve(true);
+			});
 		});
 		return promise;
 	}
 
-	postdelete(post) {
+	postdelete(post) { // 게시글 삭제
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firecomment.child(`${post.postid}`).remove();
 			this.firecommunity.child(`${post.postid}`).remove().then(() => {
 				this.firereport.child(`${uid}`).remove().then(() => {
 					this.firemypost.child(`${uid}/${post.postid}`).remove().then(() => {
-						if(post.tag1 != ''){
-						this.gettag(post.tag1).then((tags) => {
-							this.tags = tags;
+						if (post.tag1 != '') {
+							this.gettag(post.tag1).then((tags) => {
+								this.tags = tags;
 								this.firetag.child(`${post.tag1}`).update({
-									tagcnt: this.tags.tagcnt - 1,
+									tagcnt: this.tags.tagcnt - 1, // 태그 갯수 하나 뺌
 								}).then(() => {
 									resolve(true);
 								});
-						});
-					}
+							});
+						}
 					})
 				});
 			}).then(() => {
@@ -332,53 +333,48 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	reportpost(post){
+	reportpost(post) { // 게시글 신고
 		console.log("test");
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.getreport(post).then((report) => {
 				this.report = report;
-					if(this.report == null){
-						this.firereport.child(`${post.postid}`).update({
-							reportcnt: 1,
-						}).then(() => {
-							resolve(true);
-						});
+				if (this.report == null) {
+					this.firereport.child(`${post.postid}`).update({
+						reportcnt: 1,
+					}).then(() => {
+						resolve(true);
+					});
+				}
+				else {
+					this.firereport.child(`${post.postid}`).update({
+						reportcnt: this.report.reportcnt + 1,
+					}).then(() => {
+						resolve(true);
+					});
+					if (this.report.reportcnt == 20) { // 신고가 누적 20일 경우 삭제
+						this.postdelete(post);
+						this.firereport.child(`${post.postid}`).remove();
 					}
-					else{
-						if(this.uids.uid != uid){
-							this.firereport.child(`${post.postid}`).update({
-								reportcnt: this.report.reportcnt + 1,
-							}).then(() => {
-								resolve(true);
-							});
-						}
-						else{
-
-						}
-						if(this.report.reportcnt == 20){
-							this.postdelete(post);
-							this.firereport.child(`${post.postid}`).remove();
-						}
-					}
-				})
+				}
 			})
+		})
 		return promise;
 	}
 
-	
+
 	gettag(tags) {
 		var promise = new Promise((resolve) => {
 			var tag;
 			this.firetag.child(tags).once("value").then((snapshot) => {
-					tag = snapshot.val();
-					resolve(tag);
-				});
+				tag = snapshot.val();
+				resolve(tag);
 			});
+		});
 		return promise;
-  }
+	}
 
-  	getreport(post) {
+	getreport(post) {
 		var promise = new Promise((resolve) => {
 			var report;
 			this.firereport.child(`${post.postid}`).once("value").then((snapshot) => {
@@ -390,7 +386,7 @@ export class CommunityProvider {
 	}
 
 	/* get all posts in firebase */
-	getallposts() {
+	getallposts() { // 처음 10개의 게시물
 		this.limit = 10;
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
@@ -421,9 +417,9 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	onInfiniteScroll() {
+	onInfiniteScroll() { // 처음 이후 10개의 게시물
 		this.limit += 10; // or however many more you want to load
-        var uid = firebase.auth().currentUser.uid;
+		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firecommunity.orderByChild('timestamp').limitToLast(this.limit).once("value").then((snapshot) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
@@ -435,6 +431,7 @@ export class CommunityProvider {
 					snapshot.forEach((childSnapshot) => {
 						var post = childSnapshot.val();
 
+						this.morepost++;
 						// if user liked this post, set like img to full heart
 						// else, set like img to empty heart
 						if (likepostid.indexOf(post.postid) != -1) {
@@ -449,16 +446,17 @@ export class CommunityProvider {
 				});
 			});
 		});
+		console.log(this.morepost);
 		return promise;
-    }
+	}
 
-	searchtag(tag){
+	searchtag(tag) { // 검색 시 처음 10개의 게시물
 		this.cnt = 10;
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firecommunity.orderByChild('tag1').equalTo(tag).limitToLast(this.cnt).once("value").then((snapshot1) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
-					
+
 					var likepostid = [];
 					likesnapshot.forEach((childSnapshot) => {
 						likepostid.push(childSnapshot.key);
@@ -475,22 +473,24 @@ export class CommunityProvider {
 							post.likesrc = "assets/like.png";
 						}
 						posts.push(post);
+						this.moresearch++;
 					});
 					posts.reverse();
 					resolve(posts);
 				});
 			});
 		});
+		console.log(this.moresearch);
 		return promise;
 	}
 
-	doInfiniteSearch(tag) {
-        this.cnt += 10; // or however many more you want to load
+	doInfiniteSearch(tag) { // 검색 시 다음 10개의 게시물
+		this.cnt += 10; // or however many more you want to load
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firecommunity.orderByChild('tag1').equalTo(tag).limitToLast(this.cnt).once("value").then((snapshot1) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
-					
+
 					var likepostid = [];
 					likesnapshot.forEach((childSnapshot) => {
 						likepostid.push(childSnapshot.key);
@@ -499,6 +499,7 @@ export class CommunityProvider {
 					snapshot1.forEach((childSnapshot) => {
 						var post = childSnapshot.val();
 
+						this.moresearch++;
 						// if user liked this post, set like img to full heart
 						// else, set like img to empty heart
 						if (likepostid.indexOf(post.postid) != -1) {
@@ -513,11 +514,12 @@ export class CommunityProvider {
 				});
 			});
 		});
+		console.log(this.moresearch);
 		return promise;
 	}
 
 	/* when user click like of a post, save timestamp and add 1 to the number of like of a post */
-	setLike(post) {
+	setLike(post) { // 좋아요 + 1
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firelike.child(`${uid}/${post.postid}`).set({
@@ -534,7 +536,7 @@ export class CommunityProvider {
 	}
 
 	/* when user click unlike of a post, remove timestamp and subtract 1 to the number of like of a post*/
-	deleteLike(post) {
+	deleteLike(post) { // 좋아요 - 1
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firelike.child(`${uid}/${post.postid}`).remove().then(() => {
@@ -549,7 +551,7 @@ export class CommunityProvider {
 	}
 
 	/* when user write comment, add 1 to the number of comments of a post */
-	addComment(post) {
+	addComment(post) { // 댓글 + 1
 		var promise = new Promise((resolve) => {
 			this.firecommunity.child(`${post.postid}`).once("value").then((snapshot) => {
 				this.firecommunity.child(`${post.postid}`).update({
@@ -562,7 +564,7 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	deleteComment(post) {
+	deleteComment(post) { // 댓글 - 1
 		var promise = new Promise((resolve) => {
 			this.firecommunity.child(`${post.postid}`).once("value").then((snapshot) => {
 				this.firecommunity.child(`${post.postid}`).update({
