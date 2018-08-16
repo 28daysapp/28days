@@ -6,14 +6,14 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+	<ion-navbar>
 		<ion-title>글쓰기</ion-title>
 		<ion-buttons right>
-			<button ion-button icon-only (click)="write()">
+			<button ion-button icon-only (click)="write()" style="color: #000000;">
 				완료
 			</button>
 		</ion-buttons>
-  </ion-navbar>
+	</ion-navbar>
 
 </ion-header>
 
@@ -23,6 +23,7 @@
 		<ion-item>
 			<ion-label class="anonymitywrite">익명으로 글쓰기</ion-label>
 			<ion-checkbox [(ngModel)]="anonymity"></ion-checkbox>
+			<!-- 해당 체크박스 클릭시 익명으로 보임 -->
 		</ion-item>
 	</ion-list>
 	<div class="area">
@@ -30,8 +31,9 @@
 		<hr style="height: 0.1px; border: solid 1px #d8d8d8;">
 		<textarea class="area2" [(ngModel)]="text" placeholder="내용을 입력해주세요." style="border:0;"></textarea>
 		<textarea class="area3" [(ngModel)]="tag1" placeholder="# 태그를 입력해주세요." *ngIf="this.tagcorrect"></textarea>
+		<!-- 현재 페이지 아래에있는 태그 추가를 눌렀을 경우에만 보임 -->
 	</div>
-	<!--
+	<!-- 예전 사진업로드 방식
 	<div class="imagechooser">
 		<button class="gallery" (click)="openGallery()" *ngIf="!pick">
 			<div>
@@ -52,10 +54,9 @@
 </ion-content>
 
 <ion-footer>
-	<!-- <button ion-button full color="gray" (click)="write()">글 등록하기</button> -->
 	<table class="co-li" style="width:100%">
 		<td align="center" style="width: 50%">
-			<tr class="tag-image">	
+			<tr class="tag-image">
 				<button class="addtag" (click)="addtag()">
 					<img src="assets/tag.png" srcset="assets/tag@2x.png 2x, assets/tag@3x.png 3x" class="tag">
 					<span>태그 넣기</span>

@@ -16,7 +16,7 @@ import { CommunityProvider } from '../../providers/community/community';
 })
 export class ImgexpansionPage {
 
-  post = this.community.post;
+  post = this.community.post; // 현재 post
   constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider) {
   }
 

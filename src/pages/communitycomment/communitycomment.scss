@@ -144,7 +144,6 @@ page-communitycomment {
 	}
 
 	.footerform {
-		height: 58px;
 		background-color: #ffffff;
 		border: solid 2px #f7f7f7;
 	  }
@@ -154,7 +153,7 @@ page-communitycomment {
 		display: table-cell;
  		vertical-align: middle;
  		margin: 2px 5px 2px 0px;
- 		width: 88%;
+ 		width: 80%;
 	}
 
 	.footerform button {
@@ -268,6 +267,7 @@ page-communitycomment {
 
 	.co-li {
 		margin-top: 30px;
+		margin-bottom: 30px;
 		background-color: #f7f7f7;
 	}
 
@@ -306,47 +306,9 @@ page-communitycomment {
 		background-color: transparent;
 	  }
  
-		/* Alert Css??
-	.reportAlert{
-		border-radius: 9px;
-		background-color: #ffffff;
-		border: solid 1px #d8d8d8;
-		title{
-			color: #55b26e;
-			text-align: center;
-		}
-		button{
-			color: #000000;
-			text-align: center;
-		}
+	div.profilephoto img{
+		width: 24px;
+		height: 24px;
 	}
 
-	.reportComplete{
-		border-radius: 9px;
-		background-color: #ffffff;
-		border: solid 1px #d8d8d8;
-		title{
-			color: #55b26e;
-			text-align: center;
-		}
-		button{
-			color: #000000;
-			text-align: center;
-		}
-	}
-
-	.deleteAlert{
-		border-radius: 9px;
-		background-color: #ffffff;
-		border: solid 1px #d8d8d8;
-		title{
-			color: #55b26e;
-			text-align: center;
-		}
-		button{
-			color: #000000;
-			text-align: center;
-		}
-	}
-	*/
 }
