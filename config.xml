@@ -125,6 +125,7 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <allow-navigation href="http://137.68.247.13:8101" />
     <allow-navigation href="http://137.68.246.201:8100" />
+    <allow-navigation href="http://137.68.247.139:8100" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>

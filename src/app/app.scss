@@ -51,7 +51,7 @@ ion-icon {
   }
   // custom icons
   &[class*="coconut-home"] {
-      mask-image: url(../assets/icon/home.png);
+      mask-image: url(../assets/icon/home.svg);
   }
   &[class*="coconut-icon2"] {
       mask-image: url(../assets/icon/customicon2.svg);
@@ -80,19 +80,19 @@ ion-icon {
 .tabs-ios {
 a[aria-selected=false]{
    .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label=home] {
-    background-image: url(../assets/icon/home.png);
+    background-image: url(../assets/icon/home.svg);
   }
   .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
-    background-image: url(../assets/icon/hos.png);
+    background-image: url(../assets/icon/hos.svg);
   }
   .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
-    background-image: url(../assets/icon/chat.png);
+    background-image: url(../assets/icon/chat.svg);
   }
   .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
-    background-image: url(../assets/icon/supporter.png);
+    background-image: url(../assets/icon/supporter.svg);
   }
   .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
-    background-image: url(../assets/icon/community.png);
+    background-image: url(../assets/icon/community.svg);
   }
 }
 a[aria-selected=true] {
@@ -101,19 +101,19 @@ a[aria-selected=true] {
     //color: #f00; //whatever colour you want to use for the text
   //}
   .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label=home] {
-    background-image: url(../assets/icon/home-on.png);
+    background-image: url(../assets/icon/home-on.svg);
   }
   .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
-    background-image: url(../assets/icon/hos-on.png);
+    background-image: url(../assets/icon/hos-on.svg);
   }
   .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
-    background-image: url(../assets/icon/chat-on.png);
+    background-image: url(../assets/icon/chat-on.svg);
   }
   .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
-    background-image: url(../assets/icon/supporter-on.png);
+    background-image: url(../assets/icon/supporter-on.svg);
   }
   .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
-    background-image: url(../assets/icon/community-on.png);
+    background-image: url(../assets/icon/community-on.svg);
   }
 }
 }
@@ -121,19 +121,19 @@ a[aria-selected=true] {
 .tabs-md {
 a[aria-selected=false]{
    .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label=home] {
-    background-image: url(../assets/icon/home.png);
+    background-image: url(../assets/icon/home.svg);
   }
   .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
-    background-image: url(../assets/icon/hos.png);
+    background-image: url(../assets/icon/hos.svg);
   }
   .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
-    background-image: url(../assets/icon/chat.png);
+    background-image: url(../assets/icon/chat.svg);
   }
   .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
-    background-image: url(../assets/icon/supporter.png);
+    background-image: url(../assets/icon/supporter.svg);
   }
   .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
-    background-image: url(../assets/icon/community.png);
+    background-image: url(../assets/icon/community.svg);
   }
 }
 
@@ -143,19 +143,19 @@ a[aria-selected=true] {
     //color: #f00; //whatever colour you want to use for the text
   //}
   .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label=home] {
-    background-image: url(../assets/icon/home-on.png);
+    background-image: url(../assets/icon/home-on.svg);
   }
   .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
-    background-image: url(../assets/icon/hos-on.png);
+    background-image: url(../assets/icon/hos-on.svg);
   }
   .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
-    background-image: url(../assets/icon/chat-on.png);
+    background-image: url(../assets/icon/chat-on.svg);
   }
   .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
-    background-image: url(../assets/icon/supporter-on.png);
+    background-image: url(../assets/icon/supporter-on.svg);
   }
   .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
-    background-image: url(../assets/icon/community-on.png);
+    background-image: url(../assets/icon/community-on.svg);
   }
 }
 }
@@ -163,19 +163,19 @@ a[aria-selected=true] {
 .tabs-wp {
 a[aria-selected=false]{
    .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label=home] {
-    background-image: url(../assets/icon/home.png);
+    background-image: url(../assets/icon/home.svg);
   }
   .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
-    background-image: url(../assets/icon/hos.png);
+    background-image: url(../assets/icon/hos.svg);
   }
   .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
-    background-image: url(../assets/icon/chat.png);
+    background-image: url(../assets/icon/chat.svg);
   }
   .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
-    background-image: url(../assets/icon/supporter.png);
+    background-image: url(../assets/icon/supporter.svg);
   }
   .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
-    background-image: url(../assets/icon/community.png);
+    background-image: url(../assets/icon/community.svg);
   }
 }
 
@@ -185,19 +185,19 @@ a[aria-selected=true] {
     //color: #f00; //whatever colour you want to use for the text
   //}
   .tab-button-icon[ng-reflect-name=home], .tab-button-icon[aria-label=home] {
-    background-image: url(../assets/icon/home-on.png);
+    background-image: url(../assets/icon/home-on.svg);
   }
   .tab-button-icon[ng-reflect-name=hos], .tab-button-icon[aria-label=hos] {
-    background-image: url(../assets/icon/hos-on.png);
+    background-image: url(../assets/icon/hos-on.svg);
   }
   .tab-button-icon[ng-reflect-name=chat], .tab-button-icon[aria-label=chat] {
-    background-image: url(../assets/icon/chat-on.png);
+    background-image: url(../assets/icon/chat-on.svg);
   }
   .tab-button-icon[ng-reflect-name=supporter], .tab-button-icon[aria-label=supporter] {
-    background-image: url(../assets/icon/supporter-on.png);
+    background-image: url(../assets/icon/supporter-on.svg);
   }
   .tab-button-icon[ng-reflect-name=community], .tab-button-icon[aria-label=community] {
-    background-image: url(../assets/icon/community-on.png);
+    background-image: url(../assets/icon/community-on.svg);
   }
 }
 }

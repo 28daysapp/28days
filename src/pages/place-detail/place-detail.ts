@@ -25,11 +25,19 @@ export class PlaceDetailPage {
   name: string;
   phone: string;
   website: string;
+  openingHours: any;
+  photos: any;
   placeId: string;
   service: any;
   mapOptions: any;
   latLng: any;
   posts: any;
+  showInfo: boolean = true;
+  tab: any = 'info';
+
+
+  weekdays;
+  weekend;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public auth: AuthProvider, public userProvider: UserProvider,
     public storage: Storage, public alertCtrl: AlertController, public review: ReviewProvider) {
@@ -38,7 +46,10 @@ export class PlaceDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlaceDetailPage');
-    this.getGoogleInfo();
+
+    // this.getGoogleInfo();
+    // this.changeTab();
+    this.changeTab();
   }
 
   ionViewWillEnter() {
@@ -62,7 +73,7 @@ export class PlaceDetailPage {
 
     let request = {
       placeId: this.placeId,
-      fields: ['formatted_phone_number', 'formatted_address', 'opening_hours', 'website', 'photo', 'price_level']
+      fields: ['formatted_phone_number', 'formatted_address', 'opening_hours', 'website', 'photos', 'price_level']
     }
 
     let service = new google.maps.places.PlacesService(this.map);
@@ -70,12 +81,41 @@ export class PlaceDetailPage {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
         this.phone = results.formatted_phone_number;
         this.website = results.website;
+        if (results.opening_hours) {
+          this.openingHours = results.opening_hours.weekday_text
+          console.log(this.openingHours)
+        }
+        if (results.photos)
+        this.photos = results.photos;
       } else {
         console.log("Status error: " + status);
       }
     }, (error) => {
       console.log("Error: " + error);
     });
+
+
+  }
+
+  getReviews() {
+
+  }
+
+  changeTab() {
+
+    console.log("tab changed")
+    console.log('this.tab: ' + this.tab);
+    if (this.tab === 'info') {
+      this.showInfo = true;
+      this.getGoogleInfo();
+      return;
+    } else {
+      this.showInfo = false;
+      this.getReviews();
+      return;
+    }
+
+
   }
 
   reviewWrite() {

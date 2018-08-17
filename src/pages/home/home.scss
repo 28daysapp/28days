@@ -1,5 +1,13 @@
 page-home {
 
+	.toolbar-background {
+		background-color: color($colors, primary);
+	}
+
+	.content {
+		background-color: color($colors, primary);
+	}
+
 	.message {
 		width: 100%;
 		bottom: 3%;

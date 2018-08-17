@@ -14,15 +14,15 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class FcmProvider {
 
-  firebaseMessaging = firebase.messaging();
-  firebaseDatabase = firebase.database();
-  firebaseAuth = firebase.auth();
-  firebaseUsers = firebase.database().ref('/users');
-  user;
-  token;
-  buddy;
-  data;
-  username;
+  // firebaseMessaging = firebase.messaging();
+  // firebaseDatabase = firebase.database();
+  // firebaseAuth = firebase.auth();
+  // firebaseUsers = firebase.database().ref('/users');
+  // user;
+  // token;
+  // buddy;
+  // data;
+  // username;
 
   
 
