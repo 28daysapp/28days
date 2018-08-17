@@ -1,13 +1,59 @@
 page-place-detail {
 
-    .name {
-        position: relative;
-        padding: 1rem;
-        align-content: center;
+    .top-image {
+        background-image: linear-gradient(
+                     rgba(20,20,20, .5), 
+                     rgba(20,20,20, .5)),
+                     url("../../assets/ccenter.jpg");
+        // position: absolute;
+        width: 375px;
+        height: 240px;
+        opacity: 0.8;
+    }
 
-        span {
-            font-size: 1.5rem;
+    // navbar back button color change
+    ion-header ion-icon.back-button-icon.icon {
+        color: map-get($colors, black);
+    }
+
+
+    ion-header {
+        .toolbar {
+          position: absolute;
+      
+          .toolbar-background {
+            background: transparent;
+          }
+          .toolbar-title {
+            color: black;
+          }
         }
+      }
+
+    #icon-create {
+        color: map-get($colors, white);
+    }
+
+    .top-buttons {
+        position: absolute;
+        z-index: 1;
+    }
+
+    .contents {
+
+    }
+
+    .details {
+        padding: 1em;
+        font-size: 12px;
+
+    }
+
+    .review-write {
+        width: 351px;
+        height: 50px;
+        border-radius: 8px;
+        border: solid 1px #d8d8d8;
     }
 
     .reviews {

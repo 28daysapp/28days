@@ -6,44 +6,68 @@
 -->
 <ion-header no-border>
 
-  <ion-navbar>
-    <ion-title>상담센터</ion-title>
-    <ion-buttons right>
-      <button ion-button icon-only (click)="reviewWrite()">
-        <ion-icon name="create"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-navbar class="top-buttons">
+    <ion-title>
+      {{ name }}
+    </ion-title>
+    <!-- <ion-buttons right>
+        <button ion-button icon-only (click)="reviewWrite()">
+          <ion-icon id="icon-create" name="create"></ion-icon>
+        </button>
+      </ion-buttons> -->
   </ion-navbar>
+
+  <!--Move this div above ion-navbar if background image overlaping is needed-->
+  <div class="top-image">
+    <div id="main-img"></div>
+  </div>
 
 </ion-header>
 
+<ion-content no-border class="contents">
 
-<ion-content padding>
+  <ion-segment [(ngModel)]="tab" (click)="changeTab()">
+    <ion-segment-button value="info">
+      센터정보
+    </ion-segment-button>
+    <ion-segment-button value="reviews">
+      리뷰
+    </ion-segment-button>
+  </ion-segment>
+
+
   <div #map id="map"></div>
-  <div class="name">
-    <h4>{{ name }}</h4>
-    <p>{{ address }}</p>
-    <p>{{ website }}</p>
-    <p>{{ phone }}</p>
+
+
+  <div *ngIf="showInfo" class="details">
+    <p *ngIf="website">
+      <strong>웹사이트 </strong>{{ website }}</p>
+    <p>
+      <strong>주소 </strong>{{ address }}</p>
+    <p *ngIf="openingHours">
+      <strong>영업시간</strong>  {{ openingHours }}</p>
+    <p><strong>연락처 </strong>{{ phone }}</p>
+    <p>
+      <strong>대표키워드 </strong>#우울증</p>
   </div>
 
-  <div>총 10개의 리뷰가 있습니다</div>
-
-  <div class="reviews">
-    리뷰
+  <div *ngIf="!showInfo" class="reviews">
+    <div class="review-write">리뷰 남기기</div>
+    <ion-list *ngFor="let post of posts">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/postwriter.png">
+        </ion-thumbnail>
+        <h4>{{ post.text }}</h4>
+        <span>{{ post.username }}</span>
+        <span>{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </ion-list>
   </div>
 
-  <ion-list *ngFor="let post of posts">
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="../../assets/postwriter.png">
-      </ion-thumbnail>
-      <h4>{{ post.text }}</h4>
-      <span>{{ post.username }}</span>
-      <span>{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
-      <button ion-button clear item-end>View</button>
-    </ion-item>
-  </ion-list>
+
+
 
 
 </ion-content>

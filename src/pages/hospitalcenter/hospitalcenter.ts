@@ -2,7 +2,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
+import { GoogleProvider } from '../../providers/google/google';
 import firebase from 'firebase';
+
 // import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // import { Geolocation } from '@ionic-native/geolocation';
 
@@ -36,7 +38,8 @@ export class HospitalcenterPage {
   apiProvider;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, 
+    public menu: MenuController, public google: GoogleProvider) {
     this.places = [];
   }
 
@@ -109,14 +112,14 @@ export class HospitalcenterPage {
     } else {
       this.area = input.srcElement.value;
     }
-    console.log("Query " + this.area);
+    // console.log("Query " + this.area);
 
 
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
-      console.log(this.query)
-      console.log(this.area);
+      // console.log(this.query)
+      // console.log(this.area);
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-      console.log("latlng: " + this.latLng)
+      // console.log("latlng: " + this.latLng)
       if (!this.area) {
         this.area = "서울";
       }
@@ -133,8 +136,13 @@ export class HospitalcenterPage {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
+            // console.log(results[i].reference)
+            let imgReference = this.places[i].reference; 
+
+
+            this.places.image = this.google.getPlacePhoto(imgReference);
+            // console.log("Place image: " + this.places.image);
           }
-          console.log(results)
         } else {
           console.log("Status error: " + status);
         }
@@ -142,7 +150,6 @@ export class HospitalcenterPage {
       }, (error) => {
         console.log("Error: " + error);
       });
-      console.log("Photo reference: " + this.places.reference);
 
     }
   }

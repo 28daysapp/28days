@@ -71,6 +71,8 @@ $searchbar-ios-border-color: #d8d8d8;
 $searchbar-ios-input-search-icon-color: #9b9b9b;
 $searchbar-ios-input-placeholder-color: #9b9b9b;
 
+$segment-button-ios-text-color: color($colors, black);
+
 // $card-ios-margin-left: 0;
 // $card-ios-margin-right: 0;
 // $card-ios-padding-left: 0;
@@ -94,6 +96,10 @@ $toolbar-md-title-text-color: color($colors, primary);
 
 $searchbar-md-input-border-radius: 8px;
 $searchbar-md-input-box-shadow: white;
+
+$segment-button-md-border-bottom-color: color($colors, black);
+$segment-button-md-border-color-activated: color($colors, black);
+$segment-button-md-text-color-activated: color($colors, black);
 
 // App Windows Variables
 // --------------------------------------------------
