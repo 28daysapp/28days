@@ -34,7 +34,7 @@ export class CommunitygroupPage {
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public auth: AuthProvider, public alertCtrl: AlertController
   ) {
-    this.title = this.community.title;
+    
   }
 
   ionViewDidLoad() {

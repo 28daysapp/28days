@@ -65,7 +65,6 @@ $alert-ios-title-font-size: 16px;
 $alert-ios-head-padding-bottom: 16px;
 $radio-ios-icon-width: 20px;
 $radio-ios-icon-height: 20px;
-$toolbar-ios-title-text-color: color($colors, primary);
 
 $searchbar-ios-border-color: #d8d8d8;
 $searchbar-ios-input-search-icon-color: #9b9b9b;
@@ -92,12 +91,11 @@ $alert-md-message-text-color: #111;
 $checkbox-md-icon-size: 18px;
 $checkbox-md-icon-border-radius: 50%;
 $checkbox-md-icon-checkmark-width: 1px;
-$toolbar-md-title-text-color: color($colors, primary);
 
 $searchbar-md-input-border-radius: 8px;
 $searchbar-md-input-box-shadow: white;
 
-$segment-button-md-border-bottom-color: color($colors, black);
+// $segment-button-md-border-bottom-color: color($colors, black);
 $segment-button-md-border-color-activated: color($colors, black);
 $segment-button-md-text-color-activated: color($colors, black);
 

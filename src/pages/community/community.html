@@ -10,84 +10,94 @@
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
-				<ion-title>커뮤니티</ion-title>
-				<ion-buttons right>
-						<button ion-button icon-only (click)="communitywrite()">
-							글쓰기
-						</button>
-					</ion-buttons>
-			</ion-navbar>
-			
-			<div class="search-button">
-			<ion-searchbar class="searchbar" [(ngModel)]="tag" placeholder="태그를 검색해보세요!" (change)="searchtag(tag)"></ion-searchbar>
-			<!-- <input type="text" class="searchbar" [(ngModel)]="tag" placeholder="태그를 검색해보세요!"> -->
-			<!-- <button class="button" (click)="searchtag(tag)">검색</button> -->
-			</div>
+		<ion-title>커뮤니티</ion-title>
+		<ion-buttons right>
+			<button ion-button icon-only (click)="communitywrite()" style="color: #000000;">
+				글쓰기
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 
-	</ion-header>
+	<div class="search-button">
+		<ion-searchbar class="searchbar" [(ngModel)]="tag" placeholder="태그를 검색해보세요!" (change)="searchtag(tag)"></ion-searchbar>
+		<!-- <input type="text" class="searchbar" [(ngModel)]="tag" placeholder="태그를 검색해보세요!"> -->
+		<!-- <button class="button" (click)="searchtag(tag)">검색</button> -->
+	</div>
 
-	<ion-content>
-		<ul style="list-style:none; padding-left:0px;" class="smalltag">
-				<span class="bigtag">
-					<button (click)=searchtag(this.community.taglist[0])>#우울</button>
-					<button (click)=searchtag(this.community.taglist[1])>#불안</button>
-					<button (click)=searchtag(this.community.taglist[2])>#초조</button>
-					<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
-					<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
-					<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
-					<li *ngFor="let mosttag of mosttag1">
-						<span class="setting">
-							<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
-						</span>
-					</li>
+</ion-header>
+
+<ion-content>
+	<ul style="list-style:none; padding-left:0px;" class="smalltag">
+		<span class="bigtag">
+			<!-- communityProvider의 taglist에서 수정 가능 -->
+			<button (click)=searchtag(this.community.taglist[0])>#우울</button>
+			<button (click)=searchtag(this.community.taglist[1])>#불안</button>
+			<button (click)=searchtag(this.community.taglist[2])>#초조</button>
+			<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
+			<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
+			<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
+			<li *ngFor="let mosttag of mosttag1">
+				<!-- firebase안의 tag항목안에서 가장 tagcnt가 많은 순서대로 6개(communityProvider-mosttag-check에서 변경 가능) 보여줌 -->
+				<span class="setting">
+					<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
 				</span>
-			</ul>
-			<br>
-		<ul style="list-style:none; padding-left:0px;" class="postclass">
-				<li *ngFor="let post of posts">
-					<div class="post">
-		
-						<span class="group-time" >
-								<button class="group" (click)="comment(post)">
-									{{ post.posttitle }}
-								</button>
-								<span *ngIf="urlcheck(post)">
-									<img src="assets/gallery.png">
-								</span>
-						</span>
-						<div class="posttext">
-							<div class="posttext">{{ post.text }}</div>
-						</div>
-						<div class="tag">
-								<button (click)=searchtag(post.tag1) *ngIf="tagcheck(post.tag1)">#{{post.tag1}}</button>
-						</div>
-						<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
-						<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
-						<br>
-						<table class="co-li" style="width:100%">
-							<td align="center" style="width: 50%">
-								<tr class="comment-like">	
-									<button class="like" (click)="like(post)">
-										<img src="{{ post.likesrc }}">
-										<span>{{ post.like }}</span>
-									</button>
-								</tr>
-							</td>
-							<td align="center" style="width: 50%">
-								<tr class="comment-like">
-									<button class="like">
-										<img src="assets/comment.png">
-										<span>{{ post.comment }}</span>
-									</button>
-								</tr>
-							</td>
-						</table>
-					</div>
-				</li>
-				<div class="search-button">
-						<button class="button" (click)="doInfinite()">더 보기</button>
-				</div>
+			</li>
+		</span>
+	</ul>
+	<br>
+	<ul style="list-style:none; padding-left:0px;" class="postclass">
+		<li *ngFor="let post of posts">
+			<div class="post">
 
-			</ul>
-	
-	</ion-content>
+				<span class="group-time">
+					<button class="group" (click)="comment(post)">
+						{{ post.posttitle }}
+					</button>
+					<span *ngIf="urlcheck(post)">
+						<!-- 해당 포스트에 사진이 있다면 게시글 제목옆에 아이콘 생성 -->
+						<img src="assets/gallery.png">
+					</span>
+				</span>
+				<div class="posttext">
+					<div class="posttext">{{ post.text }}</div>
+				</div>
+				<div class="tag">
+					<button (click)=searchtag(post.tag1) *ngIf="tagcheck(post.tag1)">#{{post.tag1}}</button>
+				</div>
+				<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
+				<!-- communitywrite에서 익명 체크 시 username대신 익명으로 보임-->
+				<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
+				<br>
+				<table class="co-li" style="width:100%">
+					<!-- 좋아요와 댓글 갯수를 보여주는 table -->
+					<td align="center" style="width: 50%">
+						<tr class="comment-like">
+							<button class="like" (click)="like(post)">
+								<img src="{{ post.likesrc }}">
+								<span>{{ post.like }}</span>
+							</button>
+						</tr>
+					</td>
+					<td align="center" style="width: 50%">
+						<tr class="comment-like">
+							<button class="like">
+								<img src="assets/comment.png">
+								<span>{{ post.comment }}</span>
+							</button>
+						</tr>
+					</td>
+				</table>
+			</div>
+		</li>
+		<div class="search-button" *ngIf="value1">
+			<!-- 처음 게시글 10개 이후를 보여주는 더보기버튼 -->
+			<button class="button" (click)="doInfinite()" style="width: 100%; text-align: center;">더 보기</button>
+		</div>
+		<div class="search-button" *ngIf="value2">
+			<!-- 게시글 끝에 도달할 때 더보기 버튼이 사라짐 -->
+			<button class="button" (click)="doInfinite()" style="width: 100%; text-align: center;" *ngIf="morepost()">더 보기</button>
+		</div>
+
+	</ul>
+
+</ion-content>

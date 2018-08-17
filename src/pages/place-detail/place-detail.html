@@ -17,14 +17,16 @@
       </ion-buttons> -->
   </ion-navbar>
 
-  <!--Move this div above ion-navbar if background image overlaping is needed-->
-  <div class="top-image">
-    <div id="main-img"></div>
-  </div>
+
 
 </ion-header>
 
 <ion-content no-border class="contents">
+
+  <!--Move this div above ion-navbar if background image overlaping is needed-->
+  <div class="top-image">
+    <div id="main-img"></div>
+  </div>
 
   <ion-segment [(ngModel)]="tab" (click)="changeTab()">
     <ion-segment-button value="info">
@@ -45,23 +47,37 @@
     <p>
       <strong>주소 </strong>{{ address }}</p>
     <p *ngIf="openingHours">
-      <strong>영업시간</strong>  {{ openingHours }}</p>
-    <p><strong>연락처 </strong>{{ phone }}</p>
+      <strong>영업시간</strong> {{ openingHours }}</p>
+    <p>
+      <strong>연락처 </strong>{{ phone }}</p>
     <p>
       <strong>대표키워드 </strong>#우울증</p>
   </div>
 
   <div *ngIf="!showInfo" class="reviews">
-    <div class="review-write">리뷰 남기기</div>
+
+    <div class="review-button" (click)="reviewWrite()">
+      <div>
+        <img src="../../assets/icon/edit.svg">
+        <span>리뷰 남기기</span>
+      </div>
+    </div>
+
+
     <ion-list *ngFor="let post of posts">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="../../assets/postwriter.png">
-        </ion-thumbnail>
-        <h4>{{ post.text }}</h4>
-        <span>{{ post.username }}</span>
-        <span>{{ post.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
-        <button ion-button clear item-end>View</button>
+      <ion-item class="review">
+        <div class="review-star-points">
+          <span id="average-text">평균</span>
+          <img src="../../assets/icon/star.svg">
+          <span> {{ average }} </span>
+        </div>
+        <div class="review-text">
+          <span>{{ post.text }}</span>
+        </div>
+        <div class="review-info">
+          <span>{{ post.username }}</span>
+          <span>   {{ post.timestamp | date:'yyyy.MM.dd' }}</span>
+        </div>
       </ion-item>
     </ion-list>
   </div>

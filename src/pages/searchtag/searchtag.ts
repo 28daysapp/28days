@@ -25,7 +25,8 @@ export class SearchtagPage {
   loading;
   popover;
   post;
-  value;
+  value1 = true;
+  value2 = false;
   tag = this.community.tag;
   mosttag1;
   selectedData:any;
@@ -41,6 +42,9 @@ export class SearchtagPage {
   }
 
   ionViewWillEnter(){
+    this.community.moresearch = 0;
+    this.value1 = true;
+    this.value2 = false;
     this.community.tagcount(this.tag).then((mosttag1) => {
       console.log(mosttag1);
       this.mosttag1 = mosttag1;
@@ -194,10 +198,23 @@ export class SearchtagPage {
     }
   }
 
+  morepost(){
+    var correct = true;
+    if(this.community.moresearch % 10 != 0){
+      correct = false;
+    }
+    else if(this.community.moresearch < 10){
+      correct = false;
+    }
+    return correct;
+  }
+
   doInfiniteSearch(tag) {
     this.community.tag = tag;
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+    this.value1 = false;
+    this.value2 = true;
     this.community.doInfiniteSearch(tag).then((posts) => {
       this.posts = posts;
       let d = this.content.getContentDimensions();

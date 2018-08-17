@@ -65,9 +65,20 @@
 					</div>
 				</li>
 
+				<!--
 				<div class="search-button">
-					<button class="button" (click)="doInfiniteSearch(tag)" style="text-align: center">더 보기</button>
+					<button class="button" (click)="doInfiniteSearch(tag)" style="width: 100%; text-align: center;">더 보기</button>
 				</div>
+				-->
+
+				<li *ngFor="let mosttag of mosttag1">
+					<div class="search-button" *ngIf="value1">
+						<button class="button" (click)="doInfiniteSearch(tag)" style="width: 100%; text-align: center;" *ngIf="mosttag.tagcnt > 10">더 보기</button>
+					</div>
+					<div class="search-button" *ngIf="value2">
+						<button class="button" (click)="doInfiniteSearch(tag)" style="width: 100%; text-align: center;" *ngIf="morepost()">더 보기</button>
+					</div>
+				</li>
 
 				</ul>
 	
