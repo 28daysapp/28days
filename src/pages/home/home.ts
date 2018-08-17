@@ -63,8 +63,7 @@ export class HomePage {
       // this.fcmProvider.handleTokenRefresh();
 
       // user already logged-in
-      this.menu.enable(true, 'loggedInMenu');
-      this.menu.enable(false, 'loggedOutMenu');
+      
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
       this.photoURL = this.user.photoURL;
@@ -75,10 +74,11 @@ export class HomePage {
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.loading.dismiss();
+        this.menu.enable(true, 'loggedInMenu');
+        this.menu.enable(false, 'loggedOutMenu');
       })
     } else {
-      this.menu.enable(true, 'loggedOutMenu');
-      this.menu.enable(false, 'loggedInMenu');
+      
       // check if cache info exists in local storage
       this.storage.get('localcred').then((localcred) => {
         if (localcred) {
@@ -97,6 +97,8 @@ export class HomePage {
               this.userprofile = userprofile;
               this.greeting = this.userprofile.greeting;
               this.loading.dismiss();
+              this.menu.enable(true, 'loggedOutMenu');
+              this.menu.enable(false, 'loggedInMenu');
             });
           });
         } else {
@@ -105,11 +107,15 @@ export class HomePage {
           this.storage.get('username').then((username) => {
             if (username) {
               this.username = username;
+              this.menu.enable(true, 'loggedInMenu');
+              this.menu.enable(false, 'loggedOutMenu');
             } else {
               this.username = '코코넛';
             }
             this.greeting = "안녕하세요! " + this.username + " 입니다. 함께 나아가요!"
             this.loading.dismiss();
+            this.menu.enable(true, 'loggedOutMenu');
+              this.menu.enable(false, 'loggedInMenu');
           });
         }
       });
