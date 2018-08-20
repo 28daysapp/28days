@@ -77,6 +77,14 @@ export class MyApp {
   ) {
     firebase.initializeApp(firebaseConfig);
     this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.menu.enable(true, 'loggedInMenu');
+      this.menu.enable(false, 'loggedOutMenu');
+    }
+    else {
+      this.menu.enable(true, 'loggedOutMenu');
+      this.menu.enable(false, 'loggedInMenu');
+    }
     platform.ready().then(() => {
     //   // Okay, so the platform is ready and our plugins are available.
     //   // Here you can do any higher level native things you might need.

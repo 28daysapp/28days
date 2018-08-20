@@ -37,6 +37,7 @@ import { ReviewProvider } from '../providers/review/review';
 
 import { FCM } from '@ionic-native/fcm'
 import { OperatorProvider } from '../providers/operator/operator';
+import { GoogleProvider } from '../providers/google/google';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { OperatorProvider } from '../providers/operator/operator';
     ReviewProvider,
     FCM,
     FcmProvider,
-    OperatorProvider
+    OperatorProvider,
+    GoogleProvider
 
     //GroupProvider,
   ]
