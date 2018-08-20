@@ -26,6 +26,8 @@ export class CommunitycommentPage {
   public UserRef: firebase.database.Reference;
   public userList: Array<any>;
   public loadedUserList: Array<any>;
+  public userList2: Array<any>;
+  public loadedUserList2: Array<any>;
   comments;
   subcomments;
   commentid;
@@ -33,6 +35,7 @@ export class CommunitycommentPage {
   loading;
   posts;
   post = this.community.post;
+  comment = this.cocomment.comment;
   title;
   tag = '';
   list_showsubcomment = [];
@@ -67,11 +70,12 @@ export class CommunitycommentPage {
 
   initializeItems(): void {
     this.userList = this.loadedUserList;
+    this.userList2 = this.loadedUserList2;
   }
 
-  ionViewWillEnter() {
-    var uid = firebase.auth().currentUser.uid;
-    this.UserRef.orderByChild('uid').equalTo(uid).on('value', userList => { // 프로필사진 띄우려고 시도했으나 포기
+  ionViewWillEnter(comment) {
+    var postid = this.post.uid;
+    this.UserRef.orderByChild('uid').equalTo(postid).on('value', userList => {
       let users = [];
       userList.forEach(user => {
         users.push(user.val());
@@ -80,6 +84,18 @@ export class CommunitycommentPage {
       this.userList = users;
       this.loadedUserList = users;
     });
+    /* 댓글 프로필 사진 - communitycomment -> postid -> commentid -> uid.................................................. 
+    var commentid = this.comment.commentid.uid;
+    this.UserRef.orderByChild('uid').equalTo(commentid).on('value', userList2 => {
+      let usercomment = [];
+      userList2.forEach(user2 => {
+        usercomment.push(user2.val());
+        return false;
+      });
+      this.userList2 = usercomment;
+      this.loadedUserList2 = usercomment;
+    });
+    */
   }
 
   ionViewDidLoad() {
@@ -174,6 +190,20 @@ export class CommunitycommentPage {
       ]
     });
     alert.present();
+  }
+
+  like(post) { // 좋아요 내가 안해서 모름
+    if (post.likesrc == 'assets/like.png') {
+      this.community.setLike(post).then(() => {
+        post.likesrc = 'assets/like-full.png';
+        post.like++;
+      });
+    } else {
+      this.community.deleteLike(post).then(() => {
+        post.likesrc = 'assets/like.png';
+        post.like--;
+      });
+    }
   }
 
   usercorrect_cmt(comment) { // 댓글의 수정 삭제 보이게하는 기능

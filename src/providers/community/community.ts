@@ -47,7 +47,7 @@ export class CommunityProvider {
 	initializecom(order) {
 		//this.title = this.titlelist[order];
 		//this.namecom = this.namecomlist[order];
-		this.posts = this.posts;
+		//this.posts = this.posts;
 		//this.number = this.numberlist[order];
 	}
 
@@ -262,6 +262,24 @@ export class CommunityProvider {
 
 	mosttag() { // 가장 많은 태그 6개
 		this.check = 6;
+		var promise = new Promise((resolve) => {
+			this.firetag.orderByChild('tagcnt').limitToLast(this.check).once("value").then((snapshot) => {
+				var mosttag1 = [];
+				snapshot.forEach((childSnapshot) => {
+					var mosttags = childSnapshot.val();
+
+					mosttag1.push(mosttags);
+				});
+
+				mosttag1.reverse();
+				resolve(mosttag1);
+			});
+		});
+		return promise;
+	}
+
+	tagmore() { // 가장 많은 태그 6개
+		this.check += 6;
 		var promise = new Promise((resolve) => {
 			this.firetag.orderByChild('tagcnt').limitToLast(this.check).once("value").then((snapshot) => {
 				var mosttag1 = [];

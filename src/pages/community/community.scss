@@ -3,7 +3,7 @@ page-community {
 	ul.postclass {
 	  list-style-type: none;
 		padding: 0px;
-		padding-top: 30px;
+		padding-top: 0px;
 		margin: 0px;
 	  //height: 100%;
 	}
@@ -98,10 +98,6 @@ page-community {
 	  max-height: 100%;
 	}
 
-	.group-time {
-		margin-bottom: 5px;
-	}
-
 	.group-time button {
 		background-color: transparent;
 		font-family: AppleSDGothicNeo;
@@ -112,7 +108,7 @@ page-community {
 		line-height: normal;
 		letter-spacing: normal;
 		color: #000000;
-		padding-top: 10px;
+		padding-top: 5px;
 	}
 
 	.group-time img {
@@ -305,8 +301,19 @@ ul.smalltag .setting button{
   text-align: center;
 	color: #9b9b9b;
 	float: left;
-	padding-bottom: 30px;
 	background-color: transparent;
+}
+
+button.moremore {
+  font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+  color: #9b9b9b;
 }
 
 }

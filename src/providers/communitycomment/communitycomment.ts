@@ -18,6 +18,7 @@ export class CommunitycommentProvider {
 	comments;
 	subcomments;
 	commentid;
+	comment;
 	text;
 	posttext = '';
 	posttitle = '';
