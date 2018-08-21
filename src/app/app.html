@@ -1,13 +1,10 @@
 <ion-split-pane>
 
   <!-- logged out menu -->
-  <ion-menu id="loggedOutMenu"[content]="content">
+  <ion-menu id="loggedOutMenu"[content]="content" class="logOutMenu" >
 
     <ion-content class="outer-content" class="back">
       <ion-list>
-        <ion-list-header>
-          설정
-        </ion-list-header>
           <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
             <ion-icon item-start [name]="p.icon"></ion-icon>
             {{p.title}}
@@ -17,30 +14,36 @@
   </ion-menu>
 
   <!-- logged in menu -->
-  <ion-menu id="loggedInMenu" [content]="content">
+  <ion-menu id="loggedInMenu" [content]="content" class="logInMenu" is-enabled="myphoto()">
 
     <ion-content class="outer-content" class="back">
-
-      <ion-list>
-        <ion-list-header>
-          마이 페이지
-        </ion-list-header>
-        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-          <ion-icon item-start [name]="p.icon"></ion-icon>
+      <div class="header">
+        <img src="assets/cancel.svg" menuClose>
+      </div>
+      <div class="profile">
+        <img src="{{photoURL}}"><br>
+        <div class="username"> {{username}} </div>
+        <div class="email"> {{email}} </div>
+        <div class="myLog"> 
+          <div class="mypage"> 내 정보 수정 </div> <div class="bar"> | </div>
+          <div class="logout" click="logout()">  로그아웃 </div>
+          </div>
+      </div>
+      <div class="itemlist">
+      <ion-list no-lines>
+        <button ion-item menuClose no-line *ngFor="let p of appPages" (click)="openPage(p)">
+          <ion-icon item-start> <img src="{{p.icon}}"> </ion-icon>
           {{p.title}}
         </button>
       </ion-list>
 
       <ion-list>
-        <ion-list-header>
-          설정
-        </ion-list-header>
         <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
           <ion-icon item-start [name]="p.icon"></ion-icon>
           {{p.title}}
         </button>
       </ion-list>
-
+      </div>
     </ion-content>
 
   </ion-menu>

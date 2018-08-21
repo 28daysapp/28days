@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform } from 'ionic-angular';
+import { MenuController, AlertController, Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -35,8 +35,10 @@ export class MyApp {
   user;
   userprofile;
   username;
+  email;
   // set entry page of app
   // rootPage:any = 'TabsPage';
+  photoURL;
   rootPage = FirstRunPage;
 
   pages: any[] = [
@@ -47,11 +49,13 @@ export class MyApp {
     { title: 'My Page', component: 'MypagePage' }
   ]
   appPages: PageInterface[] = [
-    { title: '내가 쓴 글', component: 'MypostPage', icon: 'calendar' },
+    { title: '보관함', component: 'MydepositoryPage', icon: 'assets/bookmark.svg' },
+    { title: '내 커뮤니티 글', component: 'MypostPage', icon: 'assets/browser.svg' },
     //not yet made
     // { title: '충전소', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'contacts' },
-    { title: '보관함', component: 'MydepositoryPage', icon: 'map' },
-    { title: '결제 내역', component: 'PaymentPage', icon: 'information-circle' }
+    { title: '결제 내역', component: 'PaymentPage', icon: 'assets/nuts.svg' },
+    { title: '설정', component: 'MypagePage', icon: 'assets/setting.svg' }
+
   ];
   loggedInPages: PageInterface[] = [
     // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
@@ -64,6 +68,7 @@ export class MyApp {
   ];
 
   constructor(
+    public events: Events,
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
@@ -75,16 +80,9 @@ export class MyApp {
     public auth: AuthProvider,
     public storage: Storage,
   ) {
+    this.email = "you are manding or hoho";
     firebase.initializeApp(firebaseConfig);
     this.user = firebase.auth().currentUser;
-    if (this.user) {
-      this.menu.enable(true, 'loggedInMenu');
-      this.menu.enable(false, 'loggedOutMenu');
-    }
-    else {
-      this.menu.enable(true, 'loggedOutMenu');
-      this.menu.enable(false, 'loggedInMenu');
-    }
     platform.ready().then(() => {
     //   // Okay, so the platform is ready and our plugins are available.
     //   // Here you can do any higher level native things you might need.
@@ -112,6 +110,16 @@ export class MyApp {
       }
     });
     // this.pleaselogin();
+    events.subscribe('user:created', (user, time) => {
+      // user and time are the same arguments passed in `events.publish(user, time)`
+      console.log('Welcome', user, 'at', time);
+      this.photoURL = user.photoURL;
+      this.username = user.displayName;
+      this.email = user.email;
+      console.log("username:" + user.displayName);
+      console.log("username:" + user.photoURL);
+      console.log("email:" + user.email);
+    });
 }
 
   openPage(page: PageInterface) {
@@ -123,7 +131,10 @@ export class MyApp {
       this.auth.logoutUser();
     }
       this.nav.push(page.component);
-    
+  }
+
+  logout(){
+    this.auth.logoutUser();
   }
 
     // if (page.logsOut === true) {
