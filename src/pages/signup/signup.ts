@@ -55,7 +55,7 @@ export class SignupPage {
       alert.present();
     } else {
       this.auth.signupUser(this.signupForm.value.email, this.signupForm.value.password).then(() => {
-      	this.user.updateUserprofile(this.signupForm.value.name, this.gender, this.signupForm.value.age).then(() => {
+      	this.user.updateUserprofile(this.signupForm.value.email, this.signupForm.value.name, this.gender, this.signupForm.value.age).then(() => {
           this.storage.set('localcred', {
             email: this.signupForm.value.email,
             password: this.signupForm.value.password
