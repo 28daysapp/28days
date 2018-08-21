@@ -50,7 +50,7 @@ page-communitycomment {
 	color: #000000;
   }
 
-  .comment-line1 .time{
+  .profilephoto .time{
 	font-family: AppleSDGothicNeo;
 	font-size: 12px;
 	font-weight: normal;
@@ -199,7 +199,7 @@ page-communitycomment {
 		color: #000000;
 	  }
 
-	div.username span.button button{
+	span.username span.button button{
 		font-family: AppleSDGothicNeo;
 		font-size: 14px;
 		font-weight: normal;
@@ -212,7 +212,7 @@ page-communitycomment {
 		background-color: transparent;
 	  }
 
-	.username{
+	.username span.anonymity{
 		margin-top: 30px;
 		font-family: AppleSDGothicNeo;
 		font-size: 14px;
@@ -306,9 +306,13 @@ page-communitycomment {
 		background-color: transparent;
 	  }
  
-	div.profilephoto img{
+	span.profilephoto img{
 		width: 24px;
 		height: 24px;
+	}
+
+	ion-item.profile{
+		max-width: 100%;
 	}
 
 }

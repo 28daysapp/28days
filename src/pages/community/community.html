@@ -36,20 +36,31 @@
 			<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
 			<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
 			<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
+			<!--
 			<li *ngFor="let mosttag of mosttag1">
-				<!-- firebase안의 tag항목안에서 가장 tagcnt가 많은 순서대로 6개(communityProvider-mosttag-check에서 변경 가능) 보여줌 -->
+				
 				<span class="setting">
 					<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
 				</span>
 			</li>
+			-->
+			<br>
+			<br>
+			<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center">태그 더 보기</button>
+			<li *ngFor="let tagtag of mosttags">
+				<span class="setting">
+					<button (click)=searchtag(tagtag.tag1) *ngIf="moretag">#{{ tagtag.tag1 }}</button>
+				</span>
+			</li>
 		</span>
+		<!-- firebase안의 tag항목안에서 가장 tagcnt가 많은 순서대로 6개(communityProvider-mosttag-check에서 변경 가능) 보여줌 -->
 	</ul>
-	<br>
+
 	<ul style="list-style:none; padding-left:0px;" class="postclass">
 		<li *ngFor="let post of posts">
 			<div class="post">
 
-				<span class="group-time">
+				<div class="group-time">
 					<button class="group" (click)="comment(post)">
 						{{ post.posttitle }}
 					</button>
@@ -57,7 +68,7 @@
 						<!-- 해당 포스트에 사진이 있다면 게시글 제목옆에 아이콘 생성 -->
 						<img src="assets/gallery.png">
 					</span>
-				</span>
+				</div>
 				<div class="posttext">
 					<div class="posttext">{{ post.text }}</div>
 				</div>

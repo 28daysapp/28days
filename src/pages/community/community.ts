@@ -26,6 +26,8 @@ export class CommunityPage {
   popover;
   tag = '';
   mosttag1;
+  mosttags;
+  moretag;
   user;
   value1 = true;
   value2 = false;
@@ -43,6 +45,7 @@ export class CommunityPage {
 
 
   ionViewWillEnter() {
+    this.moretag = false;
     this.community.morepost = 0;
     this.value1 = true;
     this.value2 = false;
@@ -128,6 +131,14 @@ export class CommunityPage {
       correct = false;
     }
     return correct;
+  }
+
+  tagmore() {
+    this.moretag = true;
+    this.community.tagmore().then((mosttags) => {
+      console.log(mosttags);
+      this.mosttags = mosttags;
+    });
   }
 
   /* 삭제 및 신고 여기선 필요없음 지워도 무방
