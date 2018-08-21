@@ -8,12 +8,12 @@ page-searchtag {
 	  //height: 100%;
 	}
 
-	.posttext .posttext.posttext div.posttext{
+	div.posttext span.posttext{
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: box; 
 		margin-top:1px; 
-		max-height:80px; 
+		max-height:40px; 
 		overflow:hidden; 
 		vertical-align:top; 
 		text-overflow: ellipsis; 
@@ -28,7 +28,8 @@ page-searchtag {
 		line-height: normal;
 		letter-spacing: normal;
 		color: #9b9b9b;
-		padding-top: 10px;
+		//padding-top: 10px;
+		background-color: transparent;
 	}
 
 	.anonymity {

@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>"{{ this.community.tag }}" 검색결과</ion-title>
+      <ion-title>#{{ this.community.tag }} 검색결과</ion-title>
     </ion-navbar>
 
   </ion-header>
@@ -36,10 +36,10 @@
 						</div>
 						<br>
 						<div class="posttext">
-							<span class="posttext">{{ post.text }}</span>
+							<span class="posttext">&nbsp;{{ post.text }}</span>
 						</div>
 						<div class="tag">
-							<div>#{{post.tag1}}</div>
+							<div>&nbsp;#{{post.tag1}}</div>
 						</div>
 						<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
 						<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>
