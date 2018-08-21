@@ -154,6 +154,10 @@ export class HospitalcenterPage {
     }
   }
 
+  countReviews() {
+    
+  }
+
 
 
   presentAreaModal() {

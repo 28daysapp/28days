@@ -121,7 +121,7 @@ export class PlaceDetailPage {
   reviewWrite() {
     if (this.user) {
       this.navCtrl.push('ReviewWritePage', {
-        placeId: this.placeId
+        place: this.place
       });
     } else {
       this.pleaselogin();
