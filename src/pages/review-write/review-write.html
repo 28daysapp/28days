@@ -10,7 +10,7 @@
     <ion-title>리뷰 작성</ion-title>
 
     <ion-buttons *ngIf="!filledStars" right>
-      <button ion-button icon-only (click)="nextSlide()">
+      <button ion-button icon-only disabled={{nextDisabled}} (click)="nextSlide()">
         다음
       </button>
     </ion-buttons>
@@ -58,7 +58,7 @@
         <div class="star-box">
           <span class="p1">친절성</span>
           <br>
-          <span class="p2">직원들과 상담자가 친절했나요?</span>
+          <span class="p2">직원들이 친절했나요?</span>
           <br>
           <button class="like" (click)="like(1,0)">
             <img src="{{ likesrc[1][0] }}">

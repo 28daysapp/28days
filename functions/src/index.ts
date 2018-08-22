@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true })
 
+
 // exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot, context) => {
 //     // This registration token comes from the client FCM SDKs.
 //     const messageData = snapshot.val();

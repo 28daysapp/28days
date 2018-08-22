@@ -112,14 +112,11 @@ export class HospitalcenterPage {
     } else {
       this.area = input.srcElement.value;
     }
-    // console.log("Query " + this.area);
 
 
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
-      // console.log(this.query)
-      // console.log(this.area);
+
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-      // console.log("latlng: " + this.latLng)
       if (!this.area) {
         this.area = "서울";
       }
@@ -136,12 +133,9 @@ export class HospitalcenterPage {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
-            // console.log(results[i].reference)
             let imgReference = this.places[i].reference; 
-
-
             this.places.image = this.google.getPlacePhoto(imgReference);
-            // console.log("Place image: " + this.places.image);
+            console.info("Places image: " + this.places.image);
           }
         } else {
           console.log("Status error: " + status);

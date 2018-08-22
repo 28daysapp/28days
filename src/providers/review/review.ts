@@ -24,7 +24,7 @@ export class ReviewProvider {
       var time = firebase.database.ServerValue.TIMESTAMP;
       var postId = newPostRef.key;
 
-      var ratingAvg = Math.round((rating[0] + rating[1] + rating[2] + rating[3]) / 4)  / 10;
+      var ratingAvg = (rating[0] + rating[1] + rating[2] + rating[3]) / 4.0;
 
       newPostRef.set({
         postId: postId,
