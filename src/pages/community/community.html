@@ -46,7 +46,7 @@
 			-->
 			<br>
 			<br>
-			<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center">태그 더 보기</button>
+			<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center" *ngIf="tagcntlimit != 3">태그 더 보기</button>
 			<li *ngFor="let tagtag of mosttags">
 				<span class="setting">
 					<button (click)=searchtag(tagtag.tag1) *ngIf="moretag">#{{ tagtag.tag1 }}</button>
