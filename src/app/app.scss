@@ -15,6 +15,84 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.logInMenu .scroll-content {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 6%;
+  overflow: hidden;
+}
+
+.logInMenu .header {
+  height: 12%;
+  width: 100%;
+  text-align: right;
+}
+
+.logInMenu .header img {
+  width: 7%;
+  object-fit: contain;
+}
+
+.logInMenu .profile {
+  text-align: center;
+  height: 30%;
+  color: #ffffff;
+}
+
+.logInMenu .profile img {
+  width: 30%;
+  object-fit: contain;
+}
+
+.logInMenu .profile .username {
+  padding: 3%;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.logInMenu .profile .email {
+  display: inline-block;
+  width: 70%;
+  height: 13%;
+  line-height: 150%;
+  border-radius: 12px;
+  border: solid 1px #ffffff;
+}
+
+.logInMenu .profile .myLog {
+  font-size:  16px;
+  padding: 6%;
+  width: 100%;
+  height: 30%;
+  text-align: center;
+}
+
+.logInMenu .profile .myLog .mypage {
+  display: inline-block;
+}
+
+.logInMenu .profile .myLog .logout {
+  display: inline-block;
+  color: #ffffff;
+}
+
+.logInMenu .profile .myLog .bar {
+  padding-left: 6%;
+  padding-right: 6%;
+  display: inline-block;
+}
+
+.logInMenu .itemlist {
+  margin-left: 10%;
+  margin-top: 15%; 
+  color: #ffffff;
+}
+
+.list-md[no-lines] .item-block, .list-md[no-lines] ion-item-options, .list-md[no-lines] .item .item-inner {
+  color: #ffffff;
+  font-size: 20px;
+}
+
 .toolbar-background {
   background-color: #ffffff;
 }
@@ -37,6 +115,8 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+
 
 ion-icon {
   &[class*="coconut-"] {

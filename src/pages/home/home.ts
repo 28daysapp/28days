@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController, Slides, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController, Slides, MenuController, Events } from 'ionic-angular';
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
@@ -37,7 +37,7 @@ export class HomePage {
   showmodal = false;
   token;
   count;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
+  constructor(public events: Events, public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http, public menu: MenuController) {
     // Receive message from push notifications
     if (params.data.message) {
@@ -45,7 +45,9 @@ export class HomePage {
     }
   }
 
-  ionViewDidLoad() {
+  
+
+  ionViewWillLoad() {
     console.log('ionViewDidLoad - Home')
     // present loading
     this.loading = this.loadingCtrl.create();
@@ -74,6 +76,8 @@ export class HomePage {
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.loading.dismiss();
+        this.createUser();
+        console.log("1");
         this.menu.enable(true, 'loggedInMenu');
         this.menu.enable(false, 'loggedOutMenu');
       })
@@ -97,8 +101,10 @@ export class HomePage {
               this.userprofile = userprofile;
               this.greeting = this.userprofile.greeting;
               this.loading.dismiss();
-              this.menu.enable(true, 'loggedOutMenu');
-              this.menu.enable(false, 'loggedInMenu');
+              console.log("2");
+              this.createUser();
+              this.menu.enable(true, 'loggedInMenu');
+              this.menu.enable(false, 'loggedOutMenu');
             });
           });
         } else {
@@ -107,6 +113,8 @@ export class HomePage {
           this.storage.get('username').then((username) => {
             if (username) {
               this.username = username;
+              console.log("3");
+              this.createUser();
               this.menu.enable(true, 'loggedInMenu');
               this.menu.enable(false, 'loggedOutMenu');
             } else {
@@ -120,6 +128,11 @@ export class HomePage {
         }
       });
     }
+  }
+
+  createUser() {
+    console.log('User created!')
+    this.events.publish('user:created', this.user, Date.now());
   }
 
   sendFCM() {
