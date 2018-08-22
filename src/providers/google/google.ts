@@ -16,7 +16,7 @@ export class GoogleProvider {
   getPlacePhoto(data) {
 
     this.data = data;
-    console.log("이건???" + this.data);
+    console.log("Google photo reference: " + this.data);
 
     const reference = this.data;
     const apiKey = 'AIzaSyDrABdIKzwnM37L1q1R_0qCMwsLhSiMjWk';
