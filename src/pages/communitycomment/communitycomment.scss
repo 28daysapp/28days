@@ -38,7 +38,7 @@ page-communitycomment {
   	margin: 0px;
   }
 
-  .comment-line1 {
+  span.commentname {
 	margin-top: 20px;
 	font-family: AppleSDGothicNeo;
 	font-size: 14px;
@@ -50,6 +50,31 @@ page-communitycomment {
 	color: #000000;
   }
 
+  .comment-line1 p{
+	margin-top: 20px;
+	font-family: AppleSDGothicNeo;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	color: #4a4a4a;
+  }
+
+  .commenttime{
+	float: right;
+	//margin-top: 20px;
+  	font-family: AppleSDGothicNeo;
+  	font-size: 12px;
+	font-weight: 500;
+  	font-style: normal;
+  	font-stretch: normal;
+  	line-height: normal;
+  	letter-spacing: normal;
+  	color: #9b9b9b;
+  }
+
   .profilephoto .time{
 	font-family: AppleSDGothicNeo;
 	font-size: 12px;
@@ -58,7 +83,7 @@ page-communitycomment {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	text-align: right;
+	//text-align: right;
 	color: #9b9b9b;
   }
   .btn {
@@ -85,9 +110,9 @@ page-communitycomment {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	//text-align: right;
+	text-align: left;
 	color: #d8d8d8;
-	margin-bottom: 40px;
+	//margin-bottom: 40px;
   }
 
   .btn button {
@@ -200,6 +225,7 @@ page-communitycomment {
 	  }
 
 	span.username span.button button{
+		display:inline-block;
 		font-family: AppleSDGothicNeo;
 		font-size: 14px;
 		font-weight: normal;
@@ -207,16 +233,16 @@ page-communitycomment {
 		font-stretch: normal;
 		line-height: normal;
 		letter-spacing: normal;
-		text-align: right;
+		//text-align: right;
 		color: #d8d8d8;
 		background-color: transparent;
 	  }
 
-	.username span.anonymity{
+	span.username span.anonymity{
 		margin-top: 30px;
 		font-family: AppleSDGothicNeo;
 		font-size: 14px;
-		font-weight: 500;
+		font-weight: normal;
 		font-style: normal;
 		font-stretch: normal;
 		line-height: normal;
