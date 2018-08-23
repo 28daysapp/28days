@@ -83,7 +83,6 @@ export class PlaceDetailPage {
         this.website = results.website;
         if (results.opening_hours) {
           this.openingHours = results.opening_hours.weekday_text
-          console.log(this.openingHours)
         }
         if (results.photos)
         this.photos = results.photos;

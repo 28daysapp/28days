@@ -43,7 +43,7 @@
 
     <ion-item class="card-item">
       <ion-avatar item-start>
-        <img id="main-img" src="../../assets/ccenter.jpg">
+        <img id="main-img" src={{place.image}} onError="this.src='../../assets/ccenter.jpg';">
       </ion-avatar>
 
       <div class="content-wrapper">
@@ -56,7 +56,7 @@
             <ion-icon name="star"> 4.2</ion-icon>
           </button>
           <button class="card-review" ion-button icon-start clear small>
-            리뷰 3
+            리뷰 {{ place.reviewCount }}
           </button>
         </div>
       </div>

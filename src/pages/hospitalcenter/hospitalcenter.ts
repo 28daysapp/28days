@@ -32,6 +32,8 @@ export class HospitalcenterPage {
   area: string;
   user;
 
+  reviewCount;
+
   matches;
   selected;
   loadingPlaces;
@@ -132,11 +134,35 @@ export class HospitalcenterPage {
       service.textSearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
+
             this.places = results;
+            console.log("results: " + results[i]);
+            // console.log("results: " + results[i].val());
+            console.info(results)
+            console.log("results[i].place_id: " + results[i].place_id);
+
+
+            this.places[i].reviewCount = 0;
+
+            firebase.database().ref('/placeInfo/' + results[i].place_id).once('value', function (snap) {
+              if(snap.val() === null) {
+                // this.reviewCount = snap.val().reviewCount;
+                // this.places[i].reviewCount = 0;
+              } else {
+                this.places[i].reviewCount = snap.val().reviewCount;
+              }
+        
+            }).then(()=>{
+              // if(!this.places[i].reviewCount) {
+                // this.places[i].reviewCount = 0;
+              // }
+            })
+
             let imgReference = this.places[i].reference; 
-            this.places.image = this.google.getPlacePhoto(imgReference);
-            console.info("Places image: " + this.places.image);
+            this.places[i].image = this.google.getPlacePhoto(imgReference);
+            console.info("Places image: " + this.places[i].image);
           }
+
         } else {
           console.log("Status error: " + status);
         }
@@ -145,29 +171,28 @@ export class HospitalcenterPage {
         console.log("Error: " + error);
       });
 
+
     }
   }
 
-  countReviews() {
-    
-  }
+  // countReviews(placeId, i) {
 
+  //   firebase.database().ref('/placeInfo/' + placeId).once('value', function (snap) {
+  //     console.log("88888888888888888888888888888888888888 placeId: " + placeId);
+  //     if(snap.val() != null) {
+  //       // this.reviewCount = snap.val().reviewCount;
+  //       this.places[i].reviewCount = snap.val().reviewCount;
+  //       console.log("eh review count 왜 안나옴: " + this.places[i].reviewCount);
 
+  //     } else {
+  //       this.places[i].reviewCount = 0;
+  //       console.log("eh review count 왜 안나옴: " + this.places[i].reviewCount);
 
-  presentAreaModal() {
-    // let areaModal = this.modalController.create('SearchAreaPage', {
-    //   type: this.type
-    // });
-    // areaModal.onDidDismiss(data => {
-    //   this.area = data.area;
-    //   this.type = data.type;
-    //   this.navCtrl.push('SearchPage', {
-    //     area: this.area,
-    //     type: this.type
-    //   });
-    // })
-    // areaModal.present();
-  }
+  //     }
+
+  //   })
+
+  // }
 
   placeDetail(place) {
     this.navCtrl.push('PlaceDetailPage', {
@@ -179,7 +204,6 @@ export class HospitalcenterPage {
     console.log("sort clicked")
     
   }
-
 
 }
 
