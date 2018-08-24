@@ -27,11 +27,13 @@ export class HospitalcenterPage {
   type: string = "center"
   query: string;
   places: any;
+
   details: any;
   url: string;
   area: string;
   user;
 
+  rating;
   reviewCount;
 
   matches;
@@ -40,7 +42,7 @@ export class HospitalcenterPage {
   apiProvider;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController,
     public menu: MenuController, public google: GoogleProvider) {
     this.places = [];
   }
@@ -58,9 +60,7 @@ export class HospitalcenterPage {
       this.menu.enable(false, 'loggedInMenu');
     }
 
-
     this.loadMap();
-
   }
 
   loadMap() {
@@ -90,7 +90,6 @@ export class HospitalcenterPage {
     // If Google Api current location is disabled, default location is Seoul City Hall
 
     this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-    
 
     this.mapOptions = {
       center: this.latLng,
@@ -109,12 +108,11 @@ export class HospitalcenterPage {
 
   searchByText(input) {
 
-    if(!input) {
+    if (!input) {
       this.area = "서울";
     } else {
       this.area = input.srcElement.value;
     }
-
 
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
 
@@ -134,34 +132,13 @@ export class HospitalcenterPage {
       service.textSearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
-
             this.places = results;
-            console.log("results: " + results[i]);
-            // console.log("results: " + results[i].val());
-            console.info(results)
-            console.log("results[i].place_id: " + results[i].place_id);
-
-
             this.places[i].reviewCount = 0;
-
-            firebase.database().ref('/placeInfo/' + results[i].place_id).once('value', function (snap) {
-              if(snap.val() === null) {
-                // this.reviewCount = snap.val().reviewCount;
-                // this.places[i].reviewCount = 0;
-              } else {
-                this.places[i].reviewCount = snap.val().reviewCount;
-              }
-        
-            }).then(()=>{
-              // if(!this.places[i].reviewCount) {
-                // this.places[i].reviewCount = 0;
-              // }
-            })
-
-            let imgReference = this.places[i].reference; 
-            this.places[i].image = this.google.getPlacePhoto(imgReference);
-            console.info("Places image: " + this.places[i].image);
+            this.places[i].rating = 0;
+            console.log(this.places[i].place_id);
+            this.countReviews(results[i].place_id, i);
           }
+          console.log(this.places)
 
         } else {
           console.log("Status error: " + status);
@@ -175,24 +152,14 @@ export class HospitalcenterPage {
     }
   }
 
-  // countReviews(placeId, i) {
-
-  //   firebase.database().ref('/placeInfo/' + placeId).once('value', function (snap) {
-  //     console.log("88888888888888888888888888888888888888 placeId: " + placeId);
-  //     if(snap.val() != null) {
-  //       // this.reviewCount = snap.val().reviewCount;
-  //       this.places[i].reviewCount = snap.val().reviewCount;
-  //       console.log("eh review count 왜 안나옴: " + this.places[i].reviewCount);
-
-  //     } else {
-  //       this.places[i].reviewCount = 0;
-  //       console.log("eh review count 왜 안나옴: " + this.places[i].reviewCount);
-
-  //     }
-
-  //   })
-
-  // }
+  countReviews(placeId, i) {
+    firebase.database().ref('/placeInfo/' + placeId).once('value').then((snapshot) => {
+      if (snapshot.val() === null) {
+        return
+      }
+        this.places[i].reviewCount = snapshot.val().reviewCount;
+    })
+  }
 
   placeDetail(place) {
     this.navCtrl.push('PlaceDetailPage', {
@@ -202,7 +169,7 @@ export class HospitalcenterPage {
 
   sort() {
     console.log("sort clicked")
-    
+
   }
 
 }

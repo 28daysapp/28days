@@ -96,9 +96,6 @@ export class PlaceDetailPage {
 
   }
 
-  getReviews() {
-
-  }
 
   changeTab() {
 
@@ -110,7 +107,6 @@ export class PlaceDetailPage {
       return;
     } else {
       this.showInfo = false;
-      this.getReviews();
       return;
     }
 
