@@ -27,13 +27,46 @@
         </ion-segment-button>
       </ion-segment>
     <button (click)="gooperator()">개발자 임시 페이지</button>
-  <ion-list>
+  <ion-list *ngIf="isSupporter" no-lines>
     <ion-item *ngFor="let user of userList" (click)="supporterreview(user)">
       <div class="list">
         <div class="profilephoto">
-          <img src="{{user.photoURL}}">
+          <img *ngIf="user.photoURL" src="{{user.photoURL}}">
+          <img *ngIf="!user.photoURL" src="assets/peanut.png">
         </div>
-        <div class="name">{{user.username}}</div>
+        <div class="text">
+        <div class="name">{{user.username}} </div>
+          <div class="badge"> ㅇ X 0 ㅇ X 0</div>
+        <div class="greeting">"{{user.greeting}}"</div>
+        <div class="kinds">전문상담분야</div>
+        <div class="personalkinds" *ngIf="user.tag1">{{user.tag1}}</div>
+        <div class="personalkinds" *ngIf="user.tag2">{{user.tag2}}</div>
+        <div class="personalkinds" *ngIf="user.tag3">{{user.tag3}}</div>
+        <div class="reviewsum0" *ngIf="user.reviewcnt==0">리뷰 0</div>
+        <div class="reviewsum" *ngIf="user.reviewcnt!=0">리뷰 {{user.reviewcnt}}</div>
+      </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="isCounselor" no-lines>
+    <ion-item *ngFor="let user of userList" (click)="counselorreview(user)">
+      <div class="list">
+        <div class="profilephoto">
+          <img *ngIf="user.photoURL" src="{{user.photoURL}}">
+          <img *ngIf="!user.photoURL" src="assets/peanut.png">
+        </div>
+        <div class="text">
+        <div class="name">{{user.username}} </div>
+          <div class="badge"> ㅇ X 0 ㅇ X 0</div>
+        <div class="greeting">"{{user.greeting}}"</div>
+        <div class="kinds">전문상담분야</div>
+        <div class="personalkinds" *ngIf="user.tag1">{{user.tag1}}</div>
+        <div class="personalkinds" *ngIf="user.tag2">{{user.tag2}}</div>
+        <div class="personalkinds" *ngIf="user.tag3">{{user.tag3}}</div>
+        <div class="reviewsum0" *ngIf="user.reviewcnt==0">리뷰 0</div>
+        <div class="reviewsum" *ngIf="user.reviewcnt!=0">리뷰 {{user.reviewcnt}}</div>
+      </div>
       </div>
     </ion-item>
   </ion-list>

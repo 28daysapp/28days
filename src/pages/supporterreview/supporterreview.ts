@@ -17,6 +17,11 @@ import { ChatProvider } from '../../providers/chat/chat';
 })
 export class SupporterreviewPage {
   @ViewChild('content') content: Content;
+
+  type = 'profile';
+  isProfile;
+  isReview;
+
   user;
   loading;
   reviews;
@@ -33,6 +38,7 @@ export class SupporterreviewPage {
     public alertCtrl: AlertController
   ) {
     this.user = this.navParams.get("user");
+    this.type = 'profile';
     
   }
 
@@ -48,6 +54,26 @@ export class SupporterreviewPage {
       console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
     });
     this.loading.dismiss();
+
+    if(this.type=='profile'){
+      this.isProfile = true;
+      this.isReview = false;
+    }
+    else {
+      this.isProfile = false;
+      this.isReview = true;
+    }
+  }
+
+  changeType(){
+    if(this.type=='profile'){
+      this.isProfile = true;
+      this.isReview = false;
+    }
+    else {
+      this.isProfile = false;
+      this.isReview = true;
+    }
   }
 
   reviewwrite() {

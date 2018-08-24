@@ -1,4 +1,82 @@
 page-supporterreview {
+
+  .toolbar-title-md {
+    color: #000000;
+    font-size: 18px;
+  }
+
+  .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover){
+    color: color($colors, primary);
+    font-size: 18px;
+  }
+
+  .profile {
+    height: 50%;
+    width: 100%;
+    padding:10%;
+    text-align: center;
+  }
+
+  .profile .greeting {
+    font-size: 20px;
+  font-weight: 500;
+  color: #4a4a4a;
+  line-height: 1;
+  }
+
+  .profile img {
+    margin: 10%;
+    width: 20%;
+  }
+
+  .profile .name {
+    font-size: 18px;
+    color: #4a4a4a;
+  }
+
+  .profile .supporter {
+    font-size: 12px;
+    color: #9b9b9b;
+  }
+
+  .segment-md .segment-button{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    width: 50%;
+    color: #9b9b9b;;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom-width: 0;
+  }
+
+  .segment-button.segment-activated {
+    border-bottom-width: 4px;
+    color: #4a4a4a;
+
+  }
+
+
+
+  .profiletext {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .profiletext td {
+    padding: 10px;
+    width: 100px;
+    font-size: 14px;
+  }
+
+  .profiletext .text1 {
+    font-size: 14px;
+    color: #4a4a4a;
+    font-weight: bold;
+  }
+
+
+/*
     ul {
         list-style-type: none;
         padding: 0px;
@@ -142,4 +220,5 @@ page-supporterreview {
         margin-bottom: 10px;
         background-color: white;
       }
+      */
 }
