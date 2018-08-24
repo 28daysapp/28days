@@ -43,15 +43,15 @@
 
   <div *ngIf="showInfo" class="details">
     <p *ngIf="website">
-      <strong>웹사이트 </strong>{{ website }}</p>
+      <strong>웹사이트   </strong>{{ website }}</p>
     <p>
-      <strong>주소 </strong>{{ address }}</p>
+      <strong>주소   </strong>{{ address }}</p>
     <p *ngIf="openingHours">
-      <strong>영업시간</strong> {{ openingHours }}</p>
+      <strong>영업시간  </strong>{{ openingHours }}</p>
     <p>
-      <strong>연락처 </strong>{{ phone }}</p>
+      <strong>연락처   </strong>{{ phone }}</p>
     <p>
-      <strong>대표키워드 </strong>#우울증</p>
+      <strong>대표키워드   </strong>#우울증</p>
   </div>
 
   <div *ngIf="!showInfo" class="reviews">
@@ -65,20 +65,20 @@
 
 
     <ion-list *ngFor="let post of posts">
-      <ion-item class="review">
+      <div class="review">
         <div class="review-star-points">
           <span id="average-text">평균</span>
           <img src="../../assets/icon/star.svg">
           <span> {{ post.ratingAvg }} </span>
         </div>
         <div class="review-text">
-          <span>{{ post.text }}</span>
+          {{ post.text }}
         </div>
         <div class="review-info">
           <span>{{ post.username }}</span>
           <span>   {{ post.timestamp | date:'yyyy.MM.dd' }}</span>
         </div>
-      </ion-item>
+      </div>
     </ion-list>
   </div>
 

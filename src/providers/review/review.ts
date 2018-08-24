@@ -11,6 +11,7 @@ export class ReviewProvider {
   placeId;
   text;
   rating;
+  reviewCount;
 
   constructor() {
     console.log('Hello ReviewProvider Provider');
@@ -36,9 +37,23 @@ export class ReviewProvider {
         timestamp: time,
         report: 0
       }).then(() => {
+        this.countReviews(placeId);
         resolve(true);
       });
 
+    });
+
+    return promise;
+  }
+
+  countReviews(placeId) {
+    const promise = new Promise((resolve) => {
+
+      firebase.database().ref('/review/' + placeId).once('value', function (snap) {
+        firebase.database().ref(`/placeInfo/` + placeId).set({
+          reviewCount: snap.numChildren(),
+        })
+      })
     });
 
     return promise;
@@ -49,7 +64,7 @@ export class ReviewProvider {
 
     var promise = new Promise((resolve) => {
       var posts = [];
-      this.fireReview.child(this.placeId).once("value").then((snapshot) => { // fireReview에서 시간 순으로 가져오고 snapshot에 하나씩 가져옴
+      this.fireReview.child(this.placeId).orderByChild('timestamp').once("value").then((snapshot) => { // fireReview에서 시간 순으로 가져오고 snapshot에 하나씩 가져옴
         snapshot.forEach((childSnapshot) => { //스냅샷의 child개수만큼 for
           posts.push(childSnapshot.val());
           posts.reverse();
@@ -65,7 +80,7 @@ export class ReviewProvider {
   getsearchposts(tag) {
     var promise = new Promise((resolve) => {
       this.fireReview.child(``).orderByChild('timestamp').once("value").then((snapshot) => {
-        
+
       });
     });
     return promise;

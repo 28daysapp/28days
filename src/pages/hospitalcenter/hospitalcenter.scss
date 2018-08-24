@@ -78,35 +78,26 @@ page-hospitalcenter {
         padding: 0;
       }
   
-      .card-star {
-        font-family: AppleSDGothicNeo;
-        font-size: 0.65em;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #4a4a4a;
+      .card-bottom {
+        margin-top: 1px;
+        display: flex;
+        align-content: center;
+
+        .card-star {
+          font-size: 0.6em;
+        
+    
+          ion-icon {
+            color: color($colors, primary);
+          }
+        }
+    
+        .card-review {
+          font-size: 0.71em;
   
-        ion-icon {
           color: color($colors, primary);
         }
       }
-  
-      .card-review {
-        font-family: AppleSDGothicNeo;
-        font-size: 0.7em;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: color($colors, primary);
-      }
     }
-
-    
-  
   }
-
 }
