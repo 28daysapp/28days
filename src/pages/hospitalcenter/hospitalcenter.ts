@@ -135,6 +135,11 @@ export class HospitalcenterPage {
             this.places = results;
             this.places[i].reviewCount = 0;
             this.places[i].rating = 0;
+
+            console.log("photo reference: " + results[i].reference)
+
+            this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
+
             console.log(this.places[i].place_id);
             this.countReviews(results[i].place_id, i);
           }

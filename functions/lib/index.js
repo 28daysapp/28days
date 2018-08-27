@@ -4,9 +4,13 @@ admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true });
 exports.calcReviewRating = functions.database.ref('/review/{placeId}/{reviewId}').onWrite((snapshot) => {
     console.info("New Review Added!");
-    snapshot.forEach(childSnapshot => {
-        console.log(childSnapshot);
+    var total = 0;
+    var reviewCount = snapshot.numChildren();
+    snapshot.forEach(function (ratingSnapshot) {
+        total += ratingSnapshot.val().ratingAvg;
     });
+    console.info("total: " + total);
+    console.info("average: " + total / reviewCount);
     return;
 });
 // exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot, context) => {

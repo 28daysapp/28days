@@ -25,9 +25,7 @@ export class GoogleProvider {
 
     this.http.get(url + `maxwidth=400&photoreference=${reference}&key=${apiKey}`)
       .subscribe(data => {
-        console.log("여기까지 안오네?")
         this.data = data;
-        console.log("Is this the pic??: " + this.data)
         return this.data
       });
     }

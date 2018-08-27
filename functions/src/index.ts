@@ -5,12 +5,15 @@ const cors = require('cors')({ origin: true })
 
 exports.calcReviewRating = functions.database.ref('/review/{placeId}/{reviewId}').onWrite((snapshot) => {
     console.info("New Review Added!");
-    console.info(snapshot);
-    console.info(snapshot.ratingAvg);
 
-    // snapshot.forEach(childSnapshot => {
-    //     console.log(childSnapshot);
-    // });
+    var total = 0;
+    var reviewCount = snapshot.numChildren();
+    snapshot.forEach(function(ratingSnapshot) {
+        total += ratingSnapshot.val().ratingAvg;
+    })
+
+    console.info("total: " + total);
+    console.info("average: " + total / reviewCount);
 
     return;
 })
