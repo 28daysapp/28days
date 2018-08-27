@@ -289,7 +289,6 @@ page-community {
 
 
 ul.smalltag .setting button{
-	padding-top: 10px;
 	list-style-type: none;
 	height: inherit;
   font-family: AppleSDGothicNeo;
@@ -303,6 +302,7 @@ ul.smalltag .setting button{
 	color: #9b9b9b;
 	float: left;
 	background-color: transparent;
+	margin-bottom: 5px;
 }
 
 button.moremore {
@@ -314,7 +314,34 @@ button.moremore {
   line-height: normal;
 	letter-spacing: normal;
 	text-align: center;
-  color: #9b9b9b;
+	color: #9b9b9b;
+	height: 24px;
+	border-radius: 7px;
+	background-color: #ffffff;
+	border: solid 1px #979797;
+	border-top: 0px;
+	border-top-left-radius: 0%;
+	border-top-right-radius: 0%
+}
+
+div.button_align{
+	margin: auto;
+	width: 50%;
+}
+
+.Triangle_reverse {
+  width: 10px;
+  height: 8px;
+  object-fit: contain;
+  transform: rotate(180deg);
+  background-color: #d8d8d8;
+}
+
+.Triangle {
+  width: 10px;
+  height: 8px;
+  object-fit: contain;
+  background-color: #d8d8d8;
 }
 
 }
