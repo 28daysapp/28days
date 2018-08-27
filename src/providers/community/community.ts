@@ -279,7 +279,7 @@ export class CommunityProvider {
 	}
 
 	tagmore() { // 가장 많은 태그 6개
-		this.check += 6;
+		this.check += 18;
 		var promise = new Promise((resolve) => {
 			this.firetag.orderByChild('tagcnt').limitToLast(this.check).once("value").then((snapshot) => {
 				var mosttag1 = [];

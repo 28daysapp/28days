@@ -36,22 +36,32 @@
 			<button (click)=searchtag(this.community.taglist[3])>#트라우마</button>
 			<button (click)=searchtag(this.community.taglist[4])>#학교폭력</button>
 			<button (click)=searchtag(this.community.taglist[5])>#가정폭력</button>
+
+			<li *ngFor="let tagtag of mosttag1">
+				<span class="setting">
+					<button (click)=searchtag(tagtag.tag1)>#{{ tagtag.tag1 }}</button>
+				</span>
+			</li>
+			<table style="width: 100%; color: transparent;"></table>
+			<hr style="float: left; margin: auto; width: 25%; height: 0.5px; border: solid 0.3px #979797;">
+			<hr style="float: right; margin: auto; width: 25%; height: 0.5px; border: solid 0.3px #979797;">
+			<div class="button_align">
+				<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center" *ngIf="tagcntlimit == 0">태그 더 보기
+				<!--	<img src="img/triangle@3x_reverse.png" srcset="img/triangle@2x_reverse.png 2x, img/triangle@3x_reverse.png 3x" class="Triangle_reverse"> -->
+				</button>
+				<button class="moremore" (click)="tagless()" style="width: 100%; text-align: center" *ngIf="tagcntlimit == 1">태그 접기
+				<!--	<img src="img/triangle@3x.png" srcset="img/triangle@2x.png 2x, img/triangle@3x.png 3x" class="Triangle"> -->
+				</button>
+			</div>
+
 			<!--
 			<li *ngFor="let mosttag of mosttag1">
 				
 				<span class="setting">
-					<button (click)=searchtag(mosttag.tag1)>#{{ mosttag.tag1 }}</button>
+					<button (click)=searchtag(mosttag.tag1) *ngIf="tagcntlimit != 1">#{{ mosttag.tag1 }}</button>
 				</span>
 			</li>
 			-->
-			<br>
-			<br>
-			<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center" *ngIf="tagcntlimit != 3">태그 더 보기</button>
-			<li *ngFor="let tagtag of mosttags">
-				<span class="setting">
-					<button (click)=searchtag(tagtag.tag1) *ngIf="moretag">#{{ tagtag.tag1 }}</button>
-				</span>
-			</li>
 		</span>
 		<!-- firebase안의 tag항목안에서 가장 tagcnt가 많은 순서대로 6개(communityProvider-mosttag-check에서 변경 가능) 보여줌 -->
 	</ul>
@@ -61,7 +71,8 @@
 			<div class="post">
 
 				<div class="group-time">
-					<button class="group" (click)="comment(post)" style="width: 100%; text-align: left">
+					<table style="width: 100%; color: transparent;"></table>
+					<button class="group" (click)="comment(post)" style="text-align: left">
 						{{ post.posttitle }}
 						<span *ngIf="urlcheck(post)">
 							<!-- 해당 포스트에 사진이 있다면 게시글 제목옆에 아이콘 생성 -->

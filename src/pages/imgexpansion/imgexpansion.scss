@@ -1,9 +1,30 @@
 page-imgexpansion {
 
-    img{
-        //width: 100%;
-        height: 375px;
+    img.normal{
+        width: 100%;
+        height: 100%;
         vertical-align: middle;
+      }
+
+    img.rotate1{
+      width: 100%;
+      height: 100%;
+        vertical-align: middle;
+        transform: rotate(90deg);
+      }
+
+    img.rotate2{
+      width: 100%;
+      height: 100%;
+        vertical-align: middle;
+        transform: rotate(180deg);
+      }
+
+    img.rotate3{
+      width: 100%;
+      height: 100%;
+        vertical-align: middle;
+        transform: rotate(270deg);
       }
 
     .content{
