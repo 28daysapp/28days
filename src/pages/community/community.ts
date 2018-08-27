@@ -27,7 +27,6 @@ export class CommunityPage {
   tag = '';
   mosttag1;
   mosttags;
-  moretag;
   tagcntlimit = 0;
   user;
   value1 = true;
@@ -46,7 +45,6 @@ export class CommunityPage {
 
 
   ionViewWillEnter() {
-    this.moretag = false;
     this.community.morepost = 0;
     this.tagcntlimit = 0;
     this.value1 = true;
@@ -136,11 +134,18 @@ export class CommunityPage {
   }
 
   tagmore() {
-    this.moretag = true;
     this.tagcntlimit++;
-    this.community.tagmore().then((mosttags) => {
-      console.log(mosttags);
-      this.mosttags = mosttags;
+    this.community.tagmore().then((mosttag1) => {
+      console.log(mosttag1);
+      this.mosttag1 = mosttag1;
+    });
+  }
+
+  tagless() {
+    this.tagcntlimit--;
+    this.community.mosttag().then((mosttag1) => {
+      console.log(mosttag1);
+      this.mosttag1 = mosttag1;
     });
   }
 
