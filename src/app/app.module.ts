@@ -38,6 +38,7 @@ import { ReviewProvider } from '../providers/review/review';
 import { FCM } from '@ionic-native/fcm'
 import { OperatorProvider } from '../providers/operator/operator';
 import { GoogleProvider } from '../providers/google/google';
+import { CounselorProvider } from '../providers/counselor/counselor';
 import { PlaceProvider } from '../providers/place/place';
 
 
@@ -84,6 +85,7 @@ import { PlaceProvider } from '../providers/place/place';
     FcmProvider,
     OperatorProvider,
     GoogleProvider,
+    CounselorProvider,
     PlaceProvider
 
     //GroupProvider,

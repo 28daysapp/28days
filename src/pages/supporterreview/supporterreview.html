@@ -11,8 +11,8 @@
   <ion-navbar>
     <ion-title>{{user.username}}</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only (click)="reviewwrite()">
-        <ion-icon name="create"></ion-icon>
+      <button ion-button (click)="reviewwrite()">
+        후기작성
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -21,7 +21,63 @@
 
 
 <ion-content #content>
-    <button (click)="sendRequest()">채팅요청하기</button>
+<div class="profile">
+  <div class="greeting"> “ {{user.greeting}} ” </div>
+
+  <img *ngIf="user.photoURL" src="{{user.photoURL}}">
+  <img *ngIf="!user.photoURL" src="assets/peanut.png">
+  <div class="name">{{user.username}}</div>
+  <div class="supporter">서포터</div>
+  
+  
+
+  
+  <ion-segment [(ngModel)]="type" (ionChange)="changeType()">
+      <ion-segment-button value="profile">
+        프로필
+      </ion-segment-button>
+      <ion-segment-button value="review">
+        후기({{user.reviewcnt}})
+      </ion-segment-button>
+    </ion-segment>
+
+  </div>
+
+    <div *ngIf="isProfile" class="profiletext">
+      <table>
+        <tr>
+          <td class="text1">전문상담분야</td>
+          <td>{{user.tag1}} {{user.tag2}} {{user.tag3}}</td>
+        </tr>
+        <tr>
+          <td class="text1">총 상담 횟수</td>
+          <td>{{user.count}}회</td>
+        </tr>
+        <tr>
+          <td class="text1">받은 배지</td>
+          <td>0개 0개</td>
+        </tr>
+        <tr>
+          <td class="text1">나의 이야기</td>
+        </tr>
+        <tr>
+          {{user.story}}
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf="isReview" class="review">
+      <ul>
+          <li *ngFor="let review of reviews">
+              {{review.comment}}
+              <div class="group-time">
+                  <span class="time">{{ review.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
+              </div>
+          </li>
+      </ul>
+    </div>
+
+  <!--
   <ul>
     <li *ngFor="let review of reviews">
       <div class="post">
@@ -37,6 +93,8 @@
             <img src="assets/star-full.png"> {{review.rating4}}
           </div>
         </div>
+
+        -->
         <!--
          <div class="comment-like">
             <div class="like">
@@ -66,6 +124,8 @@
                   </ul>
               </div>
             -->
+
+            <!--
         <div class="group-time">
           <span class="time">{{ review.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
         </div>
@@ -73,5 +133,5 @@
       </div>
     </li>
   </ul>
-
+-->
 </ion-content>

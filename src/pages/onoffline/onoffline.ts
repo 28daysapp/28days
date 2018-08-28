@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController, App } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { SupporterProvider } from '../../providers/supporter/supporter'
 import { UserProvider } from '../../providers/user/user'
@@ -28,9 +28,11 @@ export class OnofflinePage {
 
   q;
   user;
+  isSupporter;
+  isCounselor;
 
   constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-    public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+    public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public appCrtl: App,
     public supporter: SupporterProvider, public userp: UserProvider) {
 
     this.SupporterRef = firebase.database().ref('/supporter');
@@ -82,6 +84,8 @@ export class OnofflinePage {
 
   getList() {
     if (this.type == 'Supporter') {
+      this.isSupporter = true;
+      this.isCounselor = false;
       this.SupporterRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
@@ -103,6 +107,8 @@ export class OnofflinePage {
       }
     }
     if (this.type == 'Counselor') {
+      this.isSupporter = false;
+      this.isCounselor = true;
       this.CounselorRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
@@ -130,6 +136,8 @@ export class OnofflinePage {
   ionViewWillEnter() {
     
     if (this.type == 'Supporter') {
+      this.isSupporter = true;
+      this.isCounselor = false;
       this.SupporterRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
@@ -141,6 +149,8 @@ export class OnofflinePage {
       });
     }
     if (this.type == 'Counselor') {
+      this.isSupporter = false;
+      this.isCounselor = true;
       this.CounselorRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
@@ -153,7 +163,34 @@ export class OnofflinePage {
     }
 
   }
-  supporterreview(user) {
+
+  supporterreview(user) { 
+    this.appCrtl.getRootNavs()[0].push('SupporterreviewPage',
+  {
+    user: user
+  });
+  }
+
+  counselorreview(user) {
+    this.appCrtl.getRootNavs()[0].push('CounselorreviewPage',
+  {
+    user: user
+  });
+  }
+
+  gooperator() {
+    this.navCtrl.push('OperatorPage');
+  }
+  //탭까지 같이 보내기
+  /*
+  supporterreview(user) { 
+    this.navCtrl.push('SupporterreviewPage',
+      {
+        user: user
+      });
+  }
+
+  counselorreview(user) {
     this.navCtrl.push('SupporterreviewPage',
       {
         user: user
@@ -161,7 +198,8 @@ export class OnofflinePage {
   }
   gooperator() {
     this.navCtrl.push('OperatorPage');
-  }
+  }*/
+  
 
   /*
     pleaselogin() {
