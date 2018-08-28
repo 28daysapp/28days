@@ -57,7 +57,7 @@
           <img *ngIf="!user.photoURL" src="assets/peanut.png">
         </div>
         <div class="text">
-        <div class="name">{{user.username}} </div>
+        <div class="name">{{user.username}} 상담사</div>
           <div class="badge"> ㅇ X 0 ㅇ X 0</div>
         <div class="greeting">"{{user.greeting}}"</div>
         <div class="kinds">전문상담분야</div>
@@ -65,6 +65,9 @@
         <div class="personalkinds" *ngIf="user.tag2">{{user.tag2}}</div>
         <div class="personalkinds" *ngIf="user.tag3">{{user.tag3}}</div>
         <div class="reviewsum0" *ngIf="user.reviewcnt==0">리뷰 0</div>
+        <div class="reviewsumstar" *ngIf="user.reviewcnt!=0">
+          <img src="assets/icon/star.svg"> {{user.rating}}
+        </div>
         <div class="reviewsum" *ngIf="user.reviewcnt!=0">리뷰 {{user.reviewcnt}}</div>
       </div>
       </div>

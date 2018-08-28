@@ -73,11 +73,15 @@ page-place-detail {
                 justify-content: center;
 
             }
+
+    
     
             .review {
                 margin: 0 0.7em;
+                height: auto;
                 border-bottom: solid 1px #d8d8d8;
-    
+                position: relative;
+
                 .review-star-points {
     
                     #average-text {
@@ -88,6 +92,7 @@ page-place-detail {
     
                 .review-text {
                     margin: 0.5em 0;
+                    height: auto;
                 }
     
                 .review-info {

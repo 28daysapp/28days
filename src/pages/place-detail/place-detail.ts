@@ -83,7 +83,6 @@ export class PlaceDetailPage {
         this.website = results.website;
         if (results.opening_hours) {
           this.openingHours = results.opening_hours.weekday_text
-          console.log(this.openingHours)
         }
         if (results.photos)
         this.photos = results.photos;
@@ -97,9 +96,6 @@ export class PlaceDetailPage {
 
   }
 
-  getReviews() {
-
-  }
 
   changeTab() {
 
@@ -111,7 +107,6 @@ export class PlaceDetailPage {
       return;
     } else {
       this.showInfo = false;
-      this.getReviews();
       return;
     }
 
@@ -121,7 +116,7 @@ export class PlaceDetailPage {
   reviewWrite() {
     if (this.user) {
       this.navCtrl.push('ReviewWritePage', {
-        placeId: this.placeId
+        place: this.place
       });
     } else {
       this.pleaselogin();

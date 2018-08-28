@@ -46,7 +46,7 @@
 			-->
 			<br>
 			<br>
-			<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center">태그 더 보기</button>
+			<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center" *ngIf="tagcntlimit != 3">태그 더 보기</button>
 			<li *ngFor="let tagtag of mosttags">
 				<span class="setting">
 					<button (click)=searchtag(tagtag.tag1) *ngIf="moretag">#{{ tagtag.tag1 }}</button>
@@ -61,16 +61,17 @@
 			<div class="post">
 
 				<div class="group-time">
-					<button class="group" (click)="comment(post)">
+					<button class="group" (click)="comment(post)" style="width: 100%; text-align: left">
 						{{ post.posttitle }}
+						<span *ngIf="urlcheck(post)">
+							<!-- 해당 포스트에 사진이 있다면 게시글 제목옆에 아이콘 생성 -->
+							<img src="assets/gallery.png">
+						</span>
 					</button>
-					<span *ngIf="urlcheck(post)">
-						<!-- 해당 포스트에 사진이 있다면 게시글 제목옆에 아이콘 생성 -->
-						<img src="assets/gallery.png">
-					</span>
 				</div>
 				<div class="posttext">
-					<div class="posttext">{{ post.text }}</div>
+					<!-- <button class="posttext" (click)="comment(post)">{{ post.text }}</button> -->
+					<span class="posttext">&nbsp;{{ post.text }}</span>
 				</div>
 				<div class="tag">
 					<button (click)=searchtag(post.tag1) *ngIf="tagcheck(post.tag1)">#{{post.tag1}}</button>

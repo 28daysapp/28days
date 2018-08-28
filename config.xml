@@ -126,7 +126,13 @@
     <allow-navigation href="http://137.68.247.13:8101" />
     <allow-navigation href="http://137.68.246.201:8100" />
     <allow-navigation href="http://137.68.247.139:8100" />
+<<<<<<< HEAD
     <allow-navigation href="http://137.68.247.135:8101" />
+=======
+    <allow-navigation href="http://10.231.4.185:8100" />
+    <allow-navigation href="http://172.30.1.40:8100" />
+    <allow-navigation href="http://137.68.247.161:8100" />
+>>>>>>> 8371acaffb2063cce790f2a6ef30300c027a8c90
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>

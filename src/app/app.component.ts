@@ -92,7 +92,6 @@ export class MyApp {
 
       if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
         //Notifications
-        fcm.subscribeToTopic('all');
         fcm.getToken().then(token => {
           console.log("Token: " + token);
         })

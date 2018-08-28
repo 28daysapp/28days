@@ -27,10 +27,14 @@ export class HospitalcenterPage {
   type: string = "center"
   query: string;
   places: any;
+
   details: any;
   url: string;
   area: string;
   user;
+
+  rating;
+  reviewCount;
 
   matches;
   selected;
@@ -38,7 +42,7 @@ export class HospitalcenterPage {
   apiProvider;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController,
     public menu: MenuController, public google: GoogleProvider) {
     this.places = [];
   }
@@ -56,9 +60,7 @@ export class HospitalcenterPage {
       this.menu.enable(false, 'loggedInMenu');
     }
 
-
     this.loadMap();
-
   }
 
   loadMap() {
@@ -88,7 +90,6 @@ export class HospitalcenterPage {
     // If Google Api current location is disabled, default location is Seoul City Hall
 
     this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-    
 
     this.mapOptions = {
       center: this.latLng,
@@ -107,19 +108,15 @@ export class HospitalcenterPage {
 
   searchByText(input) {
 
-    if(!input) {
+    if (!input) {
       this.area = "서울";
     } else {
       this.area = input.srcElement.value;
     }
-    // console.log("Query " + this.area);
-
 
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
-      // console.log(this.query)
-      // console.log(this.area);
+
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-      // console.log("latlng: " + this.latLng)
       if (!this.area) {
         this.area = "서울";
       }
@@ -136,13 +133,13 @@ export class HospitalcenterPage {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
-            // console.log(results[i].reference)
-            let imgReference = this.places[i].reference; 
-
-
-            this.places.image = this.google.getPlacePhoto(imgReference);
-            // console.log("Place image: " + this.places.image);
+            this.places[i].reviewCount = 0;
+            this.places[i].rating = 0;
+            console.log(this.places[i].place_id);
+            this.countReviews(results[i].place_id, i);
           }
+          console.log(this.places)
+
         } else {
           console.log("Status error: " + status);
         }
@@ -151,24 +148,17 @@ export class HospitalcenterPage {
         console.log("Error: " + error);
       });
 
+
     }
   }
 
-
-
-  presentAreaModal() {
-    // let areaModal = this.modalController.create('SearchAreaPage', {
-    //   type: this.type
-    // });
-    // areaModal.onDidDismiss(data => {
-    //   this.area = data.area;
-    //   this.type = data.type;
-    //   this.navCtrl.push('SearchPage', {
-    //     area: this.area,
-    //     type: this.type
-    //   });
-    // })
-    // areaModal.present();
+  countReviews(placeId, i) {
+    firebase.database().ref('/placeInfo/' + placeId).once('value').then((snapshot) => {
+      if (snapshot.val() === null) {
+        return
+      }
+        this.places[i].reviewCount = snapshot.val().reviewCount;
+    })
   }
 
   placeDetail(place) {
@@ -179,9 +169,8 @@ export class HospitalcenterPage {
 
   sort() {
     console.log("sort clicked")
-    
-  }
 
+  }
 
 }
 

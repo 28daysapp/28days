@@ -2,6 +2,13 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true });
+exports.calcReviewRating = functions.database.ref('/review/{placeId}/{reviewId}').onWrite((snapshot) => {
+    console.info("New Review Added!");
+    snapshot.forEach(childSnapshot => {
+        console.log(childSnapshot);
+    });
+    return;
+});
 // exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot, context) => {
 //     // This registration token comes from the client FCM SDKs.
 //     const messageData = snapshot.val();

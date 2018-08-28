@@ -11,7 +11,7 @@ import firebase from 'firebase';
 export class CounselorProvider {
 
   firecounselorreview = firebase.database().ref('/counselorreview');
-  firecounselorreviewsum = firebase.database().ref('/supporterreviewsum');
+  firecounselorreviewsum = firebase.database().ref('/counselorreviewsum');
   count;
   reviewrating;
 

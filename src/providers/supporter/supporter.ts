@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import { resolve } from 'path';
 
 /*
   Generated class for the SupporterProvider provider.
@@ -10,6 +11,7 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class SupporterProvider {
+  firesupporter = firebase.database().ref('/supporter');
   firesupporterreview = firebase.database().ref('/supporterreview');
   firesupporterreviewsum = firebase.database().ref('/supporterreviewsum');
   count;
@@ -20,7 +22,7 @@ export class SupporterProvider {
     this.count = 0;
   }
 
-  addsupporterreview(supporterid, rating1, rating2, rating3, rating4, comment) {
+  addsupporterreview(supporterid, comment) {
     var uid = firebase.auth().currentUser.uid;
     var newReviewRef = this.firesupporterreview.push();
     var reviewid = newReviewRef.key;
@@ -29,18 +31,29 @@ export class SupporterProvider {
         supporterid: supporterid,
         reviewid: reviewid,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
-        rating1: rating1,
-        rating2: rating2,
-        rating3: rating3,
-        rating4: rating4,
         comment: comment,
         uid: uid
       }).then(() => {
-        this.sumrating(rating1, rating2, rating3, rating4, supporterid);
+        this.addsupportersum(supporterid);
         resolve(true);
       });
     });
     return promise;
+  }
+
+  addsupportersum(supporterid) {
+    var supporter;
+    var promise = new Promise((resolve) => {
+      this.firesupporterreview.child(supporterid).once("value").then((snapshot) => {
+        console.log(snapshot.numChildren())
+      this.firesupporter.child(`${supporterid}`).update({
+        reviewcnt: snapshot.numChildren()
+      }).then(() => {
+        resolve(true);
+      });
+    });
+  });
+  console.log('1');
   }
 
   sumrating(r1, r2, r3, r4, supporterid) {
@@ -80,6 +93,17 @@ export class SupporterProvider {
       this.firesupporterreviewsum.child(supporterid).once("value").then((snapshot) => {
         reviewrating = snapshot.val();
         resolve(reviewrating);
+      });
+    });
+    return (promise);
+  }
+
+  getsupporter(supporterid) {
+    var promise = new Promise((resolve) => {
+      var supporter;
+      this.firesupporter.child(supporterid).once("value").then((snapshot) => {
+        supporter = snapshot.val();
+        resolve(supporter);
       });
     });
     return (promise);

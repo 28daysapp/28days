@@ -28,6 +28,7 @@ export class CommunityPage {
   mosttag1;
   mosttags;
   moretag;
+  tagcntlimit = 0;
   user;
   value1 = true;
   value2 = false;
@@ -47,6 +48,7 @@ export class CommunityPage {
   ionViewWillEnter() {
     this.moretag = false;
     this.community.morepost = 0;
+    this.tagcntlimit = 0;
     this.value1 = true;
     this.value2 = false;
     this.user = firebase.auth().currentUser;
@@ -135,6 +137,7 @@ export class CommunityPage {
 
   tagmore() {
     this.moretag = true;
+    this.tagcntlimit++;
     this.community.tagmore().then((mosttags) => {
       console.log(mosttags);
       this.mosttags = mosttags;

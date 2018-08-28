@@ -10,7 +10,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>병원/센터
-      <img src="../../assets/icon/question.png">
+      <img src="assets/icon/question.png">
     </ion-title>
 
     <ion-buttons right>
@@ -43,20 +43,19 @@
 
     <ion-item class="card-item">
       <ion-avatar item-start>
-        <img id="main-img" src="../../assets/ccenter.jpg">
+        <img id="main-img" src={{place.image}} onError="this.src='assets/ccenter.jpg';">
       </ion-avatar>
 
       <div class="content-wrapper">
         <div class="card-title"> {{ place.name }}</div>
-
         <div class="card-subtitle">{{ place.formatted_address.substr(5) }}</div>
         <div class="hash-tags"> #우울증 </div>
         <div class="card-bottom">
           <button class="card-star" ion-button icon-start clear small>
-            <ion-icon name="star"> 4.2</ion-icon>
+            <ion-icon name="star"> {{ place.rating }}  리뷰 {{ place.reviewCount }}</ion-icon>
           </button>
           <button class="card-review" ion-button icon-start clear small>
-            리뷰 3
+            
           </button>
         </div>
       </div>

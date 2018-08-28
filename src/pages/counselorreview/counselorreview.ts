@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
-import { SupporterProvider } from '../../providers/supporter/supporter';
+import { CounselorProvider } from '../../providers/counselor/counselor';
 import { ChatProvider } from '../../providers/chat/chat';
-import { resolve } from 'url';
 
 /**
- * Generated class for the SupporterreviewPage page.
+ * Generated class for the CounselorreviewPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,10 +12,10 @@ import { resolve } from 'url';
 
 @IonicPage()
 @Component({
-  selector: 'page-supporterreview',
-  templateUrl: 'supporterreview.html',
+  selector: 'page-counselorreview',
+  templateUrl: 'counselorreview.html',
 })
-export class SupporterreviewPage {
+export class CounselorreviewPage {
   @ViewChild('content') content: Content;
 
   type = 'profile';
@@ -34,7 +33,7 @@ export class SupporterreviewPage {
   reviewnum;
   count;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider,public chat: ChatProvider,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public counselor: CounselorProvider,public chat: ChatProvider,
     public loadingCtrl: LoadingController, public popoverCtrl: PopoverController, public viewCtrl: ViewController,
     public alertCtrl: AlertController
   ) {
@@ -44,12 +43,18 @@ export class SupporterreviewPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SupporterreviewPage');
+    console.log('ionViewDidLoad CounselorreviewPage');
   }
 
   ionViewWillEnter() {
-    //this.loading = this.loadingCtrl.create();
-    //this.loading.present();
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    this.counselor.getallreview(this.user.uid).then((reviews) => {
+      this.reviews = reviews;
+      console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
+    });
+    this.loading.dismiss();
+
     if(this.type=='profile'){
       this.isProfile = true;
       this.isReview = false;
@@ -58,23 +63,6 @@ export class SupporterreviewPage {
       this.isProfile = false;
       this.isReview = true;
     }
-
-    var promise = new Promise((resolve) => {
-      this.supporter.getallreview(this.user.uid).then((reviews) => {
-        this.reviews = reviews;
-        console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
-      }).then(() => {
-      this.supporter.getsupporter(this.user.uid).then((supporter) => {
-        this.user = supporter;
-        console.log('SupporterPage - getallusersExceptbuddy - userprofiles12: ' + JSON.stringify(this.user));
-      });
-    });
-  });
-    return promise;
-    
-    //this.loading.dismiss();
-
-    
   }
 
   changeType(){
@@ -89,7 +77,7 @@ export class SupporterreviewPage {
   }
 
   reviewwrite() {
-    this.navCtrl.push('SupporterreviewwritePage',
+    this.navCtrl.push('CounselorreviewwritePage',
       {
         user: this.user
       });
@@ -97,7 +85,7 @@ export class SupporterreviewPage {
 
   sendRequest() {
     this.chat.initializebuddy(this.user);
-    this.navCtrl.push('SupporterchatPage').then(() => {
+    this.navCtrl.push('CounselorchatPage').then(() => {
       var index = this.viewCtrl.index;
       this.navCtrl.remove(index);
     });
@@ -120,3 +108,4 @@ export class SupporterreviewPage {
   }
 
 }
+
