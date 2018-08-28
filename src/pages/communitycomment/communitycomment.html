@@ -104,6 +104,22 @@
 			<span class="button" *ngIf="reportuser_cmt(comment)" style="float: right;">
 				<button (click)="reportcomment(comment)">신고</button>
 			</span>
+
+			<div *ngIf="comment.updatecomment">
+				<div class="subcomment">
+					<br>
+					<br>
+					<form [formGroup]="updateForm" class="footerform" *ngIf="cancelbutton">
+						<input formControlName="txt" type="text"  style="width: 60%">
+						<button (click)="cancel(comment)" style="float:right">
+							취소
+						</button>
+						<button (click)="updatecomment(comment)" style="float:right">
+							수정
+						</button>
+					</form>
+				</div>
+			</div>
 			<hr style="width: 100%; height: 0.1px; border: solid 1px #d8d8d8; margin-bottom: 20px;">
 			<!--
 				<ion-item no-lines class="profile" *ngFor="let user of userList2">
@@ -123,16 +139,6 @@
 					<button (click)="deletecomment(comment)">삭제</button>
 				</span>
 
-				<div *ngIf="comment.updatecomment">
-					<div class="subcomment">
-						<form [formGroup]="updateForm" class="footerform">
-							<input formControlName="txt" type="text">
-							<button (click)="updatecomment(comment)" style="float:right">
-								게시
-							</button>
-						</form>
-					</div>
-				</div>
 			-->
 				<!-- 뭔지 모름
 		<li *ngFor="let comment of comments">

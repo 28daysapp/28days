@@ -39,7 +39,7 @@
 							<span class="posttext">&nbsp;{{ post.text }}</span>
 						</div>
 						<div class="tag">
-							<div>&nbsp;#{{post.tag1}}</div>
+							<div *ngIf="tagcheck(post.tag1)">&nbsp;#{{post.tag1}}</div>
 						</div>
 						<div class="anonymity" *ngIf="changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} 익명</div>
 						<div class="anonymity" *ngIf="!changeAnonymity(post)">{{ post.timestamp | date:'MM.dd a hh:mm' }} {{ post.username }}</div>

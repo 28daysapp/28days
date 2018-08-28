@@ -15,8 +15,8 @@ import { CommunityProvider } from '../../providers/community/community';
 	templateUrl: 'communityfix.html',
 })
 export class CommunityfixPage {
-	title;
 	post = this.community.post;
+	title;
 	pick = false;
 	text = '';
 	tag1 = '';
@@ -25,7 +25,7 @@ export class CommunityfixPage {
 	}
 
 	fix(title, text) {
-		if (this.title == '' || this.text == '') { // 제목과 내용 필수 기입 항목
+		if (title == '' || text == '') { // 제목과 내용 필수 기입 항목
 			let alert = this.alertCtrl.create({
 				title: '알림',
 				message: '제목, 내용을 모두 기입해주세요.',
@@ -38,7 +38,7 @@ export class CommunityfixPage {
 			})
 			alert.present();
 		}
-		else if (this.title.length > 20) { // 제목 길이 제한 - 없어도 무방
+		else if (title.length > 20) { // 제목 길이 제한 - 없어도 무방
 			let alert = this.alertCtrl.create({
 				title: '알림',
 				message: '제목의 길이는 최대 20자 입니다.',
@@ -51,7 +51,7 @@ export class CommunityfixPage {
 			})
 			alert.present();
 		}
-		else if (this.text.length > 500) { // 내용 길이 제한 - 없어도 무방
+		else if (text.length > 500) { // 내용 길이 제한 - 없어도 무방
 			let alert = this.alertCtrl.create({
 				title: '알림',
 				message: '내용의 길이는 최대 500자 입니다.',
@@ -72,7 +72,15 @@ export class CommunityfixPage {
 				dismissOnPageChange: true,
 			});
 			loading.present();
-		}
+		} /*
+		this.community.updatePost(title, text).then(() => { // communityProvider 의 updatepost를 수행
+			this.navCtrl.pop();
+		});
+		let loading = this.loadingCtrl.create({
+			dismissOnPageChange: true,
+		});
+		loading.present();
+		*/
 	}
 
 }
