@@ -5,6 +5,9 @@
 
     <ion-content class="outer-content" class="back">
       <ion-list>
+          <br>
+          <br>
+          <br>
           <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
             <ion-icon item-start [name]="p.icon"></ion-icon>
             {{p.title}}

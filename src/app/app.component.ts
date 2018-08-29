@@ -59,7 +59,7 @@ export class MyApp {
   ];
   loggedInPages: PageInterface[] = [
     // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
-    { title: '비밀번호 바꾸기', component: 'PwdchangePage', icon: 'help' },
+    { title: '비밀번호 바꾸기', component: 'PwdcheckPage', icon: 'help' },
     { title: '로그아웃', component: 'TabsPage', icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
