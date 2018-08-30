@@ -26,6 +26,8 @@ export class SignupPage {
   usernameAvailable: boolean;
   clickmale = false;
   clickfemale = false;
+  clickterms1 = false;
+  clickterms2 = false;
   gender = '';
   constructor(public navCtrl: NavController, public auth: AuthProvider, public user: UserProvider,
     public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
@@ -35,7 +37,7 @@ export class SignupPage {
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
   		password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])],
     	passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])],
-      age: ['', Validators.required]
+      age: ['', Validators.required],
     });
   }
 
@@ -45,6 +47,19 @@ export class SignupPage {
       let alert = this.alertCtrl.create({
         title: '회원가입 오류',
         message: '모든 항목을 모두 입력하였는지 확인하여 주시고 각 항목의 형식을 지켜주세요!',
+        buttons: [
+          {
+            text: '확인',
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+    } 
+    else if(this.clickterms1 == false || this.clickterms2 == false){
+      let alert = this.alertCtrl.create({
+        title: '회원가입 오류',
+        message: '약관에 모두 동의해주세요!',
         buttons: [
           {
             text: '확인',
@@ -111,4 +126,19 @@ export class SignupPage {
     this.gender = 'F';
   }
 
+  setTerms1(){
+    this.clickterms1 = true;
+  }
+
+  setTerms2(){
+    this.clickterms2 = true;
+  }
+
+  terms1(){
+    this.navCtrl.push("PersonalInformationPage");
+  }
+
+  terms2(){
+    this.navCtrl.push("TermsUsePage");
+  }
 }

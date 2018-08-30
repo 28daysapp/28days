@@ -214,9 +214,26 @@ export class MypagePage {
       this.pleaselogin();
     }
   }
-  mysetting(){
+
+  terms1(){
     if (this.user) {
-      this.navCtrl.push('MysettingPage');
+      this.navCtrl.push('PersonalInformationPage');
+    } else {
+      this.pleaselogin();
+    }
+  }
+
+  terms2(){
+    if (this.user) {
+      this.navCtrl.push('TermsUsePage');
+    } else {
+      this.pleaselogin();
+    }
+  }
+
+  mypay(){
+    if (this.user) {
+      this.navCtrl.push('PaymentPage');
     } else {
       this.pleaselogin();
     }

@@ -1,7 +1,7 @@
 page-signup {
 
 	.cardsbg {
-		background: color($colors, bggray, base);
+		background-color: #55b26e;
 	}
 
 	ion-card {
@@ -19,7 +19,7 @@ page-signup {
   }
 
 	ion-input {
-		border-bottom: 1px solid color($colors, dark, base);
+		border-bottom: solid 1px #ffffff;
 	}
 
 	h4 {
@@ -57,7 +57,7 @@ page-signup {
     border-radius: 10px;
     font-weight: 500;
     font-size: 15px;
-    color: white;
+    color: #55b26e;
     padding: 10px 0px;
     width: 46%;
     background-color: color($colors, bordergray, base);
@@ -68,7 +68,93 @@ page-signup {
   }
 
   .greenbtn {
-  	background-color: color($colors, daysgreen, base) !important;
+  	background-color: color($colors, #ffffff, base) !important;
   }
 
+	span.coconut{
+		padding-top: 25%;
+		width: 100%;
+		text-align: center;
+		height: 36px;
+		font-family: Baruta;
+		font-size: 30px;
+		font-weight: 900;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #ffffff;
+	}
+
+	form {
+		padding: 15px;
+		padding-top: 55%;
+		width: 70%;
+		height: 19px;
+		font-family: AppleSDGothicNeo;
+		font-size: 16px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #ffffff;
+		margin-left: auto;
+		margin-right: auto;
+		display: block !important;	
+	}
+
+	form button.button{
+		margin-top: 50px;
+		margin-bottom: 70px;
+		background-color: transparent;
+		height: 29px;
+		font-family: AppleSDGothicNeo;
+		font-size: 24px;
+		font-weight: 500;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: center;
+		color: #ffffff;
+		margin-left: auto;
+		margin-right: auto;
+		display: block !important;
+	}
+
+	span.info{
+		padding-top: 10px;
+	}
+
+	.button2 button {
+		vertical-align: middle;
+		border-radius: 10px;
+		font-weight: 500;
+		font-size: 15px;
+		color: white;
+		padding: 10px 0px;
+		width: 10%;
+		background-color: color($colors, bordergray, base);
+	}
+
+	.button2 button.terms1{
+		background-color: transparent;
+		width: 56%;
+		//vertical-align: middle;
+		border-radius: 0px;
+	}
+
+	.button2 button.terms2{
+		background-color: transparent;
+		width: 28%;
+		//vertical-align: middle;
+		border-radius: 0px;
+	}
+
+	.button2 span.terms1{
+		font-size: 15px;
+		//vertical-align: middle;
+		font-weight: 500;
+	}
 }
