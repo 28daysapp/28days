@@ -57,13 +57,17 @@ export class MyApp {
     { title: '설정', component: 'MypagePage', icon: 'assets/setting.svg' }
 
   ];
+  /*
   loggedInPages: PageInterface[] = [
     // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
     { title: '비밀번호 바꾸기', component: 'PwdcheckPage', icon: 'help' },
     { title: '로그아웃', component: 'TabsPage', icon: 'log-out', logsOut: true }
   ];
+  */
   loggedOutPages: PageInterface[] = [
     { title: '로그인', component: 'LoginPage', icon: 'log-in' },
+  ];
+  loggedOutPages2: PageInterface[] = [
     { title: '회원가입', component: 'SignupPage', icon: 'person-add' }
   ];
 
