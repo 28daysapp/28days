@@ -54,7 +54,7 @@ $colors: (
 );
 
 
-
+$tabs-background: color($colors, white, base);
 
 // App iOS Variables
 // --------------------------------------------------
@@ -71,6 +71,8 @@ $searchbar-ios-input-search-icon-color: #9b9b9b;
 $searchbar-ios-input-placeholder-color: #9b9b9b;
 
 $segment-button-ios-text-color: color($colors, black);
+
+$tabs-ios-tab-padding-top: 9px;
 
 // $card-ios-margin-left: 0;
 // $card-ios-margin-right: 0;
@@ -98,6 +100,8 @@ $searchbar-md-input-box-shadow: white;
 // $segment-button-md-border-bottom-color: color($colors, black);
 $segment-button-md-border-color-activated: color($colors, black);
 $segment-button-md-text-color-activated: color($colors, black);
+
+$tabs-md-tab-padding-top: 9px;
 
 // App Windows Variables
 // --------------------------------------------------

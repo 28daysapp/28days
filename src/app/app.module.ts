@@ -30,7 +30,6 @@ import { FcmProvider } from '../providers/fcm/fcm'
 //import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { GroupProvider } from '../providers/group/group';
-import { SearchPage } from '../pages/search/search';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
@@ -78,7 +77,6 @@ import { PlaceProvider } from '../providers/place/place';
     CommunityfixPage,
     // IamportService,
     InAppBrowser,
-    SearchPage,
     SupporterProvider,
     ReviewProvider,
     FCM,

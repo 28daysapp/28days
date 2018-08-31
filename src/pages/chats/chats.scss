@@ -1,0 +1,113 @@
+page-chats {
+
+    ion-list {
+		background-color: transparent !important;
+    }
+
+
+
+	.bottom-border {
+        width: 100%;
+		border-bottom: 1px solid color($colors, bggray, base) !important;
+		padding: 12px !important;
+		background-color: transparent !important;
+    }
+
+    .grid-username { 
+        grid-area: username; 
+        color: #4a4a4a;
+		font-size: 18px;
+		margin-bottom: 10px !important;
+        text-align: left;
+    }
+    .grid-time { 
+        grid-area: time; 
+        color: gray;
+        font-size: 12px;
+        text-align: right;
+    }
+    .grid-message { 
+        margin: 3px 0px;
+        grid-area: message; 
+        color: gray;
+        font-size: 12px;
+        text-align: left;
+		// line-height: 1.3em;
+		height: 2.6em;
+		white-space: pre-line;
+		overflow: hidden;
+		text-overflow: ellipsis;
+    }
+    .grid-review { 
+        border: 1px solid #4a4a4a;
+        border-radius: 8px;
+        width: 80%;
+        padding: 8px;
+        width: 80px;
+        float: right;        
+        background-color: transparent;
+        color:#4a4a4a;
+        font-size: 12px;
+    }
+    
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+        'username username username username time'
+        'message message message message review';
+        grid-gap: 5px;
+    }
+
+	ion-avatar {
+		margin: 0px 8px 0px 0px !important;
+	}
+
+	ion-avatar img {
+		width: 60px !important;
+		height: 60px !important;
+    }
+    
+    .grid-item {
+        color: gray;
+        font-size: 12px;
+        text-align: center;
+    }
+
+	.msg {
+		margin: 3px 55px 0px 0px;
+		font-size: 12px;
+		line-height: 1.3em;
+		height: 2.6em;
+		white-space: pre-line;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: gray;
+	}
+
+	// ion-item remove padding
+	.label {
+  	margin: 0px;
+	}
+
+	.username {
+        color: #4a4a4a;
+		font-size: 18px;
+		margin-bottom: 10px !important;
+	}
+
+	.time {
+		font-size: 12px;
+		color: gray;
+		float: right;
+    }
+    
+    .review {
+        border: 1px solid #4a4a4a;
+        padding: 8px;
+        float: right;
+        background-color: transparent;
+        border-radius: 8px;
+        color:#4a4a4a;
+        font-size: 12px;
+    }
+}
