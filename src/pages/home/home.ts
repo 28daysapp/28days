@@ -287,5 +287,31 @@ export class HomePage {
     });
   }
 
+  counselling(){
+    let alert = this.alertCtrl.create({
+      title: '알림',
+      message: '아직 준비중인 서비스입니다.',
+      buttons: [
+        {
+          text: '확인',
+          role: 'cancel'
+        },
+      ]
+    });
+    alert.present();
+  }
 
+  nuts(){
+    let alert = this.alertCtrl.create({
+      title: '알림',
+      message: '아직 준비중인 서비스입니다.',
+      buttons: [
+        {
+          text: '확인',
+          role: 'cancel'
+        },
+      ]
+    });
+    alert.present();
+  }
 }

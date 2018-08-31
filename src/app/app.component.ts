@@ -57,13 +57,17 @@ export class MyApp {
     { title: '설정', component: 'MypagePage', icon: 'assets/setting.svg' }
 
   ];
+  /*
   loggedInPages: PageInterface[] = [
     // { title: '푸쉬알람', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'person' },
-    { title: '비밀번호 바꾸기', component: 'PwdchangePage', icon: 'help' },
+    { title: '비밀번호 바꾸기', component: 'PwdcheckPage', icon: 'help' },
     { title: '로그아웃', component: 'TabsPage', icon: 'log-out', logsOut: true }
   ];
+  */
   loggedOutPages: PageInterface[] = [
     { title: '로그인', component: 'LoginPage', icon: 'log-in' },
+  ];
+  loggedOutPages2: PageInterface[] = [
     { title: '회원가입', component: 'SignupPage', icon: 'person-add' }
   ];
 
@@ -90,23 +94,23 @@ export class MyApp {
       splashScreen.hide();
     //   // this.initPushNotification();
 
-      if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
-        //Notifications
-        fcm.getToken().then(token => {
-          console.log("Token: " + token);
-        })
-        fcm.onNotification().subscribe(data => {
-          if (data.wasTapped) {
-            console.log("Received in background");
-          } else {
-            console.log("Received in foreground");
-          };
-        })
-        fcm.onTokenRefresh().subscribe(token => {
-          console.log(token);
-        });
-        //end notifications.
-      }
+      // if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
+      //   //Notifications
+      //   fcm.getToken().then(token => {
+      //     console.log("Token: " + token);
+      //   })
+      //   fcm.onNotification().subscribe(data => {
+      //     if (data.wasTapped) {
+      //       console.log("Received in background");
+      //     } else {
+      //       console.log("Received in foreground");
+      //     };
+      //   })
+      //   fcm.onTokenRefresh().subscribe(token => {
+      //     console.log(token);
+      //   });
+      //   //end notifications.
+      // }
     });
     // this.pleaselogin();
     events.subscribe('user:created', (user, time) => {

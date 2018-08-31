@@ -536,6 +536,74 @@ export class CommunityProvider {
 		return promise;
 	}
 
+	mypost() { // 검색 시 처음 10개의 게시물
+		this.cnt = 10;
+		var uid = firebase.auth().currentUser.uid;
+		var promise = new Promise((resolve) => {
+			this.firecommunity.orderByChild('uid').equalTo(uid).limitToLast(this.cnt).once("value").then((snapshot1) => {
+				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
+
+					var likepostid = [];
+					likesnapshot.forEach((childSnapshot) => {
+						likepostid.push(childSnapshot.key);
+					});
+					var posts = [];
+					snapshot1.forEach((childSnapshot) => {
+						var post = childSnapshot.val();
+
+						// if user liked this post, set like img to full heart
+						// else, set like img to empty heart
+						if (likepostid.indexOf(post.postid) != -1) {
+							post.likesrc = "assets/like-full.png";
+						} else {
+							post.likesrc = "assets/like.png";
+						}
+						posts.push(post);
+						this.moresearch++;
+					});
+					posts.reverse();
+					resolve(posts);
+				});
+			});
+		});
+		console.log(this.moresearch);
+		return promise;
+	}
+
+	doInfiniteMypost() { // 검색 시 다음 10개의 게시물
+		this.cnt += 10; // or however many more you want to load
+		var uid = firebase.auth().currentUser.uid;
+		var promise = new Promise((resolve) => {
+			this.firecommunity.orderByChild('uid').equalTo(uid).limitToLast(this.cnt).once("value").then((snapshot1) => {
+				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
+
+					var likepostid = [];
+					likesnapshot.forEach((childSnapshot) => {
+						likepostid.push(childSnapshot.key);
+					});
+					var posts = [];
+					snapshot1.forEach((childSnapshot) => {
+						var post = childSnapshot.val();
+
+						this.moresearch++;
+						// if user liked this post, set like img to full heart
+						// else, set like img to empty heart
+						if (likepostid.indexOf(post.postid) != -1) {
+							post.likesrc = "assets/like-full.png";
+						} else {
+							post.likesrc = "assets/like.png";
+						}
+						posts.push(post);
+					});
+					posts.reverse();
+					resolve(posts);
+				});
+			});
+		});
+		console.log(this.moresearch);
+		return promise;
+	}
+
 	/* when user click like of a post, save timestamp and add 1 to the number of like of a post */
 	setLike(post) { // 좋아요 + 1
 		var uid = firebase.auth().currentUser.uid;
