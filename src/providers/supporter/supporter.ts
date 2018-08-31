@@ -1,7 +1,6 @@
 
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-// import { resolve } from 'path';
 
 /*
   Generated class for the SupporterProvider provider.
