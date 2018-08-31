@@ -54,10 +54,13 @@
                 <ion-avatar item-start>
                   <img src="{{ item.buddyphotoURL }}">
                 </ion-avatar>
-                <span class="username" (click)="supporterchat(item)">{{ item.buddyusername }}</span>
-                <span class="time" (click)="supporterchat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-                <div class="msg" (click)="supporterchat(item)">{{ item.recentmessage }}</div>
-                <button class="review" (click)="writeReview()" right>후기 남기기</button>
+                <div class="grid-container">
+                    <span class="grid-username" (click)="supporterchat(item)">{{ item.buddyusername }}</span>
+                    <span class="grid-time" (click)="supporterchat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
+                    <div class="grid-message" (click)="supporterchat(item)">{{ item.recentmessage }}</div>
+                    <div class="grid-review" (click)="writeReview()">후기 남기기</div>
+                </div>
+
               </ion-item>
               <ion-item-options side="right">
                 <button class="delete_button" ion-button color="danger" (click)="deleteSupporterChat(item)">
