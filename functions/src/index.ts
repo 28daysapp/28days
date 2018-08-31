@@ -9,25 +9,23 @@ const cors = require('cors')({ origin: true })
 
 exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((snapshot, context) => {
     console.info("New Review Added!");
-
-    console.info("before: " + JSON.stringify(snapshot.before));
-    console.info("after: " + JSON.stringify(snapshot.after));
-
-
+    const placeId = snapshot.after.key;
     const reviewCount = snapshot.after.numChildren();
-    console.info("reviewCount: " + reviewCount);
-
-    snapshot.after.forEach((childSnapshot) => {
-        console.info("child snapshot: " + JSON.stringify(childSnapshot));
-        console.info("reviewAvg: " + childSnapshot.ratingAvg);
-    });
-
-
     let total = 0;
 
-
-
-    return;
+    snapshot.after.forEach((childSnapshot) => {
+        console.info("Rating Avg: " + childSnapshot.val().ratingAvg);
+        let ratingAvg = childSnapshot.val().ratingAvg;
+        if (!ratingAvg) {
+            ratingAvg = 0;
+        }
+        total = total + childSnapshot.val().ratingAvg;
+    });
+    const totalAvg = total / reviewCount;
+    admin.database().ref(`/placeInfo/${placeId}`).update({
+        ratings: Math.round(totalAvg * 10) / 10
+    });
+    return totalAvg;
 })
 
 exports.getGooglePhotos = functions.https.onRequest((req, res) => {

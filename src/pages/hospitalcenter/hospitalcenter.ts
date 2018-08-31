@@ -134,7 +134,7 @@ export class HospitalcenterPage {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
             this.places[i].reviewCount = 0;
-            this.places[i].rating = 0;
+            this.places[i].ratings = 0;
 
             console.log("photo reference: " + results[i].reference)
 

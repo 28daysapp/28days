@@ -6,16 +6,22 @@ admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true });
 exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((snapshot, context) => {
     console.info("New Review Added!");
-    console.info("before: " + JSON.stringify(snapshot.before));
-    console.info("after: " + JSON.stringify(snapshot.after));
+    const placeId = snapshot.after.key;
     const reviewCount = snapshot.after.numChildren();
-    console.info("reviewCount: " + reviewCount);
-    snapshot.after.forEach((childSnapshot) => {
-        console.info("child snapshot: " + JSON.stringify(childSnapshot));
-        console.info("reviewAvg: " + childSnapshot.reviewAvg);
-    });
     let total = 0;
-    return;
+    snapshot.after.forEach((childSnapshot) => {
+        console.info("Rating Avg: " + childSnapshot.val().ratingAvg);
+        let ratingAvg = childSnapshot.val().ratingAvg;
+        if (!ratingAvg) {
+            ratingAvg = 0;
+        }
+        total = total + childSnapshot.val().ratingAvg;
+    });
+    const totalAvg = total / reviewCount;
+    admin.database().ref(`/placeInfo/${placeId}`).update({
+        ratings: Math.round(totalAvg * 10) / 10
+    });
+    return totalAvg;
 });
 exports.getGooglePhotos = functions.https.onRequest((req, res) => {
     // const data = "CmRbAAAA3V8LQAKXfZQQJNJHJJq84i0pxWJiOE4HVKI4xJOtuxyomH9ksTHBAc4cDnvqhB4n0XBOx2GAnKHl-JXcxwPEFuX_8f0GOXYukG_PrjMmfM28qd3Bei0UW9Oh_zCWjP4jEhBzf9o5Vhx5XTVa2qG6W54wGhShGQoFMYPPR-UkG-EYI_6xy7neRg";
