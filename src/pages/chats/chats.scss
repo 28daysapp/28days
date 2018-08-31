@@ -2,14 +2,18 @@ page-chats {
 
     ion-list {
 		background-color: transparent !important;
-	}
+    }
+
+
 
 	.bottom-border {
         width: 100%;
 		border-bottom: 1px solid color($colors, bggray, base) !important;
-		padding: 12px 0 !important;
+		padding: 12px !important;
 		background-color: transparent !important;
-	}
+    }
+    
+
 
 	ion-avatar {
 		margin: 0px 8px 0px 0px !important;
@@ -37,6 +41,7 @@ page-chats {
 	}
 
 	.username {
+        color: #4a4a4a;
 		font-size: 18px;
 		margin-bottom: 10px !important;
 	}
@@ -45,5 +50,15 @@ page-chats {
 		font-size: 12px;
 		color: gray;
 		float: right;
-	}
+    }
+    
+    .review {
+        border: 1px solid #4a4a4a;
+        padding: 8px;
+        float: right;
+        background-color: transparent;
+        border-radius: 8px;
+        color:#4a4a4a;
+        font-size: 12px;
+    }
 }

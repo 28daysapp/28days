@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
     <ion-segment [(ngModel)]="type" (ionChange)="getChatList()">
         <ion-segment-button value="requested">
@@ -50,13 +50,14 @@
 
         <ion-list no-lines *ngSwitchCase="'request'">
           <ion-item-sliding *ngFor="let item of requestinfos">
-            <ion-item class="bottom-border" (click)="supporterchat(item)">
+            <ion-item class="bottom-border">
                 <ion-avatar item-start>
                   <img src="{{ item.buddyphotoURL }}">
                 </ion-avatar>
-                <span class="username">{{ item.buddyusername }}</span>
-                <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-                <div class="msg">{{ item.recentmessage }}</div>
+                <span class="username" (click)="supporterchat(item)">{{ item.buddyusername }}</span>
+                <span class="time" (click)="supporterchat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
+                <div class="msg" (click)="supporterchat(item)">{{ item.recentmessage }}</div>
+                <button class="review" (click)="writeReview()" right>후기 남기기</button>
               </ion-item>
               <ion-item-options side="right">
                 <button class="delete_button" ion-button color="danger" (click)="deleteSupporterChat(item)">

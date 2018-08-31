@@ -28,7 +28,7 @@ export class ChatsPage {
     });
   }
 
-  getItems(searchbar){
+  getItems(searchbar) {
     console.log(searchbar);
   }
 
@@ -51,4 +51,12 @@ export class ChatsPage {
       });
     });
   }
+
+  writeReview() {
+    this.navCtrl.push('SupporterreviewwritePage',
+      {
+        user: this.user
+      });
+  }
+
 }
