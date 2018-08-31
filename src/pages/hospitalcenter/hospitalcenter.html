@@ -22,19 +22,20 @@
   <ion-toolbar no-border>
     <ion-searchbar (ionInput)="searchByText($event)" placeholder="검색"></ion-searchbar>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content no-border>
   <!-- Segment in content -->
-
   <ion-segment [(ngModel)]="type" (ionChange)="searchByText()">
-    <ion-segment-button value="center">
-      상담센터
-    </ion-segment-button>
-    <ion-segment-button value="psychiatric">
-      정신과
-    </ion-segment-button>
-  </ion-segment>
+      <ion-segment-button value="center">
+        상담센터
+      </ion-segment-button>
+      <ion-segment-button value="psychiatric">
+        정신과
+      </ion-segment-button>
+    </ion-segment>
+
 
   <div #map id="map"></div>
   <!-- <ion-spinner ios></ion-spinner> -->

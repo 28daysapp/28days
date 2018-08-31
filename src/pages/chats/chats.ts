@@ -5,11 +5,16 @@ import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
 @Component({
-  selector: 'page-requestedchat',
-  templateUrl: 'requestedchat.html',
+  selector: 'page-chats',
+  templateUrl: 'chats.html',
 })
-export class RequestedchatPage {
+export class ChatsPage {
+
   requestedinfos;
+  requestinfos;
+
+  type: string = "requested";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public user: UserProvider) {
   }
@@ -18,6 +23,18 @@ export class RequestedchatPage {
     this.chat.getallRequestedinfos().then((info) => {
       this.requestedinfos = info;
     });
+    this.chat.getallRequestinfos().then((info) => {
+      this.requestinfos = info;
+    });
+  }
+
+  getItems(searchbar){
+    console.log(searchbar);
+  }
+
+  getChatList() {
+    const chatType = this.type;
+    console.log("Chat type: " + chatType);
   }
 
   supporterchat(item) {
@@ -27,4 +44,11 @@ export class RequestedchatPage {
     });
   }
 
+  deleteSupporterChat(item) {
+    this.chat.deleteChat(item.buddyuid).then(() => {
+      this.chat.getallRequestinfos().then((info) => {
+        this.requestinfos = info;
+      });
+    });
+  }
 }
