@@ -56,7 +56,7 @@ export class SupporterreviewwritePage {
 
   reviewwrite(){
     console.log('gg');
-    this.supporter.addsupporterreview(this.user.uid, this.text).then(() => {
+    this.supporter.addsupporterreview(this.user.uid, this.text, this.user.username).then(() => {
 	  	this.navCtrl.pop();
 	  });
 	  let loading = this.loadingCtrl.create({

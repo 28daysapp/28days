@@ -29,7 +29,8 @@
   <div class="name">{{user.username}}</div>
   <div class="supporter">서포터</div>
   
-  
+</div>
+<div class="segbutton">
 
   
   <ion-segment [(ngModel)]="type" (ionChange)="changeType()">
@@ -67,14 +68,17 @@
     </div>
 
     <div *ngIf="isReview" class="review">
-      <ul>
-          <li *ngFor="let review of reviews">
-              {{review.comment}}
-              <div class="group-time">
-                  <span class="time">{{ review.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
-              </div>
-          </li>
-      </ul>
+      <ion-list>
+        <ion-item *ngFor="let review of reviews">
+          <div class="reviewcomment">
+            {{review.comment}}
+          </div>
+            <div class="group-time">
+              {{review.username}}
+                <span class="time">{{ review.timestamp | date:'yyyy.MM.dd' }}</span>
+            </div>
+        </ion-item>
+      </ion-list> 
     </div>
 
   <!--

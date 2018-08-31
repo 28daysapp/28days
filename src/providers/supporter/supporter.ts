@@ -22,7 +22,7 @@ export class SupporterProvider {
     this.count = 0;
   }
 
-  addsupporterreview(supporterid, comment) {
+  addsupporterreview(supporterid, comment, username) {
     var uid = firebase.auth().currentUser.uid;
     var newReviewRef = this.firesupporterreview.push();
     var reviewid = newReviewRef.key;
@@ -32,7 +32,8 @@ export class SupporterProvider {
         reviewid: reviewid,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
         comment: comment,
-        uid: uid
+        uid: uid,
+        username: username
       }).then(() => {
         this.addsupportersum(supporterid);
         resolve(true);
@@ -129,11 +130,11 @@ export class SupporterProvider {
     this.getreviewrating(supporterid).then((reviewrating) => {
       this.reviewrating = reviewrating;
       if (this.reviewrating == null) {
-        return 0
+        return 0;
       }
       else {
         sum = this.reviewrating.ratingA + this.reviewrating.ratingB + this.reviewrating.ratingC + this.reviewrating.ratingD
-        sum = sum + (this.reviewrating.count * 4);
+        sum = sum / (this.reviewrating.count * 4);
         return sum;
       }
     });
