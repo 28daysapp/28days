@@ -85,8 +85,9 @@ import { PlaceProvider } from '../providers/place/place';
     FcmProvider,
     OperatorProvider,
     GoogleProvider,
+    PlaceProvider,
     CounselorProvider,
-    PlaceProvider
+    
 
     //GroupProvider,
   ]

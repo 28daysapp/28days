@@ -1,19 +1,50 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const https = require('https');
+const http = require('http');
 admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true })
 
-exports.calcReviewRating = functions.database.ref('/review/{placeId}/{reviewId}').onWrite((snapshot) => {
+
+
+exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((snapshot, context) => {
     console.info("New Review Added!");
-    console.info(snapshot);
-    console.info(snapshot.ratingAvg);
+    const placeId = snapshot.after.key;
+    const reviewCount = snapshot.after.numChildren();
+    let total = 0;
 
-    // snapshot.forEach(childSnapshot => {
-    //     console.log(childSnapshot);
-    // });
-
-    return;
+    snapshot.after.forEach((childSnapshot) => {
+        console.info("Rating Avg: " + childSnapshot.val().ratingAvg);
+        let ratingAvg = childSnapshot.val().ratingAvg;
+        if (!ratingAvg) {
+            ratingAvg = 0;
+        }
+        total = total + childSnapshot.val().ratingAvg;
+    });
+    const totalAvg = total / reviewCount;
+    admin.database().ref(`/placeInfo/${placeId}`).update({
+        ratings: Math.round(totalAvg * 10) / 10
+    });
+    return totalAvg;
 })
+
+exports.getGooglePhotos = functions.https.onRequest((req, res) => {
+
+    // const data = "CmRbAAAA3V8LQAKXfZQQJNJHJJq84i0pxWJiOE4HVKI4xJOtuxyomH9ksTHBAc4cDnvqhB4n0XBOx2GAnKHl-JXcxwPEFuX_8f0GOXYukG_PrjMmfM28qd3Bei0UW9Oh_zCWjP4jEhBzf9o5Vhx5XTVa2qG6W54wGhShGQoFMYPPR-UkG-EYI_6xy7neRg";
+
+    const reference = "CmRbAAAA3V8LQAKXfZQQJNJHJJq84i0pxWJiOE4HVKI4xJOtuxyomH9ksTHBAc4cDnvqhB4n0XBOx2GAnKHl-JXcxwPEFuX_8f0GOXYukG_PrjMmfM28qd3Bei0UW9Oh_zCWjP4jEhBzf9o5Vhx5XTVa2qG6W54wGhShGQoFMYPPR-UkG-EYI_6xy7neRg";
+    const apiKey = 'AIzaSyDrABdIKzwnM37L1q1R_0qCMwsLhSiMjWk';
+    const url = 'https://maps.googleapis.com/maps/api/place/photo?'
+    
+
+    // const headers = new HttpHeaders().set('Access-Control-Allow-Origin' , '*')
+
+
+    http.get(url + `maxwidth=400&photoreference=${reference}&key=${apiKey}`)
+      .subscribe(data => {
+        return data
+      });
+});
 
 
 // exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot, context) => {
