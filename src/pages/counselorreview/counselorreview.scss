@@ -1,77 +1,139 @@
 page-counselorreview {
+  .toolbar-title-md {
+    color: #000000;
+    font-size: 18px;
+  }
 
-    .toolbar-title-md {
-        color: #000000;
-        font-size: 18px;
-      }
-    
-      .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover){
-        color: color($colors, primary);
-        font-size: 18px;
-      }
-    
-      .profile {
-        height: 50%;
-        width: 100%;
-        padding:10%;
-        text-align: center;
-      }
-    
-      .profile .greeting {
-        font-size: 20px;
-      font-weight: 500;
-      color: #4a4a4a;
-      line-height: 1;
-      }
-    
-      .profile img {
-        margin: 10%;
-        width: 20%;
-      }
-    
-      .profile .name {
-        font-size: 18px;
-        color: #4a4a4a;
-      }
-    
-      .profile .supporter {
-        font-size: 12px;
-        color: #9b9b9b;
-      }
-    
-      .segment-md .segment-button{
-        margin-left: 5%;
-        margin-right: 5%;
-        margin-top: 5%;
-        width: 50%;
-        color: #9b9b9b;;
-        font-size: 20px;
-        font-weight: 500;
-        border-bottom-width: 0;
-      }
-    
-      .segment-button.segment-activated {
-        border-bottom-width: 4px;
-        color: #4a4a4a;
-    
-      }
-    
-    
-    
-      .profiletext {
-        padding-left: 2%;
-        padding-right: 2%;
-      }
-    
-      .profiletext td {
-        padding: 10px;
-        width: 100px;
-        font-size: 14px;
-      }
-    
-      .profiletext .text1 {
-        font-size: 14px;
-        color: #4a4a4a;
-        font-weight: bold;
-      }
+  .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover){
+    color: color($colors, primary);
+    font-size: 18px;
+  }
+
+  .profile {
+    height: 40%;
+    width: 100%;
+    padding:10% 10% 10% 10%;
+    text-align: center;
+  }
+
+  .profile .greeting {
+    font-size: 20px;
+  font-weight: 500;
+  color: #4a4a4a;
+  line-height: 1;
+  }
+
+  .profile img {
+    margin: 10%;
+    width: 20%;
+  }
+
+  .profile .name {
+    font-size: 18px;
+    color: #4a4a4a;
+  }
+
+  .profile .supporter {
+    font-size: 12px;
+    color: #9b9b9b;
+    padding-bottom: 5%;
+  }
+  .segbutton {
+    width: 80%;
+    bottom: 3%;
+    margin: 0% 10% 0% 10%;
+    text-align: center;
+  }
+
+  .segment-md .segment-button{
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-top: 2%;
+    width: 50%;
+    color: #9b9b9b;;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom-width: 0;
+  }
+
+  .segment-button.segment-activated {
+    border-bottom-width: 4px;
+    color: #4a4a4a;
+
+  }
+
+
+  .profiletext {
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  .profiletext td {
+    padding: 10px;
+    width: 100px;
+    font-size: 14px;
+  }
+
+  .profiletext .text1 {
+    font-size: 14px;
+    color: #4a4a4a;
+    font-weight: bold;
+  }
+
+  .review .rating {
+    padding-bottom: 1%;
+    height: 20px;
+  }
+
+  .review .rating .avgtext {
+    line-height: 130%;
+    float: left;
+    font-size: 12px;
+    color: #55b26e;
+    padding-right: 1%;
+  }
+
+  .review .rating img {
+    float: left;
+    width: 15px;
+    object-fit: contain;
+  }
+
+  .review .rating .avg {
+    line-height: 140%;
+    padding-left: 0.5%;
+    float: left;
+    font-size: 12px;
+    color: #4a4a4a;
+  }
+
+  .review .reviewcomment {
+    font-size: 14px;
+    color: #4a4a4a;
+  }
+/*
+  .review .detailrating {
+    width: 100%;
+    height: 20px;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-radius: 8px;
+    border: solid 1px #d8d8d8;
+    font-size: 12px;
+    color: #55b26e;
+  }
+*/
+  .review .group-time {
+    padding-top: 1%;
+    color: #9b9b9b;
+    font-size: 12px;
+  }
+
+  .review .group-time .time {
+    padding-left: 2%;
+  }
+
+  .item-md {
+    padding-right: 16px;
+  }
 }

@@ -47,13 +47,7 @@ export class CounselorreviewPage {
   }
 
   ionViewWillEnter() {
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
-    this.counselor.getallreview(this.user.uid).then((reviews) => {
-      this.reviews = reviews;
-      console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
-    });
-    this.loading.dismiss();
+    
 
     if(this.type=='profile'){
       this.isProfile = true;
@@ -63,6 +57,18 @@ export class CounselorreviewPage {
       this.isProfile = false;
       this.isReview = true;
     }
+
+    var promise = new Promise((resolve) => {
+      this.counselor.getallreview(this.user.uid).then((reviews) => {
+        this.reviews = reviews;
+        console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
+      }).then(() => {
+      this.counselor.getcounselor(this.user.uid).then((supporter) => {
+        this.user = supporter;
+      });
+    });
+  });
+    return promise;
   }
 
   changeType(){
@@ -77,7 +83,7 @@ export class CounselorreviewPage {
   }
 
   reviewwrite() {
-    this.navCtrl.push('CounselorreviewwritePage',
+    this.navCtrl.push('CounselorReviewWritePage',
       {
         user: this.user
       });

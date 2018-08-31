@@ -11,9 +11,9 @@ page-supporterreview {
   }
 
   .profile {
-    height: 50%;
+    height: 40%;
     width: 100%;
-    padding:10%;
+    padding:10% 10% 10% 10%;
     text-align: center;
   }
 
@@ -37,12 +37,19 @@ page-supporterreview {
   .profile .supporter {
     font-size: 12px;
     color: #9b9b9b;
+    padding-bottom: 5%;
+  }
+  .segbutton {
+    width: 80%;
+    bottom: 3%;
+    margin: 0% 10% 0% 10%;
+    text-align: center;
   }
 
   .segment-md .segment-button{
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-top: 2%;
     width: 50%;
     color: #9b9b9b;;
     font-size: 20px;
@@ -73,6 +80,25 @@ page-supporterreview {
     font-size: 14px;
     color: #4a4a4a;
     font-weight: bold;
+  }
+
+  .review .reviewcomment {
+    font-size: 14px;
+    color: #4a4a4a;
+  }
+
+  .review .group-time {
+    padding-top: 2%;
+    color: #9b9b9b;
+    font-size: 12px;
+  }
+
+  .review .group-time .time {
+    padding-left: 2%;
+  }
+
+  .item-md {
+    padding-right: 16px;
   }
 
 

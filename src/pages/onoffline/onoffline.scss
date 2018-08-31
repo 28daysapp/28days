@@ -81,8 +81,32 @@ page-onoffline {
     padding-top: 2%;
     color: #55b26e;
     font-size: 12px;
+    width: 30%;
     float: left;
     clear: both;
+  }
+
+  .list .reviewsum img {
+    width: 15px;
+    float: left;
+  }
+
+  .list .reviewsum .avg {
+    line-height: 16px;
+    padding-left: 4%;
+    padding-right: 5%;
+    font-size: 12px;
+    color: #4a4a4a;
+    float: left;
+    
+  }
+
+  .list .reviewsum .count {
+    padding-left: 5%;
+    color: #55b26e;
+    font-size: 12px;
+    float: left;
+    line-height: 16px;
   }
 
   .label-md {

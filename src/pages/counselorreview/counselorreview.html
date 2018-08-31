@@ -28,7 +28,8 @@
   <div class="supporter">상담사</div>
   
   
-
+</div>
+<div class="segbutton">
   
   <ion-segment [(ngModel)]="type" (ionChange)="changeType()">
       <ion-segment-button value="profile">
@@ -52,27 +53,33 @@
           <td>{{user.count}}회</td>
         </tr>
         <tr>
-          <td class="text1">받은 배지</td>
-          <td>0개 0개</td>
+          <td class="text1">경력</td>
         </tr>
         <tr>
-          <td class="text1">나의 이야기</td>
-        </tr>
-        <tr>
-          {{user.story}}
+          {{user.career}}
         </tr>
       </table>
     </div>
 
     <div *ngIf="isReview" class="review">
-      <ul>
-          <li *ngFor="let review of reviews">
-              {{review.comment}}
-              <div class="group-time">
-                  <span class="time">{{ review.timestamp | date:'yyyy.MM.dd a hh:mm' }}</span>
-              </div>
-          </li>
-      </ul>
+      <ion-list>
+        <ion-item *ngFor="let review of reviews">
+          <div class="rating">
+            <div class="avgtext">
+              평균
+            </div>
+             <img src="assets/icon/star.svg">
+            <div class="avg">{{review.ratingavg}}</div>
+          </div>
+          <div class="reviewcomment">
+            {{review.comment}}
+          </div>
+            <div class="group-time">
+              {{review.username}}
+                <span class="time">{{ review.timestamp | date:'yyyy.MM.dd' }}</span>
+            </div>
+        </ion-item>
+      </ion-list> 
     </div>
 
 </ion-content>
