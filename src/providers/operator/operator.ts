@@ -22,6 +22,8 @@ export class OperatorProvider {
   }
 
   addgeneral(user) {
+    this.firesupporter.child(`${user.uid}`).remove();
+    this.firecounselor.child(`${user.uid}`).remove();
     var promise = new Promise((resolve) => {
       this.firegeneral.child(`${user.uid}`).set({
         uid: user.uid,
@@ -42,12 +44,12 @@ export class OperatorProvider {
       this.firesupporter.child(`${user.uid}`).set({
         uid: user.uid,
         username: user.username,
-        rating: 0,
         count: 0,
         greeting: '안녕하세요! 서포터 ' + user.username + '입니다.',
         tag: null,
         gender: user.gender,
-        age: user.age
+        age: user.age,
+        reviewcnt: 0
       }).then(() => {
         this.fireuser.child(`${user.uid}`).update({
           usertype: 'supporter'
@@ -64,12 +66,14 @@ export class OperatorProvider {
       this.firecounselor.child(`${user.uid}`).set({
         uid: user.uid,
         username: user.username,
-        rating: 0,
         count: 0,
+        rating: 0,
         greeting: '안녕하세요! 상담사 ' + user.username + '입니다.',
         tag: null,
         gender: user.gender,
-        age: user.age
+        age: user.age,
+        photoURL: user.photoURL,
+        reviewcnt: 0
       }).then(() => {
         this.fireuser.child(`${user.uid}`).update({
           usertype: 'counselor'

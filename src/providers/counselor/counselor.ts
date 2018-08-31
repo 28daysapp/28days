@@ -1,68 +1,56 @@
-
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-// import { resolve } from 'path';
 
 /*
-  Generated class for the SupporterProvider provider.
+  Generated class for the CounselorProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
-export class SupporterProvider {
-  firesupporter = firebase.database().ref('/supporter');
-  firesupporterreview = firebase.database().ref('/supporterreview');
-  firesupporterreviewsum = firebase.database().ref('/supporterreviewsum');
+export class CounselorProvider {
+
+  firecounselorreview = firebase.database().ref('/counselorreview');
+  firecounselorreviewsum = firebase.database().ref('/counselorreviewsum');
   count;
   reviewrating;
+
   constructor() {
-    console.log('Hello SupporterProvider Provider');
+    console.log('Hello CounselorProvider Provider');
 
     this.count = 0;
   }
 
-  addsupporterreview(supporterid, comment) {
+  addcounselorreview(counselorid, rating1, rating2, rating3, rating4, comment) {
     var uid = firebase.auth().currentUser.uid;
-    var newReviewRef = this.firesupporterreview.push();
+    var newReviewRef = this.firecounselorreview.push();
     var reviewid = newReviewRef.key;
     var promise = new Promise((resolve) => {
-      this.firesupporterreview.child(`${supporterid}/${reviewid}`).set({//firemypost에 값 넣기
-        supporterid: supporterid,
+      this.firecounselorreview.child(`${counselorid}/${reviewid}`).set({//firemypost에 값 넣기
+        counselorid: counselorid,
         reviewid: reviewid,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
+        rating1: rating1,
+        rating2: rating2,
+        rating3: rating3,
+        rating4: rating4,
         comment: comment,
         uid: uid
       }).then(() => {
-        this.addsupportersum(supporterid);
+        this.sumrating(rating1, rating2, rating3, rating4, counselorid);
         resolve(true);
       });
     });
     return promise;
   }
 
-  addsupportersum(supporterid) {
-    var supporter;
-    var promise = new Promise((resolve) => {
-      this.firesupporterreview.child(supporterid).once("value").then((snapshot) => {
-        console.log(snapshot.numChildren())
-      this.firesupporter.child(`${supporterid}`).update({
-        reviewcnt: snapshot.numChildren()
-      }).then(() => {
-        resolve(true);
-      });
-    });
-  });
-  console.log('1');
-  }
-
-  sumrating(r1, r2, r3, r4, supporterid) {
+  sumrating(r1, r2, r3, r4, counselorid) {
 
     var promise = new Promise((resolve) => {
-      this.getreviewrating(supporterid).then((reviewrating) => {
+      this.getreviewrating(counselorid).then((reviewrating) => {
         this.reviewrating = reviewrating;
         if (this.reviewrating == null) {
-          this.firesupporterreviewsum.child(`${supporterid}`).set({
+          this.firecounselorreviewsum.child(`${counselorid}`).set({
             ratingA: r1,
             ratingB: r2,
             ratingC: r3,
@@ -72,7 +60,7 @@ export class SupporterProvider {
             resolve(true);
           });
         } else {
-          this.firesupporterreviewsum.child(`${supporterid}`).set({
+          this.firecounselorreviewsum.child(`${counselorid}`).set({
             ratingA: this.reviewrating.ratingA + r1,
             ratingB: this.reviewrating.ratingB + r2,
             ratingC: this.reviewrating.ratingC + r3,
@@ -87,10 +75,10 @@ export class SupporterProvider {
     return promise;
   }
 
-  getreviewrating(supporterid) {
+  getreviewrating(counselorid) {
     var promise = new Promise((resolve) => {
       var reviewrating;
-      this.firesupporterreviewsum.child(supporterid).once("value").then((snapshot) => {
+      this.firecounselorreviewsum.child(counselorid).once("value").then((snapshot) => {
         reviewrating = snapshot.val();
         resolve(reviewrating);
       });
@@ -98,21 +86,10 @@ export class SupporterProvider {
     return (promise);
   }
 
-  getsupporter(supporterid) {
-    var promise = new Promise((resolve) => {
-      var supporter;
-      this.firesupporter.child(supporterid).once("value").then((snapshot) => {
-        supporter = snapshot.val();
-        resolve(supporter);
-      });
-    });
-    return (promise);
-  }
-
-  getallreview(supporterid) {
+  getallreview(counselorid) {
     var promise = new Promise((resolve) => {
       var reviews = [];
-      this.firesupporterreview.child(supporterid).orderByChild('timestamp').once("value").then((snapshot) => { // firemypost에서 시간 순으로 가져오고 snapshot에 하나씩 가져옴
+      this.firecounselorreview.child(counselorid).orderByChild('timestamp').once("value").then((snapshot) => { // firemypost에서 시간 순으로 가져오고 snapshot에 하나씩 가져옴
         snapshot.forEach((childSnapshot) => {
           var review = childSnapshot.val();
           reviews.push(review);
@@ -124,9 +101,9 @@ export class SupporterProvider {
     return promise;
   }
 
-  getsumrating(supporterid) {
+  getsumrating(counselorid) {
     var sum;
-    this.getreviewrating(supporterid).then((reviewrating) => {
+    this.getreviewrating(counselorid).then((reviewrating) => {
       this.reviewrating = reviewrating;
       if (this.reviewrating == null) {
         return 0
@@ -138,4 +115,5 @@ export class SupporterProvider {
       }
     });
   }
+
 }

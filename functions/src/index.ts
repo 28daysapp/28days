@@ -5,21 +5,27 @@ const http = require('http');
 admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true })
 
-exports.calcReviewRating = functions.database.ref('/review/{placeId}/{reviewId}').onWrite((snapshot) => {
+
+
+exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((snapshot, context) => {
     console.info("New Review Added!");
 
-    let total = 0;
-    const reviewRef = snapshot.after.ref.parent;
-    const reviewCount = reviewRef.parent.child('ratingAvg')
-    // snapshot.forEach(function(ratingSnapshot) {
-    //     total += ratingSnapshot.val().ratingAvg;
-    // })
+    console.info("before: " + JSON.stringify(snapshot.before));
+    console.info("after: " + JSON.stringify(snapshot.after));
 
-    console.info("reviewRef: " + reviewRef);
+
+    const reviewCount = snapshot.after.numChildren();
     console.info("reviewCount: " + reviewCount);
 
-    console.info("total: " + total);
-    console.info("average: " + total / reviewCount);
+    snapshot.after.forEach((childSnapshot) => {
+        console.info("child snapshot: " + JSON.stringify(childSnapshot));
+        console.info("reviewAvg: " + childSnapshot.ratingAvg);
+    });
+
+
+    let total = 0;
+
+
 
     return;
 })

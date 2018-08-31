@@ -4,18 +4,17 @@ const https = require('https');
 const http = require('http');
 admin.initializeApp(functions.config().firebase);
 const cors = require('cors')({ origin: true });
-exports.calcReviewRating = functions.database.ref('/review/{placeId}/{reviewId}').onWrite((snapshot) => {
+exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((snapshot, context) => {
     console.info("New Review Added!");
-    let total = 0;
-    const reviewRef = snapshot.after.ref.parent;
-    const reviewCount = reviewRef.parent.child('ratingAvg');
-    // snapshot.forEach(function(ratingSnapshot) {
-    //     total += ratingSnapshot.val().ratingAvg;
-    // })
-    console.info("reviewRef: " + reviewRef);
+    console.info("before: " + JSON.stringify(snapshot.before));
+    console.info("after: " + JSON.stringify(snapshot.after));
+    const reviewCount = snapshot.after.numChildren();
     console.info("reviewCount: " + reviewCount);
-    console.info("total: " + total);
-    console.info("average: " + total / reviewCount);
+    snapshot.after.forEach((childSnapshot) => {
+        console.info("child snapshot: " + JSON.stringify(childSnapshot));
+        console.info("reviewAvg: " + childSnapshot.reviewAvg);
+    });
+    let total = 0;
     return;
 });
 exports.getGooglePhotos = functions.https.onRequest((req, res) => {

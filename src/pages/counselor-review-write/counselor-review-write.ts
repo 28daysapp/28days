@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { SupporterProvider } from '../../providers/supporter/supporter';
-
+import { CounselorProvider } from '../../providers/counselor/counselor';
 /**
- * Generated class for the SupporterreviewwritePage page.
+ * Generated class for the CounselorReviewWritePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,18 +10,17 @@ import { SupporterProvider } from '../../providers/supporter/supporter';
 
 @IonicPage()
 @Component({
-  selector: 'page-supporterreviewwrite',
-  templateUrl: 'supporterreviewwrite.html',
+  selector: 'page-counselor-review-write',
+  templateUrl: 'counselor-review-write.html',
 })
-export class SupporterreviewwritePage {
+export class CounselorReviewWritePage {
 
   likesrc = [];
   text;
   user;
   rating = [];
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public counselor: CounselorProvider, public loadingCtrl: LoadingController) {
     var arr1 = [0,1,2,3,4];
     var arr2 = [0,1,2,3,4];
     var arr3 = [0,1,2,3,4];
@@ -41,7 +39,7 @@ export class SupporterreviewwritePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SupporterreviewwritePage');
+    console.log('ionViewDidLoad CounselorReviewWritePage');
   }
 
   like(item,num){
@@ -56,7 +54,7 @@ export class SupporterreviewwritePage {
 
   reviewwrite(){
     console.log('gg');
-    this.supporter.addsupporterreview(this.user.uid, this.text).then(() => {
+    this.counselor.addcounselorreview(this.user.uid, this.rating[0], this.rating[1], this.rating[2], this.rating[3], this.text).then(() => {
 	  	this.navCtrl.pop();
 	  });
 	  let loading = this.loadingCtrl.create({
@@ -64,9 +62,5 @@ export class SupporterreviewwritePage {
     });
     loading.present();
   }
-
-  
-
-  
 
 }

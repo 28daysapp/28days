@@ -36,6 +36,7 @@ export class CommunitycommentPage {
   posts;
   post = this.community.post;
   comment = this.cocomment.comment;
+  cancelbutton = true;
   title;
   tag = '';
   list_showsubcomment = [];
@@ -158,10 +159,33 @@ export class CommunitycommentPage {
   }
 
   updatebutton(comment) {
+    this.cancelbutton = true;
     comment.updatecomment = true;
     this.updateForm = this.formBuilder.group({
       txt: [comment.text, Validators.required]
     });
+  }
+
+  cancel(comment){
+    let alert = this.alertCtrl.create({
+      cssClass: 'deleteAlert', // alert css -> app.scss에서 수정가능
+
+      message: '정말 취소하시겠습니까?',
+      buttons: [
+        {
+          text: '예',
+          handler: () => {
+            this.cancelbutton = false;
+            comment.updatecomment = false;
+          }
+        },
+        {
+          text: '아니요',
+          role: 'cancel'
+        },
+      ]
+    });
+    alert.present();
   }
 
   updatecomment(comment) {
