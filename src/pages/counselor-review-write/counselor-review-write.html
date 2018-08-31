@@ -29,15 +29,14 @@
 
   <ion-slides>
     <ion-slide>
-
       <div class="place-name">
-        <span>{{ placeName }}</span>
+        <span>{{ counselorName }}</span>
       </div>
       <div class="container">
         <div class="star-box">
-          <span class="p1">접근성</span>
+          <span class="p1">신속한 응답</span>
           <br>
-          <span class="p2">찾아가기 쉬웠나요?</span>
+          <span class="p2">상담사의 응답이 신속, 적절했나요?</span>
           <br>
           <button class="like" (click)="like(0,0)">
             <img src="{{ likesrc[0][0] }}">
@@ -56,9 +55,9 @@
           </button>
         </div>
         <div class="star-box">
-          <span class="p1">친절성</span>
+          <span class="p1">공감능력</span>
           <br>
-          <span class="p2">직원들이 친절했나요?</span>
+          <span class="p2">이야기를 잘 들어줬나요?</span>
           <br>
           <button class="like" (click)="like(1,0)">
             <img src="{{ likesrc[1][0] }}">
@@ -77,9 +76,9 @@
           </button>
         </div>
         <div class="star-box">
-          <span class="p1">가격</span>
+          <span class="p1">전문성</span>
           <br>
-          <span class="p2">제공 받은 서비스의 가격이 적절했나요?</span>
+          <span class="p2">필요한 기술과 지식을 가졌나요?</span>
           <br>
           <button class="like" (click)="like(2,0)">
             <img src="{{ likesrc[2][0] }}">
@@ -124,10 +123,10 @@
     </ion-slide>
     <ion-slide>
       <div class="place-name">
-        <span>{{ placeName }}</span>
+        <span>{{ counselorName }}</span>
       </div>
       <div class="area">
-        <textarea class="area2" [(ngModel)]="text" placeholder="직원들의 친절도, 진료나 상담의 가격, 방문 후의 기분 등 서비스에 대해 이야기 해주세요! "></textarea>
+        <textarea class="area2" [(ngModel)]="text" placeholder="상담사의 응답속도, 전문성이나 공감능력, 상담 후의 기분 등 서비스에 대해 이야기 해주세요! "></textarea>
       </div>
 
 

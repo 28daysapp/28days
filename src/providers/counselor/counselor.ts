@@ -34,6 +34,7 @@ export class CounselorProvider {
         rating2: rating2,
         rating3: rating3,
         rating4: rating4,
+        ratingavg: (rating1+rating2+rating3+rating4)/4,
         comment: comment,
         uid: uid,
         username: username

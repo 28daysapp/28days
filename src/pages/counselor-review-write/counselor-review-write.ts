@@ -19,6 +19,7 @@ export class CounselorReviewWritePage {
   @ViewChild(Slides) slides: Slides;
 
   counselor;
+  counselorName;
   text;
   nextDisabled: boolean;
   writeDisabled: boolean;
@@ -46,6 +47,7 @@ export class CounselorReviewWritePage {
     }
     this.counselor = this.navParams.get("user");
     console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.counselor));
+    this.counselorName = this.counselor.username;
     this.user = firebase.auth().currentUser;
     console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.user));
   }

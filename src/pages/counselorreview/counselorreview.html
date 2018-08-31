@@ -64,6 +64,13 @@
     <div *ngIf="isReview" class="review">
       <ion-list>
         <ion-item *ngFor="let review of reviews">
+          <div class="rating">
+            <div class="avgtext">
+              평균
+            </div>
+             <img src="assets/icon/star.svg">
+            <div class="avg">{{review.ratingavg}}</div>
+          </div>
           <div class="reviewcomment">
             {{review.comment}}
           </div>
