@@ -195,7 +195,7 @@ export class MypagePage {
   
   profile(){
     if (this.user) {
-      this.navCtrl.push('MyprofilePage');
+      this.navCtrl.push('CharacterPage');
     } else {
       this.pleaselogin();
     }
@@ -234,6 +234,14 @@ export class MypagePage {
   mypay(){
     if (this.user) {
       this.navCtrl.push('PaymentPage');
+    } else {
+      this.pleaselogin();
+    }
+  }
+
+  pwdchange(){
+    if (this.user) {
+      this.navCtrl.push('PwdcheckPage');
     } else {
       this.pleaselogin();
     }

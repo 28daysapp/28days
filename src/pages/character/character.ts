@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Navbar, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Navbar, LoadingController, Events } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
 
@@ -20,14 +20,24 @@ export class CharacterPage {
   // flags which character is picked
 	p = [false, false, false, false];
   // original character index
-	originpick;
+  originpick;
+  emailcheck;
+  user2;
   // character index which user picks
 	pick;
   constructor(public navCtrl: NavController, public navParams: NavParams, public user: UserProvider,
-  	public loadingCtrl: LoadingController) {
+  	public loadingCtrl: LoadingController, public events: Events) {
+      this.user2 = firebase.auth().currentUser;
+      events.subscribe('user:created', (user, time) => {
+        // user and time are the same arguments passed in `events.publish(user, time)`
+        console.log('Welcome', user, 'at', time);
+        this.emailcheck = user.email;
+        console.log("email:" + user.email);
+      });
   }
 
   ionViewDidLoad() {
+    this.createUser();
   	console.log('original profile index : ' + firebase.auth().currentUser.photoURL.charAt(14));
   	this.originpick = parseInt(firebase.auth().currentUser.photoURL.charAt(14));
   	this.pick = this.originpick;
@@ -43,7 +53,7 @@ export class CharacterPage {
 
   backhandler() {
     // go to home page
-  	this.navCtrl.setRoot('HomePage');
+  	this.navCtrl.pop();
   }
 
   changecharacter(num) {
@@ -65,4 +75,8 @@ export class CharacterPage {
   	});
   }
 
+  createUser() {
+    console.log('User created!')
+    this.events.publish('user:created', this.user2, Date.now());
+  }
 }
