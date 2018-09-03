@@ -66,17 +66,21 @@ export class CharacterPage {
   setcharacter() {
   	if (this.pick == this.originpick) {
       // not change character image
-  		this.navCtrl.setRoot('HomePage');
+  		this.navCtrl.push('TabsPage');
   		return;
   	}
     // change character image
   	this.user.updatePhoto(`assets/profile${ this.pick }.png`).then(() => {
-  		this.navCtrl.setRoot('HomePage');
+  		this.navCtrl.push('TabsPage');
   	});
   }
 
   createUser() {
     console.log('User created!')
     this.events.publish('user:created', this.user2, Date.now());
+  }
+
+  pickpicture(){
+    this.navCtrl.push('CharacterchoicePage');
   }
 }

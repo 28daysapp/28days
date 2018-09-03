@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform, Events,} from 'ionic-angular';
+import { MenuController, AlertController, Nav, Platform, Events, App, ToastController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -36,6 +36,7 @@ export class MyApp {
   userprofile;
   username;
   email;
+  backBtn;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;
@@ -83,6 +84,8 @@ export class MyApp {
     // public userProvider: UserProvider,
     public auth: AuthProvider,
     public storage: Storage,
+    private app : App,
+    private toastCtrl : ToastController,
   ) {
     this.email = "you are manding or hoho";
     firebase.initializeApp(firebaseConfig);
@@ -111,6 +114,27 @@ export class MyApp {
       //   });
       //   //end notifications.
       // }
+      platform.ready().then(() => {
+        platform.registerBackButtonAction(() => {
+          let nav = this.app.getActiveNav();
+          if (nav.canGoBack()) {
+            nav.pop();
+          } else {
+            if (this.backBtn) {
+              this.platform.exitApp();
+            } else {
+              let toast = this.toastCtrl.create({
+                message: '한번 더 뒤로가기 하시면 종료됩니다.',
+                duration: 3000,
+                position: 'bottom'
+              });
+              toast.present();
+              this.backBtn = true;
+              setTimeout(function () { this.backBtn = false; }, 3000);
+            }
+          }
+        });
+      });
     });
     // this.pleaselogin();
     events.subscribe('user:created', (user, time) => {
@@ -158,7 +182,7 @@ export class MyApp {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.nav.setRoot('HomePage', {}, {animate: true, direction: 'forward'});
+                  this.nav.setRoot('TabsPage', {}, {animate: true, direction: 'forward'});
                 });
               });
             }

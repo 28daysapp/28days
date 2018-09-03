@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, Platform, App, ToastController } from 'ionic-angular';
 
 import { Tab1Root, Tab2Root, Tab3Root, Tab4Root, Tab5Root } from '../';
 
@@ -28,7 +28,8 @@ export class TabsPage {
   tab3Title = "온라인상담";
   tab4Title = "서포터/상담사";
   tab5Title = "커뮤니티";
+  backBtn;
+  constructor(public navCtrl: NavController, private app: App, private toastCtrl: ToastController, public platform: Platform, ) {
 
-  constructor(public navCtrl: NavController) {}
-
+  }
 }

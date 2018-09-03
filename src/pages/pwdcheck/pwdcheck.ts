@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, Loading, AlertController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
 
 
 /**
@@ -22,16 +23,27 @@ import { Storage } from '@ionic/storage';
 export class PwdcheckPage {
   loginForm: FormGroup;
   loading: Loading;
+  emailcheck;
+  email = '';
+  user;
   constructor(public navCtrl: NavController, public auth: AuthProvider, public formBuilder: FormBuilder,
-    public alertCtrl: AlertController, public loadingCtrl: LoadingController, public storage: Storage) {
+    public alertCtrl: AlertController, public loadingCtrl: LoadingController, public storage: Storage,   public events: Events) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])]
+    });
+    this.user = firebase.auth().currentUser;
+    events.subscribe('user:created', (user, time) => {
+      // user and time are the same arguments passed in `events.publish(user, time)`
+      console.log('Welcome', user, 'at', time);
+      this.emailcheck = user.email;
+      console.log("email:" + user.email);
     });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PwdcheckPage');
+    this.createUser();
   }
 
   checkpwd() {
@@ -40,6 +52,20 @@ export class PwdcheckPage {
       let alert = this.alertCtrl.create({
         title: '로그인 오류',
         message: '이메일 주소와 비밀번호의 형식이<br>올바르지 않습니다. 다시 확인해주세요!',
+        buttons: [
+          {
+            text: '확인',
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+    } else if(this.email != this.emailcheck){
+      console.log(this.email);
+      console.log(this.emailcheck);
+      let alert = this.alertCtrl.create({
+        title: '로그인 오류',
+        message: '이메일 주소 또는 비밀번호가 올바르지 않습니다. 다시 확인해주세요!',
         buttons: [
           {
             text: '확인',
@@ -87,4 +113,8 @@ export class PwdcheckPage {
     }
   }
 
+  createUser() {
+    console.log('User created!')
+    this.events.publish('user:created', this.user, Date.now());
+  }
 }

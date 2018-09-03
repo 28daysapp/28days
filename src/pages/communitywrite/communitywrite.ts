@@ -100,7 +100,7 @@ export class CommunitywritePage {
 		});
 	}
 
-	takePicture(){
+	takePicture(){ // 사진 자르기인줄 알았으나 사진 찍기였음
 		let options =
 		{
 			quality: 100,

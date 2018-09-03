@@ -1,7 +1,7 @@
 page-pwdcheck {
 
 	.cardsbg {
-		background: color($colors, bggray, base);
+		background-color: #55b26e;
 	}
 
 	ion-card {
@@ -15,15 +15,30 @@ page-pwdcheck {
 	}
 
 	form {
-    padding: 15px;
-  }
+    	padding: 15px;
+		padding-top: 55%;
+		width: 70%;
+		height: 19px;
+		font-family: AppleSDGothicNeo;
+		font-size: 16px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #ffffff;
+		margin-left: auto;
+		margin-right: auto;
+		display: block !important;
+  	}
 
 	ion-input {
-		border-bottom: 1px solid color($colors, dark, base);
+		border-bottom: solid 1px #ffffff;
 	}
 
 	.email {
 		margin-bottom: 15px;
+		width: 100%;
 	}
 
 	.invalid {
@@ -38,6 +53,9 @@ page-pwdcheck {
 
 	.pwreset {
 		margin: 10px 0px 3px;
+		font-size: 13px;
+		background-color: transparent;
+		color: #ffffff;
 	}
 
 	.prompt {
@@ -52,5 +70,52 @@ page-pwdcheck {
 		margin: 0px 15px 15px;
 	}
 
+	span.coconut{
+		padding-top: 25%;
+		width: 100%;
+		text-align: center;
+		height: 36px;
+		font-family: Baruta;
+		font-size: 30px;
+		font-weight: 900;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #ffffff;
+	  }
+
+	span.email_pwd{
+		padding-top: 70px;
+		width: 70%;
+		height: 19px;
+		font-family: AppleSDGothicNeo;
+		font-size: 16px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #ffffff;
+		text-align: center;
+	}
+
+	form button.button{
+		margin-top: 70px;
+		background-color: transparent;
+		height: 29px;
+		font-family: AppleSDGothicNeo;
+		font-size: 24px;
+		font-weight: 500;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		text-align: center;
+		color: #ffffff;
+		margin-left: auto;
+		margin-right: auto;
+		display: block !important;
+	}
 }
 

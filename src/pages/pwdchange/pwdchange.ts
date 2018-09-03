@@ -64,6 +64,7 @@ export class PwdchangePage {
       alert.present();
     }
     else{
+      console.log(this.password);
       user.updatePassword(password).then(function() {
 
       }).catch(function(error){
@@ -79,7 +80,7 @@ export class PwdchangePage {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.navCtrl.setRoot('HomePage');
+                  this.navCtrl.push('TabsPage');
                 });
               });
             }

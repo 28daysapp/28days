@@ -12,9 +12,9 @@
     </button>
     <ion-title>온라인상담</ion-title>
   </ion-navbar>
-  <ion-toolbar no-border>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  </ion-toolbar>
+  <!-- <ion-toolbar no-border>
+    <ion-searchbar (ionInput)="filterItems($event)" placeholder="검색"></ion-searchbar>
+  </ion-toolbar> -->
 </ion-header>
 
 
@@ -55,10 +55,10 @@
                   <img src="{{ item.buddyphotoURL }}">
                 </ion-avatar>
                 <div class="grid-container">
-                    <span class="grid-username" (click)="supporterchat(item)">{{ item.buddyusername }}</span>
-                    <span class="grid-time" (click)="supporterchat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-                    <div class="grid-message" (click)="supporterchat(item)">{{ item.recentmessage }}</div>
-                    <div class="grid-review" (click)="writeReview()">후기 남기기</div>
+                    <span class="grid-username" (click)="supporterChat(item)">{{ item.buddyusername }}</span>
+                    <span class="grid-time" (click)="supporterChat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
+                    <div class="grid-message" (click)="supporterChat(item)">{{ item.recentmessage }}</div>
+                    <div class="grid-review" (click)="writeReview(item)">후기 남기기</div>
                 </div>
 
               </ion-item>

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, App } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
@@ -35,7 +35,7 @@ export class CommunityPage {
   selectedData: any;
   constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
-    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController,
+    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController, public appCtrl: App,
   ) {
 
   }
@@ -74,25 +74,31 @@ export class CommunityPage {
   comment(post) { // 게시글의 제목을 누르면 게시글로 들어감 -- 추후 이름 수정 요망
     this.community.post = post;
     this.cocomment.initializecomment(post);
-    this.navCtrl.push('CommunitycommentPage', {});
+    this.appCtrl.getRootNavs()[0].push('CommunitycommentPage', {});
   }
 
   like(post) { // 좋아요 내가 안해서 모름
     if (post.likesrc == 'assets/like.png') {
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
       this.community.setLike(post).then(() => {
         post.likesrc = 'assets/like-full.png';
         post.like++;
       });
+      this.loading.dismiss();
     } else {
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
       this.community.deleteLike(post).then(() => {
         post.likesrc = 'assets/like.png';
         post.like--;
       });
+      this.loading.dismiss();
     }
   }
 
   communitywrite() { // 글쓰기 버튼을 누르면 해당 페이지로 이동
-    this.navCtrl.push('CommunitywritePage');
+    this.appCtrl.getRootNavs()[0].push('CommunitywritePage', {});
   }
 
   changeAnonymity(post) { // 익명 글쓰기를 체크했을 때 if 체크 안했을 시 else
@@ -296,7 +302,7 @@ export class CommunityPage {
 
   searchtag(tag) { // 태그만 검색하는 기능 검색창 및 현재 페이지에서 태그 클릭시 해당 페이지로 이동
     this.community.tag = tag;
-    this.navCtrl.push("SearchtagPage", { tag: this.tag });
+    this.appCtrl.getRootNavs()[0].push('SearchtagPage', { tag: this.tag });
   }
 
   doInfinite() { // 다음 10개의 게시물 중 제일 위에 위치한 게시물의 스크롤에서부터 리스트 생성 
