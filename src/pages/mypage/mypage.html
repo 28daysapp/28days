@@ -29,6 +29,7 @@
       <ion-item (click)="terms1()">개인정보 취급방침</ion-item>
       <ion-item (click)="terms2()">이용 약관</ion-item>
       <ion-item (click)="loginpage()">로그아웃</ion-item>
+      <ion-item *ngIf="operator==true" (click)="gogoOperator()">개발자 페이지</ion-item>
     </ion-list>
 
 </ion-content>

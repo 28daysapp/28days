@@ -25,6 +25,7 @@ export class MypagePage {
   username;
   photoURL;
   greeting;
+  operator;
   origGreeting;
   showmodal = false;
 
@@ -42,7 +43,7 @@ export class MypagePage {
     }
   }
 
-  ionViewDidLoad() {
+  ionViewWillLoad() {
     console.log('ionViewDidLoad - Home')
     // present loading
     this.loading = this.loadingCtrl.create();
@@ -65,6 +66,11 @@ export class MypagePage {
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.loading.dismiss();
+        if(this.userprofile.operator == true){
+          this.operator = true;
+        }
+        else
+          this.operator = false;
       })
     } else {
       // check if cache info exists in local storage
@@ -199,6 +205,10 @@ export class MypagePage {
     } else {
       this.pleaselogin();
     }
+  }
+
+  gogoOperator(){
+    this.navCtrl.push('OperatorPage');
   }
   mychat(){
     if (this.user) {

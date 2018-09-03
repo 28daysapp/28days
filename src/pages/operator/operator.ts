@@ -40,11 +40,13 @@ export class OperatorPage {
   changeTypeSupporter(user){
     this.operator.addsuporter(user);
   }
-
   changeTypeCounselor(user){
     this.operator.addcounselor(user);
   }
   changeTypeOperator(user){
     this.operator.addoperator(user);
+  }
+  changeTypeOperatorDelete(user){
+    this.operator.deleteOperator(user);
   }
 }

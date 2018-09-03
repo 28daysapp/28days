@@ -67,8 +67,8 @@ export class CommunityPage {
     this.community.getallposts().then((posts) => {
       this.posts = posts;
       this.content.scrollToTop(0);
-      this.loading.dismiss();
     });
+    this.loading.dismiss();
   }
 
   comment(post) { // 게시글의 제목을 누르면 게시글로 들어감 -- 추후 이름 수정 요망

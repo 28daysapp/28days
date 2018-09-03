@@ -48,6 +48,7 @@ export class OperatorProvider {
         greeting: '안녕하세요! 서포터 ' + user.username + '입니다.',
         tag: null,
         gender: user.gender,
+        photoURL: user.photoURL,
         age: user.age,
         reviewcnt: 0
       }).then(() => {
@@ -93,6 +94,16 @@ export class OperatorProvider {
         resolve(true);
       });
     return promise;
+  }
+
+  deleteOperator(user){
+    var promise = new Promise((resolve) => {
+      this.fireuser.child(`${user.uid}`).update({
+        operator: false
+      });
+      resolve(true);
+    });
+  return promise;
   }
 
   

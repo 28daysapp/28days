@@ -19,10 +19,12 @@
           <div class="list">
             <div class="name">{{user.username}}</div>
             {{user.uid}} <br>
+            usertype: {{user.usertype}}<br>
             <button (click)="changeTypeGeneral(user)"> 일반 </button>
             <button (click)="changeTypeSupporter(user)"> 서포터 </button>
             <button (click)="changeTypeCounselor(user)"> 상담사 </button>
             <button (click)="changeTypeOperator(user)"> 관리자 </button>
+            <button (click)="changeTypeOperatorDelete(user)">관리자X</button>
             </div>
         </ion-item>
       </ion-list>
