@@ -71,7 +71,7 @@ export class TestanxietyPage {
           text: '취소할래요',
           cssClass: 'alertbtn',
           handler: () => {
-            this.navCtrl.setRoot('HomePage');
+            this.navCtrl.push('TabsPage');
           }
         }
       ]
@@ -125,7 +125,7 @@ export class TestanxietyPage {
   }
 
   close() {
-  	this.navCtrl.setRoot('HomePage');
+  	this.navCtrl.push('TabsPage');
   }
 
   testdepression() {

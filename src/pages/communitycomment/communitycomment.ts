@@ -218,15 +218,21 @@ export class CommunitycommentPage {
 
   like(post) { // 좋아요 내가 안해서 모름
     if (post.likesrc == 'assets/like.png') {
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
       this.community.setLike(post).then(() => {
         post.likesrc = 'assets/like-full.png';
         post.like++;
       });
+      this.loading.dismiss();
     } else {
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
       this.community.deleteLike(post).then(() => {
         post.likesrc = 'assets/like.png';
         post.like--;
       });
+      this.loading.dismiss();
     }
   }
 

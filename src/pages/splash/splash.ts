@@ -24,7 +24,7 @@ export class SplashPage {
     setTimeout(() => {
     	this.storage.get('username').then((username) => {
         if (username) {
-          this.navCtrl.setRoot('HomePage');
+          this.navCtrl.push('TabsPage');
         } else {
           this.navCtrl.setRoot('IntroPage');
         }
