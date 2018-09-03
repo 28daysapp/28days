@@ -129,6 +129,7 @@
     <allow-navigation href="http://137.68.247.135:8101" />
     <allow-navigation href="http://10.231.4.185:8100" />
     <allow-navigation href="http://137.68.247.161:8100" />
+    <plugin name="cordova-plugin-crop" spec="^0.4.0" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>
