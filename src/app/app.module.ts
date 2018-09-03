@@ -39,6 +39,7 @@ import { OperatorProvider } from '../providers/operator/operator';
 import { GoogleProvider } from '../providers/google/google';
 import { CounselorProvider } from '../providers/counselor/counselor';
 import { PlaceProvider } from '../providers/place/place';
+import { Crop } from '@ionic-native/crop';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { PlaceProvider } from '../providers/place/place';
     MyApp
   ],
   providers: [
+    Crop,
     StatusBar,
     SplashScreen,
     Camera,

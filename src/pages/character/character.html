@@ -6,15 +6,20 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>캐릭터</ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>내 정보 수정</ion-title>
+		<ion-buttons right>
+			<button ion-button icon-only (click)="end()" style="color: #000000;">
+				완료
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
+	<!--
 	<div class="text">
 		<p>자신을 대신 나타내줄 수 있는<br>캐릭터를 선택해볼까요?</p>
 	</div>
@@ -61,5 +66,35 @@
 	<button ion-button block color="daysgreen" (click)="setcharacter()">
     캐릭터 정하기
   </button>
+	-->
 
+	<table class="email" style="width:100%">
+		<td align="center" style="width: 100%; height: 90px; background-color: #f7f7f7;">
+			<tr class="mail">
+				<br>
+				<span class="text">이메일 계정</span>
+				<br>
+				<span class="textmail">{{ emailcheck }}</span>
+			</tr>
+		</td>
+	</table>
+
+	<table class="picture">
+		<td align="center">
+				<span class="text">프로필 사진</span>
+		</td>
+		<td align="center">
+				<button class="photo" (click)="pickpicture">
+						<img src="assets/profile0.png">
+				</button>
+		</td>
+	</table>
+	<table class="name">
+			<td align="center">
+					&emsp;&ensp;<span class="text">닉네임</span>
+			</td>
+			<td align="center">
+					<ion-input class="nametext" [(ngModel)]="nametext"></ion-input>
+			</td>
+		</table>
 </ion-content>

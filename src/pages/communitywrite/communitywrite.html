@@ -55,7 +55,7 @@
 
 <ion-footer>
 	<table class="co-li" style="width:100%">
-		<td align="center" style="width: 50%">
+		<td align="center" style="width: 33%">
 			<tr class="tag-image">
 				<button class="addtag" (click)="addtag()">
 					<img src="assets/tag.png" srcset="assets/tag@2x.png 2x, assets/tag@3x.png 3x" class="tag">
@@ -63,12 +63,22 @@
 				</button>
 			</tr>
 		</td>
-		<td align="center" style="width: 50%">
+		<td align="center" style="width: 33%">
 			<tr class="tag-image">
 				<button class="addimage" (click)="openGallery()" *ngIf="!pick">
 					<div>
 						<img src="assets/gallery.png" srcset="assets/gallery@2x.png 2x, assets/gallery@3x.png 3x" class="gallery">
 						<span>사진 추가</span>
+					</div>
+				</button>
+			</tr>
+		</td>
+		<td align="center" style="width: 33%">
+			<tr class="tag-image">
+				<button class="addimage" (click)="takePicture()" *ngIf="!pick">
+					<div>
+						<img src="assets/gallery.png" srcset="assets/gallery@2x.png 2x, assets/gallery@3x.png 3x" class="gallery">
+						<span>사진 자르기</span>
 					</div>
 				</button>
 			</tr>

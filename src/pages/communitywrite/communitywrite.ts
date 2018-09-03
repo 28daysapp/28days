@@ -25,6 +25,8 @@ export class CommunitywritePage {
 	tagcorrect = false;
 	fileURL;
 	dataURL;
+	photos;
+	cropService;
 	constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
 		private camera: Camera, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
 		
@@ -95,6 +97,25 @@ export class CommunitywritePage {
 		}, (err) => {
 			// Handle error
 			console.log('openGallery error : ' + err.toString());
+		});
+	}
+
+	takePicture(){
+		let options =
+		{
+			quality: 100,
+			correctOrientation: true
+		};
+		this.camera.getPicture(options)
+		.then((data) => {
+			this.photos = new Array<string>();
+			this.cropService
+			.crop(data, {quality: 75})
+			.then((newImage) => {
+				this.photos.push(newImage);
+			}, error => console.error("Error cropping image", error));
+		}, function(error) {
+			console.log(error);
 		});
 	}
 
