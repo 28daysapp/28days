@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform, Events } from 'ionic-angular';
+import { MenuController, AlertController, Nav, Platform, Events,} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -136,8 +136,45 @@ export class MyApp {
       this.nav.push(page.component);
   }
 
+  /*
   logout(){
     this.auth.logoutUser();
+  }
+  */
+
+  profile(){
+    this.nav.push('CharacterPage');
+  }
+
+  logout() {
+    if (this.user) {
+      let alert = this.alertCtrl.create({
+        title: '이미 로그인되어 있습니다.',
+        message: '28days에서 로그아웃하시겠습니까?',
+        buttons: [
+          {
+            text: '확인',
+            handler: () => {
+              // log out from firebase auth service and remove previous cache about user credential
+              this.auth.logoutUser().then(() => {
+                this.storage.remove('localcred').then(() => {
+                  this.nav.setRoot('HomePage', {}, {animate: true, direction: 'forward'});
+                });
+              });
+            }
+          },
+          {
+            text: '취소',
+            role: 'cancel',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    } else {
+      this.nav.push('LoginPage');
+    }
   }
 
     // if (page.logsOut === true) {

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>마이페이지</ion-title>
+    <ion-title>설정</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,11 +16,16 @@
 <ion-content>
     <ion-list>
       <ion-item class="profile" (click)="profile()">
-        <img class="photo" src="{{photoURL}}"> {{username}}
+        <img class="photo" src="{{photoURL}}">
+        <br>
+        <span style="width: 100%; text-align: center;">{{username}}</span>
       </ion-item>
+      <!--
       <ion-item (click)="mychat()">내 채팅</ion-item>
       <ion-item (click)="mypost()">내가 쓴 글</ion-item>
       <ion-item (click)="mypay()">결제 내역</ion-item>
+      -->
+      <ion-item (click)="pwdchange()">비밀번호 변경</ion-item>
       <ion-item (click)="terms1()">개인정보 취급방침</ion-item>
       <ion-item (click)="terms2()">이용 약관</ion-item>
       <ion-item (click)="loginpage()">로그아웃</ion-item>
