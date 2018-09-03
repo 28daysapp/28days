@@ -96,7 +96,7 @@
 			<span class="commentname">{{ comment.username }}
 				<span class="commenttime" style="float:right">{{ comment.timestamp | date:'MM.dd a hh:mm' }}</span>
 			</span>
-			<p class="text">{{ comment.text }}</p>
+			<p class="text" style="text-align: left">{{ comment.text }}</p>
 			<span class="button" *ngIf="usercorrect_cmt(comment)" style="float: right;">
 				<button (click)="updatebutton(comment)">수정</button>
 				<button (click)="deletecomment(comment)">삭제</button>
