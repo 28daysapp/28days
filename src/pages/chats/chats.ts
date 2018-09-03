@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { UserProvider } from '../../providers/user/user';
+import firebase from 'firebase';
+
 
 @IonicPage()
 @Component({
@@ -12,11 +14,15 @@ export class ChatsPage {
 
   requestedinfos;
   requestinfos;
+  user;
+  query;
 
   type: string = "requested";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
-    public user: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider, public appCrtl: App,
+    public userProvider: UserProvider) {
+      this.user = firebase.auth().currentUser;
+
   }
 
   ionViewDidLoad() {
@@ -28,8 +34,9 @@ export class ChatsPage {
     });
   }
 
-  getItems(searchbar) {
-    console.log(searchbar);
+
+  filterItems(event) {
+    console.log(event.target.value);
   }
 
   getChatList() {
@@ -38,7 +45,7 @@ export class ChatsPage {
   }
 
   supporterchat(item) {
-    this.user.getUserprofile(item.buddyuid).then((userprofile) => {
+    this.userProvider.getUserprofile(item.buddyuid).then((userprofile) => {
       this.chat.initializebuddy(userprofile);
       this.navCtrl.push('SupporterchatPage');
     });
@@ -52,10 +59,11 @@ export class ChatsPage {
     });
   }
 
-  writeReview() {
+  writeReview(item) {
     this.navCtrl.push('SupporterreviewwritePage',
       {
-        user: this.user
+        user: this.user,
+        buddy: item
       });
   }
 
