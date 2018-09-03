@@ -58,19 +58,19 @@ page-supporterchat {
     background-color: color($colors, apricot, base);
     border-radius: 14px;
     box-shadow: 1px 1px 1px #b0b0b0;
-    padding: 8px 10px;
+    padding: 1rem 0.8rem;
     font-size: 13px;
     white-space: pre-line;
     margin: 0px 5px 6px 0px;
     max-width: 200px;
   }
 
-  .gogo {
-    color: gray;
-    position: relative;
-    left: 50px;
-    background-color: color($colors, white, base);
-  }
+  // .gogo {
+  //   color: gray;
+  //   position: relative;
+  //   left: 50px;
+  //   background-color: color($colors, white, base);
+  // }
 
   .buddy {
     left: 50px;
