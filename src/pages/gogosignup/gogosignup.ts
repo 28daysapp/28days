@@ -40,7 +40,7 @@ export class GogosignupPage implements AfterViewChecked {
   }
 
   backhandler() {
-  	this.navCtrl.setRoot('HomePage');
+  	this.navCtrl.push('TabsPage');
   }
 
   ngAfterViewChecked() {
@@ -115,7 +115,7 @@ export class GogosignupPage implements AfterViewChecked {
 
   moveToMain() {
   	setTimeout(() => {
-			this.navCtrl.setRoot('HomePage');
+			this.navCtrl.push('TabsPage');
 		}, 1000);
   }
 

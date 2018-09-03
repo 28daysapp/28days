@@ -353,7 +353,7 @@ export class IntroPage implements AfterViewChecked {
 
   moveToMain() {
   	setTimeout(() => {
-			this.navCtrl.setRoot('HomePage');
+			this.navCtrl.push('TabsPage');
 		}, 1000);
   }
 

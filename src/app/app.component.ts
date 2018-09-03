@@ -158,7 +158,7 @@ export class MyApp {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.nav.setRoot('HomePage', {}, {animate: true, direction: 'forward'});
+                  this.nav.setRoot('TabsPage', {}, {animate: true, direction: 'forward'});
                 });
               });
             }
