@@ -41,6 +41,7 @@ page-chats {
     .grid-review { 
         border: 1px solid #4a4a4a;
         border-radius: 8px;
+        float: right;
         width: 80%;
         padding: 8px;
         width: 80px;
@@ -53,8 +54,8 @@ page-chats {
     .grid-container {
         display: grid;
         grid-template-areas:
-        'username username username username time'
-        'message message message message review';
+        'username username username username username time'
+        'message message message message message review';
         grid-gap: 5px;
     }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { SupporterProvider } from '../../providers/supporter/supporter';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the SupporterreviewwritePage page.
@@ -19,10 +20,12 @@ export class SupporterreviewwritePage {
   likesrc = [];
   text;
   user;
+  userProfile;
+  buddy;
   rating = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider, public userProvider: UserProvider, public loadingCtrl: LoadingController) {
     var arr1 = [0,1,2,3,4];
     var arr2 = [0,1,2,3,4];
     var arr3 = [0,1,2,3,4];
@@ -38,10 +41,14 @@ export class SupporterreviewwritePage {
       this.likesrc[i][j] = 'assets/star.png';
     }
     this.user = this.navParams.get("user");
+    this.buddy = this.navParams.get("buddy");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SupporterreviewwritePage');
+    this.userProvider.getUserprofile(this.user.uid).then((userProfile) => {
+      this.userProfile = userProfile
+    })
   }
 
   like(item,num){
@@ -55,8 +62,7 @@ export class SupporterreviewwritePage {
   }
 
   reviewwrite(){
-    console.log('gg');
-    this.supporter.addsupporterreview(this.user.uid, this.text, this.user.username).then(() => {
+    this.supporter.addsupporterreview(this.buddy.buddyuid, this.text, this.userProfile.username).then(() => {
 	  	this.navCtrl.pop();
 	  });
 	  let loading = this.loadingCtrl.create({
@@ -64,9 +70,4 @@ export class SupporterreviewwritePage {
     });
     loading.present();
   }
-
-  
-
-  
-
 }
