@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, PopoverController, LoadingController, Content, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, PopoverController, LoadingController, Content, ViewController, AlertController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
@@ -44,7 +44,7 @@ export class CommunitycommentPage {
     public popoverCtrl: PopoverController, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
     public viewCtrl: ViewController, public alertCtrl: AlertController,
-    public zone: NgZone, public formBuilder: FormBuilder) {
+    public zone: NgZone, public formBuilder: FormBuilder, public appCtrl: App) {
     this.UserRef = firebase.database().ref('/users');
     // this event is published when any changes related to firebase comment data happen in CommunitycommentProvider
     this.events.subscribe('community-newcomment', () => {
@@ -399,9 +399,7 @@ export class CommunitycommentPage {
 
   updatepost(post) { // 게시글 수정버튼 클릭시 해당 페이지로 이동
     this.community.post = post;
-    this.navCtrl.push('CommunityfixPage', {
-
-    });
+    this.appCtrl.getRootNavs()[0].push('CommunityfixPage', {});
   }
 
   usercorrect(post) { // 게시글의 계정 매칭
