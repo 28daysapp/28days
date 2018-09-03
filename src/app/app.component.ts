@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform, Events,} from 'ionic-angular';
+import { MenuController, AlertController, Nav, Platform, Events, App, ToastController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -36,6 +36,8 @@ export class MyApp {
   userprofile;
   username;
   email;
+  lastBack;
+  allowClose;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;
@@ -83,6 +85,8 @@ export class MyApp {
     // public userProvider: UserProvider,
     public auth: AuthProvider,
     public storage: Storage,
+    private app : App,
+    private toastCtrl : ToastController,
   ) {
     this.email = "you are manding or hoho";
     firebase.initializeApp(firebaseConfig);
@@ -94,23 +98,53 @@ export class MyApp {
       splashScreen.hide();
     //   // this.initPushNotification();
 
-      // if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
-      //   //Notifications
-      //   fcm.getToken().then(token => {
-      //     console.log("Token: " + token);
-      //   })
-      //   fcm.onNotification().subscribe(data => {
-      //     if (data.wasTapped) {
-      //       console.log("Received in background");
-      //     } else {
-      //       console.log("Received in foreground");
-      //     };
-      //   })
-      //   fcm.onTokenRefresh().subscribe(token => {
-      //     console.log(token);
-      //   });
-      //   //end notifications.
-      // }
+      if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
+        //Notifications
+        fcm.getToken().then(token => {
+          console.log("Token: " + token);
+        })
+        fcm.onNotification().subscribe(data => {
+          if (data.wasTapped) {
+            console.log("Received in background");
+          } else {
+            console.log("Received in foreground");
+          };
+        })
+        fcm.onTokenRefresh().subscribe(token => {
+          console.log(token);
+        });
+        //end notifications.
+      }
+
+      platform.registerBackButtonAction(() => {
+        const overlay = this.app._appRoot._overlayPortal.getActive();
+        const nav = this.app.getActiveNav();
+        const closeDelay = 2000;
+        const spamDelay = 500;
+
+        if(overlay && overlay.dismiss){
+          overlay.dismiss();
+        }
+        else if(nav.canGoBack()){
+          nav.pop();
+        }
+        else if(Date.now() - this.lastBack > spamDelay && !this.allowClose){
+          this.allowClose = true;
+          let toast = this.toastCtrl.create({
+            message: "뒤로 버튼을 한번 더 누르시면 종료합니다.",
+            duration: closeDelay,
+            dismissOnPageChange: true,
+          });
+          toast.onDidDismiss(() => {
+            this.allowClose = false;
+          });
+          toast.present();
+        } else if(Date.now() - this.lastBack < closeDelay && this.allowClose){
+          platform.exitApp();
+        }
+
+        this.lastBack = Date.now();
+      })
     });
     // this.pleaselogin();
     events.subscribe('user:created', (user, time) => {
