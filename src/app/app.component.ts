@@ -36,8 +36,7 @@ export class MyApp {
   userprofile;
   username;
   email;
-  lastBack;
-  allowClose;
+  backBtn;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;
@@ -115,7 +114,27 @@ export class MyApp {
       //   });
       //   //end notifications.
       // }
-
+      platform.ready().then(() => {
+        platform.registerBackButtonAction(() => {
+          let nav = this.app.getActiveNav();
+          if (nav.canGoBack()) {
+            nav.pop();
+          } else {
+            if (this.backBtn) {
+              this.platform.exitApp();
+            } else {
+              let toast = this.toastCtrl.create({
+                message: '한번 더 뒤로가기 하시면 종료됩니다.',
+                duration: 3000,
+                position: 'bottom'
+              });
+              toast.present();
+              this.backBtn = true;
+              setTimeout(function () { this.backBtn = false; }, 3000);
+            }
+          }
+        });
+      });
     });
     // this.pleaselogin();
     events.subscribe('user:created', (user, time) => {
