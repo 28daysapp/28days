@@ -8,20 +8,19 @@ page-supporterchat {
     margin: auto;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    padding: 1rem;
+    padding: 1rem 2.6rem;
     width: 95%;
     height: auto;
     border-radius: 14px;
-    border: solid 1px #55b26e;
+    border: solid 1px color($colors, primary, base);
     display: flex;
     align-content: center;
 
     span {
       width: 330px;
-      height: 57px;
+      height: auto;
       font-family: AppleSDGothicNeo;
       font-size: 16px;
-      font-weight: bold;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
@@ -56,7 +55,8 @@ page-supporterchat {
 
   .bubble {
     display: inline-block;
-    border-radius: 15px;
+    background-color: color($colors, apricot, base);
+    border-radius: 14px;
     box-shadow: 1px 1px 1px #b0b0b0;
     padding: 8px 10px;
     font-size: 13px;
@@ -73,15 +73,27 @@ page-supporterchat {
   }
 
   .buddy {
-    color: black;
-    position: relative;
     left: 50px;
-    background-color: color($colors, white, base);
+    position: relative;
+    background-color: color($colors, apricot2, base);
+    color: color($colors, gray, base);
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
   }
 
   .me {
-    background-color: color($colors, bubblegreen, base);
-    color: white;
+    background-color: color($colors, apricot, base);
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: color($colors, gray, base);
   }
 
   .timebuddy {
@@ -112,9 +124,14 @@ page-supporterchat {
   .footerform {
     background-color: white;
     border-top: solid 2px #f7f7f7;
-    padding: 2px 2px 2px 10px !important;
+    padding: 2rem;
     width: 100%;
-    display: table;
+    display: flex;
+
+    span {
+      font-size: 14px;
+      color: color($colors, primary, base);
+    }
   }
 
   .footerform input {

@@ -15,13 +15,13 @@
 <ion-content #content class="bg">
 
   <div class="init-message">
-    <span>[<strong>{{buddy.username}}</strong>]님과 코코넛 서포터상담을 <br>시작하셨습니다!</span>
+    <span>[<strong>{{buddy.username}}</strong>]님과 코코넛 서포터상담을<br>시작하셨습니다!</span>
   </div>
   <div class="init-message">
-    <span>코코넛 서포터 상담은 <strong>최초 메세지 5개 발송이 무료</strong>이며, 추가로 상담을 이어가고 싶으시다면 <strong>메세지 1개 발송 당 넛츠 1개가 소요</strong>됩니다.</span>
+    <span>코코넛 서포터 상담은 <strong>최초 메세지 5개 발송이<br>무료</strong>이며, 추가로 상담을 이어가고 싶으시다면<br><strong>메세지 1개 발송 당 넛츠 1개가 소요</strong>됩니다.</span>
   </div>
   <div class="init-message">
-    <span>코코넛 메세지는 <strong>1개 발송 당 50자</strong>의 텍스트 제한이 있습니다.</span>
+    <span>코코넛 메세지는 <strong>1개 발송 당 50자</strong>의<br>텍스트 제한이 있습니다.</span>
   </div>
 
 
@@ -51,9 +51,9 @@
 
 <ion-footer>
   <div class="footerform">
-    <ion-input #focusInput [(ngModel)]="inputMessage" placeholder="채팅입력...."> </ion-input>
+    <ion-input #focusInput [(ngModel)]="inputMessage" placeholder="무엇이든 말해보세요"> </ion-input>
     <button (click)="sendmessage()">
-      <img src="assets/send.png">
+      <span>보내기</span>
     </button>
   </div>
 

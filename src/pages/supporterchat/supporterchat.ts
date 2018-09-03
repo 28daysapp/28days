@@ -62,23 +62,25 @@ export class SupporterchatPage {
       // this.fcmProvider.storeBothTokens(this.buddy);
 
       if (isstart) {
-        this.gogomessages = [];
-        this.gogomsg('서포터에게 채팅을 요청했어!\n확인 후 Push 알림을 줄 거야~!', true).then(() => {
-          this.gogomsg('요즘 가장 해결하고 싶은 고민이 뭐야? 어떤 것 때문에 요청을 하게 됐니?\n얘기해줄 수 있어?', false).then(() => {
-            this.gogomsg('서포터에게 알려주면 좀 더 편하게 얘기를 할 수 있을 것 같아서~', false).then(() => {
-              setTimeout(() => {
-                this.showinput = true;
-                this.chat.getallmessages();
-              }, 500);
-            });
-          });
-        });
+        this.showinput = true;
+        this.chat.getallmessages();
+        // this.gogomessages = [];
+        // this.gogomsg('서포터에게 채팅을 요청했어!\n확인 후 Push 알림을 줄 거야~!', true).then(() => {
+        //   this.gogomsg('요즘 가장 해결하고 싶은 고민이 뭐야? 어떤 것 때문에 요청을 하게 됐니?\n얘기해줄 수 있어?', false).then(() => {
+        //     this.gogomsg('서포터에게 알려주면 좀 더 편하게 얘기를 할 수 있을 것 같아서~', false).then(() => {
+        //       setTimeout(() => {
+        //         this.showinput = true;
+        //         this.chat.getallmessages();
+        //       }, 500);
+        //     });
+        //   });
+        // });
       } else {
-        this.gogomessages = [
-          this.createmsg(true, '서포터에게 채팅을 요청했어!\n확인 후 Push 알림을 줄 거야~!', true),
-          this.createmsg(false, '요즘 가장 해결하고 싶은 고민이 뭐야? 어떤 것 때문에 요청을 하게 됐니?\n얘기해줄 수 있어?', true),
-          this.createmsg(false, '서포터에게 알려주면 좀 더 편하게 얘기를 할 수 있을 것 같아서~', true)
-        ];
+        // this.gogomessages = [
+        //   this.createmsg(true, '서포터에게 채팅을 요청했어!\n확인 후 Push 알림을 줄 거야~!', true),
+        //   this.createmsg(false, '요즘 가장 해결하고 싶은 고민이 뭐야? 어떤 것 때문에 요청을 하게 됐니?\n얘기해줄 수 있어?', true),
+        //   this.createmsg(false, '서포터에게 알려주면 좀 더 편하게 얘기를 할 수 있을 것 같아서~', true)
+        // ];
         this.showinput = true;
         this.chat.getallmessages();
       }
