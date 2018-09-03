@@ -55,9 +55,9 @@
                   <img src="{{ item.buddyphotoURL }}">
                 </ion-avatar>
                 <div class="grid-container">
-                    <span class="grid-username" (click)="supporterchat(item)">{{ item.buddyusername }}</span>
-                    <span class="grid-time" (click)="supporterchat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-                    <div class="grid-message" (click)="supporterchat(item)">{{ item.recentmessage }}</div>
+                    <span class="grid-username" (click)="supporterChat(item)">{{ item.buddyusername }}</span>
+                    <span class="grid-time" (click)="supporterChat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
+                    <div class="grid-message" (click)="supporterChat(item)">{{ item.recentmessage }}</div>
                     <div class="grid-review" (click)="writeReview(item)">후기 남기기</div>
                 </div>
 

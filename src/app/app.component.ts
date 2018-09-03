@@ -98,23 +98,23 @@ export class MyApp {
       splashScreen.hide();
     //   // this.initPushNotification();
 
-      if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
-        //Notifications
-        fcm.getToken().then(token => {
-          console.log("Token: " + token);
-        })
-        fcm.onNotification().subscribe(data => {
-          if (data.wasTapped) {
-            console.log("Received in background");
-          } else {
-            console.log("Received in foreground");
-          };
-        })
-        fcm.onTokenRefresh().subscribe(token => {
-          console.log(token);
-        });
-        //end notifications.
-      }
+      // if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
+      //   //Notifications
+      //   fcm.getToken().then(token => {
+      //     console.log("Token: " + token);
+      //   })
+      //   fcm.onNotification().subscribe(data => {
+      //     if (data.wasTapped) {
+      //       console.log("Received in background");
+      //     } else {
+      //       console.log("Received in foreground");
+      //     };
+      //   })
+      //   fcm.onTokenRefresh().subscribe(token => {
+      //     console.log(token);
+      //   });
+      //   //end notifications.
+      // }
 
       platform.registerBackButtonAction(() => {
         const overlay = this.app._appRoot._overlayPortal.getActive();
