@@ -1,8 +1,35 @@
 page-supporterchat {
 
 	.bg {
-		background-color: color($colors, bggreen, base);
-	}
+		background-color: color($colors, white, base);
+  }
+  
+  .init-message {
+    margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    width: 95%;
+    height: auto;
+    border-radius: 14px;
+    border: solid 1px #55b26e;
+    display: flex;
+    align-content: center;
+
+    span {
+      width: 330px;
+      height: 57px;
+      font-family: AppleSDGothicNeo;
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #55b26e;      
+    }
+  }
 
 	ul {
 		list-style-type: none;
@@ -78,14 +105,13 @@ page-supporterchat {
   }
 
   ion-footer {
-    background-color: #e8ede8;
+    background-color: white;
     padding: 3px 8px;
   }
 
   .footerform {
     background-color: white;
-    border: 1px solid #d0d0d0;
-    border-radius: 15px;
+    border-top: solid 2px #f7f7f7;
     padding: 2px 2px 2px 10px !important;
     width: 100%;
     display: table;

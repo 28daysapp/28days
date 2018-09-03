@@ -72,7 +72,6 @@ export class ChatProvider {
     var promise = new Promise((resolve) => {
       this.firechat.child(`${uid}/${this.buddy.uid}`).once("value").then((snapshot) => {
         if (snapshot.val()) {
-          console.log('add message to existed chat');
           this.firechat.child(`${uid}/${this.buddy.uid}`).update({
             recentmessage: msg,
             recenttimestamp: firebase.database.ServerValue.TIMESTAMP

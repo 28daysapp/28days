@@ -31,7 +31,7 @@
 
       <div [ngSwitch]="type">
         <ion-list no-lines *ngSwitchCase="'requested'">
-          <ion-item-sliding *ngFor="let item of requestedinfos" (click)="supporterchat(item)">
+          <ion-item-sliding *ngFor="let item of requestedinfos" (click)="supporterChat(item)">
             <ion-item class="bottom-border">
               <ion-avatar item-start>
                 <img src="{{ item.buddyphotoURL }}">
