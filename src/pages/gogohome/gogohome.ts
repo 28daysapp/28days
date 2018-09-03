@@ -187,7 +187,7 @@ export class GogohomePage implements AfterViewChecked {
 
   moveToHome() {
   	setTimeout(() => {
-			this.navCtrl.setRoot('HomePage');
+			this.navCtrl.push('TabsPage');
 		}, 1000);
   }
 

@@ -8,11 +8,13 @@
 
 	<ion-navbar>
 		<ion-title>내 정보 수정</ion-title>
+	<!--
 		<ion-buttons right>
 			<button ion-button icon-only (click)="end()" style="color: #000000;">
 				완료
 			</button>
 		</ion-buttons>
+	-->
 	</ion-navbar>
 </ion-header>
 
@@ -81,20 +83,22 @@
 
 	<table class="picture">
 		<td align="center">
-				<span class="text">프로필 사진</span>
+			<span class="text">프로필 사진</span>
 		</td>
 		<td align="center">
-				<button class="photo" (click)="pickpicture">
-						<img src="assets/profile0.png">
-				</button>
+			<button class="photo" (click)="pickpicture()">
+				<img src="assets/profile0.png">
+			</button>
 		</td>
 	</table>
+	<!--
 	<table class="name">
-			<td align="center">
-					&emsp;&ensp;<span class="text">닉네임</span>
-			</td>
-			<td align="center">
-					<ion-input class="nametext" [(ngModel)]="nametext"></ion-input>
-			</td>
-		</table>
+		<td align="center">
+			&emsp;&ensp;<span class="text">닉네임</span>
+		</td>
+		<td align="center">
+			<ion-input class="nametext" [(ngModel)]="nametext"></ion-input>
+		</td>
+	</table>
+-->
 </ion-content>

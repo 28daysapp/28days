@@ -54,7 +54,7 @@ export class CounselorPage {
               role: 'cancel',
               handler: () => {
                 this.loading.dismiss();
-                this.navCtrl.setRoot('HomePage');
+                this.navCtrl.push('TabsPage');
               }
             }
           ]
