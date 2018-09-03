@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
@@ -42,7 +42,7 @@ export class HospitalcenterPage {
   apiProvider;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public modalController: ModalController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation, public modalController: ModalController,
     public menu: MenuController, public google: GoogleProvider) {
     this.places = [];
   }
@@ -134,7 +134,14 @@ export class HospitalcenterPage {
           for (let i = 0; i < results.length; i++) {
             this.places = results;
             this.places[i].reviewCount = 0;
-            this.places[i].rating = 0;
+            this.places[i].ratings = 0;
+
+            console.log("photo reference: " + results[i].reference)
+
+            this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
+            
+            // this.places[i].photo = this.google.getGooglePhoto();
+
             console.log(this.places[i].place_id);
             this.countReviews(results[i].place_id, i);
           }
@@ -158,8 +165,10 @@ export class HospitalcenterPage {
         return
       }
         this.places[i].reviewCount = snapshot.val().reviewCount;
+        this.places[i].ratings = snapshot.val().ratings;
     })
   }
+
 
   placeDetail(place) {
     this.navCtrl.push('PlaceDetailPage', {
@@ -167,9 +176,26 @@ export class HospitalcenterPage {
     });
   }
 
+  showModal() {
+    let alert = this.alertCtrl.create({
+      title: '정신병원과 상담센터?',
+      message: `
+      <p><strong>정신과</strong>: 약물 치료가 병행되고 심리상담/검사/치료 기록이 건강보험에 의해 남습니다.</p>
+
+      <p><strong>상담센터</strong>: 약물 치료 없이 상담자와의 대화가 자기 통찰을 통해 건강한 심시을 회복할 수 있도록 돕습니다.</p>
+      `,
+      buttons: ['알겠어요!']
+    });
+    alert.present();
+  }
+
   sort() {
     console.log("sort clicked")
-
+    let alert = this.alertCtrl.create({
+      title: '정렬 순서',
+      buttons: [{text: '후기 많은 순'}, {text: '별점 높은 순'}]
+    });
+    alert.present();
   }
 
 }

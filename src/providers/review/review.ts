@@ -50,10 +50,12 @@ export class ReviewProvider {
     const promise = new Promise((resolve) => {
 
       firebase.database().ref('/review/' + placeId).once('value', function (snap) {
-        firebase.database().ref(`/placeInfo/` + placeId).set({
+        firebase.database().ref(`/placeInfo/` + placeId).update({
           reviewCount: snap.numChildren(),
         })
       })
+
+      return resolve
     });
 
     return promise;

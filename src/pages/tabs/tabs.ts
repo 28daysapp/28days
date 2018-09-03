@@ -25,11 +25,9 @@ export class TabsPage {
 
   tab1Title = "홈";
   tab2Title = "병원/센터";
-  tab3Title = "채팅";
-  tab4Title = "온라인상담";
+  tab3Title = "온라인상담";
+  tab4Title = "서포터/상담사";
   tab5Title = "커뮤니티";
-
-  // customicon = "../assets/gogo.png";
 
   constructor(public navCtrl: NavController) {}
 
