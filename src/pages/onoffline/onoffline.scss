@@ -23,6 +23,35 @@ page-onoffline {
   //font-: #ffffff;
   }
 
+  .segment-md {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .segbutton {
+    width: 80%;
+    bottom: 3%;
+    margin: 0% 10% 0% 10%;
+    text-align: center;
+  }
+
+  .segment-md .segment-button{
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-top: 2%;
+    width: 50%;
+    color: #9b9b9b;;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom-width: 0;
+  }
+
+  .segment-button.segment-activated {
+    border-bottom-width: 4px;
+    color: #4a4a4a;
+
+  }
+
   .list .profilephoto {
     padding-left: 2%;
     width: 19%;
