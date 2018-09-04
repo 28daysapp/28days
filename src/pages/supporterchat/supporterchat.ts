@@ -55,6 +55,7 @@ export class SupporterchatPage {
 
   ionViewDidLoad() {
     console.log('SupporterchatPage - ionViewDidLoad');
+    this.scrollToBottom();
 
     this.chat.checkstart().then((isstart) => {
 
