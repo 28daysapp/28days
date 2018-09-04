@@ -54,7 +54,7 @@ export class CounselorchatPage implements AfterViewChecked {
             this.gogomsg('상담사에게 알려주면 좀 더 편하게 얘기를 할 수 있을 것 같아서~', false).then(() => {
               setTimeout(() => {
                 this.showinput = true;
-                this.chat.getallmessages();
+                this.chat.getAllMessages();
               }, 500);
             });
           });
@@ -66,7 +66,7 @@ export class CounselorchatPage implements AfterViewChecked {
           this.createmsg(false, '상담사에게 알려주면 좀 더 편하게 얘기를 할 수 있을 것 같아서~', true)
         ];
         this.showinput = true;
-        this.chat.getallmessages();
+        this.chat.getAllMessages();
       }
     });
     // this.chat.getallmessages();
@@ -77,7 +77,7 @@ export class CounselorchatPage implements AfterViewChecked {
     this.chat.stoplistenmessages();
   }
 
-  sendmessage() {
+  sendMessage() {
     if (this.inputForm.valid) {
       var txt = this.inputForm.value.txt;
       this.inputForm.reset();
@@ -86,7 +86,7 @@ export class CounselorchatPage implements AfterViewChecked {
       if (txt == 'pay') {
         this.payMembership();
       } else {
-        this.chat.sendmessage(txt);
+        this.chat.sendMessage(txt);
       }
     }
   }
