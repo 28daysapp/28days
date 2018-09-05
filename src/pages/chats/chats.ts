@@ -36,6 +36,15 @@ export class ChatsPage {
     });
   }
 
+  ionViewWillEnter() {
+    this.chat.getAllRequestedInfos().then(info => {
+      this.requestedInfos = info;
+    });
+    this.chat.getAllRequestInfos().then(info => {
+      this.requestInfos = info;
+    });
+  }
+
   filterItems(event) {
     console.log(event.target.value);
   }
@@ -43,13 +52,13 @@ export class ChatsPage {
   getChatList() {
     const chatType = this.type;
     console.log("Chat type: " + chatType);
-    // return chatType === "requested"
-    //   ? this.chat.getAllRequestInfos().then(info => {
-    //       this.requestinfos = info;
-    //     })
-    //   : this.chat.getAllRequestedInfos().then(info => {
-    //       this.requestedinfos = info;
-    //     });
+    return chatType === "requested"
+      ? this.chat.getAllRequestInfos().then(info => {
+          this.requestInfos = info;
+        })
+      : this.chat.getAllRequestedInfos().then(info => {
+          this.requestedInfos = info;
+        });
   }
 
   supporterChat(item) {

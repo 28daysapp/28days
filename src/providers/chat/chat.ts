@@ -48,7 +48,7 @@ export class ChatProvider {
   initializebuddy(buddy) {
     this.buddy = buddy;
     this.buddyId = this.buddy.uid;
-
+    console.log("버디야!!: " + JSON.stringify(this.buddy));
     // this.storeTokens();
   }
 
@@ -65,8 +65,6 @@ export class ChatProvider {
   //     buddyToken: this.buddyToken,
   //     senderToken: this.senderToken
   //   }));
-
-
   // }
 
   sendMessage(msg) {
@@ -76,9 +74,7 @@ export class ChatProvider {
         if (snapshot.val()) {
 
           this.countUnseenMessages(uid);
-
-          // The count is updated only on the other user's db.
-
+          
           this.firechat.child(`${uid}/${this.buddy.uid}`).update({
             recentmessage: msg,
             recenttimestamp: firebase.database.ServerValue.TIMESTAMP
@@ -134,30 +130,26 @@ export class ChatProvider {
     return promise;
   }
 
+  // Updates unseen message counts
   countUnseenMessages(uid) {
-
     this.firechat.child(`${this.buddy.uid}/${uid}`).once("value").then((snapshot) => {
       if (snapshot.val()) {
         const data = snapshot.val();
-        console.log("count unseen messages")
-        console.log(data);
-        console.log(JSON.stringify(data));
-    
         this.count = parseInt(data.count, 10) + 1;
-        console.log("Counter: " + this.count)
       } 
     });
   }
 
+  // Checks for empty count values in chat database
   checkZeroCount() {
-    const uid = firebase.auth().currentUser.uid;
-    this.firechat.child(`${this.buddy.uid}/${uid}`).once("value").then((snapshot) => {
-      if (!snapshot.val().count) {
-        this.firechat.child(`${this.buddy.uid}/${uid}`).set({
-          count: 0
-        });
-      }
-    });
+    // const uid = firebase.auth().currentUser.uid;
+    // this.firechat.child(`${this.buddy.uid}/${uid}`).once("value").then((snapshot) => {
+    //   if (!snapshot.val().count) {
+    //     this.firechat.child(`${this.buddy.uid}/${uid}`).update({
+    //       count: 0
+    //     });
+    //   }
+    // });
   }
 
   getAllMessages() {
@@ -236,12 +228,16 @@ export class ChatProvider {
         var requestedchats = [];
         snapshot.forEach((childSnapshot) => {
           if (childSnapshot.val().requester != uid) {
-            requestedchatuids.push(childSnapshot.val().buddyuid);
+            console.log("key? : " + Object.keys(snapshot.val())[0]);
+            console.log("44444444444444444---------------------- : " + JSON.stringify(childSnapshot.val()));
+
+            requestedchatuids.push(Object.keys(snapshot.val())[0]);
             requestedchats.push(childSnapshot.val());
           }
         });
         this.fireusers.once("value").then((userprofile) => {
           userprofile.forEach((childSnapshot) => {
+            console.log("33333333333333333---------------------- : " + JSON.stringify(childSnapshot.val()));
             var index = requestedchatuids.indexOf(childSnapshot.val().uid);
             if (index != -1) {
               requestedchats[index].buddyusername = childSnapshot.val().username;
