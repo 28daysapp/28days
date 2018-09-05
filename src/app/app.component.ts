@@ -116,33 +116,6 @@ export class MyApp {
       //   //end notifications.
       // }
 
-      platform.registerBackButtonAction(() => {
-        const overlay = this.app._appRoot._overlayPortal.getActive();
-        const nav = this.app.getActiveNav();
-        const closeDelay = 2000;
-        const spamDelay = 500;
-
-        if(overlay && overlay.dismiss){
-          overlay.dismiss();
-        } else if(nav.canGoBack()){
-          nav.pop();
-        } else if(Date.now() - this.lastBack > spamDelay && !this.allowClose){
-          this.allowClose = true;
-          let toast = this.toastCtrl.create({
-            message : "한번 더 뒤로가기 하시면 종료됩니다.",
-            duration: closeDelay,
-            dismissOnPageChange: true
-          });
-          toast.onDidDismiss(() => {
-            this.allowClose = false;
-          });
-          toast.present();
-        } else if(Date.now() - this.lastBack < closeDelay && this.allowClose){
-          platform.exitApp();
-        }
-        this.lastBack = Date.now();
-      });
-
     });
     // this.pleaselogin();
     events.subscribe('user:created', (user, time) => {
