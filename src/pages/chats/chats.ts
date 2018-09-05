@@ -44,7 +44,7 @@ export class ChatsPage {
     console.log("Chat type: " + chatType);
   }
 
-  supporterChat(item) {
+  supporterchat(item) {
     this.userProvider.getUserprofile(item.buddyuid).then((userprofile) => {
       this.chat.initializebuddy(userprofile);
       this.navCtrl.push('SupporterchatPage');

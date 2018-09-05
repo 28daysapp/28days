@@ -36,7 +36,8 @@ export class MyApp {
   userprofile;
   username;
   email;
-  backBtn: boolean = false;
+  lastBack;
+  allowClose;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;
@@ -116,23 +117,30 @@ export class MyApp {
       // }
 
       platform.registerBackButtonAction(() => {
-        let nav = this.app.getActiveNav();
-        if (nav.canGoBack()) {
+        const overlay = this.app._appRoot._overlayPortal.getActive();
+        const nav = this.app.getActiveNav();
+        const closeDelay = 2000;
+        const spamDelay = 500;
+
+        if(overlay && overlay.dismiss){
+          overlay.dismiss();
+        } else if(nav.canGoBack()){
           nav.pop();
-        } else {
-          if (this.backBtn) {
-            this.platform.exitApp();
-          } else {
-            let toast = this.toastCtrl.create({
-              message: '한번 더 뒤로가기 하시면 종료됩니다.',
-              duration: 3000,
-              position: 'bottom'
-            });
-            toast.present();
-            this.backBtn = true;
-            setTimeout(function () { this.backBtn = false; }, 3000);
-          }
+        } else if(Date.now() - this.lastBack > spamDelay && !this.allowClose){
+          this.allowClose = true;
+          let toast = this.toastCtrl.create({
+            message : "한번 더 뒤로가기 하시면 종료됩니다.",
+            duration: closeDelay,
+            dismissOnPageChange: true
+          });
+          toast.onDidDismiss(() => {
+            this.allowClose = false;
+          });
+          toast.present();
+        } else if(Date.now() - this.lastBack < closeDelay && this.allowClose){
+          platform.exitApp();
         }
+        this.lastBack = Date.now();
       });
 
     });

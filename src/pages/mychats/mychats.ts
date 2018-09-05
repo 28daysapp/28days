@@ -20,11 +20,13 @@ export class MychatsPage {
   }
 
   requestchatpage() {
-  	this.appCtrl.getRootNavs()[0].push('RequestchatPage');
+    //this.appCtrl.getRootNavs()[0].push('RequestchatPage');
+    this.navCtrl.push('RequestchatPage');
   }
 
   requestedchatpage() {
-  	this.appCtrl.getRootNavs()[0].push('RequestedchatPage');
+    //this.appCtrl.getRootNavs()[0].push('RequestedchatPage');
+    this.navCtrl.push('RequestedchatPage');
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HospitalcenterPage');
