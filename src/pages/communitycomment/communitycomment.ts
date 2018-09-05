@@ -399,7 +399,8 @@ export class CommunitycommentPage {
 
   updatepost(post) { // 게시글 수정버튼 클릭시 해당 페이지로 이동
     this.community.post = post;
-    this.appCtrl.getRootNavs()[0].push('CommunityfixPage', {});
+    //this.appCtrl.getRootNavs()[0].push('CommunityfixPage', {});
+    this.navCtrl.push('CommunityfixPage');
   }
 
   usercorrect(post) { // 게시글의 계정 매칭

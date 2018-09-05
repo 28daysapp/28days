@@ -165,17 +165,13 @@ export class OnofflinePage {
   }
 
   supporterreview(user) { 
-    this.appCrtl.getRootNavs()[0].push('SupporterreviewPage',
-  {
-    user: user
-  });
+    //this.appCrtl.getRootNavs()[0].push('SupporterreviewPage',{ user: user });
+    this.navCtrl.push('SupporterreviewPage', { user: user });
   }
 
   counselorreview(user) {
-    this.appCrtl.getRootNavs()[0].push('CounselorreviewPage',
-  {
-    user: user
-  });
+    //this.appCrtl.getRootNavs()[0].push('CounselorreviewPage',{ user: user });
+    this.navCtrl.push('CounselorreviewPage', { user: user});
   }
 
   gooperator() {
