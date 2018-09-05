@@ -47,6 +47,7 @@ export class SupporterchatPage {
 
   ionViewDidEnter() {
     this.scrollToBottom();
+    this.chat.clearCount(this.buddy);
   }
 
   scrollToBottom() {
@@ -98,6 +99,7 @@ export class SupporterchatPage {
   ionViewWillLeave() {
     this.events.unsubscribe('newmessage');
     this.chat.stoplistenmessages();
+    this.chat.clearCount(this.buddy);
   }
 
   // subscribeToNotifications() {

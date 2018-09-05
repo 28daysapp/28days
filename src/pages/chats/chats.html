@@ -31,12 +31,12 @@
 
   <div [ngSwitch]="type">
     <ion-list no-lines *ngSwitchCase="'requested'">
-      <ion-item-sliding *ngFor="let item of requestedInfos" (click)="supporterChat(item)">
+      <ion-item-sliding *ngFor="let item of requestedInfos" (click)="supporterChat2(item)">
         <ion-item class="bottom-border">
           <ion-avatar item-start>
-            <img src="{{ item.buddyphotoURL }}">
+            <img src="{{ item.requesterPhoto }}">
           </ion-avatar>
-          <span class="username">{{ item.buddyusername }}</span>
+          <span class="username">{{ item.requesterUsername }}</span>
 
           <!-- <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
               <div class="msg">{{ item.recentmessage }}</div> -->

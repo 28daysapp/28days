@@ -20,6 +20,9 @@ export class ChatProvider {
   chatmessages;
   count;
 
+  requester: string;
+  photoURL: string;
+
   constructor(public user: UserProvider, public events: Events) {
   }
 
@@ -48,7 +51,6 @@ export class ChatProvider {
   initializebuddy(buddy) {
     this.buddy = buddy;
     this.buddyId = this.buddy.uid;
-    console.log("버디야!!: " + JSON.stringify(this.buddy));
     // this.storeTokens();
   }
 
@@ -96,16 +98,30 @@ export class ChatProvider {
 
         } else {
 
-          console.log('create new chat');
+          
+          this.fireusers.child(`${uid}`).once('value').then((snapshot)=> {
+            this.requester = snapshot.val().username;
+            this.photoURL = snapshot.val().photoURL;
+            console.log("ㅇㅁㄴㄹ;만ㅇ러;민아ㅓㄹ;미ㅏㄴㅇ : " + this.requester);
+          }).then(() => {
+            console.log('create new chat');
           this.firechat.child(`${uid}/${this.buddy.uid}`).set({
             requester: uid,
+            requesterUsername: this.requester,
+            requesterPhoto: this.photoURL,
+            buddyUsername: this.buddy.username,
             buddyuid: this.buddy.uid,
+            buddyPhoto: this.buddy.photoURL,
             recentmessage: msg,
             recenttimestamp: firebase.database.ServerValue.TIMESTAMP
           }).then(() => {
             this.firechat.child(`${this.buddy.uid}/${uid}`).set({
               requester: uid,
+              requesterUsername: this.requester,
+              requesterPhoto: this.photoURL,
               buddyuid: this.buddy.uid,
+              buddyUsername: this.buddy.username,
+              buddyPhoto: this.buddy.photoURL,
               recentmessage: msg,
               recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
               count: 1
@@ -123,6 +139,9 @@ export class ChatProvider {
               });
             });
           });
+          })
+
+          
 
         }
       });
@@ -140,16 +159,27 @@ export class ChatProvider {
     });
   }
 
+  clearCount(buddy) {
+    const uid = firebase.auth().currentUser.uid;
+    this.firechat.child(`${uid}/${buddy.uid}`).once('value').then((snapshot) => {
+      if (snapshot.hasChild('count')) {
+            this.firechat.child(`${uid}/${buddy.uid}`).update({
+              count: 0
+            });
+          }
+    })
+  }
+
   // Checks for empty count values in chat database
   checkZeroCount() {
-    // const uid = firebase.auth().currentUser.uid;
-    // this.firechat.child(`${this.buddy.uid}/${uid}`).once("value").then((snapshot) => {
-    //   if (!snapshot.val().count) {
-    //     this.firechat.child(`${this.buddy.uid}/${uid}`).update({
-    //       count: 0
-    //     });
-    //   }
-    // });
+    const uid = firebase.auth().currentUser.uid;
+    this.firechat.child(`${this.buddy.uid}/${uid}`).once("value").then((snapshot) => {
+      if (!snapshot.hasChild('count')) {
+        this.firechat.child(`${this.buddy.uid}/${uid}`).set({
+          count: 0
+        });
+      }
+    });
   }
 
   getAllMessages() {
@@ -222,30 +252,50 @@ export class ChatProvider {
 
   getAllRequestedInfos() {
     var uid = firebase.auth().currentUser.uid;
+
     var promise = new Promise((resolve) => {
       this.firechat.child(uid).once("value").then((snapshot) => {
+        console.log("this snapshot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1: " + JSON.stringify(snapshot));
         var requestedchatuids = [];
         var requestedchats = [];
         snapshot.forEach((childSnapshot) => {
-          if (childSnapshot.val().requester != uid) {
-            requestedchatuids.push(Object.keys(snapshot.val())[0]);
+          if(childSnapshot.val().requester != uid) {
             requestedchats.push(childSnapshot.val());
           }
-        });
-
-        this.fireusers.once("value").then((userprofile) => {
-          userprofile.forEach((childSnapshot) => {
-            var index = requestedchatuids.indexOf(childSnapshot.val().uid);
-            if (index != -1) {
-              requestedchats[index].buddyusername = childSnapshot.val().username;
-              requestedchats[index].buddyphotoURL = childSnapshot.val().photoURL;
-            }
-          });
-          resolve(requestedchats);
-        });
-      });
+        })
+        resolve(requestedchats);
+      })
     });
+
     return promise;
+
+
+
+
+    // var promise = new Promise((resolve) => {
+    //   this.firechat.child(uid).once("value").then((snapshot) => {
+    //     var requestedchatuids = [];
+    //     var requestedchats = [];
+    //     snapshot.forEach((childSnapshot) => {
+    //       if (childSnapshot.val().requester != uid) {
+    //         requestedchatuids.push(Object.keys(snapshot.val())[0]);
+    //         requestedchats.push(childSnapshot.val());
+    //       }
+    //     });
+
+    //     this.fireusers.once("value").then((userprofile) => {
+    //       userprofile.forEach((childSnapshot) => {
+    //         var index = requestedchatuids.indexOf(childSnapshot.val().uid);
+    //         if (index != -1) {
+    //           requestedchats[index].buddyusername = childSnapshot.val().username;
+    //           requestedchats[index].buddyphotoURL = childSnapshot.val().photoURL;
+    //         }
+    //       });
+    //       resolve(requestedchats);
+    //     });
+    //   });
+    // });
+    // return promise;
   }
 
   checkstart() {
@@ -263,3 +313,5 @@ export class ChatProvider {
   }
 
 }
+
+

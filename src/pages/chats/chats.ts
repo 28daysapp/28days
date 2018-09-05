@@ -28,7 +28,7 @@ export class ChatsPage {
   }
 
   ionViewDidLoad() {
-    this.refreshList()
+    this.refreshList();
   }
 
   ionViewWillEnter() {
@@ -64,6 +64,13 @@ export class ChatsPage {
 
   supporterChat(item) {
     this.userProvider.getUserprofile(item.buddyuid).then(userprofile => {
+      this.chat.initializebuddy(userprofile);
+      this.appCrtl.getRootNavs()[0].push("SupporterchatPage");
+    });
+  }
+
+  supporterChat2(item) {
+    this.userProvider.getUserprofile(item.requester).then(userprofile => {
       this.chat.initializebuddy(userprofile);
       this.appCrtl.getRootNavs()[0].push("SupporterchatPage");
     });
