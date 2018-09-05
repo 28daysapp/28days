@@ -146,7 +146,7 @@ export class HospitalcenterPage {
             console.log("photo reference: " + results[i].reference)
 
             this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
-            
+
             // this.places[i].photo = this.google.getGooglePhoto();
 
             console.log(this.places[i].place_id);
@@ -171,17 +171,15 @@ export class HospitalcenterPage {
       if (snapshot.val() === null) {
         return
       }
-        this.places[i].reviewCount = snapshot.val().reviewCount;
-        this.places[i].ratings = snapshot.val().ratings;
+      this.places[i].reviewCount = snapshot.val().reviewCount;
+      this.places[i].ratings = snapshot.val().ratings;
     })
   }
 
 
   placeDetail(place) {
-
-    this.appCrtl.getRootNavs()[0].push('PlaceDetailPage', {
-      place: place
-    });
+    //this.appCrtl.getRootNavs()[0].push('PlaceDetailPage', { place: place });
+    this.navCtrl.push('PlaceDetailPage', { place: place });
   }
 
   showModal() {
@@ -201,7 +199,7 @@ export class HospitalcenterPage {
     console.log("sort clicked")
     let alert = this.alertCtrl.create({
       title: '정렬 순서',
-      buttons: [{text: '후기 많은 순'}, {text: '별점 높은 순'}]
+      buttons: [{ text: '후기 많은 순' }, { text: '별점 높은 순' }]
     });
     alert.present();
   }
