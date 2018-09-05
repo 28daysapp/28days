@@ -1,7 +1,7 @@
 
 
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, Navbar  } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
@@ -12,6 +12,7 @@ import firebase from 'firebase';
   templateUrl: 'mypost.html',
 })
 export class MypostPage {
+  @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('content') content: Content;
   fireusers = firebase.database().ref('/users');
   firecommunity = firebase.database().ref('/community');
@@ -34,6 +35,10 @@ export class MypostPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchtagPage');
+    this.navBar.backButtonClick = (e:UIEvent)=>{
+      // todo something
+      this.navCtrl.pop();
+     }
   }
 
   ionViewWillEnter(){
