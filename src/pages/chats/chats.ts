@@ -28,25 +28,26 @@ export class ChatsPage {
   }
 
   ionViewDidLoad() {
-    this.chat.getAllRequestedInfos().then(info => {
-      this.requestedInfos = info;
-    });
-    this.chat.getAllRequestInfos().then(info => {
-      this.requestInfos = info;
-    });
+    this.refreshList()
   }
 
   ionViewWillEnter() {
-    this.chat.getAllRequestedInfos().then(info => {
-      this.requestedInfos = info;
-    });
-    this.chat.getAllRequestInfos().then(info => {
-      this.requestInfos = info;
-    });
+    this.refreshList();
   }
 
   filterItems(event) {
     console.log(event.target.value);
+  }
+
+  refreshList() {
+    this.chat.getAllRequestedInfos().then(info => {
+      this.requestedInfos = info;
+      console.log("요청받은 requestedInfos: " + JSON.stringify(info))
+    });
+    this.chat.getAllRequestInfos().then(info => {
+      this.requestInfos = info;
+      console.log("요청한 requestInfos: " + JSON.stringify(info))
+    });
   }
 
   getChatList() {

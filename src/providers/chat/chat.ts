@@ -228,16 +228,13 @@ export class ChatProvider {
         var requestedchats = [];
         snapshot.forEach((childSnapshot) => {
           if (childSnapshot.val().requester != uid) {
-            console.log("key? : " + Object.keys(snapshot.val())[0]);
-            console.log("44444444444444444---------------------- : " + JSON.stringify(childSnapshot.val()));
-
             requestedchatuids.push(Object.keys(snapshot.val())[0]);
             requestedchats.push(childSnapshot.val());
           }
         });
+
         this.fireusers.once("value").then((userprofile) => {
           userprofile.forEach((childSnapshot) => {
-            console.log("33333333333333333---------------------- : " + JSON.stringify(childSnapshot.val()));
             var index = requestedchatuids.indexOf(childSnapshot.val().uid);
             if (index != -1) {
               requestedchats[index].buddyusername = childSnapshot.val().username;

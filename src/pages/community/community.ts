@@ -74,7 +74,8 @@ export class CommunityPage {
   comment(post) { // 게시글의 제목을 누르면 게시글로 들어감 -- 추후 이름 수정 요망
     this.community.post = post;
     this.cocomment.initializecomment(post);
-    this.appCtrl.getRootNavs()[0].push('CommunitycommentPage', {});
+    //this.appCtrl.getRootNavs()[0].push('CommunitycommentPage', {});
+    this.navCtrl.push('CommunitycommentPage');
   }
 
   like(post) { // 좋아요 내가 안해서 모름
@@ -98,7 +99,8 @@ export class CommunityPage {
   }
 
   communitywrite() { // 글쓰기 버튼을 누르면 해당 페이지로 이동
-    this.appCtrl.getRootNavs()[0].push('CommunitywritePage', {});
+    //this.appCtrl.getRootNavs()[0].push('CommunitywritePage', {});
+    this.navCtrl.push('CommunitywritePage');
   }
 
   changeAnonymity(post) { // 익명 글쓰기를 체크했을 때 if 체크 안했을 시 else
@@ -302,7 +304,8 @@ export class CommunityPage {
 
   searchtag(tag) { // 태그만 검색하는 기능 검색창 및 현재 페이지에서 태그 클릭시 해당 페이지로 이동
     this.community.tag = tag;
-    this.appCtrl.getRootNavs()[0].push('SearchtagPage', { tag: this.tag });
+    //this.appCtrl.getRootNavs()[0].push('SearchtagPage', { tag: this.tag });
+    this.navCtrl.push('SearchtagPage', { tag: this.tag });
   }
 
   doInfinite() { // 다음 10개의 게시물 중 제일 위에 위치한 게시물의 스크롤에서부터 리스트 생성 
