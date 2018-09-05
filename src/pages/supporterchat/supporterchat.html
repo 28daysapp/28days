@@ -24,16 +24,6 @@
     <span>코코넛 메세지는 <strong>1개 발송 당 50자</strong>의<br>텍스트 제한이 있습니다.</span>
   </div>
 
-
-  <ul>
-    <li *ngFor="let msg of gogomessages">
-      <div>
-        <img *ngIf="msg.showimage" src="assets/gogo.png">
-        <p class="bubble gogo" [ngClass]="{setblack: msg.setblack}">{{msg.message}}</p>
-      </div>
-    </li>
-  </ul>
-
   <ul class="chat">
     <li *ngFor="let msg of chatmessages">
       <div *ngIf="msg.sentby == buddy.uid">
@@ -52,7 +42,7 @@
 <ion-footer>
   <div class="footerform">
     <ion-input #focusInput [(ngModel)]="inputMessage" placeholder="무엇이든 말해보세요"> </ion-input>
-    <div (click)="sendmessage()">
+    <div (click)="sendMessage()">
       <span>보내기</span>
     </div>
   </div>

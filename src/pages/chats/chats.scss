@@ -79,7 +79,7 @@ page-chats {
     .review { 
         float: right; 
         position: relative;
-        border: 1px solid color($colors, gray, base);;
+        border: 1px solid color($colors, gray, base);
         border-radius: 8px;
         width: auto;
         padding: 8px;
@@ -126,7 +126,20 @@ page-chats {
 	// ion-item remove padding
 	.label {
   	margin: 0px;
-	}
+    }
+    
+    .counter {
+        margin: 0 0.5rem;
+        padding: 0 0.5rem;
+        height: 2rem;
+        background-color: color($colors, primary, base);
+        border-radius: 50rem;
+        align-items: center;
+        text-align: center;
+        display: inline-block;
+        font-size: 1.5rem;
+        color: color($colors, white, base);
+    }
 
 	.username {
         color: #4a4a4a;
