@@ -44,13 +44,10 @@ export class ChatsPage {
     console.log("Chat type: " + chatType);
   }
 
-  supporterchat(item) {
+  supporterChat(item) {
     this.userProvider.getUserprofile(item.buddyuid).then((userprofile) => {
       this.chat.initializebuddy(userprofile);
-
-      this.appCrtl.getRootNavs()[0].push('SupporterchatPage');
-
-      // this.navCtrl.push('SupporterchatPage');
+      this.navCtrl.push('SupporterchatPage');
     });
   }
 
