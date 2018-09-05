@@ -47,7 +47,10 @@ export class ChatsPage {
   supporterchat(item) {
     this.userProvider.getUserprofile(item.buddyuid).then((userprofile) => {
       this.chat.initializebuddy(userprofile);
-      this.navCtrl.push('SupporterchatPage');
+
+      this.appCrtl.getRootNavs()[0].push('SupporterchatPage');
+
+      // this.navCtrl.push('SupporterchatPage');
     });
   }
 

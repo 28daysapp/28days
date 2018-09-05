@@ -27,14 +27,14 @@
 
 <ion-content no-border>
   <!-- Segment in content -->
-  <ion-segment [(ngModel)]="type" (ionChange)="searchByText()">
-      <ion-segment-button value="center">
-        상담센터
-      </ion-segment-button>
-      <ion-segment-button value="psychiatric">
-        정신과
-      </ion-segment-button>
-    </ion-segment>
+  <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
+    <ion-segment-button value="center">
+      상담센터
+    </ion-segment-button>
+    <ion-segment-button value="psychiatric">
+      정신과
+    </ion-segment-button>
+  </ion-segment>
 
 
   <div #map id="map"></div>
@@ -45,7 +45,7 @@
     <ion-item class="card-item">
       <ion-avatar item-start>
         <div class="container">
-            <img id="main-img" src={{place.photo}} onError="this.src='assets/imgs/hospital-default.svg';">
+          <img id="main-img" src="{{place.image}}" (Error)="this.src='assets/imgs/hospital-default1.svg';">
         </div>
       </ion-avatar>
 
@@ -54,10 +54,10 @@
         <div class="card-subtitle">{{ place.formatted_address.substr(5) }}</div>
         <div class="card-bottom">
           <button class="card-star" ion-button icon-start clear small>
-            <ion-icon name="star"> {{ place.ratings }}  리뷰 {{ place.reviewCount }}</ion-icon>
+            <ion-icon name="star"> {{ place.ratings }} 리뷰 {{ place.reviewCount }}</ion-icon>
           </button>
           <button class="card-review" ion-button icon-start clear small>
-            
+
           </button>
         </div>
       </div>

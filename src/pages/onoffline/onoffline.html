@@ -18,12 +18,12 @@
   
   <ion-content no-border>
     <!-- Segment in content -->
-    <ion-segment [(ngModel)]="type" (ionChange)="getList()">
+    <ion-segment mode="md" [(ngModel)]="type" (ionChange)="getList()">
         <ion-segment-button value="Supporter">
-          Supporter
+          서포터
         </ion-segment-button>
         <ion-segment-button value="Counselor">
-          Counselor
+          전문상담사
         </ion-segment-button>
       </ion-segment>
   <ion-list *ngIf="isSupporter" no-lines>

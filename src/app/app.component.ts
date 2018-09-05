@@ -36,8 +36,12 @@ export class MyApp {
   userprofile;
   username;
   email;
+<<<<<<< HEAD
   lastBack;
   allowClose;
+=======
+  backBtn : boolean = false;
+>>>>>>> a0a7ddb22dc3ad02a827dcad67d0d70ac8861b22
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;

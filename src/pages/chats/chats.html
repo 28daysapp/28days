@@ -20,57 +20,58 @@
 
 <ion-content>
 
-    <ion-segment [(ngModel)]="type" (ionChange)="getChatList()">
-        <ion-segment-button value="requested">
-          요청받은 상담
-        </ion-segment-button>
-        <ion-segment-button value="request">
-          요청한 상담
-        </ion-segment-button>
-      </ion-segment>
+  <ion-segment mode="md" [(ngModel)]="type" (ionChange)="getChatList()">
+    <ion-segment-button value="requested">
+      요청받은 상담
+    </ion-segment-button>
+    <ion-segment-button value="request">
+      요청한 상담
+    </ion-segment-button>
+  </ion-segment>
 
-      <div [ngSwitch]="type">
-        <ion-list no-lines *ngSwitchCase="'requested'">
-          <ion-item-sliding *ngFor="let item of requestedinfos" (click)="supporterchat(item)">
-            <ion-item class="bottom-border">
-              <ion-avatar item-start>
-                <img src="{{ item.buddyphotoURL }}">
-              </ion-avatar>
-              <span class="username">{{ item.buddyusername }}</span>
-              <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-              <div class="msg">{{ item.recentmessage }}</div>
-            </ion-item>
-          </ion-item-sliding>
-          <ion-item-options>
-            <button ion-button color="danger">
-              <ion-icon name="trash"></ion-icon>
-            </button>
-          </ion-item-options>
-        </ion-list>
+  <div [ngSwitch]="type">
+    <ion-list no-lines *ngSwitchCase="'requested'">
+      <ion-item-sliding *ngFor="let item of requestedinfos" (click)="supporterChat(item)">
+        <ion-item class="bottom-border">
+          <ion-avatar item-start>
+            <img src="{{ item.buddyphotoURL }}">
+          </ion-avatar>
+          <span class="username">{{ item.buddyusername }}</span>
 
-        <ion-list no-lines *ngSwitchCase="'request'">
-          <ion-item-sliding *ngFor="let item of requestinfos">
-            <ion-item class="bottom-border">
-                <ion-avatar item-start>
-                  <img src="{{ item.buddyphotoURL }}">
-                </ion-avatar>
-                <div class="grid-container">
-                    <span class="grid-username" (click)="supporterChat(item)">{{ item.buddyusername }}</span>
-                    <span class="grid-time" (click)="supporterChat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-                    <div class="grid-message" (click)="supporterChat(item)">{{ item.recentmessage }}</div>
-                    <div class="grid-review" (click)="writeReview(item)">후기 남기기</div>
-                </div>
+          <!-- <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
+              <div class="msg">{{ item.recentmessage }}</div> -->
+        </ion-item>
+      </ion-item-sliding>
+      <ion-item-options>
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-list>
 
-              </ion-item>
-              <ion-item-options side="right">
-                <button class="delete_button" ion-button color="danger" (click)="deleteSupporterChat(item)">
-                  <ion-icon name="trash"></ion-icon>
-                  DELETE
-                </button>
-              </ion-item-options>
-          </ion-item-sliding>
-        </ion-list>
-      </div>
-      
+    <ion-list no-lines *ngSwitchCase="'request'">
+      <ion-item-sliding *ngFor="let item of requestinfos">
+        <ion-item class="bottom-border">
+          <ion-avatar item-start>
+            <img src="{{ item.buddyphotoURL }}">
+          </ion-avatar>
+          <div class="container">
+            <span class="username" (click)="supporterChat(item)">{{ item.buddyusername }}</span>
+            <!-- <span class="grid-time" (click)="supporterChat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span> -->
+            <!-- <div class="grid-message" (click)="supporterChat(item)">{{ item.recentmessage }}</div> -->
+            <div class="review" (click)="writeReview(item)">후기 남기기</div>
+          </div>
+
+        </ion-item>
+        <ion-item-options side="right">
+          <button class="delete_button" ion-button color="danger" (click)="deleteSupporterChat(item)">
+            <ion-icon name="trash"></ion-icon>
+            DELETE
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
 
 </ion-content>
