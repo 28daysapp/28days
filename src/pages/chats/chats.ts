@@ -15,6 +15,7 @@ export class ChatsPage {
   user;
   query;
 
+  count: string = '0';
   type: string = "requested";
 
   constructor(
@@ -42,10 +43,17 @@ export class ChatsPage {
   refreshList() {
     this.chat.getAllRequestedInfos().then(info => {
       this.requestedInfos = info;
+
+      this.requestedInfos.forEach((info) => {
+        this.count = info.count;
+      });
       console.log("요청받은 requestedInfos: " + JSON.stringify(info))
     });
     this.chat.getAllRequestInfos().then(info => {
       this.requestInfos = info;
+      this.requestInfos.forEach((info) => {
+        this.count = info.count;
+      });
       console.log("요청한 requestInfos: " + JSON.stringify(info))
     });
   }
