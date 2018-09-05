@@ -43,7 +43,6 @@ export class HospitalcenterPage {
   loadingPlaces;
   apiProvider;
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation, public modalController: ModalController,
     public menu: MenuController, public appCrtl: App, public google: GoogleProvider) {
     this.places = [];
@@ -136,18 +135,11 @@ export class HospitalcenterPage {
           for (let i = 0; i < results.length; i++) {
 
             const randomNumber = Math.floor(Math.random() * 4) + 1;
-
-
             this.places = results;
             this.places[i].reviewCount = 0;
             this.places[i].ratings = 0;
             this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
-
-            console.log("photo reference: " + results[i].reference)
-
             this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
-
-            // this.places[i].photo = this.google.getGooglePhoto();
 
             console.log(this.places[i].place_id);
             this.countReviews(results[i].place_id, i);
