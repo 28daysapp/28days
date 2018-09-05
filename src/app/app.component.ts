@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform, Events, App, ToastController, NavController } from 'ionic-angular';
+import { MenuController, AlertController, Nav, Platform, Events, App, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -36,7 +36,8 @@ export class MyApp {
   userprofile;
   username;
   email;
-  backBtn : boolean = false;
+  lastBack;
+  allowClose;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;
@@ -86,7 +87,6 @@ export class MyApp {
     public storage: Storage,
     private app: App,
     private toastCtrl: ToastController,
-    public navCtrl: NavController,
   ) {
     this.email = "you are manding or hoho";
     firebase.initializeApp(firebaseConfig);
@@ -117,23 +117,30 @@ export class MyApp {
       // }
 
       platform.registerBackButtonAction(() => {
-        let nav = this.app.getActiveNav();
-        if (nav.canGoBack()) {
+        const overlay = this.app._appRoot._overlayPortal.getActive();
+        const nav = this.app.getActiveNav();
+        const closeDelay = 2000;
+        const spamDelay = 500;
+
+        if(overlay && overlay.dismiss){
+          overlay.dismiss();
+        } else if(nav.canGoBack()){
           nav.pop();
-        } else {
-          if (this.backBtn) {
-            this.platform.exitApp();
-          } else {
-            let toast = this.toastCtrl.create({
-              message: '한번 더 뒤로가기 하시면 종료됩니다.',
-              duration: 3000,
-              position: 'bottom'
-            });
-            toast.present();
-            this.backBtn = true;
-            setTimeout(function () { this.backBtn = false; }, 3000);
-          }
+        } else if(Date.now() - this.lastBack > spamDelay && !this.allowClose){
+          this.allowClose = true;
+          let toast = this.toastCtrl.create({
+            message : "한번 더 뒤로가기 하시면 종료됩니다.",
+            duration: closeDelay,
+            dismissOnPageChange: true
+          });
+          toast.onDidDismiss(() => {
+            this.allowClose = false;
+          });
+          toast.present();
+        } else if(Date.now() - this.lastBack < closeDelay && this.allowClose){
+          platform.exitApp();
         }
+        this.lastBack = Date.now();
       });
 
     });
@@ -158,7 +165,7 @@ export class MyApp {
       // Give the menu time to close before changing to logged out
       this.auth.logoutUser();
     }
-    this.navCtrl.push(page.component);
+    this.nav.push(page.component);
   }
 
   /*
@@ -168,7 +175,7 @@ export class MyApp {
   */
 
   profile() {
-    this.navCtrl.push('CharacterPage');
+    this.nav.push('CharacterPage');
   }
 
   logout() {
@@ -183,7 +190,7 @@ export class MyApp {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.navCtrl.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+                  this.nav.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
                 });
               });
             }
@@ -198,7 +205,7 @@ export class MyApp {
       });
       alert.present();
     } else {
-      this.navCtrl.push('LoginPage');
+      this.nav.push('LoginPage');
     }
   }
 
