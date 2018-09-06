@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
 import { CounselorProvider } from '../../providers/counselor/counselor';
 import { ChatProvider } from '../../providers/chat/chat';
-
+import  firebase  from 'firebase';
 /**
  * Generated class for the CounselorreviewPage page.
  *
@@ -23,6 +23,7 @@ export class CounselorreviewPage {
   isReview;
 
   user;
+  auth;
   loading;
   reviews;
   review;
@@ -39,7 +40,7 @@ export class CounselorreviewPage {
   ) {
     this.user = this.navParams.get("user");
     this.type = 'profile';
-    
+
   }
 
   ionViewDidLoad() {
@@ -47,7 +48,8 @@ export class CounselorreviewPage {
   }
 
   ionViewWillEnter() {
-    
+    var auth = firebase.auth().currentUser.uid;
+    console.log("me : "+auth+"supporter : "+this.user.uid);
 
     if(this.type=='profile'){
       this.isProfile = true;
