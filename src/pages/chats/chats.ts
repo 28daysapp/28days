@@ -1,70 +1,101 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
-import { ChatProvider } from '../../providers/chat/chat';
-import { UserProvider } from '../../providers/user/user';
-import firebase from 'firebase';
-
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams, App } from "ionic-angular";
+import { ChatProvider } from "../../providers/chat/chat";
+import { UserProvider } from "../../providers/user/user";
+import firebase from "firebase";
 
 @IonicPage()
 @Component({
-  selector: 'page-chats',
-  templateUrl: 'chats.html',
+  selector: "page-chats",
+  templateUrl: "chats.html"
 })
 export class ChatsPage {
-
-  requestedinfos;
-  requestinfos;
+  requestedInfos;
+  requestInfos;
   user;
   query;
 
+  count: string = '0';
   type: string = "requested";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider, public appCrtl: App,
-    public userProvider: UserProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public chat: ChatProvider,
+    public appCrtl: App,
+    public userProvider: UserProvider
+  ) {
     this.user = firebase.auth().currentUser;
-
   }
 
   ionViewDidLoad() {
-    this.chat.getallRequestedinfos().then((info) => {
-      this.requestedinfos = info;
-    });
-    this.chat.getallRequestinfos().then((info) => {
-      this.requestinfos = info;
-    });
+    this.refreshList();
   }
 
+  ionViewWillEnter() {
+    this.refreshList();
+  }
 
   filterItems(event) {
     console.log(event.target.value);
   }
 
+  refreshList() {
+    this.chat.getAllRequestedInfos().then(info => {
+      this.requestedInfos = info;
+
+      this.requestedInfos.forEach((info) => {
+        this.count = info.count;
+      });
+      console.log("요청받은 requestedInfos: " + JSON.stringify(info))
+    });
+    this.chat.getAllRequestInfos().then(info => {
+      this.requestInfos = info;
+      this.requestInfos.forEach((info) => {
+        this.count = info.count;
+      });
+      console.log("요청한 requestInfos: " + JSON.stringify(info))
+    });
+  }
+
   getChatList() {
     const chatType = this.type;
     console.log("Chat type: " + chatType);
+    return chatType === "requested"
+      ? this.chat.getAllRequestInfos().then(info => {
+          this.requestInfos = info;
+        })
+      : this.chat.getAllRequestedInfos().then(info => {
+          this.requestedInfos = info;
+        });
   }
 
   supporterChat(item) {
-    this.userProvider.getUserprofile(item.buddyuid).then((userprofile) => {
+    this.userProvider.getUserprofile(item.buddyuid).then(userprofile => {
       this.chat.initializebuddy(userprofile);
-      this.navCtrl.push('SupporterchatPage');
+      this.appCrtl.getRootNavs()[0].push("SupporterchatPage");
+    });
+  }
+
+  supporterChat2(item) {
+    this.userProvider.getUserprofile(item.requester).then(userprofile => {
+      this.chat.initializebuddy(userprofile);
+      this.appCrtl.getRootNavs()[0].push("SupporterchatPage");
     });
   }
 
   deleteSupporterChat(item) {
     this.chat.deleteChat(item.buddyuid).then(() => {
-      this.chat.getallRequestinfos().then((info) => {
-        this.requestinfos = info;
+      this.chat.getAllRequestInfos().then(info => {
+        this.requestInfos = info;
       });
     });
   }
 
   writeReview(item) {
-    this.navCtrl.push('SupporterreviewwritePage',
-      {
-        user: this.user,
-        buddy: item
-      });
+    this.navCtrl.push("SupporterreviewwritePage", {
+      user: this.user,
+      buddy: item
+    });
   }
-
 }

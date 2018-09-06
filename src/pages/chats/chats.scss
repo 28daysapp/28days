@@ -1,10 +1,41 @@
 page-chats {
 
-    ion-list {
-		background-color: transparent !important;
+    ion-content {
+        background-color: #f7f7f7 !important;
     }
 
+    ion-segment {
+        background-color: color($colors, white, base) !important;
+        padding-bottom: 2rem;
+    }
 
+    ion-list {
+		background-color: color($colors, white, base) !important;
+    }
+
+    .segbutton {
+        width: 80%;
+        bottom: 3%;
+        margin: 0% 10% 0% 10%;
+        text-align: center;
+      }
+    
+      .segment-md .segment-button{
+        margin-left: 7%;
+        margin-right: 7%;
+        margin-top: 2%;
+        width: 50%;
+        color: #9b9b9b;;
+        font-size: 20px;
+        font-weight: 500;
+        border-bottom-width: 0;
+      }
+    
+      .segment-button.segment-activated {
+        border-bottom-width: 4px;
+        color: #4a4a4a;
+    
+      }
 
 	.bottom-border {
         width: 100%;
@@ -13,22 +44,29 @@ page-chats {
 		background-color: transparent !important;
     }
 
-    .grid-username { 
-        grid-area: username; 
-        color: #4a4a4a;
+
+    .username { 
+        // grid-area: username;
+        float: left; 
+        position: relative;
+        color: color($colors, gray, base);
 		font-size: 18px;
 		margin-bottom: 10px !important;
-        text-align: left;
+        // text-align: left;
     }
     .grid-time { 
-        grid-area: time; 
+        // grid-area: time; 
+        float: right;
+        position: relative;
         color: gray;
         font-size: 12px;
-        text-align: right;
+        // text-align: right;
     }
     .grid-message { 
         margin: 3px 0px;
-        grid-area: message; 
+        float: left; 
+        position: relative;
+        // grid-area: message; 
         color: gray;
         font-size: 12px;
         text-align: left;
@@ -38,25 +76,25 @@ page-chats {
 		overflow: hidden;
 		text-overflow: ellipsis;
     }
-    .grid-review { 
-        border: 1px solid #4a4a4a;
+    .review { 
+        float: right; 
+        position: relative;
+        border: 1px solid color($colors, gray, base);
         border-radius: 8px;
-        float: right;
-        width: 80%;
+        width: auto;
         padding: 8px;
-        width: 80px;
-        float: right;        
         background-color: transparent;
-        color:#4a4a4a;
+        color:color($colors, gray, base);;
         font-size: 12px;
     }
     
-    .grid-container {
-        display: grid;
-        grid-template-areas:
-        'username username username username username time'
-        'message message message message message review';
-        grid-gap: 5px;
+    .container {
+        vertical-align: center;
+        // display: grid;
+        // grid-template-areas:
+        // 'username username username username username time'
+        // 'message message message message message review';
+        // grid-gap: 5px;
     }
 
 	ion-avatar {
@@ -88,7 +126,20 @@ page-chats {
 	// ion-item remove padding
 	.label {
   	margin: 0px;
-	}
+    }
+    
+    .counter {
+        margin: 0 0.5rem;
+        padding: 0 0.5rem;
+        height: 2rem;
+        background-color: color($colors, primary, base);
+        border-radius: 50rem;
+        align-items: center;
+        text-align: center;
+        display: inline-block;
+        font-size: 1.5rem;
+        color: color($colors, white, base);
+    }
 
 	.username {
         color: #4a4a4a;

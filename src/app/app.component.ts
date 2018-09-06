@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform, Events, App, ToastController} from 'ionic-angular';
+import { MenuController, AlertController, Nav, Platform, Events, App, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
@@ -36,7 +36,8 @@ export class MyApp {
   userprofile;
   username;
   email;
-  backBtn;
+  lastBack;
+  allowClose;
   // set entry page of app
   // rootPage:any = 'TabsPage';
   photoURL;
@@ -84,18 +85,18 @@ export class MyApp {
     // public userProvider: UserProvider,
     public auth: AuthProvider,
     public storage: Storage,
-    private app : App,
-    private toastCtrl : ToastController,
+    private app: App,
+    private toastCtrl: ToastController,
   ) {
     this.email = "you are manding or hoho";
     firebase.initializeApp(firebaseConfig);
     this.user = firebase.auth().currentUser;
     platform.ready().then(() => {
-    //   // Okay, so the platform is ready and our plugins are available.
-    //   // Here you can do any higher level native things you might need.
+      //   // Okay, so the platform is ready and our plugins are available.
+      //   // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-    //   // this.initPushNotification();
+      //   // this.initPushNotification();
 
       // if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
       //   //Notifications
@@ -114,27 +115,7 @@ export class MyApp {
       //   });
       //   //end notifications.
       // }
-      platform.ready().then(() => {
-        platform.registerBackButtonAction(() => {
-          let nav = this.app.getActiveNav();
-          if (nav.canGoBack()) {
-            nav.pop();
-          } else {
-            if (this.backBtn) {
-              this.platform.exitApp();
-            } else {
-              let toast = this.toastCtrl.create({
-                message: '한번 더 뒤로가기 하시면 종료됩니다.',
-                duration: 3000,
-                position: 'bottom'
-              });
-              toast.present();
-              this.backBtn = true;
-              setTimeout(function () { this.backBtn = false; }, 3000);
-            }
-          }
-        });
-      });
+
     });
     // this.pleaselogin();
     events.subscribe('user:created', (user, time) => {
@@ -147,7 +128,7 @@ export class MyApp {
       console.log("username:" + user.photoURL);
       console.log("email:" + user.email);
     });
-}
+  }
 
   openPage(page: PageInterface) {
     // close the menu when clicking a link from the menu
@@ -157,7 +138,7 @@ export class MyApp {
       // Give the menu time to close before changing to logged out
       this.auth.logoutUser();
     }
-      this.nav.push(page.component);
+    this.nav.push(page.component);
   }
 
   /*
@@ -166,7 +147,7 @@ export class MyApp {
   }
   */
 
-  profile(){
+  profile() {
     this.nav.push('CharacterPage');
   }
 
@@ -182,7 +163,7 @@ export class MyApp {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.nav.setRoot('TabsPage', {}, {animate: true, direction: 'forward'});
+                  this.nav.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
                 });
               });
             }
@@ -201,10 +182,10 @@ export class MyApp {
     }
   }
 
-    // if (page.logsOut === true) {
-    //   // Give the menu time to close before changing to logged out
-    //   this.user.logout();
-    // }
+  // if (page.logsOut === true) {
+  //   // Give the menu time to close before changing to logged out
+  //   this.user.logout();
+  // }
 
 
 

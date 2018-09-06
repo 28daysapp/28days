@@ -16,9 +16,6 @@
         </button>
       </ion-buttons> -->
   </ion-navbar>
-
-
-
 </ion-header>
 
 <ion-content no-border class="contents">
@@ -28,7 +25,7 @@
     <div id="main-img"></div>
   </div>
 
-  <ion-segment [(ngModel)]="tab" (click)="changeTab()">
+  <ion-segment mode="md" [(ngModel)]="tab" (click)="changeTab()">
     <ion-segment-button value="info">
       센터정보
     </ion-segment-button>
@@ -37,9 +34,7 @@
     </ion-segment-button>
   </ion-segment>
 
-
   <div #map id="map"></div>
-
 
   <div *ngIf="showInfo" class="details">
     <p *ngIf="website">
@@ -56,17 +51,16 @@
 
     <div class="review-button" (click)="reviewWrite()">
       <div>
-        <img src="../../assets/icon/edit.svg">
+        <img src="assets/icon/edit.svg">
         <span>리뷰 남기기</span>
       </div>
     </div>
-
 
     <ion-list *ngFor="let post of posts">
       <div class="review">
         <div class="review-star-points">
           <span id="average-text">평균</span>
-          <img src="../../assets/icon/star.svg">
+          <img src="assets/icon/star.svg">
           <span> {{ post.ratingAvg }} </span>
         </div>
         <div class="review-text">
@@ -79,9 +73,4 @@
       </div>
     </ion-list>
   </div>
-
-
-
-
-
 </ion-content>

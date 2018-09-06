@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, AlertController, App } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
@@ -36,6 +36,8 @@ export class HospitalcenterPage {
   rating;
   reviewCount;
 
+  placePicture;
+
   matches;
   selected;
   loadingPlaces;
@@ -43,7 +45,7 @@ export class HospitalcenterPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation, public modalController: ModalController,
-    public menu: MenuController, public google: GoogleProvider) {
+    public menu: MenuController, public appCrtl: App, public google: GoogleProvider) {
     this.places = [];
   }
 
@@ -132,14 +134,19 @@ export class HospitalcenterPage {
       service.textSearch(request, (results, status) => {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
+
+            const randomNumber = Math.floor(Math.random() * 4) + 1;
+
+
             this.places = results;
             this.places[i].reviewCount = 0;
             this.places[i].ratings = 0;
+            this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
 
             console.log("photo reference: " + results[i].reference)
 
             this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
-            
+
             // this.places[i].photo = this.google.getGooglePhoto();
 
             console.log(this.places[i].place_id);
@@ -164,16 +171,15 @@ export class HospitalcenterPage {
       if (snapshot.val() === null) {
         return
       }
-        this.places[i].reviewCount = snapshot.val().reviewCount;
-        this.places[i].ratings = snapshot.val().ratings;
+      this.places[i].reviewCount = snapshot.val().reviewCount;
+      this.places[i].ratings = snapshot.val().ratings;
     })
   }
 
 
   placeDetail(place) {
-    this.navCtrl.push('PlaceDetailPage', {
-      place: place
-    });
+    //this.appCrtl.getRootNavs()[0].push('PlaceDetailPage', { place: place });
+    this.navCtrl.push('PlaceDetailPage', { place: place });
   }
 
   showModal() {
@@ -193,7 +199,7 @@ export class HospitalcenterPage {
     console.log("sort clicked")
     let alert = this.alertCtrl.create({
       title: '정렬 순서',
-      buttons: [{text: '후기 많은 순'}, {text: '별점 높은 순'}]
+      buttons: [{ text: '후기 많은 순' }, { text: '별점 높은 순' }]
     });
     alert.present();
   }

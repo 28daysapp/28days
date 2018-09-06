@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, AlertController, LoadingController, Navbar } from 'ionic-angular';
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
@@ -19,6 +19,7 @@ import { NavParams, ModalController } from 'ionic-angular';
   templateUrl: 'mypage.html',
 })
 export class MypagePage {
+  @ViewChild(Navbar) navBar: Navbar;
   loading;
   user;
   userprofile;
@@ -41,6 +42,14 @@ export class MypagePage {
     if (params.data.message) {
       console.log('message: ' + params.data.message);  
     }
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad SearchtagPage');
+    this.navBar.backButtonClick = (e:UIEvent)=>{
+      // todo something
+      this.navCtrl.pop();
+     }
   }
 
   ionViewWillLoad() {
