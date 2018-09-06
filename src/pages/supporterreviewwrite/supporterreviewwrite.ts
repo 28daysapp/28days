@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { SupporterProvider } from '../../providers/supporter/supporter';
 import { UserProvider } from '../../providers/user/user';
 
@@ -25,20 +25,20 @@ export class SupporterreviewwritePage {
   rating = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider, public userProvider: UserProvider, public loadingCtrl: LoadingController) {
-    var arr1 = [0,1,2,3,4];
-    var arr2 = [0,1,2,3,4];
-    var arr3 = [0,1,2,3,4];
-    var arr4 = [0,1,2,3,4];
+  constructor(private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public supporter: SupporterProvider, public userProvider: UserProvider, public loadingCtrl: LoadingController) {
+    var arr1 = [0, 1, 2, 3, 4];
+    var arr2 = [0, 1, 2, 3, 4];
+    var arr3 = [0, 1, 2, 3, 4];
+    var arr4 = [0, 1, 2, 3, 4];
 
     this.likesrc[0] = arr1;
     this.likesrc[1] = arr2;
     this.likesrc[2] = arr3;
     this.likesrc[3] = arr4;
-    
-    for(var i = 0; i < 4; i++){
-      for(var j = 0; j < 5; j++)
-      this.likesrc[i][j] = 'assets/star.png';
+
+    for (var i = 0; i < 4; i++) {
+      for (var j = 0; j < 5; j++)
+        this.likesrc[i][j] = 'assets/star.png';
     }
     this.user = this.navParams.get("user");
     this.buddy = this.navParams.get("buddy");
@@ -51,23 +51,32 @@ export class SupporterreviewwritePage {
     })
   }
 
-  like(item,num){
-    for(var i = num; i < 5; i++){
+  like(item, num) {
+    for (var i = num; i < 5; i++) {
       this.likesrc[item][i] = 'assets/star.png';
     }
-    for(i = num; i >= 0; i--){
+    for (i = num; i >= 0; i--) {
       this.likesrc[item][i] = 'assets/star-full.png';
     }
-    this.rating[item] = num+1;
+    this.rating[item] = num + 1;
   }
 
-  reviewwrite(){
-    this.supporter.addsupporterreview(this.buddy.buddyuid, this.text, this.userProfile.username).then(() => {
-	  	this.navCtrl.pop();
-	  });
-	  let loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
-    });
-    loading.present();
+  reviewwrite() {
+    if (!this.text) {
+      let alert = this.alertCtrl.create({
+        'title': '후기 내용을 작성해주세요!',
+        buttons: ['닫기']
+      });
+      alert.present();
+    }
+    if (this.buddy.buddyuid && this.text != null) {
+      this.supporter.addsupporterreview(this.buddy.buddyuid, this.text, this.userProfile.username).then(() => {
+        this.navCtrl.pop();
+      });
+      let loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+      });
+      loading.present();
+    }
   }
 }

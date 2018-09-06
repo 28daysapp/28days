@@ -27,14 +27,17 @@ exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((
     });
     return totalAvg;
 })
-/*
-exports.createChat = functions.database.ref('/chats/{uid}/{supporterid}').onWrite((snapshot,context) => {
+
+exports.createChat = functions.database.ref('/chats/{uid}/{supporterid}').onCreate((snapshot,context) => {
     console.info("New Chats Added!");
 
-
+    console.info("보낸사람: " + snapshot.val().requester);
+    console.info("key: "+snapshot.key);
     
-})
-*/
+});
+
+
+
 exports.getGooglePhotos = functions.https.onRequest((req, res) => {
 
     // const data = "CmRbAAAA3V8LQAKXfZQQJNJHJJq84i0pxWJiOE4HVKI4xJOtuxyomH9ksTHBAc4cDnvqhB4n0XBOx2GAnKHl-JXcxwPEFuX_8f0GOXYukG_PrjMmfM28qd3Bei0UW9Oh_zCWjP4jEhBzf9o5Vhx5XTVa2qG6W54wGhShGQoFMYPPR-UkG-EYI_6xy7neRg";
