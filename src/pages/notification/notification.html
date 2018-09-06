@@ -7,12 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>notification</ion-title>
+    <ion-title>알림</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications">
+      {{notification.title}} / {{notification.time}}
+      {{notification.comment}}
+    </ion-item>
+  </ion-list>
 </ion-content>

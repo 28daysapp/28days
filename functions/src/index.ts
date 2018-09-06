@@ -3,8 +3,7 @@ const admin = require('firebase-admin');
 const https = require('https');
 const http = require('http');
 admin.initializeApp(functions.config().firebase);
-const cors = require('cors')({ origin: true })
-
+const cors = require('cors')({ origin: true });
 
 
 exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((snapshot, context) => {
@@ -32,9 +31,29 @@ exports.createChat = functions.database.ref('/chats/{uid}/{supporterid}').onCrea
     console.info("New Chats Added!");
 
     console.info("보낸사람: " + snapshot.val().requester);
+    console.info("보낸사람유저네임: " + snapshot.val().requesterUsername);
+    console.info("버디유저네임: " + snapshot.val().buddyUsername);
+    console.info("버디유아이디: " + snapshot.val().buddyuid);
     console.info("key: "+snapshot.key);
-    
+
+    if(snapshot.val().buddyUid != snapshot.key){
+        const supporterId = snapshot.val().buddyUid;
+        const userName = snapshot.val().requeterUsername;
+
+        var db = admin.database();    
+        var ref = db.ref('/notification/supporterId');
+        var newPostRef = ref.push();
+        var notificationId = newPostRef.key; //여기까지가 DB에서 새로운 키 생성하는것 까지의 소스!
+        
+        admin.database().ref(`/notification/${supporterId}/${notificationId}`).set({
+            title: "새로운 채팅",
+            comment: userName +"님이 채팅을 요청했습니다."
+        });
+    }
+    return snapshot.val();
 });
+
+//exports.createCommunity = functions.database.ref('/community/')
 
 
 

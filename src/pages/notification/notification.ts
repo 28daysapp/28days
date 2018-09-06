@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import  firebase  from 'firebase';
+import { NotificationProvider } from '../../providers/notification/notification';
 /**
  * Generated class for the NotificationPage page.
  *
@@ -15,11 +16,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NotificationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  uid;
+  notifications;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public notification: NotificationProvider) {
+    this.uid = firebase.auth().currentUser.uid;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationPage');
+  }
+
+  ionViewWillEnter(){
+    var promise = new Promise((resolve) => {
+      this.notification.getAllNotification(this.uid).then((notifications) => {
+        this.notifications = notifications;
+        console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.notifications));
+      }).then(() => {
+      });
+    });
+    return promise;
   }
 
 }

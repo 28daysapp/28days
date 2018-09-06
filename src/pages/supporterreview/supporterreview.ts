@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, Content, Popove
 import { SupporterProvider } from '../../providers/supporter/supporter';
 import { ChatProvider } from '../../providers/chat/chat';
 import { resolve } from 'url';
-
+import firebase from 'firebase';
 /**
  * Generated class for the SupporterreviewPage page.
  *
@@ -23,6 +23,7 @@ export class SupporterreviewPage {
   isProfile;
   isReview;
 
+  auth;
   user;
   loading;
   reviews;
@@ -50,6 +51,9 @@ export class SupporterreviewPage {
   ionViewWillEnter() {
     //this.loading = this.loadingCtrl.create();
     //this.loading.present();
+
+    var auth = firebase.auth().currentUser.uid;
+
     if(this.type=='profile'){
       this.isProfile = true;
       this.isReview = false;
@@ -73,7 +77,6 @@ export class SupporterreviewPage {
     return promise;
     
     //this.loading.dismiss();
-
     
   }
 
