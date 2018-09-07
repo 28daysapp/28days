@@ -26,8 +26,11 @@ export class SignupPage {
   usernameAvailable: boolean;
   clickmale = false;
   clickfemale = false;
+  clickEtc = false;
   clickterms1 = false;
   clickterms2 = false;
+
+  
   gender = '';
   constructor(public navCtrl: NavController, public auth: AuthProvider, public user: UserProvider,
     public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
@@ -106,6 +109,10 @@ export class SignupPage {
     }
   }
 
+  signIn() {
+    this.navCtrl.push('LoginPage');
+  }
+
   checkUsername() {
     if (this.signupForm.value.name.length > 0) {
       this.user.checkUsername(this.signupForm.value.name).then((snapshot) => {
@@ -117,14 +124,27 @@ export class SignupPage {
   setMale() {
     this.clickmale = true;
     this.clickfemale = false;
+    this.clickEtc = false;
+
     this.gender = 'M';
   }
 
   setFemale() {
     this.clickmale = false;
     this.clickfemale = true;
+    this.clickEtc = false;
+
     this.gender = 'F';
   }
+
+  setEtc() {
+    this.clickmale = false;
+    this.clickfemale = false;
+    this.clickEtc = true;
+
+    this.gender = 'E';
+  }
+
 
   setTerms1(){
     this.clickterms1 = true;

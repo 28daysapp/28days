@@ -46,11 +46,11 @@ export class OnofflinePage {
     if (this.user) {
       this.menu.enable(true, 'loggedInMenu');
       this.menu.enable(false, 'loggedOutMenu');
-  }
-  else{
-    this.menu.enable(true, 'loggedOutMenu');
-    this.menu.enable(false, 'loggedInMenu');
-  }
+    }
+    else {
+      this.menu.enable(true, 'loggedOutMenu');
+      this.menu.enable(false, 'loggedInMenu');
+    }
   }
 
   getItems(searchbar) {
@@ -89,13 +89,17 @@ export class OnofflinePage {
       this.SupporterRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
-          users.push(user.val());
+          console.log("AHAFGAAAAAAAAAAAAAAAAAAAA = " + JSON.stringify(user.val()));
+          console.log("soy yo???: " + this.user.uid);
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          }
           return false;
         });
         this.userList = users;
         this.loadedUserList = users;
       });
-      if(this.q){
+      if (this.q) {
         this.userList = this.userList.filter((v) => {
           if (v.username && this.q || v.uid && this.q) {
             if (v.username.toLowerCase().indexOf(this.q.toLowerCase()) > -1 || v.uid.toLowerCase().indexOf(this.q.toLowerCase()) > -1) {
@@ -118,7 +122,7 @@ export class OnofflinePage {
         this.userList = users;
         this.loadedUserList = users;
       });
-      if(this.q){
+      if (this.q) {
         this.userList = this.userList.filter((v) => {
           if (v.username && this.q || v.uid && this.q) {
             if (v.username.toLowerCase().indexOf(this.q.toLowerCase()) > -1 || v.uid.toLowerCase().indexOf(this.q.toLowerCase()) > -1) {
@@ -134,14 +138,16 @@ export class OnofflinePage {
 
 
   ionViewWillEnter() {
-    
+
     if (this.type == 'Supporter') {
       this.isSupporter = true;
       this.isCounselor = false;
       this.SupporterRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
-          users.push(user.val());
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          } 
           return false;
         });
         this.userList = users;
@@ -154,7 +160,9 @@ export class OnofflinePage {
       this.CounselorRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
-          users.push(user.val());
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          }
           return false;
         });
         this.userList = users;
@@ -164,14 +172,14 @@ export class OnofflinePage {
 
   }
 
-  supporterreview(user) { 
+  supporterreview(user) {
     //this.appCrtl.getRootNavs()[0].push('SupporterreviewPage',{ user: user });
     this.navCtrl.push('SupporterreviewPage', { user: user });
   }
 
   counselorreview(user) {
     //this.appCrtl.getRootNavs()[0].push('CounselorreviewPage',{ user: user });
-    this.navCtrl.push('CounselorreviewPage', { user: user});
+    this.navCtrl.push('CounselorreviewPage', { user: user });
   }
 
   gooperator() {
@@ -195,7 +203,7 @@ export class OnofflinePage {
   gooperator() {
     this.navCtrl.push('OperatorPage');
   }*/
-  
+
 
   /*
     pleaselogin() {

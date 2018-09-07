@@ -4,6 +4,21 @@ page-signup {
 		background-color: #55b26e;
 	}
 
+	.coconut{
+		padding-top: 25%;
+		width: 100%;
+		text-align: center;
+		height: 36px;
+		font-family: Baruta;
+		font-size: 30px;
+		font-weight: 900;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
+		color: #ffffff;
+	}
+
 	ion-card {
 		border-radius: 10px !important;
 		background-color: white !important;
@@ -15,20 +30,16 @@ page-signup {
 	}
 
 	form {
-    padding: 5px 15px 15px;
-  }
+		margin: 0 4rem 4rem 4rem;
+  	}
 
 	ion-input {
 		border-bottom: solid 1px #ffffff;
 	}
 
-	h4 {
-		margin-top: 10px !important;
-	}
-
 	.invalid {
-    border-bottom: 1px solid color($colors, danger, base);
-  }
+		border-bottom: 1px solid color($colors, danger, base);
+	}
 
 	.error-message {
 		margin: 3px 0px 0px;
@@ -48,43 +59,30 @@ page-signup {
 		border-bottom: 1px solid color($colors, danger, base);
 	}
 
-  .btn2 {
-    padding: 5px 0px;
-    text-align: center;
-  }
-
-  .btn2 button {
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 15px;
-    color: #55b26e;
-    padding: 10px 0px;
-    width: 46%;
-    background-color: color($colors, bordergray, base);
-  }
-
-  .btn2 .btn2_1 {
-    margin-right: 10px;
-  }
-
-  .greenbtn {
-  	background-color: color($colors, #ffffff, base) !important;
-  }
-
-	span.coconut{
-		padding-top: 25%;
-		width: 100%;
-		text-align: center;
-		height: 36px;
-		font-family: Baruta;
-		font-size: 30px;
-		font-weight: 900;
-		font-style: normal;
-		font-stretch: normal;
-		line-height: normal;
-		letter-spacing: normal;
-		color: #ffffff;
+  	.btn2 {
+    	padding: 5px 0px;
+    	text-align: center;
 	}
+
+	.btn2 button {
+		border-radius: 10px;
+		font-weight: 500;
+		font-size: 15px;
+		color: #55b26e;
+		padding: 10px 0px;
+		width: 46%;
+		background-color: color($colors, bordergray, base);
+	}
+
+	.btn2 .btn2_1 {
+		margin-right: 10px;
+	}
+
+	.greenbtn {
+		background-color: color($colors, #ffffff, base) !important;
+	}
+
+	
 
 	form {
 		padding: 15px;
@@ -101,12 +99,12 @@ page-signup {
 		color: #ffffff;
 		margin-left: auto;
 		margin-right: auto;
-		display: block !important;	
+		display: block !important;
 	}
 
 	form button.button{
 		margin-top: 50px;
-		margin-bottom: 70px;
+		padding-bottom: 1rem;
 		background-color: transparent;
 		height: 29px;
 		font-family: AppleSDGothicNeo;
@@ -157,4 +155,9 @@ page-signup {
 		//vertical-align: middle;
 		font-weight: 500;
 	}
+
+	.spacing {
+		padding: 2rem;
+	}
+
 }
