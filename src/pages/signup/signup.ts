@@ -78,7 +78,7 @@ export class SignupPage {
             email: this.signupForm.value.email,
             password: this.signupForm.value.password
           });
-          this.navCtrl.push('GogosignupPage');
+          this.navCtrl.setRoot('TabsPage');
         });
       }, (error) => {
         console.log(JSON.stringify(error));

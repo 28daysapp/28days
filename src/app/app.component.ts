@@ -96,7 +96,9 @@ export class MyApp {
 
     if(!this.user) {
       this.rootPage = 'SignupPage'
-    } 
+    } else {
+      this.rootPage = 'HomePage'
+    }
  
 
     platform.ready().then(() => {
