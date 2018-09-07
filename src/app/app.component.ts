@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import firebase from 'firebase';
-import { FirstRunPage } from '../pages';
+import { FirstRunPage, SignUpPage } from '../pages';
 import { FCM } from '@ionic-native/fcm';
 import { AuthProvider } from '../providers/auth/auth';
 import { Storage } from '@ionic/storage';
@@ -88,12 +88,23 @@ export class MyApp {
     private app: App,
     private toastCtrl: ToastController,
   ) {
-    this.email = "you are manding or hoho";
+    this.email = "email";
+
+    
     firebase.initializeApp(firebaseConfig);
     this.user = firebase.auth().currentUser;
+
+    if(!this.user) {
+      this.rootPage = 'SignupPage'
+    } 
+ 
+
     platform.ready().then(() => {
       //   // Okay, so the platform is ready and our plugins are available.
       //   // Here you can do any higher level native things you might need.
+
+
+
       statusBar.styleDefault();
       splashScreen.hide();
       //   // this.initPushNotification();
@@ -154,8 +165,7 @@ export class MyApp {
   logout() {
     if (this.user) {
       let alert = this.alertCtrl.create({
-        title: '이미 로그인되어 있습니다.',
-        message: '28days에서 로그아웃하시겠습니까?',
+        title: '정말로 로그아웃 하시겠습니까?',
         buttons: [
           {
             text: '확인',
@@ -163,7 +173,7 @@ export class MyApp {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.nav.setRoot('TabsPage', {}, { animate: true, direction: 'forward' });
+                  this.nav.push('LoginPage');
                 });
               });
             }
