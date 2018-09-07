@@ -60,6 +60,10 @@ export class PlaceDetailPage {
     });
   }
 
+  ionViewWillLeave() {
+    
+  }
+
   getGoogleInfo() {
     this.place = this.navParams.get('place');
     this.name = this.place.name;

@@ -54,6 +54,42 @@ export class OnofflinePage {
     }
   }
 
+  ionViewWillEnter() {
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    if (this.type == 'Supporter') {
+      this.isSupporter = true;
+      this.isCounselor = false;
+      this.SupporterRef.on('value', userList => {
+        let users = [];
+        userList.forEach(user => {
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          } 
+          return false;
+        });
+        this.userList = users;
+        this.loadedUserList = users;
+      });
+    }
+    if (this.type == 'Counselor') {
+      this.isSupporter = false;
+      this.isCounselor = true;
+      this.CounselorRef.on('value', userList => {
+        let users = [];
+        userList.forEach(user => {
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          }
+          return false;
+        });
+        this.userList = users;
+        this.loadedUserList = users;
+      });
+    }
+    this.loading.dismiss();
+  }
+
   getItems(searchbar) {
     // Reset items back to all of the items
     this.initializeItems();
@@ -136,41 +172,7 @@ export class OnofflinePage {
 
 
 
-  ionViewWillEnter() {
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
-    if (this.type == 'Supporter') {
-      this.isSupporter = true;
-      this.isCounselor = false;
-      this.SupporterRef.on('value', userList => {
-        let users = [];
-        userList.forEach(user => {
-          if (user.val().uid != this.user.uid) {
-            users.push(user.val());
-          } 
-          return false;
-        });
-        this.userList = users;
-        this.loadedUserList = users;
-      });
-    }
-    if (this.type == 'Counselor') {
-      this.isSupporter = false;
-      this.isCounselor = true;
-      this.CounselorRef.on('value', userList => {
-        let users = [];
-        userList.forEach(user => {
-          if (user.val().uid != this.user.uid) {
-            users.push(user.val());
-          }
-          return false;
-        });
-        this.userList = users;
-        this.loadedUserList = users;
-      });
-    }
-    this.loading.dismiss();
-  }
+  
 
   supporterreview(user) {
     //this.appCrtl.getRootNavs()[0].push('SupporterreviewPage',{ user: user });

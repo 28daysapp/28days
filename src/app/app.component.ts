@@ -94,10 +94,10 @@ export class MyApp {
     firebase.initializeApp(firebaseConfig);
     this.user = firebase.auth().currentUser;
 
-    if(!this.user) {
+    if(this.user != firebase.auth().currentUser) {
       this.rootPage = 'SignupPage'
-    } else {
-      this.rootPage = 'HomePage'
+    } else if (this.user){
+      this.rootPage = 'TabsPage'
     }
  
 
