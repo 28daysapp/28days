@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, App } from "ionic-angular";
+import { IonicPage, NavController, NavParams, App, LoadingController } from "ionic-angular";
 import { ChatProvider } from "../../providers/chat/chat";
 import { UserProvider } from "../../providers/user/user";
 import firebase from "firebase";
@@ -14,6 +14,7 @@ export class ChatsPage {
   requestInfos;
   user;
   query;
+  loading;
 
   count: string = '0';
   type: string = "requested";
@@ -23,17 +24,23 @@ export class ChatsPage {
     public navParams: NavParams,
     public chat: ChatProvider,
     public appCrtl: App,
-    public userProvider: UserProvider
+    public userProvider: UserProvider,
+    public loadingCtrl: LoadingController,
   ) {
     this.user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
+
     this.refreshList();
+
   }
 
   ionViewWillEnter() {
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
     this.refreshList();
+    this.loading.dismiss();
   }
 
   filterItems(event) {
@@ -73,14 +80,14 @@ export class ChatsPage {
   supporterChat(item) {
     this.userProvider.getUserprofile(item.buddyuid).then(userprofile => {
       this.chat.initializebuddy(userprofile);
-      this.appCrtl.getRootNavs()[0].push("SupporterchatPage");
+      this.navCtrl.push("SupporterchatPage");
     });
   }
 
   supporterChat2(item) {
     this.userProvider.getUserprofile(item.requester).then(userprofile => {
       this.chat.initializebuddy(userprofile);
-      this.appCrtl.getRootNavs()[0].push("SupporterchatPage");
+      this.navCtrl.push("SupporterchatPage");
     });
   }
 
@@ -97,5 +104,15 @@ export class ChatsPage {
       user: this.user,
       buddy: item
     });
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.ionViewWillEnter();
+      refresher.complete();
+    }, 2000);
   }
 }

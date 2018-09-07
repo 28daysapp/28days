@@ -302,6 +302,16 @@ export class CommunityPage {
   }
   */
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.ionViewWillEnter();
+      refresher.complete();
+    }, 2000);
+  }
+
   searchtag(tag) { // 태그만 검색하는 기능 검색창 및 현재 페이지에서 태그 클릭시 해당 페이지로 이동
     this.community.tag = tag;
     //this.appCtrl.getRootNavs()[0].push('SearchtagPage', { tag: this.tag });

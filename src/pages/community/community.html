@@ -27,6 +27,9 @@
 </ion-header>
 
 <ion-content>
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
 	<ul style="list-style:none; padding-left:0px;" class="smalltag">
 		<span class="bigtag">
 			<!-- communityProvider의 taglist에서 수정 가능 -->
@@ -47,10 +50,10 @@
 			<hr style="float: right; margin: auto; width: 25%; height: 0.5px; border: solid 0.3px #979797;">
 			<div class="button_align">
 				<button class="moremore" (click)="tagmore()" style="width: 100%; text-align: center" *ngIf="tagcntlimit == 0">태그 더 보기
-				<!--	<img src="img/triangle@3x_reverse.png" srcset="img/triangle@2x_reverse.png 2x, img/triangle@3x_reverse.png 3x" class="Triangle_reverse"> -->
+					<!--	<img src="img/triangle@3x_reverse.png" srcset="img/triangle@2x_reverse.png 2x, img/triangle@3x_reverse.png 3x" class="Triangle_reverse"> -->
 				</button>
 				<button class="moremore" (click)="tagless()" style="width: 100%; text-align: center" *ngIf="tagcntlimit == 1">태그 접기
-				<!--	<img src="img/triangle@3x.png" srcset="img/triangle@2x.png 2x, img/triangle@3x.png 3x" class="Triangle"> -->
+					<!--	<img src="img/triangle@3x.png" srcset="img/triangle@2x.png 2x, img/triangle@3x.png 3x" class="Triangle"> -->
 				</button>
 			</div>
 
