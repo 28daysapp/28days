@@ -139,12 +139,8 @@ export class OnofflinePage {
 
 
   ionViewWillEnter() {
-<<<<<<< HEAD
     this.loading = this.loadingCtrl.create();
     this.loading.present();
-=======
-
->>>>>>> 9dd8092202423bed3fa8012ae3dbd15271117762
     if (this.type == 'Supporter') {
       this.isSupporter = true;
       this.isCounselor = false;
