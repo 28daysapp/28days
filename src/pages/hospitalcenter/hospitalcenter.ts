@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController, AlertController, App } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, AlertController, App, LoadingCmp, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
@@ -42,15 +42,17 @@ export class HospitalcenterPage {
   selected;
   loadingPlaces;
   apiProvider;
+  loading;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation, public modalController: ModalController,
-    public menu: MenuController, public appCrtl: App, public google: GoogleProvider) {
+    public menu: MenuController, public appCrtl: App, public google: GoogleProvider, public loadingCtrl: LoadingController) {
     this.places = [];
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad HospitalcenterPage');
-
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
     this.user = firebase.auth().currentUser;
     if (this.user) {
       this.menu.enable(true, 'loggedInMenu');
@@ -62,6 +64,7 @@ export class HospitalcenterPage {
     }
 
     this.loadMap();
+    this.loading.dismiss();
   }
 
   loadMap() {
@@ -101,7 +104,7 @@ export class HospitalcenterPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
     console.log("THIS MAP: " + this.map);
 
-
+    console.log("this.area = "+this.area);
     this.searchByText(this.area);
 
     return;
@@ -111,7 +114,10 @@ export class HospitalcenterPage {
 
     if (!input) {
       this.area = "서울";
-    } else {
+    } else if(input == "서울"){
+      this.area = "서울";
+    }
+    else {
       this.area = input.srcElement.value;
     }
 
@@ -194,6 +200,16 @@ export class HospitalcenterPage {
       buttons: [{ text: '후기 많은 순' }, { text: '별점 높은 순' }]
     });
     alert.present();
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      //this.ionViewWillEnter();
+      refresher.complete();
+    }, 2000);
   }
 
 }

@@ -30,6 +30,7 @@ export class OnofflinePage {
   user;
   isSupporter;
   isCounselor;
+  loading;
 
   constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public appCrtl: App,
@@ -89,8 +90,6 @@ export class OnofflinePage {
       this.SupporterRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
-          console.log("AHAFGAAAAAAAAAAAAAAAAAAAA = " + JSON.stringify(user.val()));
-          console.log("soy yo???: " + this.user.uid);
           if (user.val().uid != this.user.uid) {
             users.push(user.val());
           }
@@ -138,7 +137,8 @@ export class OnofflinePage {
 
 
   ionViewWillEnter() {
-
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
     if (this.type == 'Supporter') {
       this.isSupporter = true;
       this.isCounselor = false;
@@ -169,7 +169,7 @@ export class OnofflinePage {
         this.loadedUserList = users;
       });
     }
-
+    this.loading.dismiss();
   }
 
   supporterreview(user) {
@@ -182,9 +182,6 @@ export class OnofflinePage {
     this.navCtrl.push('CounselorreviewPage', { user: user });
   }
 
-  gooperator() {
-    this.navCtrl.push('OperatorPage');
-  }
 
   notReady() {
     let alert = this.alertCtrl.create({
@@ -198,6 +195,19 @@ export class OnofflinePage {
       ]
     });
     alert.present();
+    this.type = 'Supporter';
+    this.isSupporter = true;
+    this.isCounselor = false;
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.ionViewWillEnter();
+      refresher.complete();
+    }, 2000);
   }
   //탭까지 같이 보내기
   /*

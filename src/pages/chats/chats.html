@@ -31,6 +31,9 @@
 
   <div [ngSwitch]="type">
     <ion-list no-lines *ngSwitchCase="'requested'">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+          </ion-refresher>
       <ion-item-sliding *ngFor="let item of requestedInfos" (click)="supporterChat2(item)">
         <ion-item class="bottom-border">
           <ion-avatar item-start>
@@ -53,6 +56,9 @@
     </ion-list>
 
     <ion-list no-lines *ngSwitchCase="'request'">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+          </ion-refresher>
       <ion-item-sliding *ngFor="let item of requestInfos">
         <ion-item class="bottom-border">
           <ion-avatar item-start>
