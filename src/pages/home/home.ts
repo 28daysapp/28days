@@ -198,6 +198,10 @@ export class HomePage {
     }
   }
 
+  goNotification(){
+    this.navCtrl.push('NotificationPage');
+  }
+
   post() {
     if (this.user) {
       this.navCtrl.push('PostPage');

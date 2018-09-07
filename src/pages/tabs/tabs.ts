@@ -31,6 +31,7 @@ export class TabsPage {
   lastBack;
   allowClose;
   constructor(public navCtrl: NavController, private app: App, private toastCtrl: ToastController, public platform: Platform, ) {
+    /*
     platform.registerBackButtonAction(() => {
       const overlay = this.app._appRoot._overlayPortal.getActive();
       const nav = this.app.getActiveNav();
@@ -57,5 +58,6 @@ export class TabsPage {
       }
       this.lastBack = Date.now();
     });
+    */
   }
 }

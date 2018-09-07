@@ -11,7 +11,7 @@
   <ion-navbar>
     <ion-title>{{user.username}}</ion-title>
     <ion-buttons right>
-      <button ion-button (click)="sendRequest()">
+      <button ion-button *ngIf="user.uid != auth" (click)="sendRequest()">
         상담하기
       </button>
     </ion-buttons>
