@@ -3,13 +3,6 @@ import { IonicPage, NavController, Platform, App, ToastController } from 'ionic-
 
 import { Tab1Root, Tab2Root, Tab3Root, Tab4Root, Tab5Root } from '../';
 
-/**
- * Generated class for the TabsPage tabs.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-tabs',

@@ -52,10 +52,12 @@ page-login {
 	}
 
 	.pwreset {
-		margin: 10px 0px 3px;
+		margin: 1rem auto;
 		font-size: 13px;
 		background-color: transparent;
 		color: #ffffff;
+		display: flex;
+		align-items: center;
 	}
 
 	.prompt {

@@ -15,7 +15,7 @@
 
 <ion-content class="cardsbg">
   <span class="coconut" style="width: 100%; float: right;">
-    coco-nut
+    Coconut
   </span>
   <form [formGroup]="signupForm" novalidate>
     <span class="info">이름(별명)</span>
@@ -54,9 +54,12 @@
       <button [class.greenbtn]="clickfemale" (click)="setFemale()">
         여
       </button>
+      <button [class.greenbtn]="clickEtc" (click)="setEtc()">
+        그 외
+      </button>
     </div>
     <br>
-    <span class="info">나이</span>
+    <span class="info">태어난 해</span>
     <ion-input class="put" formControlName="age" type="number"></ion-input>
     <div class="button2">
       <button class="btn2_1" [class.greenbtn]="clickterms1" (click)="setTerms1()"></button>
@@ -72,8 +75,15 @@
       </span>
     </div>
     <button class="button" (click)="signupUser()">
-      회원가입하기!
+      회원가입
     </button>
+    <button class="button" (click)="signIn()">
+      로그인
+    </button>
+    <div class="spacing">
+
+    </div>
   </form>
+
 
 </ion-content>

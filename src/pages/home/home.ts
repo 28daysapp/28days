@@ -245,7 +245,7 @@ export class HomePage {
   pleaselogin() {
     let alert = this.alertCtrl.create({
       title: '로그인 후 사용하실 수 있습니다.',
-      message: '28days에 로그인하시겠습니까?',
+      message: '코코넛에 로그인하시겠습니까?',
       buttons: [
         {
           text: '확인',

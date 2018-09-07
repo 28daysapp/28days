@@ -120,8 +120,7 @@ export class MypagePage {
   loginpage() {
     if (this.user) {
       let alert = this.alertCtrl.create({
-        title: '이미 로그인되어 있습니다.',
-        message: '28days에서 로그아웃하시겠습니까?',
+        title: '로그아웃 하시겠습니까?',
         buttons: [
           {
             text: '확인',
@@ -129,7 +128,8 @@ export class MypagePage {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
                 this.storage.remove('localcred').then(() => {
-                  this.navCtrl.setRoot('TabsPage', {}, {animate: true, direction: 'forward'});
+                  // this.navCtrl.setRoot('TabsPage', {}, {animate: true, direction: 'forward'});
+                  this.navCtrl.push('LoginPage');
                 });
               });
             }
@@ -179,7 +179,7 @@ export class MypagePage {
   pleaselogin() {
     let alert = this.alertCtrl.create({
       title: '로그인 후 사용하실 수 있습니다.',
-      message: '28days에 로그인하시겠습니까?',
+      message: '코코넛에 로그인하시겠습니까?',
       buttons: [
         {
           text: '확인',
