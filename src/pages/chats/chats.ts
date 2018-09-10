@@ -115,12 +115,4 @@ export class ChatsPage {
       refresher.complete();
     }, 2000);
   }
-
-  checkCount(chat) {
-    var available = false;
-    if (chat.count > 0) {
-      available = true;
-    }
-    return available;
-  }
 }

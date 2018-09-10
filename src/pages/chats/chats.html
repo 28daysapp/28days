@@ -40,10 +40,7 @@
             <img src="{{ item.requesterPhoto }}">
           </ion-avatar>
           <span class="username">{{ item.requesterUsername }}</span>
-
-          <div *ngIf="checkCount(item)">
-            <div class="counter">{{item.count}}</div>
-          </div>
+          <div *ngIf="item.count != 0" class="counter">{{item.count}}</div>
 
           <!-- <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
               <div class="msg">{{ item.recentmessage }}</div> -->
@@ -68,7 +65,7 @@
           </ion-avatar>
           <div class="container">
             <span class="username" (click)="supporterChat(item)">{{ item.buddyusername }}</span>
-            <div class="counter">{{item.count}}</div>
+            <div *ngIf="item.count != 0" class="counter">{{item.count}}</div>
 
             <!-- <span class="grid-time" (click)="supporterChat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span> -->
             <!-- <div class="grid-message" (click)="supporterChat(item)">{{ item.recentmessage }}</div> -->

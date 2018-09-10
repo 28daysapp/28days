@@ -108,23 +108,25 @@ export class HomePage {
             });
           });
         } else {
+          this.loading.dismiss();
+          this.navCtrl.push('SignupPage');
           // cache not found
           // get username which is typed by user in Intro
-          this.storage.get('username').then((username) => {
-            if (username) {
-              this.username = username;
-              console.log("3");
-              this.createUser();
-              this.menu.enable(true, 'loggedInMenu');
-              this.menu.enable(false, 'loggedOutMenu');
-            } else {
-              this.username = '코코넛';
-            }
-            this.greeting = "안녕하세요! " + this.username + " 입니다. 함께 나아가요!"
-            this.loading.dismiss();
-            this.menu.enable(true, 'loggedOutMenu');
-              this.menu.enable(false, 'loggedInMenu');
-          });
+          // this.storage.get('username').then((username) => {
+          //   if (username) {
+          //     this.username = username;
+          //     console.log("3");
+          //     this.createUser();
+          //     this.menu.enable(true, 'loggedInMenu');
+          //     this.menu.enable(false, 'loggedOutMenu');
+          //   } else {
+          //     this.username = '코코넛';
+          //   }
+          //   this.greeting = "안녕하세요! " + this.username + " 입니다. 함께 나아가요!"
+          //   this.loading.dismiss();
+          //   this.menu.enable(true, 'loggedOutMenu');
+          //     this.menu.enable(false, 'loggedInMenu');
+          // });
         }
       });
     }
@@ -199,7 +201,18 @@ export class HomePage {
   }
 
   goNotification(){
-    this.navCtrl.push('NotificationPage');
+    // this.navCtrl.push('NotificationPage');
+    let alert = this.alertCtrl.create({
+      title: '알림',
+      message: '아직 준비중인 서비스입니다.',
+      buttons: [
+        {
+          text: '확인',
+          role: 'cancel'
+        },
+      ]
+    });
+    alert.present();
   }
 
   post() {
