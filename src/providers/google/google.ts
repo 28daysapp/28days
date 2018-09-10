@@ -30,7 +30,7 @@ export class GoogleProvider {
     this.http.get(url + `maxwidth=400&photoreference=${reference}&key=${apiKey}`, { headers })
       .subscribe(data => {
         this.data = data;
-        console.log(this.http.options)
+        console.log("HTTP Data: " + JSON.stringify(this.http.options));
         return this.data
       });
   }

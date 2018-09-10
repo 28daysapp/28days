@@ -1,21 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
-import { MenuController, AlertController, Nav, Platform, Events, App, ToastController } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Component, ViewChild } from "@angular/core";
+import {
+  MenuController,
+  AlertController,
+  Nav,
+  Platform,
+  Events
+} from "ionic-angular";
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
 // import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import firebase from 'firebase';
-import { FirstRunPage, SignUpPage } from '../pages';
-import { FCM } from '@ionic-native/fcm';
-import { AuthProvider } from '../providers/auth/auth';
-import { Storage } from '@ionic/storage';
-
+import firebase from "firebase";
+import { FirstRunPage } from "../pages";
+import { FCM } from "@ionic-native/fcm";
+import { AuthProvider } from "../providers/auth/auth";
+import { Storage } from "@ionic/storage";
 
 export interface PageInterface {
   title: string;
   component: any;
   icon: string;
   logsOut?: boolean;
-};
+}
 
 // firebase config
 export const firebaseConfig = {
@@ -28,36 +33,42 @@ export const firebaseConfig = {
 };
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: "app.html"
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav)
+  nav: Nav;
   user;
   userprofile;
   username;
   email;
   lastBack;
   allowClose;
-  // set entry page of app
-  // rootPage:any = 'TabsPage';
   photoURL;
   rootPage = FirstRunPage;
 
   pages: any[] = [
-    { title: 'Community', component: 'CommunityPage' },
-    { title: 'Supporter', component: 'SupporterPage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Home', component: 'HomePage' },
-    { title: 'My Page', component: 'MypagePage' }
-  ]
+    { title: "Community", component: "CommunityPage" },
+    { title: "Supporter", component: "SupporterPage" },
+    { title: "Tabs", component: "TabsPage" },
+    { title: "Home", component: "HomePage" },
+    { title: "My Page", component: "MypagePage" }
+  ];
   appPages: PageInterface[] = [
-    { title: '보관함', component: 'MydepositoryPage', icon: 'assets/bookmark.svg' },
-    { title: '내 커뮤니티 글', component: 'MypostPage', icon: 'assets/browser.svg' },
+    {
+      title: "보관함",
+      component: "MydepositoryPage",
+      icon: "assets/bookmark.svg"
+    },
+    {
+      title: "내 커뮤니티 글",
+      component: "MypostPage",
+      icon: "assets/browser.svg"
+    },
     //not yet made
     // { title: '충전소', name: 'TabsPage', component: TabsPage, tabComponent: HomePage, index: 0, icon: 'contacts' },
-    { title: '결제 내역', component: 'PaymentPage', icon: 'assets/nuts.svg' },
-    { title: '설정', component: 'MypagePage', icon: 'assets/setting.svg' }
-
+    { title: "결제 내역", component: "PaymentPage", icon: "assets/nuts.svg" },
+    { title: "설정", component: "MypagePage", icon: "assets/setting.svg" }
   ];
   /*
   loggedInPages: PageInterface[] = [
@@ -67,10 +78,10 @@ export class MyApp {
   ];
   */
   loggedOutPages: PageInterface[] = [
-    { title: '로그인', component: 'LoginPage', icon: 'log-in' },
+    { title: "로그인", component: "LoginPage", icon: "log-in" }
   ];
   loggedOutPages2: PageInterface[] = [
-    { title: '회원가입', component: 'SignupPage', icon: 'person-add' }
+    { title: "회원가입", component: "SignupPage", icon: "person-add" }
   ];
 
   constructor(
@@ -84,26 +95,16 @@ export class MyApp {
     public fcm: FCM,
     // public userProvider: UserProvider,
     public auth: AuthProvider,
-    public storage: Storage,
-    private app: App,
-    private toastCtrl: ToastController,
+    public storage: Storage
   ) {
     this.email = "email";
 
-    
     firebase.initializeApp(firebaseConfig);
     this.user = firebase.auth().currentUser;
-
-    if(!this.user) {
-      this.rootPage = 'SignupPage'
-    } 
- 
 
     platform.ready().then(() => {
       //   // Okay, so the platform is ready and our plugins are available.
       //   // Here you can do any higher level native things you might need.
-
-
 
       statusBar.styleDefault();
       splashScreen.hide();
@@ -126,12 +127,11 @@ export class MyApp {
       //   });
       //   //end notifications.
       // }
-
     });
     // this.pleaselogin();
-    events.subscribe('user:created', (user, time) => {
+    events.subscribe("user:created", (user, time) => {
       // user and time are the same arguments passed in `events.publish(user, time)`
-      console.log('Welcome', user, 'at', time);
+      console.log("Welcome", user, "at", time);
       this.photoURL = user.photoURL;
       this.username = user.displayName;
       this.email = user.email;
@@ -145,7 +145,7 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    if (page.title == '로그아웃') {
+    if (page.title == "로그아웃") {
       // Give the menu time to close before changing to logged out
       this.auth.logoutUser();
     }
@@ -159,36 +159,35 @@ export class MyApp {
   */
 
   profile() {
-    this.nav.push('CharacterPage');
+    this.nav.push("CharacterPage");
   }
 
   logout() {
     if (this.user) {
       let alert = this.alertCtrl.create({
-        title: '정말로 로그아웃 하시겠습니까?',
+        title: "정말로 로그아웃 하시겠습니까?",
         buttons: [
           {
-            text: '확인',
+            text: "확인",
             handler: () => {
               // log out from firebase auth service and remove previous cache about user credential
               this.auth.logoutUser().then(() => {
-                this.storage.remove('localcred').then(() => {
-                  this.nav.push('LoginPage');
+                this.storage.remove("localcred").then(() => {
+                  this.nav.push("LoginPage");
                 });
               });
             }
           },
           {
-            text: '취소',
-            role: 'cancel',
-            handler: () => {
-            }
+            text: "취소",
+            role: "cancel",
+            handler: () => {}
           }
         ]
       });
       alert.present();
     } else {
-      this.nav.push('LoginPage');
+      this.nav.push("LoginPage");
     }
   }
 
@@ -196,8 +195,6 @@ export class MyApp {
   //   // Give the menu time to close before changing to logged out
   //   this.user.logout();
   // }
-
-
 
   // isActive(page: PageInterface) {
   //   let childNav = this.nav.getActiveChildNavs()[0];
@@ -259,4 +256,3 @@ export class MyApp {
     }
     */
 }
-

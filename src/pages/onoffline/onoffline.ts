@@ -54,6 +54,42 @@ export class OnofflinePage {
     }
   }
 
+  ionViewWillEnter() {
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    if (this.type == 'Supporter') {
+      this.isSupporter = true;
+      this.isCounselor = false;
+      this.SupporterRef.on('value', userList => {
+        let users = [];
+        userList.forEach(user => {
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          } 
+          return false;
+        });
+        this.userList = users;
+        this.loadedUserList = users;
+      });
+    }
+    if (this.type == 'Counselor') {
+      this.isSupporter = false;
+      this.isCounselor = true;
+      this.CounselorRef.on('value', userList => {
+        let users = [];
+        userList.forEach(user => {
+          if (user.val().uid != this.user.uid) {
+            users.push(user.val());
+          }
+          return false;
+        });
+        this.userList = users;
+        this.loadedUserList = users;
+      });
+    }
+    this.loading.dismiss();
+  }
+
   getItems(searchbar) {
     // Reset items back to all of the items
     this.initializeItems();
@@ -90,8 +126,6 @@ export class OnofflinePage {
       this.SupporterRef.on('value', userList => {
         let users = [];
         userList.forEach(user => {
-          console.log("AHAFGAAAAAAAAAAAAAAAAAAAA = " + JSON.stringify(user.val()));
-          console.log("soy yo???: " + this.user.uid);
           if (user.val().uid != this.user.uid) {
             users.push(user.val());
           }
@@ -138,41 +172,7 @@ export class OnofflinePage {
 
 
 
-  ionViewWillEnter() {
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
-    if (this.type == 'Supporter') {
-      this.isSupporter = true;
-      this.isCounselor = false;
-      this.SupporterRef.on('value', userList => {
-        let users = [];
-        userList.forEach(user => {
-          if (user.val().uid != this.user.uid) {
-            users.push(user.val());
-          } 
-          return false;
-        });
-        this.userList = users;
-        this.loadedUserList = users;
-      });
-    }
-    if (this.type == 'Counselor') {
-      this.isSupporter = false;
-      this.isCounselor = true;
-      this.CounselorRef.on('value', userList => {
-        let users = [];
-        userList.forEach(user => {
-          if (user.val().uid != this.user.uid) {
-            users.push(user.val());
-          }
-          return false;
-        });
-        this.userList = users;
-        this.loadedUserList = users;
-      });
-    }
-    this.loading.dismiss();
-  }
+  
 
   supporterreview(user) {
     //this.appCrtl.getRootNavs()[0].push('SupporterreviewPage',{ user: user });
@@ -184,8 +184,22 @@ export class OnofflinePage {
     this.navCtrl.push('CounselorreviewPage', { user: user });
   }
 
-  gooperator() {
-    this.navCtrl.push('OperatorPage');
+
+  notReady() {
+    let alert = this.alertCtrl.create({
+      title: '알림',
+      message: '아직 준비중인 서비스입니다.',
+      buttons: [
+        {
+          text: '확인',
+          role: 'cancel'
+        },
+      ]
+    });
+    alert.present();
+    this.type = 'Supporter';
+    this.isSupporter = true;
+    this.isCounselor = false;
   }
 
   doRefresh(refresher) {

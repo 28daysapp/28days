@@ -30,7 +30,7 @@ export class HospitalcenterPage {
 
   details: any;
   url: string;
-  area: string;
+  area: string = "서울";
   user;
 
   rating;
@@ -51,8 +51,7 @@ export class HospitalcenterPage {
 
   ionViewWillEnter() {
     console.log('ionViewDidLoad HospitalcenterPage');
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
+
     this.user = firebase.auth().currentUser;
     if (this.user) {
       this.menu.enable(true, 'loggedInMenu');
@@ -64,7 +63,6 @@ export class HospitalcenterPage {
     }
 
     this.loadMap();
-    this.loading.dismiss();
   }
 
   loadMap() {
@@ -104,7 +102,7 @@ export class HospitalcenterPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
     console.log("THIS MAP: " + this.map);
 
-    console.log("this.area = "+this.area);
+    console.log("this.area = " + this.area);
     this.searchByText(this.area);
 
     return;
@@ -112,13 +110,14 @@ export class HospitalcenterPage {
 
   searchByText(input) {
 
-    if (!input) {
+    let text = input
+
+    if (!text) {
+      this.area = "서울"
+    } else if (text == "서울") {
       this.area = "서울";
-    } else if(input == "서울"){
-      this.area = "서울";
-    }
-    else {
-      this.area = input.srcElement.value;
+    } else {
+      this.area = text.srcElement.value;
     }
 
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
@@ -146,12 +145,8 @@ export class HospitalcenterPage {
             this.places[i].ratings = 0;
             this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
             this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
-
-            console.log(this.places[i].place_id);
             this.countReviews(results[i].place_id, i);
           }
-          console.log(this.places)
-
         } else {
           console.log("Status error: " + status);
         }
@@ -198,6 +193,20 @@ export class HospitalcenterPage {
     let alert = this.alertCtrl.create({
       title: '정렬 순서',
       buttons: [{ text: '후기 많은 순' }, { text: '별점 높은 순' }]
+    });
+    alert.present();
+  }
+
+  notReady() {
+    let alert = this.alertCtrl.create({
+      title: '알림',
+      message: '아직 준비중인 서비스입니다.',
+      buttons: [
+        {
+          text: '확인',
+          role: 'cancel'
+        },
+      ]
     });
     alert.present();
   }

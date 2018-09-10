@@ -31,17 +31,16 @@
 
   <div [ngSwitch]="type">
     <ion-list no-lines *ngSwitchCase="'requested'">
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content></ion-refresher-content>
-          </ion-refresher>
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-item-sliding *ngFor="let item of requestedInfos" (click)="supporterChat2(item)">
         <ion-item class="bottom-border">
           <ion-avatar item-start>
             <img src="{{ item.requesterPhoto }}">
           </ion-avatar>
           <span class="username">{{ item.requesterUsername }}</span>
-          
-            <div class="counter">{{item.count}}</div>
+          <div *ngIf="item.count != 0" class="counter">{{item.count}}</div>
 
           <!-- <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
               <div class="msg">{{ item.recentmessage }}</div> -->
@@ -56,9 +55,9 @@
     </ion-list>
 
     <ion-list no-lines *ngSwitchCase="'request'">
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content></ion-refresher-content>
-          </ion-refresher>
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-item-sliding *ngFor="let item of requestInfos">
         <ion-item class="bottom-border">
           <ion-avatar item-start>
@@ -66,7 +65,7 @@
           </ion-avatar>
           <div class="container">
             <span class="username" (click)="supporterChat(item)">{{ item.buddyusername }}</span>
-            <div class="counter">{{item.count}}</div>
+            <div *ngIf="item.count != 0" class="counter">{{item.count}}</div>
 
             <!-- <span class="grid-time" (click)="supporterChat(item)">{{ item.recenttimestamp | date:'hh:mm a' }}</span> -->
             <!-- <div class="grid-message" (click)="supporterChat(item)">{{ item.recentmessage }}</div> -->

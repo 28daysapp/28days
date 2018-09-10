@@ -42,6 +42,9 @@ export class SignupPage {
     	passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])],
       age: ['', Validators.required],
     });
+
+    // this.clickterms1 = true;
+    // this.clickterms2 = true;
   }
 
   signupUser(){
@@ -78,7 +81,7 @@ export class SignupPage {
             email: this.signupForm.value.email,
             password: this.signupForm.value.password
           });
-          this.navCtrl.push('GogosignupPage');
+          this.navCtrl.setRoot('TabsPage');
         });
       }, (error) => {
         console.log(JSON.stringify(error));

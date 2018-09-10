@@ -11,9 +11,9 @@ page-supporterchat {
     padding: 1rem 2.6rem;
     width: 95%;
     height: auto;
+    display: flex;
     align-items: center;
     text-align: center;
-    display: inline-block;
     border-radius: 14px;
     border: solid 1px color($colors, primary, base);
 

@@ -102,7 +102,6 @@ export class ChatProvider {
           this.fireusers.child(`${uid}`).once('value').then((snapshot)=> {
             this.requester = snapshot.val().username;
             this.photoURL = snapshot.val().photoURL;
-            console.log("ㅇㅁㄴㄹ;만ㅇ러;민아ㅓㄹ;미ㅏㄴㅇ : " + this.requester);
           }).then(() => {
             console.log('create new chat');
           this.firechat.child(`${uid}/${this.buddy.uid}`).set({
@@ -113,7 +112,9 @@ export class ChatProvider {
             buddyuid: this.buddy.uid,
             buddyPhoto: this.buddy.photoURL,
             recentmessage: msg,
-            recenttimestamp: firebase.database.ServerValue.TIMESTAMP
+            recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
+            count: 0
+
           }).then(() => {
             this.firechat.child(`${this.buddy.uid}/${uid}`).set({
               requester: uid,
