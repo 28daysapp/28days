@@ -40,7 +40,7 @@ export class FcmProvider {
     // })
   }
 
-  getToken(user) {
+  setToken(user) {
     // this.user = user;
     // console.log("get token start");
     // if (this.user) {
