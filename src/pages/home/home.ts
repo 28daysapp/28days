@@ -9,13 +9,6 @@ import { NavParams, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -56,15 +49,12 @@ export class HomePage {
     // set defualt user photo
     this.photoURL = 'assets/profile0.png';
 
-
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
 
-      // this.fcmProvider.getToken(this.user);
+      this.fcmProvider.setToken(this.user);
       // this.fcmProvider.handleTokenRefresh();
-
-      // user already logged-in
       
       console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
@@ -93,7 +83,7 @@ export class HomePage {
             this.username = this.user.displayName;
             this.photoURL = this.user.photoURL;
 
-            this.fcmProvider.getToken(this.user);
+            this.fcmProvider.setToken(this.user);
 
             this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
               console.log("user profile");
@@ -145,8 +135,6 @@ export class HomePage {
     // })
   }
 
-
-
   mypage() {
     if (this.user) {
       this.navCtrl.push('MypagePage');
@@ -155,53 +143,8 @@ export class HomePage {
     }
   }
 
-  changecharacter() {
-    if (this.user) {
-      this.navCtrl.push('CharacterPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  changename() {
-    if (this.user) {
-      // this.navCtrl.push('SupporterPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  changegreeting() {
-    if (this.user) {
-      // this.navCtrl.push('SupporterPage');
-      setTimeout(() => {
-        this.origGreeting = this.greeting;
-        this.showmodal = true;
-      }, 500);
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  community() {
-    if (this.user) {
-      this.navCtrl.push('CommunityPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  supporter() {
-    if (this.user) {
-      // this.navCtrl.push('GogosupporterPage');
-      this.navCtrl.push('SupporterPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
 
   goNotification(){
-    // this.navCtrl.push('NotificationPage');
     let alert = this.alertCtrl.create({
       title: '알림',
       message: '아직 준비중인 서비스입니다.',
@@ -213,46 +156,6 @@ export class HomePage {
       ]
     });
     alert.present();
-  }
-
-  post() {
-    if (this.user) {
-      this.navCtrl.push('PostPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  meditate() {
-    if (this.user) {
-      this.navCtrl.push('MeditatePage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  searchhelp() {
-    this.navCtrl.push('SearchhelpPage');
-  }
-
-  test() {
-    this.navCtrl.push('TestPage');
-  }
-
-  diary() {
-    if (this.user) {
-      this.navCtrl.push('DiaryPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  emotionbasket() {
-    if (this.user) {
-      this.navCtrl.push('EmotionbasketPage');
-    } else {
-      this.pleaselogin();
-    }
   }
 
   pleaselogin() {
@@ -277,10 +180,6 @@ export class HomePage {
     alert.present();
   }
 
-  gogo() {
-    this.navCtrl.push('GogohomePage');
-  }
-
   modalhandler(modal) {
     this.greeting = modal.value.greeting;
     this.showmodal = false;
@@ -290,18 +189,6 @@ export class HomePage {
   dismissModal() {
     this.showmodal = false;
     this.greeting = this.origGreeting;
-  }
-
-  counseling() {
-    this.navCtrl.push('SearchPage', {
-      type: "c"
-    });
-  }
-
-  psychiatric() {
-    this.navCtrl.push('SearchPage', {
-      type: "p"
-    });
   }
 
   counselling(){

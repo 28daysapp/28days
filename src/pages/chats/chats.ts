@@ -54,20 +54,17 @@ export class ChatsPage {
       this.requestedInfos.forEach((info) => {
         this.count = info.count;
       });
-      console.log("요청받은 requestedInfos: " + JSON.stringify(info))
     });
     this.chat.getAllRequestInfos().then(info => {
       this.requestInfos = info;
       this.requestInfos.forEach((info) => {
         this.count = info.count;
       });
-      console.log("요청한 requestInfos: " + JSON.stringify(info))
     });
   }
 
   getChatList() {
     const chatType = this.type;
-    console.log("Chat type: " + chatType);
     return chatType === "requested"
       ? this.chat.getAllRequestInfos().then(info => {
           this.requestInfos = info;
