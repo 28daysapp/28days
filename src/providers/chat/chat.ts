@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
-
 /*
   Generated class for the ChatProvider provider.
-
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
@@ -15,17 +13,15 @@ export class ChatProvider {
   fireusers = firebase.database().ref('/users');
   buddy;
   buddyId;
-  // buddyToken;
-  // senderToken;
+  buddyToken;
+  requesterToken;
+  targetToken;
   chatmessages;
   count;
-
   requester: string;
   photoURL: string;
-
   constructor(public user: UserProvider, public events: Events) {
   }
-
   getallusersExceptbuddy() {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
@@ -47,130 +43,117 @@ export class ChatProvider {
     });
     return promise;
   }
-
   initializebuddy(buddy) {
     this.buddy = buddy;
     this.buddyId = this.buddy.uid;
-    // this.storeTokens();
+    this.buddyToken = this.buddy.token;
+    console.info(" WHAT ABOUIT THIS BUDDY: " + JSON.stringify(this.buddy));
   }
-
-  // storeTokens() {
-  //   var uid = firebase.auth().currentUser.uid;
-
-  //   this.fireusers.child(this.buddyId).once('value').then((snapshot) => {
-  //     this.buddyToken = snapshot.token;
-  //   })
-
-  //   this.fireusers.child(uid).once('value').then((snapshot) => {
-  //     this.senderToken = snapshot.token;
-  //   }).then(() => this.firechat.child(`${uid}/${this.buddy.uid}/messages`).set({
-  //     buddyToken: this.buddyToken,
-  //     senderToken: this.senderToken
-  //   }));
-  // }
-
   sendMessage(msg) {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
       this.firechat.child(`${uid}/${this.buddy.uid}`).once("value").then((snapshot) => {
         if (snapshot.val()) {
-
           this.countUnseenMessages(uid);
-          
-          this.firechat.child(`${uid}/${this.buddy.uid}`).update({
-            recentmessage: msg,
-            recenttimestamp: firebase.database.ServerValue.TIMESTAMP
-          }).then(() => this.firechat.child(`${this.buddy.uid}/${uid}`).update({
-            recentmessage: msg,
-            recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
-            count: this.count
-          })).then(() => this.firechat.child(`${uid}/${this.buddy.uid}/messages`).push().set({
-            message: msg,
-            sentby: uid,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
-          })).then(() => this.firechat.child(`${this.buddy.uid}/${uid}/messages`).push().set({
-            message: msg,
-            sentby: uid,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
-          })).then(() => {
-            resolve(true);
-          });
-
+          this.targetToken = this.buddy.token;
+          // this.fireusers.child(`${uid}`).once('value').then((snapshot) => { 
+          //   const user = snapshot.val();
+          //   this.targetToken = user.token;
+          // })
+            this.firechat.child(`${uid}/${this.buddy.uid}`).update({
+              recentmessage: msg,
+              recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
+              targetToken: this.targetToken
+            }).then(() => this.firechat.child(`${this.buddy.uid}/${uid}`).update({
+              recentmessage: msg,
+              recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
+              count: this.count
+            })).then(() => this.firechat.child(`${uid}/${this.buddy.uid}/messages`).push().set({
+              message: msg,
+              sentby: uid,
+              timestamp: firebase.database.ServerValue.TIMESTAMP
+            })).then(() => this.firechat.child(`${this.buddy.uid}/${uid}/messages`).push().set({
+              message: msg,
+              sentby: uid,
+              timestamp: firebase.database.ServerValue.TIMESTAMP
+            })).then(() => {
+              resolve(true);
+            });
         } else {
-
-          
-          this.fireusers.child(`${uid}`).once('value').then((snapshot)=> {
-            this.requester = snapshot.val().username;
-            this.photoURL = snapshot.val().photoURL;
+          this.fireusers.child(`${uid}`).once('value').then((snapshot) => {
+            const user = snapshot.val();
+            this.requester = user.username;
+            this.photoURL = user.photoURL;
+            this.requesterToken = user.token;
+            this.targetToken = user.token;
           }).then(() => {
             console.log('create new chat');
-          this.firechat.child(`${uid}/${this.buddy.uid}`).set({
-            requester: uid,
-            requesterUsername: this.requester,
-            requesterPhoto: this.photoURL,
-            buddyUsername: this.buddy.username,
-            buddyuid: this.buddy.uid,
-            buddyPhoto: this.buddy.photoURL,
-            recentmessage: msg,
-            recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
-            count: 0
-
-          }).then(() => {
-            this.firechat.child(`${this.buddy.uid}/${uid}`).set({
+            this.firechat.child(`${uid}/${this.buddy.uid}`).set({
               requester: uid,
               requesterUsername: this.requester,
               requesterPhoto: this.photoURL,
-              buddyuid: this.buddy.uid,
               buddyUsername: this.buddy.username,
+              buddyuid: this.buddy.uid,
               buddyPhoto: this.buddy.photoURL,
               recentmessage: msg,
               recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
-              count: 1
+              count: 0,
+              buddyToken: this.buddyToken,
+              requesterToken: this.requesterToken,
+              targetToken: ""
             }).then(() => {
-              this.firechat.child(`${uid}/${this.buddy.uid}/messages`).push().set({
-                message: msg,
-                sentby: uid,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-              }).then(() => this.firechat.child(`${this.buddy.uid}/${uid}/messages`).push().set({
-                message: msg,
-                sentby: uid,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-              })).then(() => {
-                resolve(true);
+              this.firechat.child(`${this.buddy.uid}/${uid}`).set({
+                requester: uid,
+                requesterUsername: this.requester,
+                requesterPhoto: this.photoURL,
+                buddyuid: this.buddy.uid,
+                buddyUsername: this.buddy.username,
+                buddyPhoto: this.buddy.photoURL,
+                recentmessage: msg,
+                recenttimestamp: firebase.database.ServerValue.TIMESTAMP,
+                count: 1,
+                buddyToken: this.buddyToken,
+                requesterToken: this.requesterToken,
+                targetToken: this.targetToken
+              }).then(() => {
+                this.firechat.child(`${uid}/${this.buddy.uid}/messages`).push().set({
+                  message: msg,
+                  sentby: uid,
+                  timestamp: firebase.database.ServerValue.TIMESTAMP
+                }).then(() => this.firechat.child(`${this.buddy.uid}/${uid}/messages`).push().set({
+                  message: msg,
+                  sentby: uid,
+                  timestamp: firebase.database.ServerValue.TIMESTAMP
+                })).then(() => {
+                  resolve(true);
+                });
               });
             });
-          });
           })
-
-          
-
         }
       });
     });
     return promise;
   }
-
   // Updates unseen message counts
   countUnseenMessages(uid) {
     this.firechat.child(`${this.buddy.uid}/${uid}`).once("value").then((snapshot) => {
       if (snapshot.val()) {
         const data = snapshot.val();
         this.count = parseInt(data.count, 10) + 1;
-      } 
+      }
     });
   }
-
   clearCount(buddy) {
     const uid = firebase.auth().currentUser.uid;
     this.firechat.child(`${uid}/${buddy.uid}`).once('value').then((snapshot) => {
       if (snapshot.hasChild('count')) {
-            this.firechat.child(`${uid}/${buddy.uid}`).update({
-              count: 0
-            });
-          }
+        this.firechat.child(`${uid}/${buddy.uid}`).update({
+          count: 0
+        });
+      }
     })
   }
-
   // Checks for empty count values in chat database
   checkZeroCount() {
     const uid = firebase.auth().currentUser.uid;
@@ -182,7 +165,6 @@ export class ChatProvider {
       }
     });
   }
-
   getAllMessages() {
     var uid = firebase.auth().currentUser.uid;
     this.firechat.child(`${uid}/${this.buddy.uid}/messages`).on('value', (snapshot) => {
@@ -194,12 +176,10 @@ export class ChatProvider {
       this.events.publish('newmessage');
     });
   }
-
   stoplistenmessages() {
     var uid = firebase.auth().currentUser.uid;
     this.firechat.child(`${uid}/${this.buddy.uid}/messages`).off();
   }
-
   setshowprofileimageprop() {
     var showimage = true;
     for (var i in this.chatmessages) {
@@ -213,7 +193,6 @@ export class ChatProvider {
       }
     }
   }
-
   getAllRequestInfos() {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
@@ -240,7 +219,6 @@ export class ChatProvider {
     });
     return promise;
   }
-
   deleteChat(buddyuid) {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
@@ -250,29 +228,22 @@ export class ChatProvider {
     });
     return promise;
   }
-
   getAllRequestedInfos() {
     var uid = firebase.auth().currentUser.uid;
-
     var promise = new Promise((resolve) => {
       this.firechat.child(uid).once("value").then((snapshot) => {
         console.log("this snapshot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1: " + JSON.stringify(snapshot));
         var requestedchatuids = [];
         var requestedchats = [];
         snapshot.forEach((childSnapshot) => {
-          if(childSnapshot.val().requester != uid) {
+          if (childSnapshot.val().requester != uid) {
             requestedchats.push(childSnapshot.val());
           }
         })
         resolve(requestedchats);
       })
     });
-
     return promise;
-
-
-
-
     // var promise = new Promise((resolve) => {
     //   this.firechat.child(uid).once("value").then((snapshot) => {
     //     var requestedchatuids = [];
@@ -283,7 +254,6 @@ export class ChatProvider {
     //         requestedchats.push(childSnapshot.val());
     //       }
     //     });
-
     //     this.fireusers.once("value").then((userprofile) => {
     //       userprofile.forEach((childSnapshot) => {
     //         var index = requestedchatuids.indexOf(childSnapshot.val().uid);
@@ -298,7 +268,6 @@ export class ChatProvider {
     // });
     // return promise;
   }
-
   checkstart() {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
@@ -312,7 +281,4 @@ export class ChatProvider {
     });
     return promise;
   }
-
 }
-
-

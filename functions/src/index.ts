@@ -78,33 +78,24 @@ exports.getGooglePhotos = functions.https.onRequest((req, res) => {
 
 exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot, context) => {
     // This registration token comes from the client FCM SDKs.
-    const messageData = snapshot.after.val();
-    const senderUsername = messageData.username;
-    let targetToken;
-
+    const message = snapshot.after.val();
+    const targetToken = message.targetToken;
+    console.info("Target Token: " + targetToken);
+    
     const payload = {
         notification: {
-            title: `${senderUsername}님의 새 메세지가 도착했어요!`,
+            title: '새 코코넛 메세지가 도착했어요!',
             body: '비슷한 아픔을 겪은 분의 이야기를 들어주세요.',
         }
     };
-
-    admin.database().ref(`/chats/{userId}/{buddyId}/messages/{messageId}`).once('value').then((message) => {
-        const senderId = message.val().sentby;
-        console.info(senderId);
-        targetToken = senderId === messageData.buddyuid ? messageData.requesterToken : messageData.buddyToken;
-    }).then(() => {
-        admin.messaging().sendToDevice(targetToken, payload)
+    admin.messaging().sendToDevice(targetToken, payload)
         .then((response) => {
             // Response is a message ID string.
             console.log('Successfully sent message:', response);
+            console.log(response.results[0].error);
         })
         .catch((error) => {
             console.log('Error sending message:', error);
         });
-    })
-
-    // Send a message to the device corresponding to the provided registration token.
-
-
+    return snapshot;
 });
