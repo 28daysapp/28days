@@ -43,7 +43,7 @@ exports.createChat = functions.database.ref('/chats/{uid}/{supporterid}').onCrea
         var db = admin.database();    
         var ref = db.ref('/notification/supporterId');
         var newPostRef = ref.push();
-        var notificationId = newPostRef.key; //여기까지가 DB에서 새로운 키 생성하는것 까지의 소스!
+        var notificationId = newPostRef.key;
         
         admin.database().ref(`/notification/${supporterId}/${notificationId}`).set({
             title: "새로운 채팅",
@@ -81,13 +81,14 @@ exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').on
     const message = snapshot.after.val();
     const targetToken = message.targetToken;
     console.info("Target Token: " + targetToken);
-    
+
     const payload = {
         notification: {
             title: '새 코코넛 메세지가 도착했어요!',
             body: '비슷한 아픔을 겪은 분의 이야기를 들어주세요.',
         }
     };
+
     admin.messaging().sendToDevice(targetToken, payload)
         .then((response) => {
             // Response is a message ID string.

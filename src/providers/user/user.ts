@@ -89,6 +89,7 @@ export class UserProvider {
   getUserprofile(uid) {
     var promise = new Promise((resolve) => {
       this.fireusers.child(uid).once("value").then((snapshot) => {
+        console.info("Receiving Token?: " + JSON.stringify(snapshot));
         resolve(snapshot.val());
       });
     });

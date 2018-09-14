@@ -50,7 +50,8 @@ export class OperatorProvider {
         gender: user.gender,
         photoURL: user.photoURL,
         age: user.age,
-        reviewcnt: 0
+        reviewcnt: 0,
+        token: user.token
       }).then(() => {
         this.fireuser.child(`${user.uid}`).update({
           usertype: 'supporter'
@@ -75,7 +76,8 @@ export class OperatorProvider {
         age: user.age,
         photoURL: user.photoURL,
         reviewcnt: 0,
-        ratingavg: 0
+        ratingavg: 0,
+        token: user.token
       }).then(() => {
         this.fireuser.child(`${user.uid}`).update({
           usertype: 'counselor'
