@@ -76,6 +76,7 @@ export class ChatsPage {
 
   supporterChat(item) {
     this.userProvider.getUserprofile(item.buddyuid).then(userprofile => {
+      console.info("Receiving Token2: " + JSON.stringify(userprofile));
       this.chat.initializebuddy(userprofile);
       this.navCtrl.push("SupporterchatPage");
     });
@@ -83,6 +84,7 @@ export class ChatsPage {
 
   supporterChat2(item) {
     this.userProvider.getUserprofile(item.requester).then(userprofile => {
+      console.info("Receiving Token333: " + JSON.stringify(userprofile));
       this.chat.initializebuddy(userprofile);
       this.navCtrl.push("SupporterchatPage");
     });

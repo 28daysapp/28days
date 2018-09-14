@@ -47,7 +47,6 @@ export class ChatProvider {
     this.buddy = buddy;
     this.buddyId = this.buddy.uid;
     this.buddyToken = this.buddy.token;
-    console.info(" WHAT ABOUIT THIS BUDDY: " + JSON.stringify(this.buddy));
   }
   sendMessage(msg) {
     var uid = firebase.auth().currentUser.uid;
@@ -87,7 +86,6 @@ export class ChatProvider {
             this.requesterToken = user.token;
             this.targetToken = user.token;
           }).then(() => {
-            console.log('create new chat');
             this.firechat.child(`${uid}/${this.buddy.uid}`).set({
               requester: uid,
               requesterUsername: this.requester,
@@ -232,7 +230,6 @@ export class ChatProvider {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
       this.firechat.child(uid).once("value").then((snapshot) => {
-        console.log("this snapshot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1: " + JSON.stringify(snapshot));
         var requestedchatuids = [];
         var requestedchats = [];
         snapshot.forEach((childSnapshot) => {

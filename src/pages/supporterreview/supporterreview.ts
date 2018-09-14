@@ -99,6 +99,7 @@ export class SupporterreviewPage {
   }
 
   sendRequest() {
+    console.info("YOGIDA!!! : " + JSON.stringify(this.user));
     this.chat.initializebuddy(this.user);
     this.navCtrl.push('SupporterchatPage').then(() => {
       var index = this.viewCtrl.index;
