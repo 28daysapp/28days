@@ -53,8 +53,6 @@ export class SearchPage {
   }
 
   searchByText() {
-    console.log(this.type);
-    console.log("EVENTDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + event);
     if (this.type == null) {
       this.type = this.navParams.get('type');
     }
