@@ -76,7 +76,7 @@ exports.getGooglePhotos = functions.https.onRequest((req, res) => {
 });
 
 
-exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot, context) => {
+exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot) => {
     // This registration token comes from the client FCM SDKs.
     const message = snapshot.after.val();
     const targetToken = message.targetToken;
@@ -84,8 +84,7 @@ exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').on
 
     const payload = {
         notification: {
-            title: '새 코코넛 메세지가 도착했어요!',
-            body: '비슷한 아픔을 겪은 분의 이야기를 들어주세요.',
+            title: '새 코코넛 메세지가 도착했어요!'
         }
     };
 
@@ -98,5 +97,4 @@ exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').on
         .catch((error) => {
             console.log('Error sending message:', error);
         });
-    return snapshot;
 });
