@@ -1,7 +1,16 @@
 page-splash {
 
-	.bgcolor {
-		background: color($colors, daysgreen, base);
+	.bg {
+		/* The image used */
+		background-image: url("resources/splash.png");
+		background-color: color($colors, primary, base) !important; 
+		/* Full height */
+		height: 100%; 
+	
+		/* Center and scale the image nicely */
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
 
 	.text {

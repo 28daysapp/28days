@@ -96,8 +96,10 @@ export class MyApp {
       //   // Okay, so the platform is ready and our plugins are available.
       //   // Here you can do any higher level native things you might need.
 
+      // this.splashScreen.show();
+
       statusBar.styleDefault();
-      splashScreen.hide();
+      // this.splashScreen.hide();
       //   // this.initPushNotification();
 
       if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {

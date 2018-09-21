@@ -20,9 +20,9 @@ export class CommunityProvider {
 	firetag = firebase.database().ref('/tag');
 	user = firebase.database().ref('/users');
 	taglist = [
-		'우울',
+		'우울증',
 		'불안',
-		'초조',
+		'자해',
 		'트라우마',
 		'학교폭력',
 		'가정폭력'
