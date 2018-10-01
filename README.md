@@ -1,4 +1,4 @@
-# 28days
+# Coconut
 
 ## index.ts
 export const FirstRunPage = 'TabsPage'
