@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-/**
- * Generated class for the SplashPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -21,15 +15,12 @@ export class SplashPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad - SplashPage')
-    setTimeout(() => {
-    	this.storage.get('username').then((username) => {
-        if (username) {
-          this.navCtrl.push('TabsPage');
-        } else {
-          this.navCtrl.setRoot('IntroPage');
-        }
-      });
-		}, 2000);
-  }
 
+    const user = firebase.auth().currentUser;
+    if (user) {
+      this.navCtrl.setRoot('HomePage');
+    } else {
+      this.navCtrl.setRoot('TutorialPage');
+    }
+  }
 }

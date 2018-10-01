@@ -22,29 +22,32 @@
   <ion-toolbar no-border>
     <ion-searchbar (ionInput)="searchByText($event)" placeholder="검색"></ion-searchbar>
   </ion-toolbar>
-
+  <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
+      <ion-segment-button value="center">
+        상담센터
+      </ion-segment-button>
+      <ion-segment-button value="psychiatric">
+        정신과
+      </ion-segment-button>
+    </ion-segment>
 </ion-header>
 
 <ion-content no-border>
   <!-- Segment in content -->
-  <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
-    <ion-segment-button value="center">
-      상담센터
-    </ion-segment-button>
-    <ion-segment-button value="psychiatric">
-      정신과
-    </ion-segment-button>
-  </ion-segment>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+ 
 
 
   <div #map id="map"></div>
-  <!-- <ion-spinner ios></ion-spinner> -->
 
   <ion-card class="card-page" *ngFor="let place of places" (click)="placeDetail(place)">
+
     <ion-item class="card-item">
       <ion-avatar item-start>
         <div class="container">
-          <img id="main-img" src="{{place.image}}" (Error)="this.src='assets/imgs/hospital-default1.svg';">
+          <img id="main-img" src="{{place.image}}" (Error)="this.src='/assets/imgs/hospital-default1.svg';">
         </div>
       </ion-avatar>
 

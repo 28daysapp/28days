@@ -99,7 +99,8 @@ export class HomePage {
           });
         } else {
           this.loading.dismiss();
-          this.navCtrl.push('SignupPage');
+
+          this.navCtrl.push('TutorialPage');
           // cache not found
           // get username which is typed by user in Intro
           // this.storage.get('username').then((username) => {
