@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController, AlertController, App, LoadingCmp, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, AlertController, App, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
@@ -61,9 +61,14 @@ export class HospitalcenterPage {
       this.menu.enable(true, 'loggedOutMenu');
       this.menu.enable(false, 'loggedInMenu');
     }
-
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
     this.loadMap();
+    this.loading.dismiss();
+
   }
+
+  
 
   loadMap() {
     // this.geolocatio이 안돼서 임의로 기본 위치는 서울

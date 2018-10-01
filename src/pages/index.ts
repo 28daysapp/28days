@@ -5,7 +5,7 @@ export const SignUpPage = 'SignupPage';
 // Change this if not using tabs
 export const MainPage = 'TabsPage';
 
-// The initial root pages for our tabs (remove if not using tabs)
+// The initial root pages for tabs
 export const Tab1Root = 'HomePage';
 export const Tab2Root = 'HospitalcenterPage';
 export const Tab3Root = 'ChatsPage';
