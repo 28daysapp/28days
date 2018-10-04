@@ -76,12 +76,6 @@ $segment-button-ios-text-color: color($colors, black);
 
 $tabs-ios-tab-padding-top: 9px;
 
-// $card-ios-margin-left: 0;
-// $card-ios-margin-right: 0;
-// $card-ios-padding-left: 0;
-// $card-ios-padding-media-bottom:	0;	
-// $card-ios-padding-media-top: 0;
-// $card-ios-padding-right: 0;
 
 // App Material Design Variables
 // --------------------------------------------------
@@ -132,34 +126,3 @@ $tabs-md-tab-padding-top: 9px;
 
 // Fonts
 // --------------------------------------------------
-
-// @import "roboto";
-// @import "noto-sans";
-/*
-@font-face {
-  font-family: "Modern Life";
-  font-style: normal;
-  font-weight: bold;
-  src: url("../assets/fonts/modernlife/TlabModernLifeB.ttf")
-}
-
-@font-face {
-  font-family: "Modern Life";
-  font-style: normal;
-  font-weight: lighter;
-  src: url("../assets/fonts/modernlife/TlabModernLifeL.ttf")
-}
-
-@font-face {
-  font-family: "Modern Life";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/modernlife/TlabModernLifeM.ttf")
-}
-
-$font-family-base: "Modern Life";
-
-h1, h2, h3, h4, h5, p, body, title, header, label, button, span, div, tab-button, ion-tab, ion-card, ion-title, toolbar-title, searchbar-input {
-  font-family: "Modern Life" !important;
-  font-weight: normal !important;
-}*/
