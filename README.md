@@ -2,7 +2,7 @@
 
 ## index.ts
 export const FirstRunPage = 'TabsPage'
-현재 시작 로딩 페이지를 메인화면으로 전환해놓음. TabsPage 대신 SplashPage로 바꾸면 처음 Intro 챗봇과 대화하는 페이지 로딩됨.
+현재 시작 로딩 페이지를 메인화면으로 전환해놓음. TabsPage 대신 SplashPage로 바꾸면 현재는 앱 튜토리얼 진행 후 로그인 페이지 팝업
 
 ## onoffline
 1:1 아이콘을 누르면 온라인과 오프라인 중 선택할 수 있다
