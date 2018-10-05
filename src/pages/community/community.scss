@@ -7,14 +7,19 @@
 	
 	.community-card {
 		padding: 1rem 0;
+		width: 30%;
+		height: auto;
 		display: block;
 		text-align: center
 	}
 
 	.image {
 		margin-bottom: 1rem;
+		height: 10rem;
 
-		img { 
+		img {
+			width: 10rem;
+			height: 10rem;
 			display: flex;
 			border-radius: 50%;
 		}

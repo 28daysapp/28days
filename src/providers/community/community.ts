@@ -2,16 +2,15 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { MyProvider } from '../../providers/my/my'
 
-/*
-  Generated class for the CommunityProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class CommunityProvider {
 
-	firecommunity = firebase.database().ref('/community');
+	fireCommunityList = firebase.database().ref('communityList');
+	
+	
+	fireCommunity = firebase.database().ref('/community');
+
+
 	firemypost = firebase.database().ref('/my/post');
 	firelike = firebase.database().ref('/like');
 	firestore = firebase.storage();
@@ -19,14 +18,7 @@ export class CommunityProvider {
 	firereport = firebase.database().ref('/report');
 	firetag = firebase.database().ref('/tag');
 	user = firebase.database().ref('/users');
-	taglist = [
-		'우울증',
-		'불안',
-		'자해',
-		'트라우마',
-		'학교폭력',
-		'가정폭력'
-	];
+
 	posts;
 	post;
 	report;
@@ -43,19 +35,49 @@ export class CommunityProvider {
 
 	}
 
-	/* community provider initializer */
-	initializecom(order) {
-		//this.title = this.titlelist[order];
-		//this.namecom = this.namecomlist[order];
-		//this.posts = this.posts;
-		//this.number = this.numberlist[order];
+	readCommunityList() {
+		var promise = new Promise((resolve, reject) => {
+			this.fireCommunityList.once('value').then((snapshot) => {
+				const communities = [];
+				snapshot.forEach((childSnapshot) => {
+					const community = childSnapshot.val();
+
+					communities.push(community);
+				});
+
+				console.log("Provider Read Community List: " + JSON.stringify(communities));
+				resolve(communities);
+			});
+		});
+		return promise
 	}
+
+	createCommunity(communityName, communityDescription) {
+		var promise = new Promise((resolve, reject) => {
+			const timeCreated = firebase.database.ServerValue.TIMESTAMP;
+			const newMember = 1;
+
+			firebase.database().ref(`/communityList/${communityName}`).set({
+				communityName: communityName,
+				communityDescription: communityDescription,
+				timeCreated: timeCreated,
+				members: newMember
+			});
+		});
+		return promise
+	}
+	
+
+
+
+
+
 
 	/* upload post to firebase */
 	uploadPost(title, txt, dataURL, tag1, anonymity) { // 게시글 firebase에 업로드
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			var newPostRef = this.firecommunity.push();
+			var newPostRef = this.fireCommunity.push();
 			var time = firebase.database.ServerValue.TIMESTAMP;
 			var postId = newPostRef.key;
 			if (anonymity) { // 익명 체크의 경우
@@ -241,25 +263,6 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	/* 프로필 사진 가져오려다 망함
-	photo(){
-		var uid = firebase.auth().currentUser.uid;
-		var promise = new Promise((resolve) => {
-			this.user.child('uid').equalTo(uid).once("value").then((snapshot) => {
-				var myphoto = [];
-				snapshot.forEach((childSnapshot) => {
-					var photo = childSnapshot.val();
-
-					myphoto.push(photo);
-				});
-				myphoto.reverse();
-				resolve(myphoto);
-			});
-		});
-		return promise;
-	}
-	*/
-
 	mosttag() { // 가장 많은 태그 6개
 		this.check = 6;
 		var promise = new Promise((resolve) => {
@@ -315,7 +318,7 @@ export class CommunityProvider {
 
 	updatePost(title, text) { // 게시글 수정
 		var promise = new Promise((resolve) => {
-			this.firecommunity.child(`${this.post.postid}`).update({
+			this.fireCommunity.child(`${this.post.postid}`).update({
 				posttitle: title,
 				text: text,
 			}).then(() => {
@@ -329,7 +332,7 @@ export class CommunityProvider {
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firecomment.child(`${post.postid}`).remove();
-			this.firecommunity.child(`${post.postid}`).remove().then(() => {
+			this.fireCommunity.child(`${post.postid}`).remove().then(() => {
 				this.firereport.child(`${uid}`).remove().then(() => {
 					this.firemypost.child(`${uid}/${post.postid}`).remove().then(() => {
 						if (post.tag1 != '') {
@@ -408,7 +411,7 @@ export class CommunityProvider {
 		this.limit = 10;
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			this.firecommunity.orderByChild('timestamp').limitToLast(this.limit).once("value").then((snapshot) => {
+			this.fireCommunity.orderByChild('timestamp').limitToLast(this.limit).once("value").then((snapshot) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
 					var likepostid = [];
 					likesnapshot.forEach((childSnapshot) => {
@@ -439,7 +442,7 @@ export class CommunityProvider {
 		this.limit += 10; // or however many more you want to load
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			this.firecommunity.orderByChild('timestamp').limitToLast(this.limit).once("value").then((snapshot) => {
+			this.fireCommunity.orderByChild('timestamp').limitToLast(this.limit).once("value").then((snapshot) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
 					var likepostid = [];
 					likesnapshot.forEach((childSnapshot) => {
@@ -472,7 +475,7 @@ export class CommunityProvider {
 		this.cnt = 10;
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			this.firecommunity.orderByChild('tag1').equalTo(tag).limitToLast(this.cnt).once("value").then((snapshot1) => {
+			this.fireCommunity.orderByChild('tag1').equalTo(tag).limitToLast(this.cnt).once("value").then((snapshot1) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
 
 					var likepostid = [];
@@ -506,7 +509,7 @@ export class CommunityProvider {
 		this.cnt += 10; // or however many more you want to load
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			this.firecommunity.orderByChild('tag1').equalTo(tag).limitToLast(this.cnt).once("value").then((snapshot1) => {
+			this.fireCommunity.orderByChild('tag1').equalTo(tag).limitToLast(this.cnt).once("value").then((snapshot1) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
 
 					var likepostid = [];
@@ -540,7 +543,7 @@ export class CommunityProvider {
 		this.cnt = 10;
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			this.firecommunity.orderByChild('uid').equalTo(uid).limitToLast(this.cnt).once("value").then((snapshot1) => {
+			this.fireCommunity.orderByChild('uid').equalTo(uid).limitToLast(this.cnt).once("value").then((snapshot1) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
 
 					var likepostid = [];
@@ -574,7 +577,7 @@ export class CommunityProvider {
 		this.cnt += 10; // or however many more you want to load
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
-			this.firecommunity.orderByChild('uid').equalTo(uid).limitToLast(this.cnt).once("value").then((snapshot1) => {
+			this.fireCommunity.orderByChild('uid').equalTo(uid).limitToLast(this.cnt).once("value").then((snapshot1) => {
 				this.firelike.child(`${uid}`).once("value").then((likesnapshot) => {
 
 					var likepostid = [];
@@ -611,7 +614,7 @@ export class CommunityProvider {
 			this.firelike.child(`${uid}/${post.postid}`).set({
 				timestamp: firebase.database.ServerValue.TIMESTAMP
 			}).then(() => {
-				this.firecommunity.child(`${post.postid}`).update({
+				this.fireCommunity.child(`${post.postid}`).update({
 					like: post.like + 1
 				}).then(() => {
 					resolve(true);
@@ -626,7 +629,7 @@ export class CommunityProvider {
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.firelike.child(`${uid}/${post.postid}`).remove().then(() => {
-				this.firecommunity.child(`${post.postid}`).update({
+				this.fireCommunity.child(`${post.postid}`).update({
 					like: post.like - 1
 				}).then(() => {
 					resolve(true);
@@ -639,8 +642,8 @@ export class CommunityProvider {
 	/* when user write comment, add 1 to the number of comments of a post */
 	addComment(post) { // 댓글 + 1
 		var promise = new Promise((resolve) => {
-			this.firecommunity.child(`${post.postid}`).once("value").then((snapshot) => {
-				this.firecommunity.child(`${post.postid}`).update({
+			this.fireCommunity.child(`${post.postid}`).once("value").then((snapshot) => {
+				this.fireCommunity.child(`${post.postid}`).update({
 					comment: snapshot.val().comment + 1
 				}).then(() => {
 					resolve(true);
@@ -652,8 +655,8 @@ export class CommunityProvider {
 
 	deleteComment(post) { // 댓글 - 1
 		var promise = new Promise((resolve) => {
-			this.firecommunity.child(`${post.postid}`).once("value").then((snapshot) => {
-				this.firecommunity.child(`${post.postid}`).update({
+			this.fireCommunity.child(`${post.postid}`).once("value").then((snapshot) => {
+				this.fireCommunity.child(`${post.postid}`).update({
 					comment: snapshot.val().comment - 1
 				}).then(() => {
 					resolve(true);

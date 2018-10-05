@@ -21,62 +21,19 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ul class="community-container">
-    <li class="community-card">
+  <ion-item class="community-container" *ngFor="let community of communities">
+    <div class="community-card">
       <div class="image">
-        <img src="http://lorempixel.com/100/100/city" alt="..." />
+        <img src="assets/coconut.png" alt="..." />
       </div>
-      <div class="community-name">우울증</div>
+      <div class="community-name">{{ community.communityName }}</div>
       <div class="last-post-time">3시간 전</div>
-      <ion-badge item-end>260명</ion-badge>
+      <ion-badge item-end>{{ community.members }}명</ion-badge>
+    </div>
 
-    </li>
-    <li class="community-card">
-      <div class="image">
-        <img src="http://lorempixel.com/100/100/nature" alt="..." />
-      </div>
-      <div class="community-name">우울증</div>
-      <div class="last-post-time">3시간 전</div>
-      <ion-badge item-end>260명</ion-badge>
+  </ion-item>
 
-    </li>
-    <li class="community-card">
-      <div class="image">
-        <img src="http://lorempixel.com/100/100/abstract" alt="..." />
-      </div>
-      <div class="community-name">우울증</div>
-      <div class="last-post-time">3시간 전</div>
-      <ion-badge item-end>260명</ion-badge>
-
-    </li>
-    <li class="community-card">
-      <div class="image">
-        <img src="http://lorempixel.com/100/100/cats" alt="..." />
-      </div>
-      <div class="community-name">우울증</div>
-      <div class="last-post-time">3시간 전</div>
-      <ion-badge item-end>260명</ion-badge>
-
-    </li>
-    <li class="community-card">
-      <div class="image">
-        <img src="http://lorempixel.com/100/100/people" alt="..." />
-      </div>
-      <div class="community-name">우울증</div>
-      <div class="last-post-time">3시간 전</div>
-      <ion-badge item-end>260명</ion-badge>
-
-    </li>
-    <li class="community-card">
-      <div class="image">
-        <img src="http://lorempixel.com/100/100/business" alt="..." />
-      </div>
-      <div class="community-name">우울증</div>
-      <div class="last-post-time">3시간 전</div>
-      <ion-badge item-end>260명</ion-badge>
-
-    </li>
-  </ul>
+  <button ion-button (click)="addCommunity()">Add Community</button>
 
 
 </ion-content>
