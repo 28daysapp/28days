@@ -9,8 +9,6 @@ export class CommunityProvider {
 	
 	
 	fireCommunity = firebase.database().ref('/community');
-
-
 	firemypost = firebase.database().ref('/my/post');
 	firelike = firebase.database().ref('/like');
 	firestore = firebase.storage();
@@ -34,6 +32,8 @@ export class CommunityProvider {
 	constructor(public my: MyProvider) {
 
 	}
+
+	//--------------------------------------------------------------------------------
 
 	readCommunityList() {
 		var promise = new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ export class CommunityProvider {
 	}
 	
 
-
+	//--------------------------------------------------------------------------------
 
 
 

@@ -16,11 +16,6 @@ export class CommunityPage {
   communities: any;
 
 
-
-
-
-
-
   fireusers = firebase.database().ref('/users');
   firecommunity = firebase.database().ref('/community');
   firereport = firebase.database().ref('/report');
@@ -49,8 +44,9 @@ export class CommunityPage {
 
   ionViewWillEnter() {
 
+    //--------------------------------------------------------------------------------
     this.getCommunityList() 
-
+    //--------------------------------------------------------------------------------
 
     this.community.morepost = 0;
     this.tagcntlimit = 0;
@@ -81,7 +77,7 @@ export class CommunityPage {
     this.loading.dismiss();
   }
 
-
+  //--------------------------------------------------------------------------------
 
   getCommunityList() {
     this.community.readCommunityList().then((communities) => {
@@ -90,17 +86,21 @@ export class CommunityPage {
     })
   }
 
+  toCommunityPosts(community) {
+    this.navCtrl.push('CommunityPostsPage', {
+      community: community
+    });
+  }
+
   addCommunity() {
-    const communityName = "LGBTQ+"
-		const communityDescription = "이 그룹은 LGBTQIA 커뮤니티입니다. 서로의 스토리를 안전하게 나눌 수 있는 공간입니다."
+    const communityName = "PTSD"
+		const communityDescription = "이 그룹은 외상후 스트레스 장애 커뮤니티입니다. 같이 이겨내봐요."
     this.community.createCommunity(communityName, communityDescription);
   }
 
 
 
-
-
-
+  //--------------------------------------------------------------------------------
 
   comment(post) { // 게시글의 제목을 누르면 게시글로 들어감 -- 추후 이름 수정 요망
     this.community.post = post;
