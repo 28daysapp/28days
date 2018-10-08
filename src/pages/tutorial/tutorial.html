@@ -1,20 +1,53 @@
 <ion-content>
-  <ion-slides class="tutorial" (ionSlideDidChange)="slideChanged()">
-    <ion-slide >
-      <img src="assets/tutorial1.png">
+  <ion-slides pager class="tutorial" (ionSlideDidChange)="slideChanged()">
+    <ion-slide class="tutorialMainPage tutorialFont">
+      <div class="tutorialHeaderContainer">
+        <p> 
+          왜 <span class="logoContainer"><img class="logoImage"src="assets/logo_w.png"></span> 이죠?
+          <br><br>
+        </p>
+        <p class="secondaryLine_1">나만 이런가? 나만 힘든건가?</p>
+        <p class="secondaryLine_2"><br>COCONUT은 영어 <b>CO</b>와 <b>함께</b>라는 뜻과<br><b>NUT(s)</b>의 <b>미쳤다</b>라는 뜻을 합친 단어입니다.</p>
+      </div>
+      <div class="tutorialFooterContainer">
+        <p><span>우리는</span></p>
+        <p><span>모두</span> 미쳤기 때문에</p>
+        <p><span>정상</span>입니다</p>
+      </div>
     </ion-slide>
-    <ion-slide >
-        <img src="assets/tutorial2.png">
+    <ion-slide class="tutorialPages  tutorialFont">
+      <div class="tutorialHeaderContainer">
+        <p>나에게 맞는 병원/센터를 찾고,</p>
+        <p><b>소비자로서 후기를 공유해주세요</b></p>
+      </div>
+    
+      <div class="tutorialMiddleContainer">
+        <p>당신의 한마디가 누군가에게는 큰 도움이 됩니다</p>
+      </div>
+
+      <img class="phoneImage" src="assets/tutorialPhone-1.png">
     </ion-slide>
-    <ion-slide >
-        <img src="assets/tutorial3.png">
+    <ion-slide class="tutorialPages tutorialFont">
+      <div class="tutorialHeaderContainer">
+        <p>나와 <b>같은 아픔</b>을 겪은</p>
+        <p>서포터와 대화해보세요</p>
+      </div>
+
+      <div class="tutorialMiddleContainer">
+        <p>코코넛 서포터와 함께라면<br>당신은 혼자가 아닙니다!</p>
+      </div>
+      <img class="phoneImage" src="assets/tutorialPhone-2.png">
     </ion-slide>
-    <ion-slide >
-       
-            <img src="assets/tutorial4.png">
-      </ion-slide>
-      <ion-slide >
-       
+    <ion-slide class="tutorialPages tutorialFont">
+        <div class="tutorialHeaderContainer">
+          <p>사람들과 <b>이야기</b>를 나누고</p>
+          <p>정보를 공유해주세요</p>
+        </div>
+  
+        <div class="tutorialMiddleContainer">
+          <p>#공동체 #같은_아픔 #소통 #공유 #공감</p>
+        </div>
+        <img class="phoneImage" src="assets/tutorialPhone-3.png">
     </ion-slide>
   </ion-slides>
 </ion-content>
