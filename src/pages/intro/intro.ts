@@ -72,6 +72,11 @@ export class IntroPage implements AfterViewChecked {
   		}];
   }
 
+
+  skipTutorial() {
+	this.navCtrl.push('TabsPage');
+  }
+
   createmsg(showimage, gogo, message) {
   	return {
   		showimage: showimage,
