@@ -6,8 +6,8 @@ export const FirstRunPage = 'TutorialPage';
 export const MainPage = 'TabsPage';
 
 // The initial root pages for tabs
-export const Tab1Root = 'HomePage';
-export const Tab2Root = 'HospitalcenterPage';
+export const Tab1Root = 'CommunityPage';
+export const Tab2Root = 'OnofflinePage';
 export const Tab3Root = 'ChatsPage';
-export const Tab4Root = 'OnofflinePage';
-export const Tab5Root = 'CommunityPage';
+export const Tab4Root = 'HospitalcenterPage';
+export const Tab5Root = 'HomePage';
