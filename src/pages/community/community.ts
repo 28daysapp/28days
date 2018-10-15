@@ -4,12 +4,6 @@ import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
 import { MenuController } from 'ionic-angular';
-/**
- * Generated class for the CommunitygroupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,6 +12,10 @@ import { MenuController } from 'ionic-angular';
 })
 export class CommunityPage {
   @ViewChild(Content) content: Content;
+  
+  communities: any;
+
+
   fireusers = firebase.database().ref('/users');
   firecommunity = firebase.database().ref('/community');
   firereport = firebase.database().ref('/report');
@@ -45,11 +43,17 @@ export class CommunityPage {
 
 
   ionViewWillEnter() {
+
+    //--------------------------------------------------------------------------------
+    this.getCommunityList() 
+    //--------------------------------------------------------------------------------
+
     this.community.morepost = 0;
     this.tagcntlimit = 0;
     this.value1 = true;
     this.value2 = false;
     this.user = firebase.auth().currentUser;
+
     if (this.user) {
       this.menu.enable(true, 'loggedInMenu');
       this.menu.enable(false, 'loggedOutMenu');
@@ -58,10 +62,12 @@ export class CommunityPage {
       this.menu.enable(true, 'loggedOutMenu');
       this.menu.enable(false, 'loggedInMenu');
     }
+
     this.community.mosttag().then((mosttag1) => {
       console.log(mosttag1);
       this.mosttag1 = mosttag1;
     });
+
     this.loading = this.loadingCtrl.create();
     this.loading.present();
     this.community.getallposts().then((posts) => {
@@ -70,6 +76,31 @@ export class CommunityPage {
     });
     this.loading.dismiss();
   }
+
+  //--------------------------------------------------------------------------------
+
+  getCommunityList() {
+    this.community.readCommunityList().then((communities) => {
+      this.communities = communities;
+      console.log("Community List: " + JSON.stringify(this.communities));
+    })
+  }
+
+  toCommunityPosts(community) {
+    this.navCtrl.push('CommunityPostsPage', {
+      community: community
+    });
+  }
+
+  addCommunity() {
+    const communityName = "PTSD"
+		const communityDescription = "이 그룹은 외상후 스트레스 장애 커뮤니티입니다. 같이 이겨내봐요."
+    this.community.createCommunity(communityName, communityDescription);
+  }
+
+
+
+  //--------------------------------------------------------------------------------
 
   comment(post) { // 게시글의 제목을 누르면 게시글로 들어감 -- 추후 이름 수정 요망
     this.community.post = post;
@@ -156,151 +187,6 @@ export class CommunityPage {
       this.mosttag1 = mosttag1;
     });
   }
-
-  /* 삭제 및 신고 여기선 필요없음 지워도 무방
-  postdelete(post){
-    let alert = this.alertCtrl.create({
-      title: '경고',
-      message: '정말 삭제하시겠습니까?',
-      buttons: [
-        {
-          text: '취소',
-          role: 'cancel'
-        },
-        {
-          text: '확인',
-          handler: () =>{
-            this.community.postdelete(post);
-
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  updatepost(post){
-    this.community.post = post;
-    this.navCtrl.push('CommunityfixPage', {
-      
-    });
-  }
-
-  usercorrect(post){
-    var correct = false;
-    if(firebase.auth().currentUser.uid == post.uid){
-      correct = true;
-    }
-    return correct;
-  }
-
-  reportuser(post){
-    var correct = true;
-    if(firebase.auth().currentUser.uid == post.uid){
-      correct = false;
-    }
-    return correct;
-  }
-
-  reportpost(post){
-    let alert = this.alertCtrl.create({
-      title: '',
-      message: '신고항목',
-      buttons: [
-        {
-          text: '비방/욕설',
-          handler: () => {
-              this.community.reportpost(post);
-              let alert = this.alertCtrl.create({
-                title: '신고항목',
-                message: '정상적으로 신고가 접수되었습니다',
-                buttons: [
-                  {
-                    text: '확인',
-                    role: 'cancel'
-                  }
-                ]
-              })
-              alert.present();
-          }
-        },
-        {
-          text: '게시글/댓글 도배',
-          handler: () => {
-              this.community.reportpost(post);
-              let alert = this.alertCtrl.create({
-                title: '신고항목',
-                message: '정상적으로 신고가 접수되었습니다',
-                buttons: [
-                  {
-                    text: '확인',
-                    role: 'cancel'
-                  }
-                ]
-              })
-              alert.present();
-          }
-        },
-        {
-          text: '불법성 광고/홍보',
-          handler: () => {
-              this.community.reportpost(post);
-              let alert = this.alertCtrl.create({
-                title: '신고항목',
-                message: '정상적으로 신고가 접수되었습니다',
-                buttons: [
-                  {
-                    text: '확인',
-                    role: 'cancel'
-                  }
-                ]
-              })
-              alert.present();
-          }
-        },
-        {
-          text: '개인정보/저작권 침해',
-          handler: () => {
-              this.community.reportpost(post);
-              let alert = this.alertCtrl.create({
-                title: '신고항목',
-                message: '정상적으로 신고가 접수되었습니다',
-                buttons: [
-                  {
-                    text: '확인',
-                    role: 'cancel'
-                  }
-                ]
-              })
-              alert.present();
-          }
-        },
-        {
-          text: '기타',
-          handler: () => {
-              this.community.reportpost(post);
-              let alert = this.alertCtrl.create({
-                title: '신고항목',
-                message: '정상적으로 신고가 접수되었습니다',
-                buttons: [
-                  {
-                    text: '확인',
-                    role: 'cancel'
-                  }
-                ]
-              })
-              alert.present();
-          }
-        },
-        {
-          text: '취소',
-          role: 'cancel'
-        }
-      ]
-    });
-    alert.present();
-  }
-  */
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
