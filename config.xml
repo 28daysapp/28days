@@ -3,7 +3,7 @@
     <name>Coconut</name>
     <description>서로의 마음을 돌봐주는 앱.</description>
     <author email="bhlee@mentalhealthkorea.org" href="https://www.mentalhealthkorea.org/">코코넛</author>
-    <content original-src="index.html" src="http://137.68.248.20:8100" />
+    <content original-src="index.html" src="http://137.68.247.254:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -134,6 +134,7 @@
     <allow-navigation href="http://137.68.248.20:8100" sessionid="5859b138" />
     <allow-navigation href="http://137.68.249.34:8100" sessionid="67887f9e" />
     <allow-navigation href="http://192.168.35.51:8100" sessionid="fc12cd45" />
+    <allow-navigation href="http://137.68.247.254:8100" sessionid="0d00c399" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>
