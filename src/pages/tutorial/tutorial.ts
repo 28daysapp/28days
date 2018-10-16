@@ -23,14 +23,14 @@ export class TutorialPage {
     let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is', currentIndex);
   
-    // if (currentIndex == 4) {
+    if (currentIndex == 4) {
     //   let options: NativeTransitionOptions = {
     //     direction: 'left',
     //     duration: 3000,
     //     slowdownfactor: -5,
     //   };
     //   this.nativePageTransitions.slide(options);
-    //   this.navCtrl.push('SignupPage');
-    // }
+      this.navCtrl.push('IntroPage');
+    }
   }
 }
