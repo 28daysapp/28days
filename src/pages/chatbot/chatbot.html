@@ -1,7 +1,6 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>28DAYS – Intro</ion-title>
+    <ion-title>코코넛</ion-title>
     <ion-buttons right>
       <button ion-button (click)="skipTutorial()">
         건너뛰기
@@ -11,16 +10,19 @@
 </ion-header>
 
 
-<ion-content #content>
+<ion-content #content class="bg">
 
-  <ul>
-    <li *ngFor="let msg of chatmessages">
-    	<div class="clearfix">
-		    <img *ngIf="msg.showimage" src="assets/gogo.png">
-	    	<p class="bubble buddy" [ngClass]="{setblack: msg.setblack}" *ngIf="msg.gogo">{{msg.message}}</p>
-	    	<p class="bubble me" *ngIf="!msg.gogo">{{msg.message}}</p>
-	    </div>
-  	</li>
+  <ul class="chat">
+    <li *ngFor="let msg of chatMessages">
+      <div>
+        <img *ngIf="msg.showimage" src="assets/coconut.png">
+        <p class="bubble buddy" *ngIf="msg.gogo">{{msg.message}}</p>
+      </div>
+
+      <div class="mymsg">
+        <p class="bubble me" *ngIf="!msg.gogo">{{msg.message}}</p>
+      </div>
+    </li>
   </ul>
 
   <div class="modal" *ngIf="showmodal">
