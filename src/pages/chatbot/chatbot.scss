@@ -27,7 +27,7 @@ page-chatbot {
         max-width: 200px;
     }
     .buddy {
-      left: 50px;
+        left: 50px;
         position: relative;
         background-color: color($colors, apricot2, base);
         color: color($colors, gray, base);
@@ -46,6 +46,10 @@ page-chatbot {
     .mymsg {
         float: right;
     }
+    ion-footer {
+        background-color: white;
+        padding: 3px 8px;
+    }
     .btn1 {
         padding: 5px 15px;
     }
@@ -59,16 +63,15 @@ page-chatbot {
         background-color: color($colors, primary, base);
     }
     .input1 {
-        background-color: #e8ede8;
+        background-color: white;
         padding: 3px 8px;
     }
     .input1 .footerform {
         background-color: white;
-        border: 1px solid #d0d0d0;
-        border-radius: 15px;
-        padding: 2px 2px 2px 10px !important;
+        border-top: solid 2px white;
+        padding: 1.5rem;
         width: 100%;
-        display: table;
+        display: flex;
     }
     .input1 .footerform input {
         border-style: none;
