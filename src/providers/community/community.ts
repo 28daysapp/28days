@@ -5,7 +5,9 @@ import { MyProvider } from '../../providers/my/my'
 @Injectable()
 export class CommunityProvider {
 
+	// Firebase Real-Time Database references
 	fireCommunityList = firebase.database().ref('communityList');
+	fireCommunityPost = firebase.database().ref('communityPost');
 	
 	
 	fireCommunity = firebase.database().ref('/community');
@@ -35,25 +37,8 @@ export class CommunityProvider {
 
 	//--------------------------------------------------------------------------------
 
-	readCommunityList() {
-		var promise = new Promise((resolve, reject) => {
-			this.fireCommunityList.once('value').then((snapshot) => {
-				const communities = [];
-				snapshot.forEach((childSnapshot) => {
-					const community = childSnapshot.val();
-
-					communities.push(community);
-				});
-
-				console.log("Provider Read Community List: " + JSON.stringify(communities));
-				resolve(communities);
-			});
-		});
-		return promise
-	}
-
 	createCommunity(communityName, communityDescription) {
-		var promise = new Promise((resolve, reject) => {
+		const promise = new Promise((resolve, reject) => {
 			const timeCreated = firebase.database.ServerValue.TIMESTAMP;
 			const newMember = 1;
 
@@ -66,6 +51,49 @@ export class CommunityProvider {
 		});
 		return promise
 	}
+
+	readCommunityList() {
+		const promise = new Promise((resolve, reject) => {
+			this.fireCommunityList.once('value').then((snapshot) => {
+				const communities = [];
+				snapshot.forEach((childSnapshot) => {
+					const community = childSnapshot.val();
+					communities.push(community);
+				});
+				resolve(communities);
+			});
+		});
+		return promise
+	}
+
+
+	createCommunityPost(communityName, ) {
+		const promise = new Promise((resolve, reject) => {
+			const timeCreated = firebase.database.ServerValue.TIMESTAMP;
+			
+
+			firebase.database().ref(`/communityPost/${communityName}`).push({
+
+			});
+		});
+		return promise
+	}
+
+	readCommunityPosts() {
+		// var promise = new Promise((resolve, reject) => {
+		// 	this.fireCommunityPost.once('value').then((snapshot) => {
+		// 		const posts = [];
+		// 		snapshot.forEach((childSnapshot) => {
+		// 			const post = childSnapshot.val();
+		// 			posts.push(post);
+		// 		});
+		// 		resolve(posts);
+		// 	});
+		// });
+		// return promise
+	}
+
+
 	
 
 	//--------------------------------------------------------------------------------

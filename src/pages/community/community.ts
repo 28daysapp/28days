@@ -84,13 +84,12 @@ export class CommunityPage {
   getCommunityList() {
     this.community.readCommunityList().then((communities) => {
       this.communities = communities;
-      console.log("Community List: " + JSON.stringify(this.communities));
     })
   }
 
   toCommunityPosts(community) {
     this.navCtrl.push('CommunityPostsPage', {
-      community: community
+      communityInfo: community
     });
   }
 
