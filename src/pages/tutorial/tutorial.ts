@@ -30,7 +30,7 @@ export class TutorialPage {
     //     slowdownfactor: -5,
     //   };
     //   this.nativePageTransitions.slide(options);
-      this.navCtrl.push('IntroPage');
+      this.navCtrl.push('ChatbotPage');
     }
   }
 }

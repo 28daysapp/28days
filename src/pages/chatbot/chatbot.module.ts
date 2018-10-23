@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { IntroPage } from './intro';
+import { ChatbotPage } from './chatbot';
 
 @NgModule({
   declarations: [
-    IntroPage,
+    ChatbotPage,
   ],
   imports: [
-    IonicPageModule.forChild(IntroPage),
+    IonicPageModule.forChild(ChatbotPage),
   ],
 })
-export class IntroPageModule {}
+export class ChatbotPageModule {}
