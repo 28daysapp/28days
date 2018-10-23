@@ -6,6 +6,8 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { Storage } from '@ionic/storage';
 
+// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -22,12 +24,60 @@ export class LoginPage {
   loginForm: FormGroup;
   loading: Loading;
   constructor(public navCtrl: NavController, public auth: AuthProvider, public formBuilder: FormBuilder,
-    public alertCtrl: AlertController, public loadingCtrl: LoadingController, public storage: Storage) {
+    public alertCtrl: AlertController, public loadingCtrl: LoadingController, public storage: Storage/* , private fb: Facebook */) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])]
     });
   }
+
+  /* ------- Facebook Login Function - Needs Check and Testing --------- */
+
+  // signinFacebook()
+  // {
+  //   // Login with permissions
+  //   this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
+  //   .then( (res: FacebookLoginResponse) => {
+      
+  //       console.log("Facebook Function Accessed!");
+
+  //       // The connection was successful
+  //       if(res.status == "connected") {
+  //           console.log("Facebook Login Connected!");
+            
+  //           // Get user ID and Token
+  //           var fb_id = res.authResponse.userID;
+  //           var fb_token = res.authResponse.accessToken;
+
+  //           console.log(fb_id, fb_token);
+
+  //           // Get user infos from the API
+  //           this.fb.api("/me?fields=name,gender,birthday,email", []).then((user) => {
+
+  //               // Get the connected user details
+  //               var gender    = user.gender;
+  //               var birthday  = user.birthday;
+  //               var name      = user.name;
+  //               var email     = user.email;
+
+  //               console.log("=== USER INFOS ===");
+  //               console.log("Gender : " + gender);
+  //               console.log("Birthday : " + birthday);
+  //               console.log("Name : " + name);
+  //               console.log("Email : " + email);
+
+  //               // => Open user session and redirect to the next page
+  //           });
+  //       } 
+  //       // An error occurred while loging-in
+  //       else {
+  //           console.log("An error occurred...");
+  //       }
+  //   })
+  //   .catch((e) => {
+  //       console.log('Error logging into Facebook', e);
+  //   });
+  // }
 
   signin() {
     if (!this.loginForm.valid){

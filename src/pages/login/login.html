@@ -1,28 +1,55 @@
 
-<ion-content class="cardsbg">
-  <span class="coconut" style="width: 100%; float: right;">
-    Coconut
-  </span>
+<ion-content no-bounce>
+  <div class="header-container">
+    <div>
+      <img class="logo-KR" src="assets/logo_loginKR.png">
+    </div>
+    <div>
+      <img class="logo-EN"src="assets/logo_loginEN.png">
+    </div>
+  </div>
+
   <form [formGroup]="loginForm" novalidate>
-    <span class="email_pwd">이메일 계정</span>
-    <ion-input class="email" formControlName="email" type="email"></ion-input>
-    <span class="email_pwd">비밀번호</span>
-    <ion-input formControlName="password" type="password" [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty" style="width: 100%;"></ion-input>
-    <p class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
-      8자리 이상, 숫자와 문자를 조합해주세요!
-    </p>
 
-    <button (click)="signin()" class="button">
-      로그인 하기
-    </button>
-    <button class="pwreset" (click)="passwordreset()">
-      비밀번호가 기억이 안 나세요?
-    </button>
-    <button (click)="signup()" class="button">
-      회원가입 하기
-    </button>
+    <div class="form-content">
+      <ion-item class="input-email">
+        <ion-icon item-start name="mail"></ion-icon>
+        <ion-input
+          formControlName="email"
+          type="email"
+          placeholder="이메일 계정">
+        </ion-input>
+      </ion-item>
+      <ion-item class="input-password">
+        <ion-icon item-start name="lock"></ion-icon>
+        <ion-input
+          formControlName="password"
+          type="password"
+          placeholder="비밀번호">
+        </ion-input>
+      </ion-item>
+    </div>
 
+    <div class="form-btn-container">
+      <div class="form-login-btn">
+        <button (click)="signin()">
+           로그인 하기
+        </button>
+      </div>
+      <div class="form-sns-btn">
+        <button>kakao-talk</button>
+        <button>facebook</button>
+      </div>
+    </div>
+
+    <div class="form-account-container">
+      <button class="form-account-btn btn-signup" (click)="signup()">
+       회원가입
+      </button>
+      <button class="form-account-btn btn-password" (click)="passwordreset()">
+        비밀번호 찾기
+      </button>
+    </div>
 
   </form>
-
 </ion-content>

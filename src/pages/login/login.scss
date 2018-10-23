@@ -1,123 +1,220 @@
 page-login {
+	$height-square-size: calc(100vh / 66);
+	$width-square-size: calc(100vw / 37);
 
-	.cardsbg {
-		background-color: #55b26e;
+	.item-ios.item-block .item-inner,  .item-md.item-block .item-inner{
+		border-bottom: 0px;
+		padding-right: 0px;
 	}
 
-	ion-card {
-		border-radius: 10px !important;
-		background-color: white !important;
-	}
 
-	ion-card-content {
-		border-radius: 10px;
-		padding: 0px !important;
+	ion-content {
+		overflow: hidden;
+	}
+	.text-input {
+		margin: 0;
+	}
+	.header-container {
+		padding-top: calc(#{$height-square-size} * 5);
+		padding-bottom: calc(#{$height-square-size} * 5);
+		border-bottom: 1px solid color($colors, primary);
+	}
+	.header-container div{
+		display: flex;
+		justify-content: center;
+		margin: $height-square-size;
+		
+	}
+	.logo-KR {
+		height: calc(#{$height-square-size} * 4);
+		width: calc(100%-(#{$width-square-size} * 22));
+	}
+	.logo-EN{
+		height: calc(#{$height-square-size} * 1.5);
+		width: calc(100%-(#{$width-square-size} * 26));
 	}
 
 	form {
-	padding: 15px;
-	padding-top: 55%;
-	width: 70%;
-	height: 19px;
-	font-family: AppleSDGothicNeo;
-	font-size: 16px;
-	font-weight: normal;
-	font-style: normal;
-	font-stretch: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	color: #ffffff;
-	margin-left: auto;
-	margin-right: auto;
-	display: block !important;
-  }
-
-	ion-input {
-		border-bottom: solid 1px #ffffff;
-	}
-
-	.email {
-		margin-bottom: 15px;
-		width: 100%;
-	}
-
-	.invalid {
-    	border-bottom: 1px solid color($colors, danger, base);
-  	}
-
-	.error-message {
-		margin: 3px 0px 0px;
-		color: color($colors, gray, base) !important;
-		font-size: 80%;
-	}
-
-	.pwreset {
-		margin: 1rem auto;
-		font-size: 13px;
-		background-color: transparent;
-		color: #ffffff;
 		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		align-items: center;
+		height: 70vh;
+		// Form Input Container 스타일
+		.form-content {
+			align-items: center;
+			height: calc(#{$height-square-size} * 19);
+			width: calc(100% - (#{$width-square-size} * 6));
+			ion-item {
+				border: 1.1px solid color($colors, primary);
+				border-radius: 16px;
+				height: calc(#{$height-square-size} * 6);
+				ion-icon {
+					color: color($colors, primary_light);
+				}
+				::placeholder {
+					color: color($colors, primary_light);
+				}
+				ion-input:focus {
+					border-color: black;
+				}
+			}
+			.input-email {
+				margin-top: calc(#{$height-square-size} * 3);
+				margin-bottom: $height-square-size;
+			}
+			.input-password {
+				margin-bottom: calc(#{$height-square-size} * 3);	
+			}
+			
+		}
+		// 로그인 /SNS 버튼 스타일링
+		.form-btn-container {
+			flex: 1;
+			width: calc(100% - (#{$width-square-size} * 6));
+			.form-login-btn {
+				margin-bottom: calc(#{$height-square-size} * 5);
+				button {
+					padding: 0;
+					height: calc(#{$height-square-size} * 6);
+					width: 100%;
+					background-color: color($colors, primary);
+					color: color($colors, white);
+					font-weight: bold;
+					font-size: 16px;
+					border-radius: 16px;
+				}
+			}
+			.form-sns-btn {
+				display: flex;
+				margin-bottom: calc(#{$height-square-size} * 6);
+				justify-content: space-evenly;
+				button {
+					background-color: gray;
+					padding: 0;
+					height: calc(#{$height-square-size} * 3);
+					width: calc(#{$width-square-size} * 15);
+				}
+			}
+		}
+		// 회원가입 / 계정 찾기 관련 버튼 스타일링
+		.form-account-container {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+			border-top: 1px solid color($colors, primary);
+			width: 100%;
+			height: 10vh;
+			.form-account-btn {
+				padding: 0 $width-square-size;
+				background-color: color($colors, white);
+				color: color($colors, primary_light);
+				font-size: 12px;
+				height: calc(#{$height-square-size} * 3);
+			}
+		}
 	}
 
-	.prompt {
-		border-top: 1px solid color($colors, gray, base);
-		color: color($colors, gray, base) !important;
-		text-align: center;
-		padding: 10px 0px;
-		font-size: 13px;
-	}
+	
 
-	.signup {
-		margin: 0px 15px 15px;
-	}
+// 	form {
+// 	// padding: 15px;
+// 	// padding-top: 55%;
+// 	// width: 70%;
+// 	// height: 19px;
+// 	// font-family: AppleSDGothicNeo;
+// 	// font-size: 16px;
+// 	// color: color($colors, primary);
+// 	// margin-left: auto;
+// 	// margin-right: auto;
+//   }
 
-	span.coconut{
-		padding-top: 25%;
-		width: 100%;
-		text-align: center;
-		height: 36px;
-		font-family: Baruta;
-		font-size: 30px;
-		font-weight: 900;
-		font-style: normal;
-		font-stretch: normal;
-		line-height: normal;
-		letter-spacing: normal;
-		color: #ffffff;
-	  }
+// 	ion-input {
+// 		border-bottom: solid 1px #ffffff;
+// 	}
 
-	span.email_pwd{
-		padding-top: 70px;
-		width: 70%;
-		height: 19px;
-		font-family: AppleSDGothicNeo;
-		font-size: 16px;
-		font-weight: normal;
-		font-style: normal;
-		font-stretch: normal;
-		line-height: normal;
-		letter-spacing: normal;
-		color: #ffffff;
-		text-align: center;
-	  }
+// 	.email {
+// 		margin-bottom: 15px;
+// 		width: 100%;
+// 	}
 
-	form button.button{
-		margin-top: 70px;
-		background-color: transparent;
-		height: 29px;
-		font-family: AppleSDGothicNeo;
-		font-size: 24px;
-		font-weight: 500;
-		font-style: normal;
-		font-stretch: normal;
-		line-height: normal;
-		letter-spacing: normal;
-		text-align: center;
-		color: #ffffff;
-		margin-left: auto;
-		margin-right: auto;
-		display: block !important;
-	  }
+// 	.invalid {
+//     	border-bottom: 1px solid color($colors, danger, base);
+//   	}
+
+// 	.error-message {
+// 		margin: 3px 0px 0px;
+// 		color: color($colors, gray, base) !important;
+// 		font-size: 80%;
+// 	}
+
+// 	.pwreset {
+// 		margin: 1rem auto;
+// 		font-size: 13px;
+// 		background-color: transparent;
+// 		color: #ffffff;
+// 		display: flex;
+// 		align-items: center;
+// 	}
+
+// 	.prompt {
+// 		border-top: 1px solid color($colors, gray, base);
+// 		color: color($colors, gray, base) !important;
+// 		text-align: center;
+// 		padding: 10px 0px;
+// 		font-size: 13px;
+// 	}
+
+// 	.signup {
+// 		margin: 0px 15px 15px;
+// 	}
+
+// 	span.coconut{
+// 		padding-top: 25%;
+// 		width: 100%;
+// 		text-align: center;
+// 		height: 36px;
+// 		font-family: Baruta;
+// 		font-size: 30px;
+// 		font-weight: 900;
+// 		font-style: normal;
+// 		font-stretch: normal;
+// 		line-height: normal;
+// 		letter-spacing: normal;
+// 		color: #ffffff;
+// 	  }
+
+// 	span.email_pwd{
+// 		padding-top: 70px;
+// 		width: 70%;
+// 		height: 19px;
+// 		font-family: AppleSDGothicNeo;
+// 		font-size: 16px;
+// 		font-weight: normal;
+// 		font-style: normal;
+// 		font-stretch: normal;
+// 		line-height: normal;
+// 		letter-spacing: normal;
+// 		color: #ffffff;
+// 		text-align: center;
+// 	  }
+
+// 	form button.button{
+// 		margin-top: 70px;
+// 		background-color: transparent;
+// 		height: 29px;
+// 		font-family: AppleSDGothicNeo;
+// 		font-size: 24px;
+// 		font-weight: 500;
+// 		font-style: normal;
+// 		font-stretch: normal;
+// 		line-height: normal;
+// 		letter-spacing: normal;
+// 		text-align: center;
+// 		color: #ffffff;
+// 		margin-left: auto;
+// 		margin-right: auto;
+// 		display: block !important;
+// 	  }
 
 }
