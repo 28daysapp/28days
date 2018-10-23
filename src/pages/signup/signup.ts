@@ -150,11 +150,19 @@ export class SignupPage {
 
 
   setTerms1(){
-    this.clickterms1 = true;
+    if(this.clickterms1 == false) {
+      this.clickterms1 = true;
+    } else {
+      this.clickterms1 = false;
+    }
   }
 
   setTerms2(){
-    this.clickterms2 = true;
+    if(this.clickterms2 == false) {
+      this.clickterms2 = true;
+    } else {
+      this.clickterms2 = false;
+    }
   }
 
   terms1(){

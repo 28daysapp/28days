@@ -49,8 +49,8 @@ export class ChatbotPage {
   ionViewDidLoad() {
     console.log('Chatbot - ionViewDieLoad');
     this.chatMessages = [];
-    this.gogomsg('반가워요! \n코코넛에 온걸 환영해요!', true).then(() => {
-      this.gogomsg("저는 코코넛의 챗봇 코코에요.\n여기에서는 누구나 익명으로 자신의 고민거리를 이야기 할 수 있어요.", false).then(() => {
+    this.gogomsg('반가워! \n코코넛에 온걸 환영해!', true).then(() => {
+      this.gogomsg("나는 코코넛의 챗봇 코코야!\n여기에서는 누구나 익명으로 자신의 고민거리를 이야기 할 수 있어!", false).then(() => {
         setTimeout(() => {
           this.showbtn1 = true;
         }, 500);
@@ -69,7 +69,7 @@ export class ChatbotPage {
 
 
   skipTutorial() {
-    this.navCtrl.push('TabsPage');
+    this.navCtrl.push('SignupPage');
   }
 
   createmsg(showimage, gogo, message) {
@@ -109,7 +109,7 @@ export class ChatbotPage {
   button1() {
     this.chatMessages.push(this.createmsg(false, false, '그렇구나!'));
     this.showbtn1 = false;
-    this.gogomsg('앞으로 제가 어떻게 불러드려야 할까요?', true).then(() => {
+    this.gogomsg('앞으로 내가 어떻게 불러야 할까?', true).then(() => {
       setTimeout(() => {
         this.showinput1 = true;
       }, 500);
@@ -121,7 +121,7 @@ export class ChatbotPage {
     this.storage.set('username', this.username);
     this.chatMessages.push(this.createmsg(false, false, this.username));
     this.showinput1 = false;
-    this.gogomsg(`${this.username}!!! 정말 예쁜 닉네임이네요!\n그나저나,\n요즘 어떤 일로 가장 힘드신가요?`, true).then(() => {
+    this.gogomsg(`${this.username}!!! 정말 예쁜 닉네임이네!\n그나저나,\n요즘 어떤 일로 가장 힘들어?`, true).then(() => {
       setTimeout(() => {
         this.showbtn2 = true;
       }, 500);
@@ -141,7 +141,7 @@ export class ChatbotPage {
   button2() {
     this.chatMessages.push(this.createmsg(false, false, `${this.currentMood}해`));
     this.showbtn2 = false;
-    this.gogomsg(`${this.currentMood}했군요...ㅠㅠ 많이 힘들었겠어요..\n${this.currentMood}한 지는 몇 주 정도 됐나요?`, true).then(() => {
+    this.gogomsg(`${this.currentMood}했구나...ㅠㅠ 많이 힘들었겠다..\n${this.currentMood}한 지는 몇 주 정도 됐어?`, true).then(() => {
       setTimeout(() => {
         this.showinput2 = true;
       }, 500);
@@ -151,8 +151,8 @@ export class ChatbotPage {
   input2(ip2: NgForm) {
     this.chatMessages.push(this.createmsg(false, false, `${ip2.value.text}주 정도 됐어.`));
     this.showinput2 = false;
-    this.gogomsg(`${ip2.value.text}주 동안 정말 힘들었겠군요..`, true).then(() => {
-      this.gogomsg(`그럼 지금 얼마나 ${this.currentMood}한가요?\n1부터 10까지 중 하나 입력해주시겠어요?\n1은 조금 ${this.currentMood}한 거고,\n10은 많이 ${this.currentMood}한 거에요.`, false).then(() => {
+    this.gogomsg(`${ip2.value.text}주 동안 정말 힘들었겠다..`, true).then(() => {
+      this.gogomsg(`그럼 지금 얼마나 ${this.currentMood}해?\n1부터 10까지 중 하나 입력해주시겠니?\n1은 조금 ${this.currentMood}한 거고,\n10은 많이 ${this.currentMood}한 거야.`, false).then(() => {
         setTimeout(() => {
           this.showinput3 = true;
         }, 500);
@@ -163,8 +163,8 @@ export class ChatbotPage {
   input3(ip3: NgForm) {
     this.chatMessages.push(this.createmsg(false, false, `${ip3.value.text}`));
     this.showinput3 = false;
-    this.gogomsg('그랬군요.. 많이 힘들겠어요..', true).then(() => {
-      this.gogomsg('혹시 프로작, 졸피뎀, 자낙스와 같은\n정신 건강에 관련된 약을 복용하고 있나요?', false).then(() => {
+    this.gogomsg('그랬구나.. 많이 힘들었겠다..', true).then(() => {
+      this.gogomsg('혹시 프로작, 졸피뎀, 자낙스와 같은\n정신 건강에 관련된 약을 복용하고 있니?', false).then(() => {
         setTimeout(() => {
           this.showbtn3 = true;
         }, 500);
@@ -185,15 +185,15 @@ export class ChatbotPage {
   button3() {
     this.chatMessages.push(this.createmsg(false, false, `${this.btn3text}`));
     this.showbtn3 = false;
-    this.gogomsg('그렇군요\n약을 복용하고 있으면 평소에 제가 알람을 주고 싶어서 물어봤어요!', true).then(() => {
+    this.gogomsg('그렇군\n약을 복용하고 있으면 평소에 내가 알람을 주고 싶어서 물어봤어!', true).then(() => {
       if (this.btn3text == '응') {
-        this.gogomsg('어떤 약을 복용하고 있는지 얘기해주시겠어요??', false).then(() => {
+        this.gogomsg('어떤 약을 복용하고 있는지 얘기해주겠니??', false).then(() => {
           setTimeout(() => {
             this.showbtn4 = true;
           }, 500);
         });
       } else {
-        this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해보시겠어요?', false).then(() => {
+        this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해볼래?', false).then(() => {
           setTimeout(() => {
             this.showbtn5 = true;
           }, 500);
@@ -220,8 +220,8 @@ export class ChatbotPage {
         this.showmodal = true;
       }, 500);
     } else {
-      this.gogomsg('알겠어요! 나중에 알려주시면 약을 복용할 시간에 알람을 줘서 도움을 줄게요!', true).then(() => {
-        this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해보시겠어요?', false).then(() => {
+      this.gogomsg('알겠어! 나중에 알려주면 약을 복용할 시간에 알람을 줘서 도움을 줄게!', true).then(() => {
+        this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해볼래?', false).then(() => {
           setTimeout(() => {
             this.showbtn5 = true;
           }, 500);
@@ -252,7 +252,7 @@ export class ChatbotPage {
         }
       });
     } else {
-      this.gogomsg(`그 마음 이해해요.. 저도 그랬었어요.. 그런데 아주 간단한 테스트에요!\n${this.username}님 상태가 어떤지 저도 알고 싶어서..\n전 ${this.username}님이 이 테스트를 꼭 받아봤으면 좋겠어요!`, true).then(() => {
+      this.gogomsg(`그 마음 이해해.. 나도 그랬었어.. 그런데 아주 간단한 테스트야!\n${this.username}(이)의 상태가 어떤지 나도 알고 싶어서..\n난 ${this.username}가(이) 이 테스트를 꼭 받아봤으면 좋겠어!`, true).then(() => {
         setTimeout(() => {
           this.showbtn6 = true;
         }, 500);
@@ -274,7 +274,7 @@ export class ChatbotPage {
     this.chatMessages.push(this.createmsg(false, false, `${this.btn6text}`));
     this.showbtn6 = false;
     if (this.btn6text == '알겠어') {
-      this.gogomsg('잘 생각했어요!\n검사 페이지로 이동할게요', true).then(() => {
+      this.gogomsg('잘 생각했어!\n검사 페이지로 이동할게', true).then(() => {
         if (this.currentMood == '불안') {
           this.moveToTestanxiety();
         } else {
@@ -282,7 +282,7 @@ export class ChatbotPage {
         }
       });
     } else {
-      this.gogomsg('간단한 테스트에요!\n지금 하기 싫다면 나중에 해볼 수도 있어요!', true).then(() => {
+      this.gogomsg('간단한 테스트야!\n지금 하기 싫다면 나중에 해볼 수도 있어!', true).then(() => {
         setTimeout(() => {
           this.showbtn7 = true;
         }, 500);
@@ -304,7 +304,7 @@ export class ChatbotPage {
     this.chatMessages.push(this.createmsg(false, false, `${this.btn7text}`));
     this.showbtn7 = false;
     if (this.btn7text == '그래, 해볼게!') {
-      this.gogomsg('잘 생각했어요!\n검사 페이지로 이동할게요', true).then(() => {
+      this.gogomsg('잘 생각했어!\n검사 페이지로 이동할게', true).then(() => {
         if (this.currentMood == '불안') {
           this.moveToTestanxiety();
         } else {
@@ -312,7 +312,7 @@ export class ChatbotPage {
         }
       });
     } else {
-      this.gogomsg('알겠어요! 그럼 메인 화면으로 이동할게요', true).then(() => {
+      this.gogomsg('알겠어! 그럼 메인 화면으로 이동할게', true).then(() => {
         this.moveToMain();
       });
     }
@@ -330,8 +330,8 @@ export class ChatbotPage {
     console.log(modal.value.mediname + ' / ' + modal.value.mediamount);
     console.log(JSON.stringify(this.modaltime));
     this.showmodal = false;
-    this.gogomsg('얘기해줘서 고마워요! 약을 복용할 시간에 알람을 줘서 도움을 줄게요!', true).then(() => {
-      this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해보시겠어요?', false).then(() => {
+    this.gogomsg('얘기해줘서 고마워! 약을 복용할 시간에 알람을 줘서 도움을 줄게!', true).then(() => {
+      this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해볼래?', false).then(() => {
         setTimeout(() => {
           this.showbtn5 = true;
         }, 500);

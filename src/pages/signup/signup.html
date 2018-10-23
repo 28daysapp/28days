@@ -45,7 +45,7 @@
     <p class="error-message" *ngIf="!signupForm.controls.passwordconfirm.valid && signupForm.controls.passwordconfirm.dirty">
       비밀번호가 맞지 않습니다.
     </p>
-    <br>
+    <!-- <br>
     <span class="info">성별</span>
     <div class="btn2">
       <button class="btn2_1" [class.greenbtn]="clickmale" (click)="setMale()">
@@ -60,7 +60,7 @@
     </div>
     <br>
     <span class="info">태어난 해</span>
-    <ion-input class="put" formControlName="age" type="number"></ion-input>
+    <ion-input class="put" formControlName="age" type="number"></ion-input> -->
     <div class="button2">
       <button class="btn2_1" [class.greenbtn]="clickterms1" (click)="setTerms1()"></button>
       <span class="terms1">
@@ -74,12 +74,16 @@
         <button class="terms2" style="text-align: left">동의</button>
       </span>
     </div>
-    <button class="button" (click)="signupUser()">
-      회원가입
-    </button>
-    <button class="button" (click)="signIn()">
-      이미 아이디가 있으신가요?
-    </button>
+
+    <div class="register-done" (click)="signupUser()">
+      회원가입 완료
+    </div>
+    <div class="spans">
+      <span (click)="signIn()">
+        이미 아이디가 있으신가요?
+      </span>
+    </div>
+
     <div class="spacing">
 
     </div>
