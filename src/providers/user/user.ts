@@ -29,7 +29,7 @@ export class UserProvider {
      
    }
 
- 	updateUserprofile(email:string, username: string, gender: string, age) {
+ 	updateUserprofile(email:string, username: string) {
     var uid = firebase.auth().currentUser.uid;
     let data = {};
     data[username] = uid;
@@ -43,8 +43,6 @@ export class UserProvider {
           uid: uid,
           username: username,
           greeting: "안녕하세요! " + username + " 입니다. 함께 나아가요!",
-          gender: gender,
-          age: age,
           photoURL: "assets/profile0.png"
         }).then(() => {
           this.fireusernames.update(data).then(() => {

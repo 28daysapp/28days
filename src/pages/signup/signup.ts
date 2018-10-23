@@ -39,8 +39,7 @@ export class SignupPage {
     	name: ['', Validators.compose([Validators.required, Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
   		password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])],
-    	passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])],
-      age: ['', Validators.required],
+    	passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])]
     });
 
     // this.clickterms1 = true;
@@ -48,7 +47,7 @@ export class SignupPage {
   }
 
   signupUser(){
-    if (!this.signupForm.valid || !this.usernameAvailable || this.gender == '') {
+    if (!this.signupForm.valid || !this.usernameAvailable) {
       console.log(this.signupForm.value.name);
       let alert = this.alertCtrl.create({
         title: '회원가입 오류',
@@ -76,7 +75,7 @@ export class SignupPage {
       alert.present();
     } else {
       this.auth.signupUser(this.signupForm.value.email, this.signupForm.value.password).then(() => {
-      	this.user.updateUserprofile(this.signupForm.value.email, this.signupForm.value.name, this.gender, this.signupForm.value.age).then(() => {
+      	this.user.updateUserprofile(this.signupForm.value.email, this.signupForm.value.name).then(() => {
           this.storage.set('localcred', {
             email: this.signupForm.value.email,
             password: this.signupForm.value.password
