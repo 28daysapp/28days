@@ -8,8 +8,9 @@ export class CommunityProvider {
 	// Firebase Real-Time Database references
 	fireCommunityList = firebase.database().ref('communityList');
 	fireCommunityPost = firebase.database().ref('communityPost');
-	
-	
+
+	photoURL: any = "";
+
 	fireCommunity = firebase.database().ref('/community');
 	firemypost = firebase.database().ref('/my/post');
 	firelike = firebase.database().ref('/like');
@@ -67,34 +68,72 @@ export class CommunityProvider {
 	}
 
 
-	createCommunityPost(communityName, ) {
+	createCommunityPost(title, text, dataURL, anonymity, communityInfo) {
+		const uid = firebase.auth().currentUser.uid;
+
+		console.log("Community INFO!!!: " + communityInfo.communityName)
+
 		const promise = new Promise((resolve, reject) => {
+
+			const newPostRef = firebase.database().ref(`/communityPost/${communityInfo.communityName}`).push();
 			const timeCreated = firebase.database.ServerValue.TIMESTAMP;
-			
+			const postId = newPostRef.key;
+			const imageStore = this.firestore.ref('/community/').child(postId);
 
-			firebase.database().ref(`/communityPost/${communityName}`).push({
+			console.log("reaches here????")
+			console.log("anonymity?: " + anonymity)
 
+			if (dataURL) {
+				imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+					console.log("r111111eaches here????")
+					this.photoURL = savedImage.downloadURL;
+					console.log(this.photoURL)
+				});
+			}
+
+			if (!anonymity) {
+				anonymity = false;
+			}
+
+			newPostRef.set({
+				postId: postId,
+				postTitle: title,
+				uid: uid,
+				username: firebase.auth().currentUser.displayName,
+				text: text,
+				photoURL: this.photoURL,
+				timestamp: timeCreated,
+				comment: 0,
+				like: 0,
+				report: 0,
+				urlcheck: true,
+				anonymity: anonymity,
+				communityName: communityInfo.communityName
+			});
+			console.log("what about reaches here????")
+
+			resolve(true);
+		});
+
+		return promise
+	}
+
+	readCommunityPosts(communityName) {
+		var promise = new Promise((resolve, reject) => {
+			this.fireCommunityPost.child(communityName).once('value').then((snapshot) => {
+				const posts = [];
+				snapshot.forEach((childSnapshot) => {
+					const post = childSnapshot.val();
+					posts.push(post);
+				});
+				resolve(posts);
 			});
 		});
 		return promise
 	}
 
-	readCommunityPosts() {
-		// var promise = new Promise((resolve, reject) => {
-		// 	this.fireCommunityPost.once('value').then((snapshot) => {
-		// 		const posts = [];
-		// 		snapshot.forEach((childSnapshot) => {
-		// 			const post = childSnapshot.val();
-		// 			posts.push(post);
-		// 		});
-		// 		resolve(posts);
-		// 	});
-		// });
-		// return promise
-	}
 
 
-	
 
 	//--------------------------------------------------------------------------------
 
@@ -102,7 +141,7 @@ export class CommunityProvider {
 
 
 	/* upload post to firebase */
-	uploadPost(title, txt, dataURL, tag1, anonymity) { // 게시글 firebase에 업로드
+	uploadPost(title, txt, dataURL, tag1, anonymity, communityInfo) { // 게시글 firebase에 업로드
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			var newPostRef = this.fireCommunity.push();
@@ -127,6 +166,7 @@ export class CommunityProvider {
 							tag1: tag1,
 							urlcheck: true,
 							anonymity: true,
+							communityName: communityInfo.communityName
 						}).then(() => {
 							this.my.addmypost(uid, postId, time).then(() => {
 								resolve(true);
@@ -169,6 +209,7 @@ export class CommunityProvider {
 						report: 0,
 						tag1: tag1,
 						anonymity: true,
+						communityName: communityInfo.communityName
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);
@@ -216,6 +257,7 @@ export class CommunityProvider {
 							tag1: tag1,
 							urlcheck: true,
 							anonymity: false,
+							communityName: communityInfo.communityName
 						}).then(() => {
 							this.my.addmypost(uid, postId, time).then(() => {
 								resolve(true);
@@ -257,7 +299,7 @@ export class CommunityProvider {
 						like: 0,
 						report: 0,
 						tag1: tag1,
-						anonymity: false,
+						communityName: communityInfo.communityName
 					}).then(() => {
 						this.my.addmypost(uid, postId, time).then(() => {
 							resolve(true);

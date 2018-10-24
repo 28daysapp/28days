@@ -18,7 +18,7 @@ export class CommunityPostsPage {
   }
 
   ionViewWillEnter() {
-    this.getCommunityPosts();
+    this.getCommunityPosts(this.communityInfo.communityName);
   }
 
   ionViewDidLoad() {
@@ -28,18 +28,21 @@ export class CommunityPostsPage {
 
 
 
-  getCommunityPosts() {
-    // this.communityProvider.readCommunityPosts().then((posts)=> {
-    //   this.posts = posts;
-    // });
+  getCommunityPosts(communityName) {
+    this.communityProvider.readCommunityPosts(communityName).then((posts)=> {
+      this.posts = posts;
+      console.log("POSTS!: " + JSON.stringify(this.posts));
+    });
   }
 
   addCommunityPost() {
     
   }
 
-  toCommunityWrite() {
-    this.navCtrl.push("CommunitywritePage");
+  toCommunityWrite(communityInfo) {
+    this.navCtrl.push("CommunitywritePage", {
+      communityInfo: communityInfo
+    });
   }
 
 }

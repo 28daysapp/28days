@@ -27,9 +27,14 @@ export class CommunitywritePage {
 	dataURL;
 	photos;
 	cropService;
+
+	communityInfo: any;
+
 	constructor(public navCtrl: NavController, public navParams: NavParams, public community: CommunityProvider,
 		private camera: Camera, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
-		
+
+		this.communityInfo = this.navParams.get('communityInfo');
+		console.log("The community INFO!!: " + JSON.stringify(this.communityInfo));
 	}
 
 	write() { // communityfix와 동일
@@ -70,9 +75,14 @@ export class CommunitywritePage {
 			alert.present();
 		}
 		else {
-			this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity).then(() => {
+
+			this.community.createCommunityPost(this.title, this.text, this.dataURL, this.anonymity, this.communityInfo).then(() => {
 				this.navCtrl.pop();
 			});
+
+			// this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity, this.communityInfo).then(() => {
+			// 	this.navCtrl.pop();
+			// });
 			let loading = this.loadingCtrl.create({
 				dismissOnPageChange: true,
 			});
@@ -100,23 +110,23 @@ export class CommunitywritePage {
 		});
 	}
 
-	takePicture(){ // 사진 자르기인줄 알았으나 사진 찍기였음
+	takePicture() { // 사진 자르기인줄 알았으나 사진 찍기였음
 		let options =
 		{
 			quality: 100,
 			correctOrientation: true
 		};
 		this.camera.getPicture(options)
-		.then((data) => {
-			this.photos = new Array<string>();
-			this.cropService
-			.crop(data, {quality: 75})
-			.then((newImage) => {
-				this.photos.push(newImage);
-			}, error => console.error("Error cropping image", error));
-		}, function(error) {
-			console.log(error);
-		});
+			.then((data) => {
+				this.photos = new Array<string>();
+				this.cropService
+					.crop(data, { quality: 75 })
+					.then((newImage) => {
+						this.photos.push(newImage);
+					}, error => console.error("Error cropping image", error));
+			}, function (error) {
+				console.log(error);
+			});
 	}
 
 	addtag() { // 태그 추가 시 텍스트창 생성 하나만 가능
