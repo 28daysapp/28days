@@ -125,7 +125,7 @@ export class TestanxietyPage {
   }
 
   close() {
-  	this.navCtrl.push('TabsPage');
+  	this.navCtrl.push('SignupPage');
   }
 
   testdepression() {

@@ -101,7 +101,7 @@ export class TestdepressionPage {
   }
 
   close() {
-  	this.navCtrl.push('TabsPage');
+  	this.navCtrl.push('SignupPage');
   }
 
 }

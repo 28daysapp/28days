@@ -1,9 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, App, Events } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
+import { Storage } from '@ionic/storage';
+
 import { MenuController } from 'ionic-angular';
+import { FcmProvider } from '../../providers/fcm/fcm';
+import { UserProvider } from '../../providers/user/user';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -20,7 +25,6 @@ export class CommunityPage {
   // firecommunity = firebase.database().ref('/community');
   // firereport = firebase.database().ref('/report');
   // posts;
-  loading;
   // popover;
   // tag = '';
   // mosttag1;
@@ -32,11 +36,78 @@ export class CommunityPage {
   //anonymity = this.community.changeAnonymity;
   // selectedData: any;
 
-  constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
-    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider,
+  fireusers = firebase.database().ref('/users');
+  loading;
+  user;
+  userprofile;
+  username;
+  photoURL;
+  greeting;
+  origGreeting;
+  showmodal = false;
+  token;
+  count;
+
+  constructor(public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
+    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider, public fcmProvider: FcmProvider, public userProvider: UserProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController, public appCtrl: App,
   ) {
 
+  }
+
+  ionViewWillLoad() {
+
+    // check if user already logged-in
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+
+      this.fcmProvider.setToken(this.user);
+      // this.fcmProvider.handleTokenRefresh();
+      
+      console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
+      this.username = this.user.displayName;
+      this.photoURL = this.user.photoURL;
+
+      this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
+        console.log("user profile");
+        console.log(JSON.stringify(userprofile));
+        this.userprofile = userprofile;
+        this.greeting = this.userprofile.greeting;
+        this.loading.dismiss();
+        this.createUser();
+        console.log("1");
+        this.menu.enable(true, 'loggedInMenu');
+        this.menu.enable(false, 'loggedOutMenu');
+      })
+    } else {
+      
+      // check if cache info exists in local storage
+      this.storage.get('localcred').then((localcred) => {
+        if (localcred) {
+          // cache exists
+          this.auth.loginUser(localcred.email, localcred.password).then((user) => {
+            console.log('Home - ionViewDidLoad - load token ' + user.displayName + '/' + user.photoURL);
+            this.user = user;
+            this.username = this.user.displayName;
+            this.photoURL = this.user.photoURL;
+
+            this.fcmProvider.setToken(this.user);
+
+            this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
+              console.log("user profile");
+              console.log(JSON.stringify(userprofile));
+              this.userprofile = userprofile;
+              this.greeting = this.userprofile.greeting;
+              this.loading.dismiss();
+              console.log("2");
+              this.createUser();
+              this.menu.enable(true, 'loggedInMenu');
+              this.menu.enable(false, 'loggedOutMenu');
+            });
+          });
+        }
+      });
+    }
   }
 
   ionViewDidLoad() {
@@ -100,6 +171,11 @@ export class CommunityPage {
   }
 
 
+
+  createUser() {
+    console.log('User created!')
+    this.events.publish('user:created', this.user, Date.now());
+  }
 
   //--------------------------------------------------------------------------------
 
