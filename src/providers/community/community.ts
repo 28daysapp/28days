@@ -40,13 +40,13 @@ export class CommunityProvider {
 
 	createCommunity(communityName, communityDescription) {
 		const promise = new Promise((resolve, reject) => {
-			const timeCreated = firebase.database.ServerValue.TIMESTAMP;
+			const createdTime = firebase.database.ServerValue.TIMESTAMP;
 			const newMember = 1;
 
 			firebase.database().ref(`/communityList/${communityName}`).set({
 				communityName: communityName,
 				communityDescription: communityDescription,
-				timeCreated: timeCreated,
+				createdTime: createdTime,
 				members: newMember
 			});
 		});
@@ -68,7 +68,7 @@ export class CommunityProvider {
 	}
 
 
-	createCommunityPost(title, text, dataURL, anonymity, communityInfo) {
+	createCommunityPost(text, dataURL, anonymity, communityInfo) {
 		const uid = firebase.auth().currentUser.uid;
 
 		console.log("Community INFO!!!: " + communityInfo.communityName)
@@ -76,7 +76,7 @@ export class CommunityProvider {
 		const promise = new Promise((resolve, reject) => {
 
 			const newPostRef = firebase.database().ref(`/communityPost/${communityInfo.communityName}`).push();
-			const timeCreated = firebase.database.ServerValue.TIMESTAMP;
+			const createdTime = firebase.database.ServerValue.TIMESTAMP;
 			const postId = newPostRef.key;
 			const imageStore = this.firestore.ref('/community/').child(postId);
 
@@ -97,12 +97,11 @@ export class CommunityProvider {
 
 			newPostRef.set({
 				postId: postId,
-				postTitle: title,
 				uid: uid,
 				username: firebase.auth().currentUser.displayName,
 				text: text,
 				photoURL: this.photoURL,
-				timestamp: timeCreated,
+				createdTime: createdTime,
 				comment: 0,
 				like: 0,
 				report: 0,
@@ -141,7 +140,7 @@ export class CommunityProvider {
 
 
 	/* upload post to firebase */
-	uploadPost(title, txt, dataURL, tag1, anonymity, communityInfo) { // 게시글 firebase에 업로드
+	uploadPost(txt, dataURL, tag1, anonymity, communityInfo) { // 게시글 firebase에 업로드
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			var newPostRef = this.fireCommunity.push();
@@ -154,7 +153,6 @@ export class CommunityProvider {
 					imageStore1.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 						newPostRef.set({
 							postid: postId,
-							posttitle: title,
 							uid: uid,
 							username: firebase.auth().currentUser.displayName,
 							text: txt,
@@ -198,7 +196,6 @@ export class CommunityProvider {
 				} else { // 사진이 없을 경우
 					newPostRef.set({
 						postid: postId,
-						posttitle: title,
 						uid: uid,
 						username: firebase.auth().currentUser.displayName,
 						text: txt,
@@ -245,7 +242,6 @@ export class CommunityProvider {
 					imageStore2.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 						newPostRef.set({
 							postid: postId,
-							posttitle: title,
 							uid: uid,
 							username: firebase.auth().currentUser.displayName,
 							text: txt,
@@ -289,7 +285,6 @@ export class CommunityProvider {
 				} else { // 사진이 없을 경우
 					newPostRef.set({
 						postid: postId,
-						posttitle: title,
 						uid: uid,
 						username: firebase.auth().currentUser.displayName,
 						text: txt,
@@ -386,11 +381,10 @@ export class CommunityProvider {
 		return promise;
 	}
 
-	updatePost(title, text) { // 게시글 수정
+	updatePost(text) { // 게시글 수정
 		var promise = new Promise((resolve) => {
 			this.fireCommunity.child(`${this.post.postid}`).update({
-				posttitle: title,
-				text: text,
+				text: text
 			}).then(() => {
 				resolve(true);
 			});

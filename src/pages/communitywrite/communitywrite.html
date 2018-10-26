@@ -27,8 +27,6 @@
 		</ion-item>
 	</ion-list>
 	<div class="area">
-		<textarea class="area1" [(ngModel)]="title" placeholder="제목을 입력해주세요." style="border:0;"></textarea>
-		<hr style="height: 0.1px; border: solid 1px #d8d8d8;">
 		<textarea class="area2" [(ngModel)]="text" placeholder="내용을 입력해주세요." style="border:0;"></textarea>
 		<textarea class="area3" [(ngModel)]="tag1" placeholder="# 태그를 입력해주세요." *ngIf="this.tagcorrect"></textarea>
 		<!-- 현재 페이지 아래에있는 태그 추가를 눌렀을 경우에만 보임 -->

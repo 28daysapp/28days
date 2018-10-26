@@ -17,7 +17,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 	templateUrl: 'communitywrite.html',
 })
 export class CommunitywritePage {
-	title = '';
 	pick = false;
 	text = '';
 	tag1 = '';
@@ -38,21 +37,9 @@ export class CommunitywritePage {
 	}
 
 	write() { // communityfix와 동일
-		if (this.title == '' || this.text == '') {
+		if (this.text == '') {
 			let alert = this.alertCtrl.create({
-				title: '제목과 내용은 필수 항목입니다.',
-				buttons: [
-					{
-						text: '확인',
-						role: 'cancel'
-					}
-				]
-			})
-			alert.present();
-		}
-		else if (this.title.length > 50) {
-			let alert = this.alertCtrl.create({
-				title: '제목의 길이는 최대 50자 입니다.',
+				title: '내용은 필수 항목입니다.',
 				buttons: [
 					{
 						text: '확인',
@@ -76,7 +63,7 @@ export class CommunitywritePage {
 		}
 		else {
 
-			this.community.createCommunityPost(this.title, this.text, this.dataURL, this.anonymity, this.communityInfo).then(() => {
+			this.community.createCommunityPost(this.text, this.dataURL, this.anonymity, this.communityInfo).then(() => {
 				this.navCtrl.pop();
 			});
 

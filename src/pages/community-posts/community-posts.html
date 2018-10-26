@@ -18,17 +18,19 @@
   <div>
     {{ communityInfo.communityDescription }}
   </div>
-  <!-- <div class="posts-container">
+
+  
+  <div class="posts-container">
     <div class="post-card" *ngFor="let post of posts">
 
-      <img class="image center" src="assets/ccenter.jpg" alt="..." />
-
-      <div class="post-username">{{ post.username }}</div>
-      <div class="post-content">{{ post.content }}</div>
-      <div class="post-uploadTime">{{ post.uploadTime }}}</div>
-      <div class=""></div>
+      <img class="image center" src="{{post.photoURL}}" />
+      <div class="post-username" *ngIf="!post.anonymity" >{{ post.username }}</div>
+      <div class="post-username" *ngIf="post.anonymity" >익명</div>
+      <div class="post-createdTime">{{ post.createdTime | date:'MM.dd a hh:mm' }}</div>
+      <div class="post-text">{{ post.text }}</div>
+      <div class="post-like">{{ post.like }} 서폿</div>
     </div>
 
-  </div> -->
+  </div>
 
 </ion-content>
