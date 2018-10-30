@@ -1,0 +1,42 @@
+page-create-community-modal {
+    .close-button {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .form-container {
+        margin: 1rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: space-around;
+        .name-form {
+            margin: 1rem;
+            border: 0rem;
+            border-bottom: 1px solid color($colors, black);
+            height: 3rem;
+        }
+        .description-form {
+            margin: 1rem;
+            border: 0rem;
+            border-bottom: 1px solid color($colors, black);
+            height: 20rem;
+        }
+    }
+    .create-button-container {
+        display: flex;
+        margin: 1rem;
+        padding: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    .create-button {
+        padding: 0.5rem;
+        text-align: center;
+        width: 100%;
+        border-radius: 10rem;
+    }
+}

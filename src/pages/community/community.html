@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
 
   <ion-navbar no-border-bottom>
     <button ion-button menuToggle>
@@ -10,9 +10,9 @@
 
 <ion-content>
 
-
+  <ion-toolbar no-border>
   <ion-searchbar (ionInput)="searchCommunity($event)" placeholder="커뮤니티를 검색해보세요!"></ion-searchbar>
-
+</ion-toolbar>
   <div class="community-container">
     <div class="community-card" *ngFor="let community of communities" (click)="toCommunityPosts(community)">
       <img class="image center" src="assets/digital-campaign.png" alt="assets/digital-campaign.png" />
@@ -21,7 +21,7 @@
       <ion-badge item-end>{{ community.members }}명</ion-badge>
     </div>
     <div class="create-button-container">
-      <button ion-button class="create-button" (click)="addCommunity()">커뮤니티 추가하기</button>
+      <button ion-button class="create-button" (click)="presentCreateCommunityModal()">커뮤니티 추가하기</button>
     </div>
   </div>
 

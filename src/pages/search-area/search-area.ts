@@ -28,7 +28,6 @@ export class SearchAreaPage {
       type: this.type 
     };
     this.viewController.dismiss(data);
-
   }
 
 }

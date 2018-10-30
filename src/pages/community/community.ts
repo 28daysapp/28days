@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, App, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, App, Events, ModalController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
@@ -33,7 +33,7 @@ export class CommunityPage {
   token;
   count;
 
-  constructor(public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
+  constructor(public modalCtrl: ModalController, public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider, public fcmProvider: FcmProvider, public userProvider: UserProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController, public appCtrl: App,
   ) {
@@ -97,7 +97,6 @@ export class CommunityPage {
   initializeCommunities() {
     this.community.readCommunityList().then((communities) => {
       this.communities = communities;
-      console.log("Initialize Communities")
     })
   }
 
@@ -114,12 +113,7 @@ export class CommunityPage {
   }
 
   searchCommunity(searchbarInput: any) {
-
-
-    console.log("Ion input start")
     this.searchQuery = searchbarInput.srcElement.value;
-    console.log(this.searchQuery)
-
     if (this.searchQuery && this.searchQuery.trim() != '') {
       this.communities = this.communities.filter((community) => {
         return (community.communityName.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1);
@@ -129,6 +123,16 @@ export class CommunityPage {
       return
     }
     
+  }
+
+  presentCreateCommunityModal() {
+    let newCommunityModal = this.modalCtrl.create('CreateCommunityModalPage', { });
+    newCommunityModal.onDidDismiss(data => {
+      console.log("Modal closed");
+      this.initializeCommunities();
+    });
+    newCommunityModal.present();
+    console.log("PRESENT????")
   }
 
   createUser() {
