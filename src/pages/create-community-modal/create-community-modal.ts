@@ -74,10 +74,7 @@ export class CreateCommunityModalPage {
    }
 
   dismiss() {
-    let data = { 
-
-    };
-    this.viewController.dismiss(data);
+    this.viewController.dismiss();
   }
 
 }
