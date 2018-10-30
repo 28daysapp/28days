@@ -5,35 +5,26 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>커뮤니티</ion-title>
-    <!-- <ion-buttons right>
-			<button ion-button icon-only (click)="communitywrite()" style="color: #000000;">
-				글쓰기
-			</button>
-		</ion-buttons> -->
   </ion-navbar>
-  <ion-toolbar no-border>
-    <ion-searchbar [(ngModel)]="tag" placeholder="커뮤니티를 검색해보세요!" (change)="searchtag(tag)"></ion-searchbar>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
 
-  <div class="community-container" >
+
+  <ion-searchbar (ionInput)="searchCommunity($event)" placeholder="커뮤니티를 검색해보세요!"></ion-searchbar>
+
+  <div class="community-container">
     <div class="community-card" *ngFor="let community of communities" (click)="toCommunityPosts(community)">
-
-        <img class="image center" src="assets/ccenter.jpg" alt="..." />
- 
+      <img class="image center" src="assets/digital-campaign.png" alt="assets/digital-campaign.png" />
       <div class="community-name">{{ community.communityName }}</div>
       <div class="last-post-time">3시간 전</div>
       <ion-badge item-end>{{ community.members }}명</ion-badge>
     </div>
-
+    <div class="create-button-container">
+      <button ion-button class="create-button" (click)="addCommunity()">커뮤니티 추가하기</button>
+    </div>
   </div>
 
-  <button ion-button (click)="addCommunity()">Add Community</button>
 
 
 </ion-content>

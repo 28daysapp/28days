@@ -28,7 +28,8 @@
       <div class="post-username" *ngIf="post.anonymity" >익명</div>
       <div class="post-createdTime">{{ post.createdTime | date:'MM.dd a hh:mm' }}</div>
       <div class="post-text">{{ post.text }}</div>
-      <div class="post-like">{{ post.like }} 서폿</div>
+      <div class="post-like">서폿 {{ post.like }}</div>
+      <div class="post-comment"> 댓글 {{ post.comment }}</div>
     </div>
 
   </div>

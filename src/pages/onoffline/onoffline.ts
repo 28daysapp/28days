@@ -111,8 +111,6 @@ export class OnofflinePage {
         return false;
       }
     });
-
-    console.log(this.q, this.userList.length);
   }
 
   initializeItems(): void {
@@ -203,10 +201,7 @@ export class OnofflinePage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
     setTimeout(() => {
-      console.log('Async operation has ended');
       this.ionViewWillEnter();
       refresher.complete();
     }, 2000);
