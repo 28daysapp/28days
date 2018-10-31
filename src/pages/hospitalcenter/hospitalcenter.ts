@@ -61,10 +61,8 @@ export class HospitalcenterPage {
       this.menu.enable(true, 'loggedOutMenu');
       this.menu.enable(false, 'loggedInMenu');
     }
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
+
     this.loadMap();
-    this.loading.dismiss();
 
   }
 
@@ -108,12 +106,14 @@ export class HospitalcenterPage {
     console.log("THIS MAP: " + this.map);
 
     console.log("this.area = " + this.area);
+
     this.searchByText(this.area);
 
     return;
   }
 
   searchByText(input) {
+    this.presentLoading()
 
     let text = input
 
@@ -180,7 +180,7 @@ export class HospitalcenterPage {
     this.navCtrl.push('PlaceDetailPage', { place: place });
   }
 
-  showModal() {
+  showExplanation() {
     let alert = this.alertCtrl.create({
       title: '정신병원과 상담센터?',
       message: `
@@ -214,6 +214,16 @@ export class HospitalcenterPage {
       ]
     });
     alert.present();
+  }
+
+  presentLoading() {
+    let loading = this.loadingCtrl.create();
+
+    loading.present()
+
+    setTimeout(()=> {
+      loading.dismiss();
+    }, 700)
   }
 
   doRefresh(refresher) {

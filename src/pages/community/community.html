@@ -11,17 +11,17 @@
 <ion-content>
 
   <ion-toolbar no-border>
-  <ion-searchbar (ionInput)="searchCommunity($event)" placeholder="커뮤니티를 검색해보세요!"></ion-searchbar>
+  <ion-searchbar (ionInput)="searchCommunity($event)" placeholder="커뮤니티 찾기!"></ion-searchbar>
 </ion-toolbar>
   <div class="community-container">
     <div class="community-card" *ngFor="let community of communities" (click)="toCommunityPosts(community)">
       <img class="image center" src="assets/digital-campaign.png" alt="assets/digital-campaign.png" />
       <div class="community-name">{{ community.communityName }}</div>
-      <div class="last-post-time">3시간 전</div>
       <ion-badge item-end>{{ community.members }}명</ion-badge>
+      <div class="last-post-time">{{ community.communityName }} 전</div>
     </div>
     <div class="create-button-container">
-      <button ion-button class="create-button" (click)="presentCreateCommunityModal()">커뮤니티 추가하기</button>
+      <button ion-button class="create-button" (click)="presentCreateCommunityModal()">새 커뮤니티 추가하기</button>
     </div>
   </div>
 

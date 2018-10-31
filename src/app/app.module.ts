@@ -27,9 +27,7 @@ import { CommunityfixPage } from '../pages/communityfix/communityfix'
 import { MyProvider } from '../providers/my/my'
 import { FcmProvider } from '../providers/fcm/fcm'
 
-//import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-//import { GroupProvider } from '../providers/group/group';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
@@ -78,7 +76,6 @@ import { NotificationProvider } from '../providers/notification/notification';
     PostProvider,
     MyProvider,
     CommunityfixPage,
-    // IamportService,
     InAppBrowser,
     SupporterProvider,
     ReviewProvider,
@@ -88,10 +85,7 @@ import { NotificationProvider } from '../providers/notification/notification';
     GoogleProvider,
     PlaceProvider,
     CounselorProvider,
-    NotificationProvider,
-    
-
-    //GroupProvider,
+    NotificationProvider
   ]
 })
 export class AppModule { }
