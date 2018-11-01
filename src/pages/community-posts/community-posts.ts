@@ -23,7 +23,6 @@ export class CommunityPostsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityPostsPage');
-    console.log("Community Posts community: " + JSON.stringify(this.communityInfo));
   }
 
 
@@ -31,12 +30,7 @@ export class CommunityPostsPage {
   getCommunityPosts(communityName) {
     this.communityProvider.readCommunityPosts(communityName).then((posts)=> {
       this.posts = posts;
-      console.log("POSTS!: " + JSON.stringify(this.posts));
     });
-  }
-
-  addCommunityPost() {
-    
   }
 
   toCommunityWrite(communityInfo) {

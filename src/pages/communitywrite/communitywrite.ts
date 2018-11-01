@@ -67,9 +67,6 @@ export class CommunitywritePage {
 				this.navCtrl.pop();
 			});
 
-			// this.community.uploadPost(this.title, this.text, this.dataURL, this.tag1, this.anonymity, this.communityInfo).then(() => {
-			// 	this.navCtrl.pop();
-			// });
 			let loading = this.loadingCtrl.create({
 				dismissOnPageChange: true,
 			});
@@ -77,7 +74,7 @@ export class CommunitywritePage {
 		}
 	}
 
-	openGallery() { // 사진 업로드 인듯
+	openGallery() { // 사진 업로드
 		const options: CameraOptions = {
 			quality: 100,
 			destinationType: this.camera.DestinationType.DATA_URL,
@@ -97,7 +94,7 @@ export class CommunitywritePage {
 		});
 	}
 
-	takePicture() { // 사진 자르기인줄 알았으나 사진 찍기였음
+	takePicture() { 
 		let options =
 		{
 			quality: 100,
