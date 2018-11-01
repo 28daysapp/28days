@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Navbar, LoadingController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Navbar, LoadingController, Events, AlertController } from 'ionic-angular';
 import { Crop } from '@ionic-native/crop';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
@@ -29,7 +29,7 @@ export class CharacterPage {
   photoURL;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider,
-    public loadingCtrl: LoadingController, public events: Events, private camera: Camera, private crop: Crop) {
+    public loadingCtrl: LoadingController, public events: Events, private camera: Camera, private crop: Crop, private alertCtrl: AlertController) {
     this.user2 = firebase.auth().currentUser;
     events.subscribe('user:created', (user, time) => {
       // user and time are the same arguments passed in `events.publish(user, time)`
@@ -73,7 +73,7 @@ export class CharacterPage {
       this.fileURL = 'data:image/jpeg;base64,' + imagePath;
       this.dataURL = imagePath;
 
-          this.updateProfilePicture();
+      this.updateProfilePicture();
 
     }, (err) => {
       // Handle error
@@ -105,7 +105,7 @@ export class CharacterPage {
 
           console.log("Photo URL: " + this.photoURL);
 
-  
+
           this.userProvider.updatePhoto(`${this.photoURL}`).then(() => {
             console.log("Photo uploaded")
             this.user = this.userProvider.getUserprofile(uid);
@@ -114,11 +114,20 @@ export class CharacterPage {
 
 
         });
+        const alert = this.alertCtrl.create({
+          message: `
+          <p>사진이 변경되었습니다</p>
+          `
+        });
+        alert.present();
+        setTimeout(()=> {
+          alert.dismiss();
+        }, 600)
       }
     } catch (error) {
       console.log(error)
     }
-   
+
   }
 
   changecharacter(num) {

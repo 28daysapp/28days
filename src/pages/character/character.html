@@ -5,15 +5,16 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
 
-	<div class="email-container">
-		<div >이메일 계정</div>
-		<div >{{ emailcheck }}</div>
-	</div>
+	<ion-list>
+		<button ion-item>
+			이메일 계정: {{ emailcheck }}
+		</button>
+		<button ion-item (click)="openGallery()">
+			프로필 사진 변경
+		</button>
+	</ion-list>
 
-	<div class="image-container" (click)="openGallery()">
-		<img class="image center" src="{{photoURL}}"/>
-	</div>
 	
 </ion-content>
