@@ -1,9 +1,3 @@
-<!--
-  Generated template for the CommunitywritePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
 	<ion-navbar>
@@ -31,19 +25,6 @@
 		<textarea class="area3" [(ngModel)]="tag1" placeholder="# 태그를 입력해주세요." *ngIf="this.tagcorrect"></textarea>
 		<!-- 현재 페이지 아래에있는 태그 추가를 눌렀을 경우에만 보임 -->
 	</div>
-	<!-- 예전 사진업로드 방식
-	<div class="imagechooser">
-		<button class="gallery" (click)="openGallery()" *ngIf="!pick">
-			<div>
-				<ion-icon name="camera"></ion-icon>
-				<span>사진 업로드 또는 변경</span>
-			</div>
-		</button>
-		<button class="image" (click)="openGallery()" *ngIf="pick">
-			<img src="{{ fileURL }}">
-		</button>
-	</div>
--->
 	<div class="imgchooser">
 		<button class="image" (click)="openGallery()" *ngIf="pick">
 			<img src="{{ fileURL }}">

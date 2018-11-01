@@ -223,7 +223,7 @@ export class HospitalcenterPage {
 
     setTimeout(()=> {
       loading.dismiss();
-    }, 700)
+    }, 300)
   }
 
   doRefresh(refresher) {
