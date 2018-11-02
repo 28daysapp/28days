@@ -53,8 +53,7 @@ export class NotificationProvider {
 
   readNotifications() {
     return new Promise((resolve) => {
-      // let readerUid = firebase.auth().currentUser.uid;
-      let readerUid = "12345"
+      let readerUid = firebase.auth().currentUser.uid;
       const notifications = [];
       const creatorUids = [];
       
