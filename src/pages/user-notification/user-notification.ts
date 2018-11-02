@@ -16,7 +16,7 @@ import { NotificationProvider } from '../../providers/notification/notification'
 })
 export class UserNotificationPage {
 
-  notifications
+  notifications = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -26,36 +26,44 @@ export class UserNotificationPage {
 
 /* ------------------------------------------------------------------ */
 
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserNotificationPage');
+    
   }
 
   ionViewWillEnter() {
-    
-    /*
-  ?  let type = {
-  ?    readerUid: 수신자 고유번호
-  ?    readerUsername: 수진자 Display Name
-  ?    readerType: 수신자 Notification 대한 정보
-  ?      {type: 게시물, typeId: 게시물-고유ID, notifier: "좋아요" or "댓글"}
-  ?      {type: 채팅, typeID: 채팅-고유ID}
+    let type = {
+      readerType: {
+        type: '채팅',
+        uid: '게시물-고유-ID'
+      },
+      creatorType: "채팅",
+      readerUid: "12345"
+    }
 
-  ?    creatorUid: 알림 발생하는 사람 고유번호
-  ?    creatorUsername: "알림 발생하는 사람 이름"
-  ?    timeCreated: 알림 발생 시각
-  ?  };
-    */
+    this.notification.createNotification(type);
 
-    // this.notification.createNotification(type);
+    console.log('ionViewDidLoad UserNotificationPage');
     this.getNotificationList();
   }
 
 /* ------------------------------------------------------------------ */
-
   getNotificationList() {
-    this.notification.readNotifications().then((res) => {
-      console.log(res);
-    });
+    this.notification.readNotifications().then((response:any) => {
+      console.log(response);
+      this.notifications = response;
+    })
+  }
+
+  clearNotificationList() {
+    this.notification.deleteAllNotifications().then((response) => {
+      if (response === true) {
+        this.notifications = [];
+        console.log("Deleted All Notifications")
+      } else {
+        console.log("Error in Deleting Notifications")
+      }
+    })
   }
 
 /*

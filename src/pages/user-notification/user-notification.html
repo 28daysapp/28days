@@ -7,17 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>userNotification</ion-title>
+    <ion-title>알림</ion-title>
+    <ion-buttons end>
+      <button end [disabled]="notifications.length === 0" ion-button clear (click)="clearNotificationList()">Clear</button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let notification of notifications">
-      {{notification.creatorUsername}}이 당신의 {{notification.notificationType}}에 좋아요를 남겼습니다!
-    </ion-item>
+    <button ion-item *ngFor="let notification of notifications">
+      <ion-avatar item-start>
+        <img [src]="notification.creatorPhoto" alt="avatar">
+      </ion-avatar>
+      <ng-container *ngIf="notification.readerType.type === '채팅'">
+        <div class="notification-content">
+          <b>{{notification.creatorUsername}}</b>님이 당신과 {{notification.creatorType}}을 시작했습니다!
+        </div>
+      </ng-container>
+      <ng-container *ngIf="notification.readerType.type !== '채팅'">
+          <div class="notification-content">
+              <b>{{notification.creatorUsername}}</b>님이 당신의 {{notification.readerType.type}}에 {{notification.creatorType}}을 남겼습니다!
+          </div>
+      </ng-container>
+      <p>{{notification.timeCreated | date: 'MM/dd H:mm'}}</p>
+    </button>
   </ion-list>
-
 </ion-content>
