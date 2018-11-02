@@ -3,7 +3,7 @@
     <name>Coconut</name>
     <description>서로의 마음을 돌봐주는 앱.</description>
     <author email="bhlee@mentalhealthkorea.org" href="https://www.mentalhealthkorea.org/">코코넛</author>
-    <content original-src="index.html" src="http://137.68.247.237:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -154,10 +154,16 @@
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
     <plugin name="cordova-support-google-services" spec="^1.2.1" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
+    <allow-navigation href="http://137.68.247.237:8100" sessionid="c2cb6854" />
     <plugin name="cordova-plugin-crop" spec="^0.4.0" />
+<<<<<<< HEAD
     <allow-navigation href="http://137.68.247.237:8100" sessionid="aed0612d" />
 =======
 >>>>>>> feature/notification-page
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
+=======
+    <engine name="browser" spec="^5.0.4" />
+    <engine name="android" spec="^7.1.1" />
+>>>>>>> 19554561a958017c6be6e3938048934a3ddb11e1
 </widget>

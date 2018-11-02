@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController, App, Events, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, App, Events, ModalController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { CommunitycommentProvider } from '../../providers/communitycomment/communitycomment';
 import firebase from 'firebase';
@@ -35,7 +35,7 @@ export class CommunityPage {
 
   constructor(public modalCtrl: ModalController, public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider, public fcmProvider: FcmProvider, public userProvider: UserProvider,
-    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public alertCtrl: AlertController, public appCtrl: App,
+    public popoverCtrl: PopoverController, public viewCtrl: ViewController, public appCtrl: App,
   ) {
     this.initializeCommunities()
   }

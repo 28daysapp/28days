@@ -89,36 +89,44 @@ export class MyApp {
   ) {
     this.email = "email";
 
-    firebase.initializeApp(firebaseConfig);
-    this.user = firebase.auth().currentUser;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      this.user = firebase.auth().currentUser;
+    } catch (error) {
+      console.log(error)
+    }
+
 
     platform.ready().then(() => {
-      //   // Okay, so the platform is ready and our plugins are available.
-      //   // Here you can do any higher level native things you might need.
 
-      // this.splashScreen.show();
-
-      statusBar.styleDefault();
-      // this.splashScreen.hide();
-      //   // this.initPushNotification();
-
-      if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
-        //Notifications
-        fcm.getToken().then(token => {
-          console.log("Token: " + token);
-        })
-        fcm.onNotification().subscribe(data => {
-          if (data.wasTapped) {
-            console.log("Received in background");
-          } else {
-            console.log("Received in foreground");
-          };
-        })
-        fcm.onTokenRefresh().subscribe(token => {
-          console.log(token);
-        });
-        //end notifications.
+      try {
+        statusBar.styleDefault();
+      } catch (error) {
+        console.log(error)
       }
+
+      try {
+        if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
+          //Notifications
+          fcm.getToken().then(token => {
+            console.log("Token: " + token);
+          })
+          fcm.onNotification().subscribe(data => {
+            if (data.wasTapped) {
+              console.log("Received in background");
+            } else {
+              console.log("Received in foreground");
+            };
+          })
+          fcm.onTokenRefresh().subscribe(token => {
+            console.log(token);
+          });
+          //end notifications.
+        }
+      } catch (error) {
+        console.log("Unable to use Notifications", error)
+      }
+
     });
     // this.pleaselogin();
     events.subscribe("user:created", (user, time) => {
@@ -142,6 +150,11 @@ export class MyApp {
 
   profile() {
     this.nav.push("CharacterPage");
+  }
+
+  changeProfilePicture() {
+    this.menu.close();
+    this.nav.push('CharacterPage');
   }
 
   logout() {

@@ -27,9 +27,7 @@ import { CommunityfixPage } from '../pages/communityfix/communityfix'
 import { MyProvider } from '../providers/my/my'
 import { FcmProvider } from '../providers/fcm/fcm'
 
-//import { IamportService } from 'iamport-ionic-kcp';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-//import { GroupProvider } from '../providers/group/group';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
@@ -41,6 +39,7 @@ import { CounselorProvider } from '../providers/counselor/counselor';
 import { PlaceProvider } from '../providers/place/place';
 import { Crop } from '@ionic-native/crop';
 import { NotificationProvider } from '../providers/notification/notification';
+import { CameraProvider } from '../providers/camera/camera';
 
 
 @NgModule({
@@ -78,7 +77,6 @@ import { NotificationProvider } from '../providers/notification/notification';
     PostProvider,
     MyProvider,
     CommunityfixPage,
-    // IamportService,
     InAppBrowser,
     SupporterProvider,
     ReviewProvider,
@@ -89,9 +87,7 @@ import { NotificationProvider } from '../providers/notification/notification';
     PlaceProvider,
     CounselorProvider,
     NotificationProvider,
-    
-
-    //GroupProvider,
+    CameraProvider
   ]
 })
 export class AppModule { }

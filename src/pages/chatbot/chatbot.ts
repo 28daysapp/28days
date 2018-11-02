@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IonicPage, NavController, NavParams, Content, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 @IonicPage()
@@ -33,7 +33,7 @@ export class ChatbotPage {
   modaltime = [];
   showmodal = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     public storage: Storage) {
     console.log("Start Chatbot")
   }

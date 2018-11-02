@@ -1,5 +1,20 @@
 page-community-posts {
 
+    .slides {
+        height: 30%;
+    }
+
+    .items {
+        height: auto;
+    }
+
+    .text {
+        height: auto;
+        width: 100%;
+        white-space: normal !important; 
+        text-align: left;
+    }
+
     .post-card{
         margin: 0.5rem;
         padding: 1rem;

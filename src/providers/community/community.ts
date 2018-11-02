@@ -18,7 +18,7 @@ export class CommunityProvider {
 	firecomment = firebase.database().ref('/communitycomment');
 	firereport = firebase.database().ref('/report');
 	firetag = firebase.database().ref('/tag');
-	user = firebase.database().ref('/users');
+	fireusers = firebase.database().ref('/users');
 
 	posts;
 	post;
@@ -69,47 +69,48 @@ export class CommunityProvider {
 
 
 	createCommunityPost(text, dataURL, anonymity, communityInfo) {
-		const uid = firebase.auth().currentUser.uid;
 
-		console.log("Community INFO!!!: " + communityInfo.communityName)
 
 		const promise = new Promise((resolve, reject) => {
 
-			const newPostRef = firebase.database().ref(`/communityPost/${communityInfo.communityName}`).push();
-			const createdTime = firebase.database.ServerValue.TIMESTAMP;
-			const postId = newPostRef.key;
-			const imageStore = this.firestore.ref('/community/').child(postId);
+			const uid = firebase.auth().currentUser.uid;
+			let user;
 
-			console.log("reaches here????")
-			console.log("anonymity?: " + anonymity)
-
-			if (dataURL) {
-				imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
-					console.log("r111111eaches here????")
-					this.photoURL = savedImage.downloadURL;
-					console.log(this.photoURL)
+			this.fireusers.child(uid).once("value").then((snapshot) => {
+				user = snapshot.val();
+			}).then(() => {
+				const newPostRef = firebase.database().ref(`/communityPost/${communityInfo.communityName}`).push();
+				const createdTime = firebase.database.ServerValue.TIMESTAMP;
+				const postId = newPostRef.key;
+				const imageStore = this.firestore.ref('/community/').child(postId);
+				const profilePicture = user.photoURL;
+	
+				if (dataURL) {
+					imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+						this.photoURL = savedImage.downloadURL;
+					});
+				}
+	
+				if (!anonymity) {
+					anonymity = false;
+				}
+	
+				newPostRef.set({
+					postId: postId,
+					uid: uid,
+					username: firebase.auth().currentUser.displayName,
+					text: text,
+					photoURL: this.photoURL,
+					profilePicture: profilePicture,
+					createdTime: createdTime,
+					comment: 0,
+					like: 0,
+					report: 0,
+					urlcheck: true,
+					anonymity: anonymity,
+					communityName: communityInfo.communityName
 				});
-			}
-
-			if (!anonymity) {
-				anonymity = false;
-			}
-
-			newPostRef.set({
-				postId: postId,
-				uid: uid,
-				username: firebase.auth().currentUser.displayName,
-				text: text,
-				photoURL: this.photoURL,
-				createdTime: createdTime,
-				comment: 0,
-				like: 0,
-				report: 0,
-				urlcheck: true,
-				anonymity: anonymity,
-				communityName: communityInfo.communityName
 			});
-			console.log("what about reaches here????")
 
 			resolve(true);
 		});
