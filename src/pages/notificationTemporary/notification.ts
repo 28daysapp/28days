@@ -27,14 +27,14 @@ export class NotificationPage {
   }
 
   ionViewWillEnter(){
-    var promise = new Promise((resolve) => {
-      this.notification.getAllNotification(this.uid).then((notifications) => {
-        this.notifications = notifications;
-        console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.notifications));
-      }).then(() => {
-      });
-    });
-    return promise;
+    // var promise = new Promise((resolve) => {
+    //   this.notification.getAllNotification(this.uid).then((notifications) => {
+    //     this.notifications = notifications;
+    //     console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.notifications));
+    //   }).then(() => {
+    //   });
+    // });
+    // return promise;
   }
 
 }
