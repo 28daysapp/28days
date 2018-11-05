@@ -41,14 +41,14 @@ export class CommunityProvider {
 	createCommunity(communityName, communityDescription) {
 		const promise = new Promise((resolve) => {
 			const createdTime = firebase.database.ServerValue.TIMESTAMP;
-			const newMember = 1;
+			// const newMember = 1;
 
 			firebase.database().ref(`/communityList/${communityName}`).set({
 				communityName: communityName,
 				communityDescription: communityDescription,
-				createdTime: createdTime,
-				members: newMember
-			});
+				createdTime: createdTime
+				// members: newMember
+			})
 			resolve(true);
 		});
 		return promise
@@ -129,7 +129,6 @@ export class CommunityProvider {
 	}
 
 	deleteCommunityPost(post) {
-
 		var promise = new Promise((resolve) => {
 			firebase.database().ref(`communityPost/${post.communityName}/${post.postId}`).remove();
 			resolve(true);
@@ -138,7 +137,6 @@ export class CommunityProvider {
 	}
 
 	joinCommunity(communityName: String) {
-		console.log(communityName);
 		const currentUserUid = firebase.auth().currentUser.uid;
 		const currentUserUsername = firebase.auth().currentUser.displayName;
 		const joinedTime = firebase.database.ServerValue.TIMESTAMP
@@ -153,7 +151,13 @@ export class CommunityProvider {
 		return promise
 	}
 
-	
+	increaseCommunityMember(communityName: String) {
+		const communityMemberCountRef = firebase.database().ref(`/communityList/${communityName}/members`)
+		communityMemberCountRef.transaction((currentMemberCount) => {
+			return (currentMemberCount || 0) + 1;
+		})
+	}
+
 
 
 

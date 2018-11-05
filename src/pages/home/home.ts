@@ -125,27 +125,12 @@ export class HomePage {
   }
 
 
-<<<<<<< HEAD
   goNotification(){
     if (this.user) {
       this.navCtrl.push('UserNotificationPage');
     } else {
       this.pleaselogin();
     }
-=======
-  goNotification() {
-    let alert = this.alertCtrl.create({
-      title: '알림',
-      message: '아직 준비중인 서비스입니다.',
-      buttons: [
-        {
-          text: '확인',
-          role: 'cancel'
-        },
-      ]
-    });
-    alert.present();
->>>>>>> 19554561a958017c6be6e3938048934a3ddb11e1
   }
 
   pleaselogin() {

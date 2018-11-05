@@ -33,7 +33,7 @@ export class CommunityPage {
   token;
   count;
 
-  constructor(public modalCtrl: ModalController, public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private community: CommunityProvider,
+  constructor(public modalCtrl: ModalController, public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private communityProvider: CommunityProvider,
     public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider, public fcmProvider: FcmProvider, public userProvider: UserProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public appCtrl: App,
   ) {
@@ -95,7 +95,11 @@ export class CommunityPage {
   }
 
   initializeCommunities() {
-    this.community.readCommunityList().then((communities) => {
+    this.getCommunityList();
+  }
+
+  getCommunityList() {
+    this.communityProvider.readCommunityList().then((communities) => {
       this.communities = communities;
     })
   }
@@ -104,12 +108,6 @@ export class CommunityPage {
     this.navCtrl.push('CommunityPostsPage', {
       communityInfo: community
     });
-  }
-
-  addCommunity() {
-    const communityName = "PTSD"
-    const communityDescription = "이 그룹은 외상후 스트레스 장애 커뮤니티입니다. 같이 이겨내봐요."
-    this.community.createCommunity(communityName, communityDescription);
   }
 
   searchCommunity(searchbarInput: any) {
@@ -126,13 +124,22 @@ export class CommunityPage {
   }
 
   presentCreateCommunityModal() {
-    let newCommunityModal = this.modalCtrl.create('CreateCommunityModalPage', { });
+    let newCommunityModal = this.modalCtrl.create('CreateCommunityModalPage');
     newCommunityModal.onDidDismiss(data => {
       console.log("Modal closed");
       this.initializeCommunities();
     });
     newCommunityModal.present();
-    console.log("PRESENT????")
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getCommunityList();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 500);
   }
 
   createUser() {

@@ -11,7 +11,7 @@ export class UserProvider {
 
   }
 
-  readUserCommunities() {
+  readJoinedCommunities() {
     var promise = new Promise((resolve) => {
       const communities = []
       const currentUserUid = firebase.auth().currentUser.uid;
