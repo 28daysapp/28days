@@ -12,7 +12,7 @@ export class AuthProvider {
 
   constructor() {
   }
-
+ 
   loginUser(email: string, password: string): Promise<any> {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }

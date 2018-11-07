@@ -1,0 +1,72 @@
+<ion-header>
+	<ion-navbar>
+    <ion-title>
+      프로필
+    </ion-title>
+		<ion-buttons *ngIf="this.currentUser" end>
+      <button ion-button icon-only (click)="navigateTo('MypagePage')"> 
+			  <ion-icon name="settings"></ion-icon>
+      </button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="profile-container">
+    <div>
+      <img class="profile-image" src="{{this.user.photoURL}}">
+      <h1>{{this.user.displayName}}</h1>
+      <p *ngIf="this.currentUser">{{this.user.email}}</p>
+    </div>
+    <hr>
+    <ion-label class="section-label">가입한 커뮤니티</ion-label>
+    <ion-row justify-content-center align-items-center class="communities-container">
+      <ion-item no-lines>
+        <ion-scroll class="scroll" scrollX="true" scrollbar-y="false">
+          <div *ngFor="let community of sampleJoinedCommunity" class="community-icon">
+            <p>{{community.communityName}}</p>
+          </div>
+        </ion-scroll>
+      </ion-item>
+    </ion-row>
+    <hr>
+    <ion-label class="section-label">쓴 글</ion-label>
+    <div class="cards-container">
+      <ion-card class="card-container"*ngFor="let card of displayedPostCards">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{this.user.photoURL}}">
+          </ion-avatar>
+          <h2>{{this.user.displayName}}</h2>
+          <p>{{card.communityName}}</p>
+        </ion-item>
+        <ion-card-content class="card-content">
+          <p>{{card.postContent}}</p>
+        </ion-card-content>
+        <ion-row class="card-buttons">
+          <ion-col class="button-wrapper" col-5>
+            <button ion-button icon-start clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              좋아요 {{card.likeCount}}개
+            </button>
+          </ion-col>
+          <ion-col class="button-wrapper" col-5>
+            <button ion-button icon-start clear small>
+              <ion-icon name="text"></ion-icon>
+              댓글 {{card.commentCount}}개
+            </button>
+          </ion-col>
+          <ion-col class="button-wrapper" class="card-time">
+            <ion-note>{{card.postTimeCreated}}</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-infinite-scroll *ngIf="samplePostCards.length !== displayedPostCards.length" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+        ></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
+</ion-content>

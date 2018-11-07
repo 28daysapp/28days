@@ -10,4 +10,4 @@ export const Tab1Root = 'CommunityPage';
 export const Tab2Root = 'OnofflinePage';
 export const Tab3Root = 'ChatsPage';
 export const Tab4Root = 'HospitalcenterPage';
-export const Tab5Root = 'HomePage';
+export const Tab5Root = 'ProfilePage';

@@ -19,6 +19,24 @@ export class UserProvider {
     
   }
 
+  readCurrentUser() {
+    return firebase.auth().currentUser;
+  }
+
+  readUserData(userid) {
+    return new Promise((resolve) => {
+      firebase.database().ref(`/users/${userid}`).once('value').then((snapshot) => {
+        const { uid, displayName, email, photoURL } = snapshot.val();
+        let result = {
+          uid,
+          displayName,
+          email,
+          photoURL
+        }
+        resolve(result);
+      })
+    })
+  }
 
 	checkUsername(username: string) {
   	username = username.toLowerCase();
