@@ -114,6 +114,47 @@ export class CommunityProvider {
 		return promise
 	}
 
+	createMyPost(text, dataURL, communityInfo) {
+		console.log("create my post")
+		const promise = new Promise((resolve) => {
+			const uid = firebase.auth().currentUser.uid;
+			let user;
+			this.fireusers.child(uid).once("value").then((snapshot) => {
+				user = snapshot.val();
+			}).then(() => {
+				const newPostRef = firebase.database().ref(`/myPost/${uid}`).push();
+				const createdTime = firebase.database.ServerValue.TIMESTAMP;
+				const postId = newPostRef.key;
+				const imageStore = this.firestore.ref('/community/').child(postId);
+				const profilePicture = user.photoURL;
+
+				if (dataURL) {
+					imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+						this.photoURL = savedImage.downloadURL;
+					});
+				}
+
+				newPostRef.set({
+					postId: postId,
+					uid: uid,
+					username: firebase.auth().currentUser.displayName,
+					text: text,
+					photoURL: this.photoURL,
+					profilePicture: profilePicture,
+					createdTime: createdTime,
+					comment: 0,
+					like: 0,
+					report: 0,
+					urlcheck: true,
+					communityName: communityInfo.communityName
+				});
+			});
+			resolve(true);
+		});
+
+		return promise
+	}
+
 	readCommunityPosts(communityName) {
 		var promise = new Promise((resolve) => {
 			this.fireCommunityPost.child(communityName).once('value').then((snapshot) => {
