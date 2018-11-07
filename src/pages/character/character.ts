@@ -62,7 +62,7 @@ export class CharacterPage {
 
   openGallery() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 30,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -122,7 +122,7 @@ export class CharacterPage {
         alert.present();
         setTimeout(()=> {
           alert.dismiss();
-        }, 600)
+        }, 2000)
       }
     } catch (error) {
       console.log(error)

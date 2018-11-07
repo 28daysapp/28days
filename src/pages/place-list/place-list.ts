@@ -1,21 +1,19 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController, AlertController, App, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, AlertController, App, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
 import firebase from 'firebase';
+import { PlaceProvider } from '../../providers/place/place';
 
-// import { IonicPage, NavController, NavParams } from 'ionic-angular';
-// import { Geolocation } from '@ionic-native/geolocation';
-
-declare var google;
+declare let google;
 
 @IonicPage()
 @Component({
-  selector: 'page-hospitalcenter',
-  templateUrl: 'hospitalcenter.html',
+  selector: 'page-place-list',
+  templateUrl: 'place-list.html',
 })
-export class HospitalcenterPage {
+export class PlaceListPage {
 
   @ViewChild("map") mapElement: ElementRef;
 
@@ -44,13 +42,13 @@ export class HospitalcenterPage {
   apiProvider;
   loading;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation, public modalController: ModalController,
-    public menu: MenuController, public appCrtl: App, public google: GoogleProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation,
+    public menu: MenuController, public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
     this.places = [];
   }
 
   ionViewWillEnter() {
-    console.log('ionViewDidLoad HospitalcenterPage');
+    console.log('ionViewDidLoad PlaceListPage');
 
     this.user = firebase.auth().currentUser;
     if (this.user) {
@@ -65,8 +63,6 @@ export class HospitalcenterPage {
     this.loadMap();
 
   }
-
-  
 
   loadMap() {
     // this.geolocatio이 안돼서 임의로 기본 위치는 서울
@@ -103,9 +99,6 @@ export class HospitalcenterPage {
       streetViewControl: false
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-    console.log("THIS MAP: " + this.map);
-
-    console.log("this.area = " + this.area);
 
     this.searchByText(this.area);
 
@@ -149,7 +142,7 @@ export class HospitalcenterPage {
             this.places[i].reviewCount = 0;
             this.places[i].ratings = 0;
             this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
-            this.places[i].photo = this.google.getPlacePhoto(results[i].reference)
+            this.places[i].photo = this.googleProvider.getPlacePhoto(results[i].reference)
             this.countReviews(results[i].place_id, i);
           }
         } else {
@@ -176,7 +169,6 @@ export class HospitalcenterPage {
 
 
   placeDetail(place) {
-    //this.appCrtl.getRootNavs()[0].push('PlaceDetailPage', { place: place });
     this.navCtrl.push('PlaceDetailPage', { place: place });
   }
 
@@ -184,11 +176,11 @@ export class HospitalcenterPage {
     let alert = this.alertCtrl.create({
       title: '정신병원과 상담센터?',
       message: `
-      <p><strong>정신과</strong>: 약물 치료가 병행되고 심리상담/검사/치료 기록이 건강보험에 의해 남습니다.</p>
+      <p><strong>정신과</strong>: 약물 치료가 병행될 수 있고 보험 처리가 되어서 상담센터보다 조금 더 저렴한 편이야.</p>
 
-      <p><strong>상담센터</strong>: 약물 치료 없이 상담자와의 대화가 자기 통찰을 통해 건강한 심시을 회복할 수 있도록 돕습니다.</p>
+      <p><strong>상담센터</strong>: 상담자와의 대화를 통해 자신을 좀 더 깊게 이해하고 건강한 마음을 회복할 수 있도록 돕는 곳이야.</p>
       `,
-      buttons: ['알겠어요!']
+      buttons: ['알겠어!']
     });
     alert.present();
   }
@@ -221,7 +213,7 @@ export class HospitalcenterPage {
 
     loading.present()
 
-    setTimeout(()=> {
+    setTimeout(() => {
       loading.dismiss();
     }, 300)
   }
@@ -237,5 +229,3 @@ export class HospitalcenterPage {
   }
 
 }
-
-

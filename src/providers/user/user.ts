@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 
-
-
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
 
@@ -16,9 +8,26 @@ export class UserProvider {
   fireusernames = firebase.database().ref('/usernames');
   photo;
   constructor() {
-    
+
   }
 
+  readJoinedCommunities() {
+    var promise = new Promise((resolve) => {
+      const communities = []
+      const currentUserUid = firebase.auth().currentUser.uid;
+  
+      firebase.database().ref(`/users/${currentUserUid}`).child("joinedCommunities").once("value").then((snapshot)=>{
+        snapshot.forEach((childSnapshot) => {
+          const community = childSnapshot.val();
+          communities.push(community);
+        });
+        resolve(communities);
+      })
+    });
+    return promise;
+  }
+
+<<<<<<< HEAD
   readCurrentUser() {
     return firebase.auth().currentUser;
   }
@@ -36,19 +45,34 @@ export class UserProvider {
         resolve(result);
       })
     })
+=======
+  createCommunityMembership(communityName) {
+    const currentUserUid = firebase.auth().currentUser.uid;
+    const promise = new Promise((resolve) => {
+			firebase.database().ref(`/users/${currentUserUid}/joinedCommunities`).push({
+        communityName: communityName
+      });
+      resolve(true);
+		});
+		return promise;
+>>>>>>> 57c25221760b57ccec86b049bd9724b4b18d16ef
   }
 
-	checkUsername(username: string) {
-  	username = username.toLowerCase();
-    return this.fireusernames.child(username).once("value");
-   }
-   
-   searchuser(){
-     
-   }
+  checkUser(currentUserUid: String, targetUserUid: String) {
+    if (currentUserUid == targetUserUid) {
+      return true
+    } else {
+      return false
+    }
+  }
 
- 	updateUserprofile(email:string, username: string) {
-    var uid = firebase.auth().currentUser.uid;
+  checkUsername(username: string) {
+    username = username.toLowerCase();
+    return this.fireusernames.child(username).once("value");
+  }
+
+  updateUserprofile(email: string, username: string) {
+    let uid = firebase.auth().currentUser.uid;
     let data = {};
     data[username] = uid;
     var promise = new Promise((resolve) => {
@@ -70,7 +94,7 @@ export class UserProvider {
       });
     });
     return promise;
- 	}
+  }
 
   getallUserprofiles() {
     var promise = new Promise((resolve) => {
@@ -123,7 +147,7 @@ export class UserProvider {
     return promise;
   }
 
-  updatePassword(password){
+  updatePassword(password) {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
       this.fireusers.child(uid).update({

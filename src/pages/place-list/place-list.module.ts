@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { CenterPage } from './center';
+import { PlaceListPage } from './place-list';
 
 @NgModule({
   declarations: [
-    CenterPage,
+    PlaceListPage,
   ],
   imports: [
-    IonicPageModule.forChild(CenterPage),
+    IonicPageModule.forChild(PlaceListPage),
   ],
 })
-export class CenterPageModule {}
+export class PlaceListPageModule {}

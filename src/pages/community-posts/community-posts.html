@@ -15,23 +15,31 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-slides class="slides">
     <ion-slide>
       <div>
-          {{ communityInfo.communityName }}
+        {{ communityInfo.communityName }}
       </div>
-      <button ion-button>
-          커뮤니티 가입하기
+      <button *ngIf="!alreadyJoined" ion-button (click)="joinCommunity()">
+        커뮤니티 가입하기
       </button>
+      <button *ngIf="alreadyJoined" ion-button >
+          커뮤니티 멤버
+        </button>
     </ion-slide>
     <ion-slide>
-        {{ communityInfo.communityDescription }}
+      {{ communityInfo.communityDescription }}
     </ion-slide>
   </ion-slides>
 
 
   <ion-list>
-    <ion-item class="items" *ngFor="let post of posts">
+    <ion-item class="items" *ngFor="let post of posts" (click)="presentActionSheet(post)">
       <ion-avatar item-start>
         <img *ngIf="!post.anonymity" src="{{post.profilePicture}}">
         <img *ngIf="post.anonymity" src="../../assets/round-account_circle.svg">
@@ -42,21 +50,5 @@
       <!-- <ion-note item-end>{{ post.createdTime | date:'MM.dd a hh:mm' }}</ion-note> -->
     </ion-item>
   </ion-list>
-
-  <!-- <div class="posts-container">
-    <div class="post-card" *ngFor="let post of posts">
-
-      
-
-      <img class="image center" src="{{post.profilePicture}}" />
-      <div class="post-username" *ngIf="!post.anonymity">{{ post.username }}</div>
-      <div class="post-username" *ngIf="post.anonymity">익명</div>
-      <div class="post-createdTime">{{ post.createdTime | date:'MM.dd a hh:mm' }}</div>
-      <div class="post-text">{{ post.text }}</div>
-      <div class="post-like">서폿 {{ post.like }}</div>
-      <div class="post-comment"> 댓글 {{ post.comment }}</div>
-    </div>
-
-  </div> -->
 
 </ion-content>

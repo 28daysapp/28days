@@ -39,22 +39,23 @@ export class CommunityProvider {
 	//--------------------------------------------------------------------------------
 
 	createCommunity(communityName, communityDescription) {
-		const promise = new Promise((resolve, reject) => {
+		const promise = new Promise((resolve) => {
 			const createdTime = firebase.database.ServerValue.TIMESTAMP;
-			const newMember = 1;
+			// const newMember = 1;
 
 			firebase.database().ref(`/communityList/${communityName}`).set({
 				communityName: communityName,
 				communityDescription: communityDescription,
-				createdTime: createdTime,
-				members: newMember
-			});
+				createdTime: createdTime
+				// members: newMember
+			})
+			resolve(true);
 		});
 		return promise
 	}
 
 	readCommunityList() {
-		const promise = new Promise((resolve, reject) => {
+		const promise = new Promise((resolve) => {
 			this.fireCommunityList.once('value').then((snapshot) => {
 				const communities = [];
 				snapshot.forEach((childSnapshot) => {
@@ -69,13 +70,9 @@ export class CommunityProvider {
 
 
 	createCommunityPost(text, dataURL, anonymity, communityInfo) {
-
-
-		const promise = new Promise((resolve, reject) => {
-
+		const promise = new Promise((resolve) => {
 			const uid = firebase.auth().currentUser.uid;
 			let user;
-
 			this.fireusers.child(uid).once("value").then((snapshot) => {
 				user = snapshot.val();
 			}).then(() => {
@@ -84,17 +81,17 @@ export class CommunityProvider {
 				const postId = newPostRef.key;
 				const imageStore = this.firestore.ref('/community/').child(postId);
 				const profilePicture = user.photoURL;
-	
+
 				if (dataURL) {
 					imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
 						this.photoURL = savedImage.downloadURL;
 					});
 				}
-	
+
 				if (!anonymity) {
 					anonymity = false;
 				}
-	
+
 				newPostRef.set({
 					postId: postId,
 					uid: uid,
@@ -111,7 +108,47 @@ export class CommunityProvider {
 					communityName: communityInfo.communityName
 				});
 			});
+			resolve(true);
+		});
 
+		return promise
+	}
+
+	createMyPost(text, dataURL, communityInfo) {
+		console.log("create my post")
+		const promise = new Promise((resolve) => {
+			const uid = firebase.auth().currentUser.uid;
+			let user;
+			this.fireusers.child(uid).once("value").then((snapshot) => {
+				user = snapshot.val();
+			}).then(() => {
+				const newPostRef = firebase.database().ref(`/myPost/${uid}`).push();
+				const createdTime = firebase.database.ServerValue.TIMESTAMP;
+				const postId = newPostRef.key;
+				const imageStore = this.firestore.ref('/community/').child(postId);
+				const profilePicture = user.photoURL;
+
+				if (dataURL) {
+					imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
+						this.photoURL = savedImage.downloadURL;
+					});
+				}
+
+				newPostRef.set({
+					postId: postId,
+					uid: uid,
+					username: firebase.auth().currentUser.displayName,
+					text: text,
+					photoURL: this.photoURL,
+					profilePicture: profilePicture,
+					createdTime: createdTime,
+					comment: 0,
+					like: 0,
+					report: 0,
+					urlcheck: true,
+					communityName: communityInfo.communityName
+				});
+			});
 			resolve(true);
 		});
 
@@ -119,7 +156,7 @@ export class CommunityProvider {
 	}
 
 	readCommunityPosts(communityName) {
-		var promise = new Promise((resolve, reject) => {
+		var promise = new Promise((resolve) => {
 			this.fireCommunityPost.child(communityName).once('value').then((snapshot) => {
 				const posts = [];
 				snapshot.forEach((childSnapshot) => {
@@ -131,6 +168,37 @@ export class CommunityProvider {
 		});
 		return promise
 	}
+
+	deleteCommunityPost(post) {
+		var promise = new Promise((resolve) => {
+			firebase.database().ref(`communityPost/${post.communityName}/${post.postId}`).remove();
+			resolve(true);
+		});
+		return promise
+	}
+
+	joinCommunity(communityName: String) {
+		const currentUserUid = firebase.auth().currentUser.uid;
+		const currentUserUsername = firebase.auth().currentUser.displayName;
+		const joinedTime = firebase.database.ServerValue.TIMESTAMP
+		const promise = new Promise((resolve) => {
+			firebase.database().ref(`/communityMembers/${communityName}`).push({
+				uid: currentUserUid,
+				username: currentUserUsername,
+				joinedTime: joinedTime
+			});
+			resolve(true);
+		});
+		return promise
+	}
+
+	increaseCommunityMember(communityName: String) {
+		const communityMemberCountRef = firebase.database().ref(`/communityList/${communityName}/members`)
+		communityMemberCountRef.transaction((currentMemberCount) => {
+			return (currentMemberCount || 0) + 1;
+		})
+	}
+
 
 
 

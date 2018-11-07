@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
+import { UserProvider } from '../../providers/user/user';
 
 
 @IonicPage()
@@ -14,8 +15,8 @@ export class CreateCommunityModalPage {
   communityDescription: String = '';
   isComplete: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewController: ViewController, public community: CommunityProvider,
-    private alertCtrl: AlertController,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewController: ViewController, public userProvider: UserProvider, public communityProvider: CommunityProvider,
+    private alertCtrl: AlertController, ) {
   }
 
   ionViewDidLoad() {
@@ -24,8 +25,14 @@ export class CreateCommunityModalPage {
 
   addCommunity() {
     this.checkForm();
-    if(this.isComplete) {
-      this.community.createCommunity(this.communityName, this.communityDescription);
+    if (this.isComplete) {
+      this.communityProvider.createCommunity(this.communityName, this.communityDescription)
+        .then(() => {
+          this.userProvider.createCommunityMembership(this.communityName);
+        }).then(() => {
+          this.communityProvider.increaseCommunityMember(this.communityName);
+        });
+
       this.dismiss();
       this.showAlert()
     }
@@ -42,7 +49,7 @@ export class CreateCommunityModalPage {
     alert.present();
   }
 
-  checkForm(){
+  checkForm() {
     if (this.communityName == '') {
       const alert = this.alertCtrl.create({
         message: `
@@ -67,11 +74,11 @@ export class CreateCommunityModalPage {
         buttons: ['알겠어']
       });
       alert.present();
-    }else {
+    } else {
       this.isComplete = true;
     }
     return;
-   }
+  }
 
   dismiss() {
     this.viewController.dismiss();

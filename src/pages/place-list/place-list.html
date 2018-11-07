@@ -1,0 +1,65 @@
+<ion-header no-border>
+    <ion-navbar no-border-bottom>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>병원/센터
+        <img src="assets/icon/question.png" (click)="showExplanation()">
+      </ion-title>
+  
+      <ion-buttons right>
+        <button ion-button icon-only (click)="notReady()">
+          정렬
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar no-border>
+      <ion-searchbar (ionInput)="searchByText($event)" placeholder="검색"></ion-searchbar>
+    </ion-toolbar>
+    <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
+        <ion-segment-button value="center">
+          상담센터
+        </ion-segment-button>
+        <ion-segment-button value="psychiatric">
+          정신과
+        </ion-segment-button>
+      </ion-segment>
+  </ion-header>
+  
+  <ion-content no-border>
+    <!-- Segment in content -->
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+   
+  
+  
+    <div #map id="map"></div>
+  
+    <ion-card class="card-page" *ngFor="let place of places" (click)="placeDetail(place)">
+  
+      <ion-item class="card-item">
+        <ion-avatar item-start>
+          <div class="container">
+            <img id="main-img" src="{{place.image}}" (Error)="this.src='/assets/imgs/hospital-default1.svg';">
+          </div>
+        </ion-avatar>
+  
+        <div class="content-wrapper">
+          <div class="card-title"> {{ place.name }}</div>
+          <div class="card-subtitle">{{ place.formatted_address.substr(5) }}</div>
+          <div class="card-bottom">
+            <button class="card-star" ion-button icon-start clear small>
+              <ion-icon name="star"> {{ place.ratings }} 리뷰 {{ place.reviewCount }}</ion-icon>
+            </button>
+            <button class="card-review" ion-button icon-start clear small>
+  
+            </button>
+          </div>
+        </div>
+      </ion-item>
+  
+  
+    </ion-card>
+  
+  </ion-content>
