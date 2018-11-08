@@ -47,8 +47,10 @@
       <div class="header">
         <img src="assets/cancel.svg" menuClose>
       </div>
-      <div class="profile">
-        <img src="{{photoURL}}"><br>
+      <div class="profile" (click)="changeProfilePicture()">
+        <div class="image-container">
+            <img class="profile-image" src="{{photoURL}}"><br>
+        </div>
         <div class="username"> {{username}} </div>
         <div class="email"> {{email}} </div>
         <div class="myLog">

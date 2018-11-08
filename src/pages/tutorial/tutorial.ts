@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
+import { AuthProvider } from '../../providers/auth/auth';
+
+
 // import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 @IonicPage()
@@ -11,9 +16,26 @@ export class TutorialPage {
 
   @ViewChild(Slides) slides: Slides;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams
+  user;
+
+  constructor(public auth: AuthProvider, public storage: Storage, public navCtrl: NavController, public navParams: NavParams
     //, private nativePageTransitions: NativePageTransitions
     ) { }
+
+  ionViewWillEnter() {
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.navCtrl.push("TabsPage");
+    } else {
+      this.storage.get('localcred').then((localcred) => {
+        if (localcred) {
+          // cache exists
+          this.navCtrl.push("TabsPage");
+        }
+      });
+    }
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TutorialPage');
@@ -30,7 +52,7 @@ export class TutorialPage {
     //     slowdownfactor: -5,
     //   };
     //   this.nativePageTransitions.slide(options);
-      this.navCtrl.push('IntroPage');
+      this.navCtrl.push('ChatbotPage');
     }
   }
 }

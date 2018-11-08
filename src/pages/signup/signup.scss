@@ -157,7 +157,25 @@ page-signup {
 	}
 
 	.spacing {
-		padding: 2rem;
+		margin: 0 0 3rem 0;
+	}
+
+	.register-done {
+		margin: 2em 0;
+		text-align: center;
+
+		justify-content: center;
+		align-content: center;
+	}
+
+	.spans {
+		margin: auto;
+		width: 100%;
+		padding: 1em;
+		text-align: center;
+
+		justify-content: center;
+		align-content: center;
 	}
 
 }

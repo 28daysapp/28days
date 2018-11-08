@@ -29,7 +29,6 @@ export class MychatsPage {
     this.navCtrl.push('RequestedchatPage');
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HospitalcenterPage');
     this.user = firebase.auth().currentUser;
     if (this.user) {
       this.menu.enable(true, 'loggedInMenu');

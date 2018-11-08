@@ -24,6 +24,9 @@ $app-direction: ltr;
 
 $list-background-color: transparent;
 
+$text-input-highlight-color-invalid: transparent;
+$text-input-highlight-color-valid: transparent;
+
 
 // Named Color Variables
 // --------------------------------------------------
@@ -36,6 +39,7 @@ $list-background-color: transparent;
 $colors: (
   primary:   #55b26e,
   primary_shadow: #00661b,
+  primary_light: #BFE7CA,
   secondary:  #49BF96,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -100,6 +104,8 @@ $segment-button-md-border-color-activated: color($colors, black);
 $segment-button-md-text-color-activated: color($colors, black);
 
 $tabs-md-tab-padding-top: 9px;
+
+$text-input-md-show-focus-highlight: false;
 
 // App Windows Variables
 // --------------------------------------------------

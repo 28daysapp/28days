@@ -6,12 +6,6 @@ import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
 import { NavParams, ModalController } from 'ionic-angular';
 
-/**
- * Generated class for the MypagePage page.
- *
- * S팅e https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -29,12 +23,6 @@ export class MypagePage {
   operator;
   origGreeting;
   showmodal = false;
-
-/* tab 소스
-  tab1: string = "MychatsPage";
-  tab2: string = "MydepositoryPage";
-  tab3: string = "MysettingPage";
-	*/
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController) {

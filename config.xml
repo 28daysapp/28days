@@ -121,8 +121,6 @@
     <allow-navigation href="http://137.68.247.45:8104" />
     <allow-navigation href="http://137.68.247.45:8102" />
     <allow-navigation href="http://137.68.247.45:8105" />
-    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <allow-navigation href="http://137.68.247.13:8101" />
     <allow-navigation href="http://137.68.246.201:8100" />
     <allow-navigation href="http://137.68.247.139:8100" />
@@ -135,6 +133,9 @@
     <allow-navigation href="http://137.68.249.34:8100" sessionid="67887f9e" />
     <allow-navigation href="http://192.168.35.51:8100" sessionid="fc12cd45" />
     <allow-navigation href="http://137.68.247.254:8100" sessionid="0d00c399" />
-    <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://137.68.247.237:8100" sessionid="c2cb6854" />
+    <allow-navigation href="http://137.68.247.237:8100" sessionid="aed0612d" />
+    <engine name="browser" spec="^5.0.4" />
+    <engine name="android" spec="^7.1.1" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

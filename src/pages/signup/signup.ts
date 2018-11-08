@@ -8,13 +8,6 @@ import { matchOtherValidator } from '../../validators/match-other-validator';
 import { PasswordValidator } from '../../validators/password';
 import { Storage } from '@ionic/storage';
 
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -38,9 +31,8 @@ export class SignupPage {
     this.signupForm = formBuilder.group({
     	name: ['', Validators.compose([Validators.required, Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-  		password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])],
-    	passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])],
-      age: ['', Validators.required],
+  		password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])]
+    	// passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])]
     });
 
     // this.clickterms1 = true;
@@ -48,7 +40,7 @@ export class SignupPage {
   }
 
   signupUser(){
-    if (!this.signupForm.valid || !this.usernameAvailable || this.gender == '') {
+    if (!this.signupForm.valid || !this.usernameAvailable) {
       console.log(this.signupForm.value.name);
       let alert = this.alertCtrl.create({
         title: '회원가입 오류',
@@ -62,21 +54,22 @@ export class SignupPage {
       });
       alert.present();
     } 
-    else if(this.clickterms1 == false || this.clickterms2 == false){
-      let alert = this.alertCtrl.create({
-        title: '회원가입 오류',
-        message: '약관에 모두 동의해주세요!',
-        buttons: [
-          {
-            text: '확인',
-            role: 'cancel'
-          }
-        ]
-      });
-      alert.present();
-    } else {
+    // else if(this.clickterms1 == false || this.clickterms2 == false){
+    //   let alert = this.alertCtrl.create({
+    //     title: '회원가입 오류',
+    //     message: '약관에 모두 동의해주세요!',
+    //     buttons: [
+    //       {
+    //         text: '확인',
+    //         role: 'cancel'
+    //       }
+    //     ]
+    //   });
+    //   alert.present();
+    // } 
+    else {
       this.auth.signupUser(this.signupForm.value.email, this.signupForm.value.password).then(() => {
-      	this.user.updateUserprofile(this.signupForm.value.email, this.signupForm.value.name, this.gender, this.signupForm.value.age).then(() => {
+      	this.user.updateUserprofile(this.signupForm.value.email, this.signupForm.value.name).then(() => {
           this.storage.set('localcred', {
             email: this.signupForm.value.email,
             password: this.signupForm.value.password
@@ -124,44 +117,52 @@ export class SignupPage {
     }
   }
 
-  setMale() {
-    this.clickmale = true;
-    this.clickfemale = false;
-    this.clickEtc = false;
+  // setMale() {
+  //   this.clickmale = true;
+  //   this.clickfemale = false;
+  //   this.clickEtc = false;
 
-    this.gender = 'M';
-  }
+  //   this.gender = 'M';
+  // }
 
-  setFemale() {
-    this.clickmale = false;
-    this.clickfemale = true;
-    this.clickEtc = false;
+  // setFemale() {
+  //   this.clickmale = false;
+  //   this.clickfemale = true;
+  //   this.clickEtc = false;
 
-    this.gender = 'F';
-  }
+  //   this.gender = 'F';
+  // }
 
-  setEtc() {
-    this.clickmale = false;
-    this.clickfemale = false;
-    this.clickEtc = true;
+  // setEtc() {
+  //   this.clickmale = false;
+  //   this.clickfemale = false;
+  //   this.clickEtc = true;
 
-    this.gender = 'E';
-  }
+  //   this.gender = 'E';
+  // }
 
 
-  setTerms1(){
-    this.clickterms1 = true;
-  }
+  // setTerms1(){
+  //   if(this.clickterms1 == false) {
+  //     this.clickterms1 = true;
+  //   } else {
+  //     this.clickterms1 = false;
+  //   }
+  // }
 
-  setTerms2(){
-    this.clickterms2 = true;
-  }
+  // setTerms2(){
+  //   if(this.clickterms2 == false) {
+  //     this.clickterms2 = true;
+  //   } else {
+  //     this.clickterms2 = false;
+  //   }
+  // }
 
-  terms1(){
-    this.navCtrl.push("PersonalInformationPage");
-  }
+  // terms1(){
+  //   this.navCtrl.push("PersonalInformationPage");
+  // }
 
-  terms2(){
-    this.navCtrl.push("TermsUsePage");
-  }
+  // terms2(){
+  //   this.navCtrl.push("TermsUsePage");
+  // }
 }

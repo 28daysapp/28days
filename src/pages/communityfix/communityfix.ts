@@ -65,13 +65,13 @@ export class CommunityfixPage {
 			alert.present();
 		}
 		else {
-			this.community.updatePost(title, text).then(() => { // communityProvider 의 updatepost를 수행
-				this.navCtrl.pop();
-			});
-			let loading = this.loadingCtrl.create({
-				dismissOnPageChange: true,
-			});
-			loading.present();
+			// this.community.updatePost(title, text).then(() => { // communityProvider 의 updatepost를 수행
+			// 	this.navCtrl.pop();
+			// });
+			// let loading = this.loadingCtrl.create({
+			// 	dismissOnPageChange: true,
+			// });
+			// loading.present();
 		} /*
 		this.community.updatePost(title, text).then(() => { // communityProvider 의 updatepost를 수행
 			this.navCtrl.pop();

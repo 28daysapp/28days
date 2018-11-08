@@ -91,28 +91,12 @@ export class ReviewWritePage {
   }
 
   write() {
-
-    // let loading = this.loadingCtrl.create({
-    //   dismissOnPageChange: true,
-    // });
-
-    // loading.present();
-
-    // if(this.text != null) {
-    //   let alert = this.alertCtrl.create({
-    //     'title': '후기 내용을 작성해주세요!',
-    //     buttons: ['Dismiss']
-    //   });
-    //   alert.present();
-
-    //   return;
-    // }
-    if(!this.text) {
+    if (!this.text) {
       let alert = this.alertCtrl.create({
-            'title': '후기 내용을 작성해주세요!',
-            buttons: ['닫기']
-          });
-          alert.present();
+        'title': '후기 내용을 작성해주세요!',
+        buttons: ['닫기']
+      });
+      alert.present();
     }
 
     if(this.placeId && this.rating && this.text != null) {
