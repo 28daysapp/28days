@@ -116,7 +116,7 @@ export class ReviewWritePage {
     }
 
     if(this.placeId && this.rating && this.text != null) {
-      this.review.writeReview(this.placeId, this.rating, this.text).then(() => {
+      this.review.writeReview(this.placeId, this.placeName, this.rating, this.text).then(() => {
         this.navCtrl.pop();
       });
     }

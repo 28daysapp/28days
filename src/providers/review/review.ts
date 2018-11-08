@@ -17,7 +17,7 @@ export class ReviewProvider {
     console.log('Hello ReviewProvider Provider');
   }
 
-  writeReview(placeId, rating, text) {
+  writeReview(placeId, placeName, rating, text) {
 
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
@@ -28,6 +28,7 @@ export class ReviewProvider {
       var ratingAvg = (rating[0] + rating[1] + rating[2] + rating[3]) / 4.0;
 
       newPostRef.set({
+        placeName: placeName,
         postId: postId,
         uid: uid,
         rating: rating,

@@ -3,7 +3,7 @@
     <name>Coconut</name>
     <description>서로의 마음을 돌봐주는 앱.</description>
     <author email="bhlee@mentalhealthkorea.org" href="https://www.mentalhealthkorea.org/">코코넛</author>
-    <content original-src="index.html" src="http://137.68.247.254:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
