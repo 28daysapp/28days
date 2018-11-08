@@ -36,14 +36,9 @@ export class CommunityPostsPage {
   }
 
   toCommunityWrite(communityInfo) {
-    if (!this.alreadyJoined) {
-      this.postWriteAlert();
-      return;
-    } else {
-      this.navCtrl.push("CommunitywritePage", {
-        communityInfo: communityInfo
-      });
-    }
+    this.navCtrl.push("CommunitywritePage", {
+      communityInfo: communityInfo
+    });
   }
 
   joinCommunity() {
@@ -55,6 +50,7 @@ export class CommunityPostsPage {
         this.communityProvider.increaseCommunityMember(communityName);
       })
       .then(() => {
+        this.checkIfJoinedCommunity();
         this.getCommunityPosts(this.communityInfo.communityName);
       })
       .then(() => {
