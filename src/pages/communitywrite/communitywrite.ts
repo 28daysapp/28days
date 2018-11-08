@@ -63,8 +63,8 @@ export class CommunitywritePage {
 		}
 		else {
 
-			this.community.createCommunityPost(this.text, this.dataURL, this.anonymity, this.communityInfo).then(() => {
-				this.community.createMyPost(this.text, this.dataURL, this.communityInfo);
+			this.community.createCommunityPost(this.text, this.dataURL, this.anonymity, this.communityInfo).then((postId) => {
+				this.community.createMyPost(postId, this.text, this.dataURL, this.communityInfo);
 			}).then(()=>{
 				this.navCtrl.pop();
 			});

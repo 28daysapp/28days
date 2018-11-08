@@ -65,7 +65,7 @@ export class CommunityPostsPage {
   }
 
   checkIfJoinedCommunity() {
-    this.userProvider.readJoinedCommunities().then((joinedCommunities) => {
+    this.userProvider.readJoinedCommunities(this.currentUserUid).then((joinedCommunities) => {
       for (let i in joinedCommunities) {
         if (this.communityInfo.communityName == joinedCommunities[i].communityName) {
           this.alreadyJoined = true
@@ -87,7 +87,11 @@ export class CommunityPostsPage {
             handler: () => {
               console.log('Destructive clicked');
               this.communityProvider.deleteCommunityPost(post).then(() => {
+                this.communityProvider.deleteMyPost(post);
                 this.getCommunityPosts(this.communityInfo.communityName)
+              }).then(()=>{
+                
+              }).then(()=>{
               });
             }
           },

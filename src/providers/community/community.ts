@@ -19,6 +19,7 @@ export class CommunityProvider {
 	firereport = firebase.database().ref('/report');
 	firetag = firebase.database().ref('/tag');
 	fireusers = firebase.database().ref('/users');
+	fireMyPost = firebase.database().ref('/myPost');
 
 	posts;
 	post;
@@ -70,7 +71,7 @@ export class CommunityProvider {
 
 
 	createCommunityPost(text, dataURL, anonymity, communityInfo) {
-		const promise = new Promise((resolve) => {
+		return new Promise((resolve) => {
 			const uid = firebase.auth().currentUser.uid;
 			let user;
 			this.fireusers.child(uid).once("value").then((snapshot) => {
@@ -107,14 +108,12 @@ export class CommunityProvider {
 					anonymity: anonymity,
 					communityName: communityInfo.communityName
 				});
+				resolve(postId);
 			});
-			resolve(true);
 		});
-
-		return promise
 	}
 
-	createMyPost(text, dataURL, communityInfo) {
+	createMyPost(postId, text, dataURL, communityInfo) {
 		console.log("create my post")
 		const promise = new Promise((resolve) => {
 			const uid = firebase.auth().currentUser.uid;
@@ -122,9 +121,8 @@ export class CommunityProvider {
 			this.fireusers.child(uid).once("value").then((snapshot) => {
 				user = snapshot.val();
 			}).then(() => {
-				const newPostRef = firebase.database().ref(`/myPost/${uid}`).push();
+				const newPostRef = firebase.database().ref(`/userPost/${uid}/${postId}`);
 				const createdTime = firebase.database.ServerValue.TIMESTAMP;
-				const postId = newPostRef.key;
 				const imageStore = this.firestore.ref('/community/').child(postId);
 				const profilePicture = user.photoURL;
 
@@ -155,6 +153,22 @@ export class CommunityProvider {
 		return promise
 	}
 
+	readUserPost(uid) {
+		return new Promise((resolve, reject) => {
+			firebase.database().ref(`/userPost/${uid}`).once('value').then((snapshot) => {
+				const userPosts = [];
+				snapshot.forEach((childSnapshot) => {
+					const userPost = childSnapshot.val();
+					userPosts.push(userPost);
+				});
+				resolve(userPosts);
+			})
+			.catch(() => {
+				reject("Error in Reading Post!");
+			})
+		})
+	}
+
 	readCommunityPosts(communityName) {
 		var promise = new Promise((resolve) => {
 			this.fireCommunityPost.child(communityName).once('value').then((snapshot) => {
@@ -172,6 +186,18 @@ export class CommunityProvider {
 	deleteCommunityPost(post) {
 		var promise = new Promise((resolve) => {
 			firebase.database().ref(`communityPost/${post.communityName}/${post.postId}`).remove();
+			resolve(true);
+		});
+		return promise
+	}
+
+	deleteMyPost(post) {
+		var promise = new Promise((resolve) => {
+			const uid = firebase.auth().currentUser.uid;
+			console.log("uid: " + uid)
+			console.log("postid: " + post.postId)
+
+			firebase.database().ref(`userPost/${uid}/${post.postId}`).remove();
 			resolve(true);
 		});
 		return promise

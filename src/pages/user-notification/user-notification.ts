@@ -32,16 +32,14 @@ export class UserNotificationPage {
   }
 
   ionViewWillEnter() {
-    let type = {
-      readerType: {
-        type: '채팅',
-        uid: '게시물-고유-ID'
-      },
-      creatorType: "채팅",
-      readerUid: "12345"
-    }
-
-    this.notification.createNotification(type);
+    // let type = {
+    //   readerType: {
+    //     type: '채팅',
+    //     uid: '게시물-고유-ID'
+    //   },
+    //   creatorType: "채팅",
+    //   readerUid: "12345"
+    // }
 
     console.log('ionViewDidLoad UserNotificationPage');
     this.getNotificationList();
