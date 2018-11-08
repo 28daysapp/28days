@@ -135,7 +135,6 @@
     <allow-navigation href="http://137.68.249.34:8100" sessionid="67887f9e" />
     <allow-navigation href="http://192.168.35.51:8100" sessionid="fc12cd45" />
     <allow-navigation href="http://137.68.247.254:8100" sessionid="0d00c399" />
-<<<<<<< HEAD
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
@@ -156,8 +155,6 @@
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
     <plugin name="cordova-plugin-crop" spec="^0.4.0" />
     <allow-navigation href="http://137.68.247.237:8100" sessionid="aed0612d" />
-=======
->>>>>>> feature/notification-page
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>

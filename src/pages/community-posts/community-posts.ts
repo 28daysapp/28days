@@ -69,7 +69,7 @@ export class CommunityPostsPage {
   }
 
   checkIfJoinedCommunity() {
-    this.userProvider.readJoinedCommunities().then((joinedCommunities) => {
+    this.userProvider.readJoinedCommunities(this.currentUserUid).then((joinedCommunities) => {
       for (let i in joinedCommunities) {
         if (this.communityInfo.communityName == joinedCommunities[i].communityName) {
           this.alreadyJoined = true

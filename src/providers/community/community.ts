@@ -19,6 +19,7 @@ export class CommunityProvider {
 	firereport = firebase.database().ref('/report');
 	firetag = firebase.database().ref('/tag');
 	fireusers = firebase.database().ref('/users');
+	fireMyPost = firebase.database().ref('/myPost');
 
 	posts;
 	post;
@@ -122,7 +123,7 @@ export class CommunityProvider {
 			this.fireusers.child(uid).once("value").then((snapshot) => {
 				user = snapshot.val();
 			}).then(() => {
-				const newPostRef = firebase.database().ref(`/myPost/${uid}`).push();
+				const newPostRef = firebase.database().ref(`/userPost/${uid}`).push();
 				const createdTime = firebase.database.ServerValue.TIMESTAMP;
 				const postId = newPostRef.key;
 				const imageStore = this.firestore.ref('/community/').child(postId);
@@ -153,6 +154,22 @@ export class CommunityProvider {
 		});
 
 		return promise
+	}
+
+	readUserPost(uid) {
+		return new Promise((resolve, reject) => {
+			firebase.database().ref(`/userPost/${uid}`).once('value').then((snapshot) => {
+				const userPosts = [];
+				snapshot.forEach((childSnapshot) => {
+					const userPost = childSnapshot.val();
+					userPosts.push(userPost);
+				});
+				resolve(userPosts);
+			})
+			.catch(() => {
+				reject("Error in Reading Post!");
+			})
+		})
 	}
 
 	readCommunityPosts(communityName) {

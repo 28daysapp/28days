@@ -11,12 +11,10 @@ export class UserProvider {
 
   }
 
-  readJoinedCommunities() {
+  readJoinedCommunities(uid) {
     var promise = new Promise((resolve) => {
       const communities = []
-      const currentUserUid = firebase.auth().currentUser.uid;
-  
-      firebase.database().ref(`/users/${currentUserUid}`).child("joinedCommunities").once("value").then((snapshot)=>{
+      firebase.database().ref(`/users/${uid}`).child("joinedCommunities").once("value").then((snapshot)=>{
         snapshot.forEach((childSnapshot) => {
           const community = childSnapshot.val();
           communities.push(community);
@@ -27,7 +25,7 @@ export class UserProvider {
     return promise;
   }
 
-<<<<<<< HEAD
+
   readCurrentUser() {
     return firebase.auth().currentUser;
   }
@@ -45,7 +43,8 @@ export class UserProvider {
         resolve(result);
       })
     })
-=======
+  }
+
   createCommunityMembership(communityName) {
     const currentUserUid = firebase.auth().currentUser.uid;
     const promise = new Promise((resolve) => {
@@ -55,7 +54,6 @@ export class UserProvider {
       resolve(true);
 		});
 		return promise;
->>>>>>> 57c25221760b57ccec86b049bd9724b4b18d16ef
   }
 
   checkUser(currentUserUid: String, targetUserUid: String) {
