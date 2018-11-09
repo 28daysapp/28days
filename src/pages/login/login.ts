@@ -6,15 +6,6 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { Storage } from '@ionic/storage';
 
-// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-login',

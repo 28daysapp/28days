@@ -3,7 +3,6 @@ import { IonicPage, NavController, AlertController, LoadingController, Slides, M
 import firebase from 'firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
-import { FcmProvider } from '../../providers/fcm/fcm';
 import { Storage } from '@ionic/storage';
 import { NavParams, ModalController } from 'ionic-angular';
 import { Http } from '@angular/http';
@@ -30,7 +29,7 @@ export class HomePage {
   showmodal = false;
   token;
   count;
-  constructor(public events: Events, public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider, public fcmProvider: FcmProvider,
+  constructor(public events: Events, public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController, public http: Http, public menu: MenuController) {
     // Receive message from push notifications
     if (params.data.message) {
@@ -54,7 +53,6 @@ export class HomePage {
     if (this.user) {
 
       try {
-        this.fcmProvider.setToken(this.user);
       } catch (error) {
         console.log(error)
       }
@@ -82,11 +80,6 @@ export class HomePage {
             this.username = this.user.displayName;
             this.photoURL = this.user.photoURL;
 
-            try {
-              this.fcmProvider.setToken(this.user);
-            } catch (error) {
-              console.log(error)
-            }
             this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
               this.userprofile = userprofile;
               this.greeting = this.userprofile.greeting;
@@ -108,14 +101,6 @@ export class HomePage {
     this.events.publish('user:created', this.user, Date.now());
   }
 
-  sendFCM() {
-    // this.fcmProvider.sendFcm(this.user);
-    // this.http.get('https://us-central1-days-fd14f.cloudfunctions.net/sendMessage')
-    // .subscribe((data) => {
-    //   console.log('data', data);
-    // })
-  }
-
   mypage() {
     if (this.user) {
       this.navCtrl.push('MypagePage');
@@ -123,7 +108,6 @@ export class HomePage {
       this.pleaselogin();
     }
   }
-
 
   goNotification(){
     if (this.user) {

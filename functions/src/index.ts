@@ -28,29 +28,29 @@ exports.calcReviewRating = functions.database.ref('/review/{placeId}').onWrite((
 })
 
 exports.createChat = functions.database.ref('/chats/{uid}/{supporterid}').onCreate((snapshot,context) => {
-    console.info("New Chats Added!");
+    // console.info("New Chats Added!");
 
-    console.info("보낸사람: " + snapshot.val().requester);
-    console.info("보낸사람유저네임: " + snapshot.val().requesterUsername);
-    console.info("버디유저네임: " + snapshot.val().buddyUsername);
-    console.info("버디유아이디: " + snapshot.val().buddyuid);
-    console.info("key: "+snapshot.key);
+    // console.info("보낸사람: " + snapshot.val().requester);
+    // console.info("보낸사람유저네임: " + snapshot.val().requesterUsername);
+    // console.info("버디유저네임: " + snapshot.val().buddyUsername);
+    // console.info("버디유아이디: " + snapshot.val().buddyuid);
+    // console.info("key: "+snapshot.key);
 
-    if(snapshot.val().buddyUid != snapshot.key){
-        const supporterId = snapshot.val().buddyUid;
-        const userName = snapshot.val().requeterUsername;
+    // if(snapshot.val().buddyUid != snapshot.key){
+    //     const supporterId = snapshot.val().buddyUid;
+    //     const userName = snapshot.val().requeterUsername;
 
-        var db = admin.database();    
-        var ref = db.ref('/notification/supporterId');
-        var newPostRef = ref.push();
-        var notificationId = newPostRef.key;
+    //     var db = admin.database();    
+    //     var ref = db.ref('/notification/supporterId');
+    //     var newPostRef = ref.push();
+    //     var notificationId = newPostRef.key;
         
-        admin.database().ref(`/notification/${supporterId}/${notificationId}`).set({
-            title: "새로운 채팅",
-            comment: userName +"님이 채팅을 요청했습니다."
-        });
-    }
-    return snapshot.val();
+    //     admin.database().ref(`/notification/${supporterId}/${notificationId}`).set({
+    //         title: "새로운 채팅",
+    //         comment: userName +"님이 채팅을 요청했습니다."
+    //     });
+    // }
+    // return snapshot.val();
 });
 
 //exports.createCommunity = functions.database.ref('/community/')
@@ -78,23 +78,23 @@ exports.getGooglePhotos = functions.https.onRequest((req, res) => {
 
 exports.onMessageCreate = functions.database.ref('/chats/{userId}/{buddyId}').onWrite((snapshot) => {
     // This registration token comes from the client FCM SDKs.
-    const message = snapshot.after.val();
-    const targetToken = message.targetToken;
-    console.info("Target Token: " + targetToken);
+    // const message = snapshot.after.val();
+    // const targetToken = message.targetToken;
+    // console.info("Target Token: " + targetToken);
 
-    const payload = {
-        notification: {
-            title: '새 코코넛 메세지가 도착했어요!'
-        }
-    };
+    // const payload = {
+    //     notification: {
+    //         title: '새 코코넛 메세지가 도착했어요!'
+    //     }
+    // };
 
-    admin.messaging().sendToDevice(targetToken, payload)
-        .then((response) => {
-            // Response is a message ID string.
-            console.log('Successfully sent message:', response);
-            console.log(response.results[0].error);
-        })
-        .catch((error) => {
-            console.log('Error sending message:', error);
-        });
+    // admin.messaging().sendToDevice(targetToken, payload)
+    //     .then((response) => {
+    //         // Response is a message ID string.
+    //         console.log('Successfully sent message:', response);
+    //         console.log(response.results[0].error);
+    //     })
+    //     .catch((error) => {
+    //         console.log('Error sending message:', error);
+    //     });
 });

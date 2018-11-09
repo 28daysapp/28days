@@ -6,7 +6,6 @@ import firebase from 'firebase';
 import { Storage } from '@ionic/storage';
 
 import { MenuController } from 'ionic-angular';
-import { FcmProvider } from '../../providers/fcm/fcm';
 import { UserProvider } from '../../providers/user/user';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -22,7 +21,7 @@ export class CommunityPage {
   searchQuery: String;
 
   fireusers = firebase.database().ref('/users');
-  loading;
+
   user;
   userprofile;
   username;
@@ -34,7 +33,7 @@ export class CommunityPage {
   count;
 
   constructor(public modalCtrl: ModalController, public storage: Storage, public auth: AuthProvider, public events: Events, public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, private communityProvider: CommunityProvider,
-    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider, public fcmProvider: FcmProvider, public userProvider: UserProvider,
+    public loadingCtrl: LoadingController, public cocomment: CommunitycommentProvider, public userProvider: UserProvider,
     public popoverCtrl: PopoverController, public viewCtrl: ViewController, public appCtrl: App,
   ) {
     this.initializeCommunities()
@@ -45,54 +44,46 @@ export class CommunityPage {
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
-
-      this.fcmProvider.setToken(this.user);
-      // this.fcmProvider.handleTokenRefresh();
       this.username = this.user.displayName;
       this.photoURL = this.user.photoURL;
-
       this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
-        console.log(JSON.stringify(userprofile));
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
-        this.loading.dismiss();
         this.createUser();
         this.menu.enable(true, 'loggedInMenu');
         this.menu.enable(false, 'loggedOutMenu');
       })
     } else {
 
-      // check if cache info exists in local storage
-      this.storage.get('localcred').then((localcred) => {
-        if (localcred) {
-          // cache exists
-          this.auth.loginUser(localcred.email, localcred.password).then((user) => {
-            this.user = user;
-            this.username = this.user.displayName;
-            this.photoURL = this.user.photoURL;
-
-            this.fcmProvider.setToken(this.user);
-
-            this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
-
-              this.userprofile = userprofile;
-              this.greeting = this.userprofile.greeting;
-              this.loading.dismiss();
-              this.createUser();
-              this.menu.enable(true, 'loggedInMenu');
-              this.menu.enable(false, 'loggedOutMenu');
+      try {
+        // check if cache info exists in local storage
+        this.storage.get('localcred').then((localcred) => {
+          if (localcred) {
+            // cache exists
+            this.auth.loginUser(localcred.email, localcred.password).then((result) => {
+              this.user = result.user;
+              this.username = result.user.displayName;
+              this.photoURL = result.user.photoURL;
+              this.userProvider.getUserprofile(result.user.uid).then((userprofile) => {
+                this.userprofile = userprofile;
+                this.greeting = this.userprofile.greeting;
+                this.createUser();
+                this.menu.enable(true, 'loggedInMenu');
+                this.menu.enable(false, 'loggedOutMenu');
+              });
             });
-          });
-        }
-      });
+          }
+        });
+      } catch (error) {
+        console.log(error)
+      }
+
     }
   }
 
   ionViewWillEnter() {
-    this.loading = this.loadingCtrl.create();
     this.initializeCommunities()
-    this.loading.present();
-    this.loading.dismiss();
+
   }
 
   initializeCommunities() {
@@ -121,7 +112,7 @@ export class CommunityPage {
       this.initializeCommunities()
       return
     }
-    
+
   }
 
   presentCreateCommunityModal() {

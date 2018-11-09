@@ -125,12 +125,15 @@ export class UserProvider {
   }
 
   getUserprofile(uid) {
-    var promise = new Promise((resolve) => {
-      this.fireusers.child(uid).once("value").then((snapshot) => {
-        resolve(snapshot.val());
+    if (uid) {
+      var promise = new Promise((resolve) => {
+        this.fireusers.child(uid).once("value").then((snapshot) => {
+          resolve(snapshot.val());
+        });
       });
-    });
-    return promise;
+      return promise;
+    }
+
   }
 
   updateGreeting(greeting) {

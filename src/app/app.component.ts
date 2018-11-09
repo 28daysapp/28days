@@ -8,10 +8,8 @@ import {
 } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
-// import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import firebase from "firebase";
 import { FirstRunPage } from "../pages";
-import { FCM } from "@ionic-native/fcm";
 import { AuthProvider } from "../providers/auth/auth";
 import { Storage } from "@ionic/storage";
 
@@ -22,7 +20,6 @@ export interface PageInterface {
   logsOut?: boolean;
 }
 
-// firebase config
 export const firebaseConfig = {
   apiKey: "AIzaSyBz5qFakcahaCIdkR1XbDemZEJc37-l7vs",
   authDomain: "days-fd14f.firebaseapp.com",
@@ -83,7 +80,6 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menu: MenuController,
     public alertCtrl: AlertController,
-    public fcm: FCM,
     public auth: AuthProvider,
     public storage: Storage
   ) {
@@ -96,7 +92,6 @@ export class MyApp {
       console.log(error)
     }
 
-
     platform.ready().then(() => {
 
       try {
@@ -105,32 +100,8 @@ export class MyApp {
         console.log(error)
       }
 
-      try {
-        if (this.platform.is('cordova') || this.platform.is('android') || this.platform.is('ios')) {
-          //Notifications
-          fcm.getToken().then(token => {
-            console.log("Token: " + token);
-          })
-          fcm.onNotification().subscribe(data => {
-            if (data.wasTapped) {
-              console.log("Received in background");
-            } else {
-              console.log("Received in foreground");
-            };
-          })
-          fcm.onTokenRefresh().subscribe(token => {
-            console.log(token);
-          });
-          //end notifications.
-        }
-      } catch (error) {
-        console.log("Unable to use Notifications", error)
-      }
-
     });
-    // this.pleaselogin();
     events.subscribe("user:created", (user, time) => {
-      // user and time are the same arguments passed in `events.publish(user, time)`
       this.photoURL = user.photoURL;
       this.username = user.displayName;
       this.email = user.email;

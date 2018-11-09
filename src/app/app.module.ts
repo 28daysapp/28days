@@ -25,14 +25,12 @@ import { CommunitycommentProvider } from '../providers/communitycomment/communit
 import { PostProvider } from '../providers/post/post';
 import { CommunityfixPage } from '../pages/communityfix/communityfix'
 import { MyProvider } from '../providers/my/my'
-import { FcmProvider } from '../providers/fcm/fcm'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Geolocation } from '@ionic-native/geolocation';
 import { SupporterProvider } from '../providers/supporter/supporter';
 import { ReviewProvider } from '../providers/review/review';
 
-import { FCM } from '@ionic-native/fcm'
 import { OperatorProvider } from '../providers/operator/operator';
 import { GoogleProvider } from '../providers/google/google';
 import { CounselorProvider } from '../providers/counselor/counselor';
@@ -80,8 +78,6 @@ import { CameraProvider } from '../providers/camera/camera';
     InAppBrowser,
     SupporterProvider,
     ReviewProvider,
-    FCM,
-    FcmProvider,
     OperatorProvider,
     GoogleProvider,
     PlaceProvider,
