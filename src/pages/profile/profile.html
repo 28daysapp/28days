@@ -45,23 +45,26 @@
       </div>
       <p *ngIf="displayedPostCards.length === 0">아직 쓴 글이 없습니다!</p>
       <div *ngIf="displayedPostCards.length > 0" class="cards-container">
-        <ion-card class="card-container"*ngFor="let card of displayedPostCards">
-          <ion-item>
+        <ion-card class="card-container" *ngFor="let card of displayedPostCards" >
+          <ion-item >
             <ion-avatar item-start>
               <img src="{{this.user.photoURL}}">
             </ion-avatar>
             <div ion-content>
               <h2>{{this.user.username || this.user.displayName}}</h2>
-              <p>{{card.communityName}}</p>
+              <p *ngIf="!card.anonymity">{{card.communityName}}</p>
             </div>
             <button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
               <ion-icon name="more"></ion-icon>
             </button>
           </ion-item>
-          <ion-card-content class="card-content">
-            <p>{{card.text}}</p>
+          <ion-card-content class="card-content" *ngIf="!card.anonymity">
+              <p >{{card.text}}</p>
           </ion-card-content>
-          <ion-row class="card-buttons">
+          <ion-card-content class="card-content" *ngIf="card.anonymity">
+            <p>익명의 글입니다</p>
+          </ion-card-content>
+          <ion-row class="card-buttons" >
             <ion-col class="button-wrapper" col-5>
               <!-- 좋아요 기능 -->
               <!-- <button ion-button icon-start clear small>

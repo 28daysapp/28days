@@ -113,7 +113,7 @@ export class CommunityProvider {
 		});
 	}
 
-	createMyPost(postId, text, dataURL, communityInfo) {
+	createMyPost(postId, text, dataURL, anonymity, communityInfo) {
 		console.log("create my post")
 		const promise = new Promise((resolve) => {
 			const uid = firebase.auth().currentUser.uid;
@@ -132,6 +132,10 @@ export class CommunityProvider {
 					});
 				}
 
+				if (!anonymity) {
+					anonymity = false;
+				}
+
 				newPostRef.set({
 					postId: postId,
 					uid: uid,
@@ -144,6 +148,7 @@ export class CommunityProvider {
 					like: 0,
 					report: 0,
 					urlcheck: true,
+					anonymity: anonymity,
 					communityName: communityInfo.communityName
 				});
 			});
@@ -172,7 +177,7 @@ export class CommunityProvider {
 
 	readCommunityPosts(communityName) {
 		var promise = new Promise((resolve) => {
-			this.fireCommunityPost.child(communityName).orderByChild('createdTime').once('value').then((snapshot) => {
+			this.fireCommunityPost.child(communityName).orderByKey().once('value').then((snapshot) => {
 				const posts = [];
 				snapshot.forEach((childSnapshot) => {
 					const post = childSnapshot.val();

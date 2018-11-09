@@ -42,10 +42,13 @@
   <ion-card class="card-container"*ngFor="let card of posts">
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{card.profilePicture}}">
+        <img *ngIf="!card.anonymity" src="{{card.profilePicture}}">
+        <img *ngIf="card.anonymity" src="../../assets/round-account_circle.svg">
       </ion-avatar>
       <div ion-content>
-        <h2 (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>
+        <h2 *ngIf="!card.anonymity" (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>
+        <h2 *ngIf="card.anonymity">익명</h2>
+
         <p>{{card.communityName}}</p>
       </div>
       <button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
