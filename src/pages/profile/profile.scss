@@ -1,4 +1,10 @@
 page-profile {
+    .spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
     .profile-container{
         display: flex;
         align-items: center;
@@ -54,7 +60,7 @@ page-profile {
             .card-container {
                 .card-content {
                     padding-top: 1vh;
-                    height: 10vh;
+                    height: auto;
                     text-align: left;
                 }
                 .card-time {

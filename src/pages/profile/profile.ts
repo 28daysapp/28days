@@ -5,10 +5,10 @@ import {
   NavParams, 
   AlertController,
   LoadingController,
+  ActionSheetController
 } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { CommunityProvider } from '../../providers/community/community';
-import { dateDataSortValue } from 'ionic-angular/umd/util/datetime-util';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -31,7 +31,8 @@ export class ProfilePage {
     public loadingCtrl: LoadingController,
     public navParams: NavParams,
     public userProvider: UserProvider,
-    public communityProvider: CommunityProvider
+    public communityProvider: CommunityProvider,
+    public actionSheetCtrl: ActionSheetController
   ) {
     this.profileUid = this.navParams.get('uid')
     if (this.profileUid) {
@@ -69,6 +70,7 @@ export class ProfilePage {
 
   getUserPosts(uid) {
     this.communityProvider.readUserPost(uid).then(response => {
+      this.displayedPostCards = [];
       this.postCards = response;
       console.log(this.postCards);
       for (let i = 0; i < this.postCards.length; i++) {
@@ -85,5 +87,65 @@ export class ProfilePage {
       this.user = response;
       console.log(this.user);
     })
+  }
+
+  deletePost(arr, id) {
+    const newArr = arr.filter(card => card.postId !== id);
+    return newArr
+  }
+
+  presentActionSheet(post) {
+    const postWriterUid = post.uid;
+    let actionSheet;
+
+    if (this.userProvider.checkUser(this.profileUid, postWriterUid)) {
+      actionSheet = this.actionSheetCtrl.create({
+        buttons: [
+          {
+            text: '글 삭제',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+              this.communityProvider.deleteCommunityPost(post).then(() => {
+              this.communityProvider.deleteMyPost(post);
+              this.displayedPostCards = this.deletePost(this.displayedPostCards, post.postId)
+              })
+            }
+          },
+          {
+            text: '댓글 달기',
+            handler: () => {
+              console.log('Archive clicked');
+            }
+          },
+          {
+            text: '닫기',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+    } else {
+      actionSheet = this.actionSheetCtrl.create({
+        buttons: [
+          {
+            text: '댓글 달기',
+            handler: () => {
+              console.log('Archive clicked');
+            }
+          },
+          {
+            text: '닫기',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+    }
+    actionSheet.present();
   }
 }

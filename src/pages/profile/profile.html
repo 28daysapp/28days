@@ -13,9 +13,9 @@
 
 
 <ion-content padding>
-  <ng-container *ngIf="!this.user">
+  <div class="spinner-container" *ngIf="!this.user">
     <ion-spinner></ion-spinner>
-  </ng-container>
+  </div>
   <ng-container *ngIf="this.user">
     <div class="profile-container">
       <div>
@@ -50,8 +50,13 @@
             <ion-avatar item-start>
               <img src="{{this.user.photoURL}}">
             </ion-avatar>
-            <h2>{{this.user.username}}</h2>
-            <p>{{card.communityName}}</p>
+            <div ion-content>
+              <h2>{{this.user.username || this.user.displayName}}</h2>
+              <p>{{card.communityName}}</p>
+            </div>
+            <button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
+              <ion-icon name="more"></ion-icon>
+            </button>
           </ion-item>
           <ion-card-content class="card-content">
             <p>{{card.text}}</p>

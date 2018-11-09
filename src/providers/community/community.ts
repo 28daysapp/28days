@@ -160,6 +160,7 @@ export class CommunityProvider {
 				snapshot.forEach((childSnapshot) => {
 					const userPost = childSnapshot.val();
 					userPosts.push(userPost);
+					userPosts.reverse();
 				});
 				resolve(userPosts);
 			})
