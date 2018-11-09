@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ communityInfo.communityName }}</ion-title>
+    <ion-title>커뮤니티</ion-title>
     <ion-buttons right>
       <button ion-button (click)="toCommunityWrite(communityInfo)">
         글쓰기
@@ -20,35 +20,62 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-slides class="slides">
+  <ion-slides class="slides" pager paginationType="fraction">
     <ion-slide>
       <div>
-        {{ communityInfo.communityName }}
+        <h1 class="text">{{ communityInfo.communityName }}</h1>
+        <hr noshadow>
+        <p class="text">{{ communityInfo.communityDescription }}</p>
+        <p class="text">멤버 {{ communityInfo.members }}명</p>
       </div>
+    </ion-slide>
+    <ion-slide>
       <button *ngIf="!alreadyJoined" ion-button (click)="joinCommunity()">
         커뮤니티 가입하기
       </button>
       <button *ngIf="alreadyJoined" ion-button >
-          커뮤니티 멤버
-        </button>
-    </ion-slide>
-    <ion-slide>
-      {{ communityInfo.communityDescription }}
+        커뮤니티 멤버
+      </button>
     </ion-slide>
   </ion-slides>
 
-
-  <ion-list>
-    <ion-item class="items" *ngFor="let post of posts" (click)="presentActionSheet(post)">
+  <ion-card class="card-container"*ngFor="let card of posts">
+    <ion-item>
       <ion-avatar item-start>
-        <img *ngIf="!post.anonymity" src="{{post.profilePicture}}">
-        <img *ngIf="post.anonymity" src="../../assets/round-account_circle.svg">
+        <img src="{{card.profilePicture}}">
       </ion-avatar>
-      <h2 *ngIf="!post.anonymity">{{ post.username }}</h2>
-      <h2 *ngIf="post.anonymity">익명</h2>
-      <div class="text">{{ post.text }}</div>
-      <!-- <ion-note item-end>{{ post.createdTime | date:'MM.dd a hh:mm' }}</ion-note> -->
+      <div ion-content>
+        <h2 (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>
+        <p>{{card.communityName}}</p>
+      </div>
+      <button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
+        <ion-icon name="more"></ion-icon>
+      </button>
     </ion-item>
-  </ion-list>
+    <ion-card-content class="card-content">
+      <p class="card-text">{{card.text}}</p>
+    </ion-card-content>
+    <ion-row class="card-buttons">
+      <ion-col class="button-wrapper" col-5>
+        <!-- 좋아요 기능 -->
+        <!-- <button ion-button icon-start clear small>
+             <ion-icon name="thumbs-up"></ion-icon>
+             좋아요 {{card.like}}개
+             </button> -->
+      </ion-col>
+      <ion-col class="button-wrapper" col-5>
+        <!-- 댓글 기능 -->
+        <!-- <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          댓글 {{card.comment}}개
+        </button> -->
+      </ion-col>
+      <ion-col class="button-wrapper" class="card-time">
+        <ion-note>{{card.createdTime | date: 'MM/dd'}}</ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+
 
 </ion-content>

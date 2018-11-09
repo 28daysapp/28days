@@ -21,12 +21,15 @@ export class CommunityPostsPage {
   }
 
   ionViewWillEnter() {
-    this.checkIfJoinedCommunity();
     this.getCommunityPosts(this.communityInfo.communityName);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityPostsPage');
+  }
+
+  ionViewWillLoad() {
+    this.checkIfJoinedCommunity();
   }
 
   getCommunityPosts(communityName) {
@@ -152,6 +155,10 @@ export class CommunityPostsPage {
       console.log('Async operation has ended');
       refresher.complete();
     }, 700);
+  }
+
+  navigateToPage(page, uid) {
+    this.navCtrl.push(page, {uid});
   }
 
 }

@@ -18,7 +18,6 @@ export class ProfilePage {
   profileUid;
   loading;
   user;
-  photoURL;
   currentUser = true;
 
   postCards;
@@ -36,12 +35,13 @@ export class ProfilePage {
   ) {
     this.profileUid = this.navParams.get('uid')
     if (this.profileUid) {
-      this.user = this.navParams.get('uid');
+      this.getUserData(this.profileUid);
       this.currentUser = false;
     } else {
       this.user = this.userProvider.readCurrentUser();
       this.profileUid = this.user.uid;
     }
+    console.log("Constructor");
   }
 
   ionViewWillEnter() {
@@ -77,6 +77,13 @@ export class ProfilePage {
     })
     .catch(error => {
       console.log(error);
+    })
+  }
+
+  getUserData(uid) {
+    this.userProvider.readUserData(uid).then(response => {
+      this.user = response;
+      console.log(this.user);
     })
   }
 }

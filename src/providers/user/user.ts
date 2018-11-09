@@ -33,10 +33,10 @@ export class UserProvider {
   readUserData(userid) {
     return new Promise((resolve) => {
       firebase.database().ref(`/users/${userid}`).once('value').then((snapshot) => {
-        const { uid, displayName, email, photoURL } = snapshot.val();
+        const { uid, username, email, photoURL } = snapshot.val();
         let result = {
           uid,
-          displayName,
+          username,
           email,
           photoURL
         }

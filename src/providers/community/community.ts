@@ -171,11 +171,12 @@ export class CommunityProvider {
 
 	readCommunityPosts(communityName) {
 		var promise = new Promise((resolve) => {
-			this.fireCommunityPost.child(communityName).once('value').then((snapshot) => {
+			this.fireCommunityPost.child(communityName).orderByChild('createdTime').once('value').then((snapshot) => {
 				const posts = [];
 				snapshot.forEach((childSnapshot) => {
 					const post = childSnapshot.val();
 					posts.push(post);
+					posts.reverse();
 				});
 				resolve(posts);
 			});
