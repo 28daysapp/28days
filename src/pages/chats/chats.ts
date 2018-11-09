@@ -17,7 +17,7 @@ export class ChatsPage {
   loading;
 
   count: string = '0';
-  type: string = "requested";
+  type: string = "request";
 
   constructor(
     public navCtrl: NavController,

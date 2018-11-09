@@ -148,7 +148,6 @@ export class PlaceListPage {
         } else {
           console.log("Status error: " + status);
         }
-
       }, (error) => {
         console.log("Error: " + error);
       });
