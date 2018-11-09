@@ -52,8 +52,7 @@ export class CommunityPostsPage {
       .then(() => {
         this.checkIfJoinedCommunity();
         this.getCommunityPosts(this.communityInfo.communityName);
-      })
-      .then(() => {
+
         const alert = this.alertCtrl.create({
           title: '커뮤니티의 멤버가 된 걸 축하해!',
         });

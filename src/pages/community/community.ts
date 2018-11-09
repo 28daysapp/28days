@@ -90,6 +90,7 @@ export class CommunityPage {
 
   ionViewWillEnter() {
     this.loading = this.loadingCtrl.create();
+    this.initializeCommunities()
     this.loading.present();
     this.loading.dismiss();
   }
