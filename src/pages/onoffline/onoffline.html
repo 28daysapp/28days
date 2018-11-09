@@ -9,7 +9,7 @@
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
-      <ion-title class="title">서포터/상담사</ion-title>
+      <ion-title class="title">서포터</ion-title>
     </ion-navbar>
     <ion-toolbar no-border>
         <ion-searchbar (ionInput)="getItems($event)" placeholder="검색"></ion-searchbar>
@@ -18,14 +18,14 @@
   
   <ion-content no-border>
     <!-- Segment in content -->
-    <ion-segment mode="md" [(ngModel)]="type" (ionChange)="getList()">
+    <!-- <ion-segment mode="md" [(ngModel)]="type" (ionChange)="getList()">
         <ion-segment-button value="Supporter">
           서포터
         </ion-segment-button>
         <ion-segment-button (click)="notReady()">
           전문상담사
         </ion-segment-button>
-      </ion-segment>
+      </ion-segment> -->
   <ion-list *ngIf="isSupporter" no-lines>
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
