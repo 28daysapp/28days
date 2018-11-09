@@ -1,22 +1,19 @@
 <ion-header no-border>
-
   <ion-navbar no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>커뮤니티</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="navigateTo('UserNotificationPage')">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+  <ion-searchbar class="searchbar" (ionInput)="searchCommunity($event)" placeholder="커뮤니티 찾기!"></ion-searchbar>
 </ion-header>
 
-<ion-content>
-
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
-
-  <ion-toolbar no-border>
-  <ion-searchbar (ionInput)="searchCommunity($event)" placeholder="커뮤니티 찾기!"></ion-searchbar>
-</ion-toolbar>
+<ion-content no-border>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="community-container">
     <div class="community-card" *ngFor="let community of communities" (click)="toCommunityPosts(community)">
       <img class="image center" src="assets/digital-campaign.png" alt="assets/digital-campaign.png" />

@@ -1,8 +1,5 @@
 <ion-header no-border>
     <ion-navbar no-border-bottom>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
       <ion-title>병원/센터
         <img src="assets/icon/question.png" (click)="showExplanation()">
       </ion-title>
@@ -13,9 +10,7 @@
         </button>
       </ion-buttons>
     </ion-navbar>
-    <ion-toolbar no-border>
-      <ion-searchbar (ionInput)="searchByText($event)" placeholder="검색"></ion-searchbar>
-    </ion-toolbar>
+    <ion-searchbar (ionInput)="searchByText($event)" placeholder="검색"></ion-searchbar>
     <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
         <ion-segment-button value="center">
           상담센터

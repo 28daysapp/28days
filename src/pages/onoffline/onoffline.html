@@ -6,15 +6,10 @@
 -->
 <ion-header no-border>
   <ion-navbar no-border-bottom>
-		<button ion-button menuToggle>
-			<ion-icon name="menu"></ion-icon>
-		</button>
-      <ion-title class="title">서포터</ion-title>
-    </ion-navbar>
-    <ion-toolbar no-border>
-        <ion-searchbar (ionInput)="getItems($event)" placeholder="검색"></ion-searchbar>
-    </ion-toolbar>
-  </ion-header>
+    <ion-title class="title">서포터</ion-title>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="검색"></ion-searchbar>
+</ion-header>
   
   <ion-content no-border>
     <!-- Segment in content -->

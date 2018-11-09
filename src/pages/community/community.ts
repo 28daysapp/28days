@@ -148,4 +148,8 @@ export class CommunityPage {
     this.events.publish('user:created', this.user, Date.now());
   }
 
+  navigateTo(page) {
+    this.navCtrl.push(page);
+  }
+
 }
