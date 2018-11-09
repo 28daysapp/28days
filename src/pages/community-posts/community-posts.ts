@@ -13,6 +13,7 @@ export class CommunityPostsPage {
 
   communityInfo: any;
   posts: any;
+  anonymity: boolean;
   alreadyJoined: boolean = false;
   currentUserUid: String = firebase.auth().currentUser.uid;
 
