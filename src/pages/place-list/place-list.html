@@ -10,7 +10,7 @@
         </button>
       </ion-buttons>
     </ion-navbar>
-    <ion-searchbar (ionInput)="searchByText($event)" placeholder="검색"></ion-searchbar>
+    <ion-searchbar #userInput (keyup.enter)="searchByText(userInput.value)" placeholder="검색"></ion-searchbar>
     <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
         <ion-segment-button value="center">
           상담센터

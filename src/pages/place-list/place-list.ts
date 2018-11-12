@@ -28,7 +28,6 @@ export class PlaceListPage {
 
   details: any;
   url: string;
-  area: string = "서울";
   user;
 
   rating;
@@ -45,20 +44,11 @@ export class PlaceListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation,
     public menu: MenuController, public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
     this.places = [];
+    this.user = firebase.auth().currentUser;
   }
 
   ionViewWillEnter() {
     console.log('ionViewDidLoad PlaceListPage');
-
-    this.user = firebase.auth().currentUser;
-    if (this.user) {
-      this.menu.enable(true, 'loggedInMenu');
-      this.menu.enable(false, 'loggedOutMenu');
-    }
-    else {
-      this.menu.enable(true, 'loggedOutMenu');
-      this.menu.enable(false, 'loggedInMenu');
-    }
 
     this.loadMap();
 
@@ -100,34 +90,28 @@ export class PlaceListPage {
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
 
-    this.searchByText(this.area);
+    this.searchByText("강남역");
 
     return;
   }
 
-  searchByText(input) {
+  searchByText(userInput) {
     this.presentLoading()
 
-    let text = input
-
-    if (!text) {
-      this.area = "서울"
-    } else if (text == "서울") {
-      this.area = "서울";
-    } else {
-      this.area = text.srcElement.value;
+    if (!userInput) {
+      userInput = "강남역"
     }
+
+    console.log("USER INPUT: " + userInput)
 
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
 
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
-      if (!this.area) {
-        this.area = "서울";
-      }
+
       let request = {
         location: this.latLng,
         radius: '500',
-        query: this.area + " " + this.query,
+        query: userInput + " " + this.query,
         language: 'ko',
         type: ["hospital", "health", "doctor"]
       };
@@ -142,8 +126,8 @@ export class PlaceListPage {
             this.places[i].reviewCount = 0;
             this.places[i].ratings = 0;
             this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
-            this.places[i].photo = this.googleProvider.getPlacePhoto(results[i].reference)
-            this.countReviews(results[i].place_id, i);
+            // this.places[i].photo = this.googleProvider.getPlacePhoto(results[i].reference)
+            // this.countReviews(results[i].place_id, i);
           }
         } else {
           console.log("Status error: " + status);
@@ -157,15 +141,8 @@ export class PlaceListPage {
   }
 
   countReviews(placeId, i) {
-    firebase.database().ref('/placeInfo/' + placeId).once('value').then((snapshot) => {
-      if (snapshot.val() === null) {
-        return
-      }
-      this.places[i].reviewCount = snapshot.val().reviewCount;
-      this.places[i].ratings = snapshot.val().ratings;
-    })
+    this.placeProvider.countReviews(this.places, placeId, i);
   }
-
 
   placeDetail(place) {
     this.navCtrl.push('PlaceDetailPage', { place: place });
