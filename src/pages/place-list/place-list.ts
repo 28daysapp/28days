@@ -3,8 +3,8 @@ import { NavController, NavParams, IonicPage, AlertController, App, LoadingContr
 import { Geolocation } from '@ionic-native/geolocation';
 import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
-import firebase from 'firebase';
 import { PlaceProvider } from '../../providers/place/place';
+import { UserProvider } from '../../providers/user/user';
 
 declare let google;
 
@@ -42,9 +42,9 @@ export class PlaceListPage {
   loading;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation,
-    public menu: MenuController, public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
+    public menu: MenuController, public userProvider: UserProvider,  public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
     this.places = [];
-    this.user = firebase.auth().currentUser;
+    this.user = this.userProvider.readCurrentUser();
   }
 
   ionViewWillEnter() {
@@ -90,7 +90,7 @@ export class PlaceListPage {
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
 
-    this.searchByText("강남역");
+    this.searchByText("강남");
 
     return;
   }
@@ -99,7 +99,7 @@ export class PlaceListPage {
     this.presentLoading()
 
     if (!userInput) {
-      userInput = "강남역"
+      userInput = "강남"
     }
 
     console.log("USER INPUT: " + userInput)
