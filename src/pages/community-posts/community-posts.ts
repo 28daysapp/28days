@@ -47,6 +47,10 @@ export class CommunityPostsPage {
     });
   }
 
+  toComments(post){
+    this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post});
+  }
+
   joinCommunity() {
     const communityName = this.communityInfo.communityName;
     this.communityProvider.joinCommunity(communityName)
@@ -101,7 +105,7 @@ export class CommunityPostsPage {
             text: '댓글 달기',
             handler: () => {
               console.log('댓글달기 clicked');
-              this.navCtrl.push('CommunityCommentPage', { post: post});
+              this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post});
             }
           },
           {

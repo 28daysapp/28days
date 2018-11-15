@@ -5,7 +5,7 @@
   <form [formGroup]="signupForm" novalidate>
     <span class="info">이름(별명)</span>
     <ion-input class="put" formControlName="name" type="text" [class.invalid]="(!signupForm.controls.name.valid && signupForm.controls.name.dirty) || (signupForm.controls.name.valid && !usernameAvailable)"
-      (keyup)="checkUsername()"></ion-input>
+      (keyup)="isSameUsername()"></ion-input>
     <p class="error-message" *ngIf="!signupForm.controls.name.valid && signupForm.controls.name.dirty">
       8글자 이하로 만들어주세요!
     </p>

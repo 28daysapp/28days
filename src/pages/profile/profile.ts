@@ -98,7 +98,7 @@ export class ProfilePage {
     const postWriterUid = post.uid;
     let actionSheet;
 
-    if (this.userProvider.checkUser(this.profileUid, postWriterUid)) {
+    if (this.userProvider.isSameUser(this.profileUid, postWriterUid)) {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {

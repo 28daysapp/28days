@@ -7,21 +7,26 @@ export class CommentProvider {
   fireusers = firebase.database().ref('/users');
   firestore = firebase.storage();
 
+  post;
+  postId: String;
+
   constructor() {
     console.log('Hello CommentProvider Provider');
   }
 
-  createCommunityComment(post, comment) {
+  initializePost(post){
+    this.post = post;
+    this.postId = post.postId
+  }
 
-    const postId = post.postId;
+  createCommunityComment(comment) {
     const uid = firebase.auth().currentUser.uid;
     let user;
-
     const promise = new Promise((resolve, reject) => {
       this.fireusers.child(uid).once('value').then((snapshot) => {
         user = snapshot.val();
       }).then(() => {
-        const newCommentRef = firebase.database().ref(`communityComment/${postId}`).push();
+        const newCommentRef = firebase.database().ref(`communityComment/${this.postId}`).push();
         const commentId = newCommentRef.key;
         newCommentRef.set({
           commentId: commentId,
@@ -34,16 +39,12 @@ export class CommentProvider {
       })
       resolve(true);
     })
-
     return promise;
   }
 
   readCommunityComment(post) {
-
     const postId = post.postId
-
     const promise = new Promise((resolve) => {
-
       firebase.database().ref(`communityComment/${postId}`).once('value').then((snapshot) => {
         const comments = [];
         snapshot.forEach((childSnapshot) => {
@@ -53,9 +54,7 @@ export class CommentProvider {
         resolve(comments)
       })
     })
-
     return promise
-
   }
 
   deleteCommunityComment(postId: String, commentId: String) {
@@ -65,4 +64,27 @@ export class CommentProvider {
     });
     return promise
   }
+
+  countComments(post){
+    const postId = post.postId
+    const promise = new Promise((resolve) => {
+      firebase.database().ref(`communityComment/${postId}`).once('value').then((snapshot) => {
+        const commentCount = snapshot.numChildren();
+        resolve(commentCount);
+      });
+    });
+    return promise
+  }
+
+  updateCommentCount(communityName, commentCount) {
+    const postId = this.post.postId
+    const promise = new Promise((resolve) => {
+      firebase.database().ref(`communityPost/${communityName}/${postId}`).update({
+        comment: commentCount
+      });
+      resolve(true)
+    });
+    return promise;
+  }
+
 }

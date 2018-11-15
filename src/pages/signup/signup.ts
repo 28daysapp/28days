@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UserProvider } from '../../providers/user/user';
 import { EmailValidator } from '../../validators/email';
-import { matchOtherValidator } from '../../validators/match-other-validator';
 import { PasswordValidator } from '../../validators/password';
 import { Storage } from '@ionic/storage';
 
@@ -32,16 +31,12 @@ export class SignupPage {
     	name: ['', Validators.compose([Validators.required, Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
   		password: ['', Validators.compose([Validators.required, Validators.minLength(8), PasswordValidator.isValid])]
-    	// passwordconfirm: ['', Validators.compose([Validators.required, matchOtherValidator('password')])]
     });
 
-    // this.clickterms1 = true;
-    // this.clickterms2 = true;
   }
 
   signupUser(){
     if (!this.signupForm.valid || !this.usernameAvailable) {
-      console.log(this.signupForm.value.name);
       let alert = this.alertCtrl.create({
         title: '회원가입 오류',
         message: '모든 항목을 모두 입력하였는지 확인하여 주시고 각 항목의 형식을 지켜주세요!',
@@ -54,19 +49,7 @@ export class SignupPage {
       });
       alert.present();
     } 
-    // else if(this.clickterms1 == false || this.clickterms2 == false){
-    //   let alert = this.alertCtrl.create({
-    //     title: '회원가입 오류',
-    //     message: '약관에 모두 동의해주세요!',
-    //     buttons: [
-    //       {
-    //         text: '확인',
-    //         role: 'cancel'
-    //       }
-    //     ]
-    //   });
-    //   alert.present();
-    // } 
+
     else {
       this.auth.signupUser(this.signupForm.value.email, this.signupForm.value.password).then(() => {
       	this.user.updateUserprofile(this.signupForm.value.email, this.signupForm.value.name).then(() => {
@@ -77,7 +60,6 @@ export class SignupPage {
           this.navCtrl.setRoot('TabsPage');
         });
       }, (error) => {
-        console.log(JSON.stringify(error));
         var message;
         if (error.code == 'auth/email-already-in-use') {
           message = '이미 등록된 이메일 주소입니다.<br>다시 확인해주세요!';
@@ -109,60 +91,12 @@ export class SignupPage {
     this.navCtrl.push('LoginPage');
   }
 
-  checkUsername() {
+  isSameUsername() {
     if (this.signupForm.value.name.length > 0) {
-      this.user.checkUsername(this.signupForm.value.name).then((snapshot) => {
+      this.user.isSameUsername(this.signupForm.value.name).then((snapshot) => {
         this.usernameAvailable = !snapshot.exists();
       });
     }
   }
 
-  // setMale() {
-  //   this.clickmale = true;
-  //   this.clickfemale = false;
-  //   this.clickEtc = false;
-
-  //   this.gender = 'M';
-  // }
-
-  // setFemale() {
-  //   this.clickmale = false;
-  //   this.clickfemale = true;
-  //   this.clickEtc = false;
-
-  //   this.gender = 'F';
-  // }
-
-  // setEtc() {
-  //   this.clickmale = false;
-  //   this.clickfemale = false;
-  //   this.clickEtc = true;
-
-  //   this.gender = 'E';
-  // }
-
-
-  // setTerms1(){
-  //   if(this.clickterms1 == false) {
-  //     this.clickterms1 = true;
-  //   } else {
-  //     this.clickterms1 = false;
-  //   }
-  // }
-
-  // setTerms2(){
-  //   if(this.clickterms2 == false) {
-  //     this.clickterms2 = true;
-  //   } else {
-  //     this.clickterms2 = false;
-  //   }
-  // }
-
-  // terms1(){
-  //   this.navCtrl.push("PersonalInformationPage");
-  // }
-
-  // terms2(){
-  //   this.navCtrl.push("TermsUsePage");
-  // }
 }

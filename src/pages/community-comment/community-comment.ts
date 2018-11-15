@@ -12,6 +12,7 @@ import { UserProvider } from '../../providers/user/user';
 export class CommunityCommentPage {
 
   commentForm: FormGroup;
+  community;
   post;
   comments;
   currentUser;
@@ -22,6 +23,7 @@ export class CommunityCommentPage {
       commentInput: ['', Validators.required]
     });
     this.currentUser = this.userProvider.readCurrentUser();
+    this.community = this.navParams.get('community');
     this.post = this.navParams.get('post');
   }
 
@@ -31,13 +33,15 @@ export class CommunityCommentPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityCommentPage');
     this.getCommunityComments();
+    this.commentProvider.initializePost(this.post);
   }
 
   writeComment() {
     try {
       const comment = this.commentForm.value.commentInput;
       this.commentForm.reset();
-      this.commentProvider.createCommunityComment(this.post, comment).then(() => {
+      this.commentProvider.createCommunityComment(comment).then(() => {
+        this.updateCommentCount();
         this.getCommunityComments();
       });
     } catch (error) {
@@ -52,6 +56,12 @@ export class CommunityCommentPage {
     });
   }
 
+  updateCommentCount() {
+    this.commentProvider.countComments(this.post).then((commentCount) => {
+      this.commentProvider.updateCommentCount(this.community.communityName, commentCount)
+    })
+  }
+
   presentActionSheet(comment) {
     const commentWriterUid = comment.uid;
     let actionSheet;
@@ -64,6 +74,7 @@ export class CommunityCommentPage {
             role: 'destructive',
             handler: () => {
               this.commentProvider.deleteCommunityComment(this.post.postId, comment.commentId).then(() => {
+                this.updateCommentCount();
                 this.getCommunityComments();
               })
             }

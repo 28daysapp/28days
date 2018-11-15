@@ -64,7 +64,7 @@ export class UserProvider {
     }
   }
 
-  checkUsername(username: string) {
+  isSameUsername(username: string) {
     username = username.toLowerCase();
     return this.fireusernames.child(username).once("value");
   }

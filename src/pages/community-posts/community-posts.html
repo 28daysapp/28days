@@ -61,17 +61,17 @@
     <ion-row class="card-buttons">
       <ion-col class="button-wrapper" col-5>
         <!-- 좋아요 기능 -->
-        <!-- <button ion-button icon-start clear small>
+        <button ion-button icon-start clear small>
              <ion-icon name="thumbs-up"></ion-icon>
              좋아요 {{card.like}}개
-             </button> -->
+             </button>
       </ion-col>
       <ion-col class="button-wrapper" col-5>
         <!-- 댓글 기능 -->
-        <!-- <button ion-button icon-start clear small>
+        <button ion-button icon-start clear small (click)="toComments(card)">
           <ion-icon name="text"></ion-icon>
           댓글 {{card.comment}}개
-        </button> -->
+        </button>
       </ion-col>
       <ion-col class="button-wrapper" class="card-time">
         <ion-note>{{card.createdTime | date: 'MM/dd'}}</ion-note>
