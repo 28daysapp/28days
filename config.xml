@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.gogople.a28days" version="0.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.gogople.a28days" version="0.1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Coconut</name>
     <description>서로의 마음을 돌봐주는 앱.</description>
     <author email="bhlee@mentalhealthkorea.org" href="https://www.mentalhealthkorea.org/">코코넛</author>
