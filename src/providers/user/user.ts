@@ -76,14 +76,14 @@ export class UserProvider {
     var promise = new Promise((resolve) => {
       firebase.auth().currentUser.updateProfile({
         displayName: username,
-        photoURL: "assets/profile0.png"
+        photoURL: "../../assets/round-account_circle.svg"
       }).then(() => {
         this.fireusers.child(uid).update({
           email: email,
           uid: uid,
           username: username,
           greeting: "안녕하세요! " + username + " 입니다. 함께 나아가요!",
-          photoURL: "assets/profile0.png"
+          photoURL: "../../assets/round-account_circle.svg"
         }).then(() => {
           this.fireusernames.update(data).then(() => {
             resolve(true);
@@ -107,9 +107,9 @@ export class UserProvider {
     return promise;
   }
 
-  updatePhoto(path) {
-    var uid = firebase.auth().currentUser.uid;
-    var promise = new Promise((resolve) => {
+  updateProfilePicture(path) {
+    const uid = firebase.auth().currentUser.uid;
+    const promise = new Promise((resolve) => {
       firebase.auth().currentUser.updateProfile({
         displayName: firebase.auth().currentUser.displayName,
         photoURL: path

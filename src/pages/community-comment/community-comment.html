@@ -12,7 +12,7 @@
 		<ion-card class="card-container"*ngFor="let card of comments">
 				<ion-item>
 					<ion-avatar item-start>
-						<img src="{{card.profilePicture}}">
+						<img src="{{card.photoURL}}">
 					</ion-avatar>
 					<div ion-content>
 						<h2 (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>

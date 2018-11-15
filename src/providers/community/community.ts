@@ -94,7 +94,6 @@ export class CommunityProvider {
 				}
 
 				newPostRef.set({
-					postId: postId,
 					uid: uid,
 					username: firebase.auth().currentUser.displayName,
 					text: text,
@@ -104,7 +103,6 @@ export class CommunityProvider {
 					comment: 0,
 					like: 0,
 					report: 0,
-					urlcheck: true,
 					anonymity: anonymity,
 					communityName: communityInfo.communityName
 				});

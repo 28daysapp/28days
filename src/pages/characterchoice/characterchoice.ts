@@ -69,7 +69,7 @@ export class CharacterchoicePage {
       return;
     }
     // change character image
-    this.user.updatePhoto(`assets/profile${this.pick}.png`).then(() => {
+    this.user.updateProfilePicture(`assets/profile${this.pick}.png`).then(() => {
       this.navCtrl.push('TabsPage');
     });
   }

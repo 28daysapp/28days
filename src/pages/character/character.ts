@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Navbar, LoadingController, Events, AlertController } from 'ionic-angular';
-import { Crop } from '@ionic-native/crop';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Crop } from '@ionic-native/crop';
 
 @IonicPage()
 @Component({
@@ -62,7 +62,7 @@ export class CharacterPage {
 
   openGallery() {
     const options: CameraOptions = {
-      quality: 30,
+      quality: 20,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -71,62 +71,68 @@ export class CharacterPage {
 
     this.camera.getPicture(options).then((imagePath) => {
       this.fileURL = 'data:image/jpeg;base64,' + imagePath;
-      this.dataURL = imagePath;
+      const dataURL = imagePath;
+
+      this.updateProfilePicture(dataURL);
 
     }, (err) => {
       // Handle error
       console.log('openGallery error : ' + err.toString());
-    }).then(()=>{
-      this.updateProfilePicture();
-    });
-
+    })
   }
 
-  updateProfilePicture() {
+  updateProfilePicture(dataURL) {
 
-    // this.crop.crop(this.dataURL, {
-    //   quality: 100,
-    //   targetHeight: 50,
-    //   targetWidth: 50
-    // }).then(
-    //     newImage => this.dataURL = newImage,
-    //     error => console.error('Error cropping image', error)
-    //   );
-
-    const uid = firebase.auth().currentUser.uid;
-    const imageStore = this.firestore.ref('/user/').child(uid);
-    try {
-      if (this.dataURL) {
-        imageStore.putString(this.dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
-
-          console.log("Image Store");
-
-          this.photoURL = savedImage.downloadURL;
-
-          console.log("Photo URL: " + this.photoURL);
-
-
-          this.userProvider.updatePhoto(`${this.photoURL}`).then(() => {
-            console.log("Photo uploaded")
-            this.user = this.userProvider.getUserprofile(uid);
-            this.navCtrl.push('TabsPage');
+    this.crop.crop(this.dataURL, {
+      quality: 50,
+      targetHeight: 50,
+      targetWidth: 50
+    }).then(
+        newImage => this.dataURL = newImage,
+        error => console.error('Error cropping image', error)
+    ).then(()=>{
+      const uid = firebase.auth().currentUser.uid;
+      const imageStore = this.firestore.ref('/user/').child(uid);
+      try {
+        // console.log("dataURL: "  + dataURL)
+        if (dataURL) {
+          imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((uploadTask) => {
+  
+            console.log("what is this? " +  uploadTask.ref.getDownloadURL);
+            console.log('what the heck')
+  
+            uploadTask.ref.getDownloadURL().then((downloadURL)=> {
+              this.photoURL = downloadURL;
+              console.log(this.photoURL)
+            }).then(()=>{
+              if(this.photoURL) {
+                this.userProvider.updateProfilePicture(`${this.photoURL}`).then(() => {
+                  console.log("Photo uploaded")
+                  this.user = this.userProvider.getUserprofile(uid);
+                  this.navCtrl.push('TabsPage');
+                }).then(()=> {
+                  const alert = this.alertCtrl.create({
+                    message: `
+                    <p>사진이 변경되었습니다</p>
+                    `
+                  });
+                  alert.present();
+                  setTimeout(()=> {
+                    alert.dismiss();
+                  }, 2000)
+                });
+              } else {
+                console.log("Could not upload profile picture.")
+              }
+            })
+  
           });
-
-
-        });
-        const alert = this.alertCtrl.create({
-          message: `
-          <p>사진이 변경되었습니다</p>
-          `
-        });
-        alert.present();
-        setTimeout(()=> {
-          alert.dismiss();
-        }, 2000)
+  
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-    }
+    });
 
   }
 
@@ -144,7 +150,7 @@ export class CharacterPage {
       return;
     }
     // change character image
-    this.userProvider.updatePhoto(`assets/profile${this.pick}.png`).then(() => {
+    this.userProvider.updateProfilePicture(`assets/profile${this.pick}.png`).then(() => {
       this.navCtrl.push('TabsPage');
     });
   }

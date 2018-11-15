@@ -3,7 +3,7 @@
     <name>Coconut</name>
     <description>서로의 마음을 돌봐주는 앱.</description>
     <author email="bhlee@mentalhealthkorea.org" href="https://www.mentalhealthkorea.org/">코코넛</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://137.68.247.203:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -127,7 +127,6 @@
     <allow-navigation href="http://137.68.247.135:8101" />
     <allow-navigation href="http://10.231.4.185:8100" />
     <allow-navigation href="http://137.68.247.161:8100" />
-    <plugin name="cordova-plugin-crop" spec="^0.4.0" />
     <allow-navigation href="http://137.68.248.13:8100" sessionid="4af4f417" />
     <allow-navigation href="http://137.68.248.20:8100" sessionid="5859b138" />
     <allow-navigation href="http://137.68.249.34:8100" sessionid="67887f9e" />
@@ -135,6 +134,8 @@
     <allow-navigation href="http://137.68.247.254:8100" sessionid="0d00c399" />
     <allow-navigation href="http://137.68.247.237:8100" sessionid="c2cb6854" />
     <allow-navigation href="http://137.68.247.237:8100" sessionid="aed0612d" />
+    <plugin name="cordova-plugin-crop" spec="^0.4.0" />
+    <allow-navigation href="http://137.68.247.203:8100" sessionid="c5aa2330" />
     <engine name="browser" spec="^5.0.4" />
     <engine name="android" spec="^7.1.1" />
     <engine name="ios" spec="4.5.5" />
