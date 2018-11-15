@@ -26,7 +26,6 @@ export class PopoverPage {
   }
 
   communityfix(){
-    this.navCtrl.push('CommunityfixPage');
   }
 
   ionViewDidLoad() {

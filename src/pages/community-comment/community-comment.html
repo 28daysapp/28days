@@ -12,14 +12,14 @@
 		<ion-card class="card-container"*ngFor="let card of comments">
 				<ion-item>
 					<ion-avatar item-start>
-						<img src="{{card.photoURL}}">
+						<img src="{{card.profilePicture}}">
 					</ion-avatar>
 					<div ion-content>
 						<h2 (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>
 					</div>
-					<!-- <button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
+					<button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
 						<ion-icon name="more"></ion-icon>
-					</button> -->
+					</button>
 				</ion-item>
 				<ion-card-content class="card-content">
 					<p class="card-text">{{card.text}}</p>

@@ -83,7 +83,7 @@ export class CommunityPostsPage {
     const postWriterUid = post.uid;
     let actionSheet;
 
-    if (this.userProvider.checkUser(this.currentUserUid, postWriterUid)) {
+    if (this.userProvider.isSameUser(this.currentUserUid, postWriterUid)) {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {
@@ -101,7 +101,7 @@ export class CommunityPostsPage {
             text: '댓글 달기',
             handler: () => {
               console.log('댓글달기 clicked');
-              this.navCtrl.push('CommunitycommentPage');
+              this.navCtrl.push('CommunityCommentPage', { post: post});
             }
           },
           {

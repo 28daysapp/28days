@@ -21,9 +21,8 @@ export class CommunityCommentPage {
     this.commentForm = this.formBuilder.group({
       commentInput: ['', Validators.required]
     });
-    this.currentUser = this.userProvider.getUserprofile;
+    this.currentUser = this.userProvider.readCurrentUser();
     this.post = this.navParams.get('post');
-
   }
 
   ionViewWillEnter() {
@@ -34,51 +33,45 @@ export class CommunityCommentPage {
     this.getCommunityComments();
   }
 
-  writeComment(){
-      try {
-        const comment = this.commentForm.value.commentInput;
-        this.commentForm.reset();
-        this.commentProvider.createCommunityComment(this.post, comment).then(()=>{
-          this.getCommunityComments();
-        });
-      } catch(error) {
-        console.log(error)
-      }
+  writeComment() {
+    try {
+      const comment = this.commentForm.value.commentInput;
+      this.commentForm.reset();
+      this.commentProvider.createCommunityComment(this.post, comment).then(() => {
+        this.getCommunityComments();
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  getCommunityComments(){
-    this.commentProvider.readCommunityComment(this.post).then((comments)=>{
+  getCommunityComments() {
+    this.commentProvider.readCommunityComment(this.post).then((comments) => {
       this.comments = comments;
       console.log(this.comments)
     });
   }
 
-  presentActionSheet(post) {
-    const postWriterUid = post.uid;
+  presentActionSheet(comment) {
+    const commentWriterUid = comment.uid;
     let actionSheet;
 
-    if (this.userProvider.checkUser(this.currentUser.uid, postWriterUid)) {
+    if (this.userProvider.isSameUser(this.currentUser.uid, commentWriterUid)) {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {
             text: '글 삭제',
             role: 'destructive',
             handler: () => {
-              console.log('Destructive clicked');
-            }
-          },
-          {
-            text: '댓글 달기',
-            handler: () => {
-              console.log('댓글달기 clicked');
-              this.navCtrl.push('CommunitycommentPage');
+              this.commentProvider.deleteCommunityComment(this.post.postId, comment.commentId).then(() => {
+                this.getCommunityComments();
+              })
             }
           },
           {
             text: '닫기',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
             }
           }
         ]
@@ -87,17 +80,14 @@ export class CommunityCommentPage {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {
-            text: '댓글 달기',
+            text: '신고',
             handler: () => {
-              console.log('댓글달기 clicked');
-              this.navCtrl.push('CommunityCommentPage', { post: post });
             }
           },
           {
             text: '닫기',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
             }
           }
         ]
@@ -107,7 +97,7 @@ export class CommunityCommentPage {
   }
 
   navigateToPage(page, uid) {
-    this.navCtrl.push(page, {uid})
+    this.navCtrl.push(page, { uid })
   }
 
 }

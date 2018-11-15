@@ -115,10 +115,7 @@ export class SearchtagPage {
   }
 
   updatepost(post){
-    this.community.post = post;
-    this.navCtrl.push('CommunityfixPage', {
-     //text: post.text,
-    });
+
   }
 
   urlcheck(post){

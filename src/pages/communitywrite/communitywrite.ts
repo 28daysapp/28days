@@ -36,7 +36,7 @@ export class CommunitywritePage {
 		console.log("The community INFO!!: " + JSON.stringify(this.communityInfo));
 	}
 
-	write() { // communityfix와 동일
+	write() { 
 		if (this.text == '') {
 			let alert = this.alertCtrl.create({
 				title: '내용은 필수 항목입니다.',

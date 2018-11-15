@@ -56,7 +56,7 @@ export class UserProvider {
 		return promise;
   }
 
-  checkUser(currentUserUid: String, targetUserUid: String) {
+  isSameUser(currentUserUid: String, targetUserUid: String) {
     if (currentUserUid == targetUserUid) {
       return true
     } else {

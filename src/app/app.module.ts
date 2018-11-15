@@ -23,7 +23,6 @@ import { EmotionProvider } from '../providers/emotion/emotion';
 import { CommunityProvider } from '../providers/community/community';
 import { CommunitycommentProvider } from '../providers/communitycomment/communitycomment';
 import { PostProvider } from '../providers/post/post';
-import { CommunityfixPage } from '../pages/communityfix/communityfix'
 import { MyProvider } from '../providers/my/my'
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -75,7 +74,6 @@ import { CommentProvider } from '../providers/comment/comment';
     CommunitycommentProvider,
     PostProvider,
     MyProvider,
-    CommunityfixPage,
     InAppBrowser,
     SupporterProvider,
     ReviewProvider,

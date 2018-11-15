@@ -27,7 +27,6 @@ export class CommentpopoverPage {
    }
  
    commentfix(){
-     //this.navCtrl.push('CommunityfixPage');
    }
 
   ionViewDidLoad() {

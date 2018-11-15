@@ -95,6 +95,7 @@ export class CommunityProvider {
 
 				newPostRef.set({
 					uid: uid,
+					postId: postId,
 					username: firebase.auth().currentUser.displayName,
 					text: text,
 					photoURL: this.photoURL,
@@ -188,7 +189,7 @@ export class CommunityProvider {
 	}
 
 	deleteCommunityPost(post) {
-		var promise = new Promise((resolve) => {
+		const promise = new Promise((resolve) => {
 			firebase.database().ref(`communityPost/${post.communityName}/${post.postId}`).remove();
 			resolve(true);
 		});

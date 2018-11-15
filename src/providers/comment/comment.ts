@@ -5,7 +5,7 @@ import firebase from 'firebase';
 export class CommentProvider {
 
   fireusers = firebase.database().ref('/users');
-	firestore = firebase.storage();
+  firestore = firebase.storage();
 
   constructor() {
     console.log('Hello CommentProvider Provider');
@@ -17,12 +17,14 @@ export class CommentProvider {
     const uid = firebase.auth().currentUser.uid;
     let user;
 
-  	const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       this.fireusers.child(uid).once('value').then((snapshot) => {
         user = snapshot.val();
-      }).then(()=>{
+      }).then(() => {
         const newCommentRef = firebase.database().ref(`communityComment/${postId}`).push();
+        const commentId = newCommentRef.key;
         newCommentRef.set({
+          commentId: commentId,
           uid: firebase.auth().currentUser.uid,
           username: firebase.auth().currentUser.displayName,
           text: comment,
@@ -32,19 +34,19 @@ export class CommentProvider {
       })
       resolve(true);
     })
-    
-  	return promise;
+
+    return promise;
   }
 
-  readCommunityComment(post){
-    
+  readCommunityComment(post) {
+
     const postId = post.postId
 
-    const promise = new Promise((resolve)=>{ 
+    const promise = new Promise((resolve) => {
 
       firebase.database().ref(`communityComment/${postId}`).once('value').then((snapshot) => {
         const comments = [];
-        snapshot.forEach((childSnapshot)=>{
+        snapshot.forEach((childSnapshot) => {
           const comment = childSnapshot.val();
           comments.push(comment);
         })
@@ -56,8 +58,11 @@ export class CommentProvider {
 
   }
 
-  
-
-
-
+  deleteCommunityComment(postId: String, commentId: String) {
+    const promise = new Promise((resolve) => {
+      firebase.database().ref(`communityComment/${postId}/${commentId}`).remove();
+      resolve(true);
+    });
+    return promise
+  }
 }
