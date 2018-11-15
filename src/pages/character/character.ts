@@ -73,11 +73,11 @@ export class CharacterPage {
       this.fileURL = 'data:image/jpeg;base64,' + imagePath;
       this.dataURL = imagePath;
 
-      this.updateProfilePicture();
-
     }, (err) => {
       // Handle error
       console.log('openGallery error : ' + err.toString());
+    }).then(()=>{
+      this.updateProfilePicture();
     });
 
   }

@@ -38,6 +38,7 @@ import { PlaceProvider } from '../providers/place/place';
 import { Crop } from '@ionic-native/crop';
 import { NotificationProvider } from '../providers/notification/notification';
 import { CameraProvider } from '../providers/camera/camera';
+import { CommentProvider } from '../providers/comment/comment';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { CameraProvider } from '../providers/camera/camera';
     PlaceProvider,
     CounselorProvider,
     NotificationProvider,
-    CameraProvider
+    CameraProvider,
+    CommentProvider
   ]
 })
 export class AppModule { }

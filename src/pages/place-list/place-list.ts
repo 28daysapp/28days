@@ -5,6 +5,8 @@ import { MenuController } from 'ionic-angular';
 import { GoogleProvider } from '../../providers/google/google';
 import { PlaceProvider } from '../../providers/place/place';
 import { UserProvider } from '../../providers/user/user';
+import firebase from 'firebase';
+
 
 declare let google;
 
@@ -42,7 +44,7 @@ export class PlaceListPage {
   loading;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation,
-    public menu: MenuController, public userProvider: UserProvider,  public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
+    public menu: MenuController, public userProvider: UserProvider, public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
     this.places = [];
     this.user = this.userProvider.readCurrentUser();
   }
@@ -127,21 +129,26 @@ export class PlaceListPage {
             this.places[i].ratings = 0;
             this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
             // this.places[i].photo = this.googleProvider.getPlacePhoto(results[i].reference)
-            // this.countReviews(results[i].place_id, i);
+            this.countReviews(this.places[i].place_id, i);
+
           }
         } else {
           console.log("Status error: " + status);
         }
-      }, (error) => {
-        console.log("Error: " + error);
-      });
+      })
 
 
     }
   }
 
   countReviews(placeId, i) {
-    this.placeProvider.countReviews(this.places, placeId, i);
+    firebase.database().ref('/placeInfo/' + placeId).once('value').then((snapshot) => {
+      if (snapshot.val() === null) {
+        return
+      }
+      this.places[i].reviewCount = snapshot.val().reviewCount;
+      this.places[i].ratings = snapshot.val().ratings;
+    })
   }
 
   placeDetail(place) {

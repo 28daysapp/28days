@@ -50,6 +50,7 @@ export class CommunityPage {
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.createUser();
+        console.log("User created: " + JSON.stringify(this.createUser));
         this.menu.enable(true, 'loggedInMenu');
         this.menu.enable(false, 'loggedOutMenu');
       })

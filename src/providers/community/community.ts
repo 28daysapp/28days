@@ -114,7 +114,6 @@ export class CommunityProvider {
 	}
 
 	createMyPost(postId, text, dataURL, anonymity, communityInfo) {
-		console.log("create my post")
 		const promise = new Promise((resolve) => {
 			const uid = firebase.auth().currentUser.uid;
 			let user;

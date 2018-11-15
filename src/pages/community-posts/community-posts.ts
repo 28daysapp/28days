@@ -17,7 +17,9 @@ export class CommunityPostsPage {
   alreadyJoined: boolean = false;
   currentUserUid: String = firebase.auth().currentUser.uid;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public communityProvider: CommunityProvider, public userProvider: UserProvider, public actionSheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, 
+    public navParams: NavParams, public communityProvider: CommunityProvider, 
+    public userProvider: UserProvider, public actionSheetCtrl: ActionSheetController) {
     this.communityInfo = this.navParams.get('communityInfo');
   }
 
@@ -92,16 +94,14 @@ export class CommunityPostsPage {
               this.communityProvider.deleteCommunityPost(post).then(() => {
                 this.communityProvider.deleteMyPost(post);
                 this.getCommunityPosts(this.communityInfo.communityName)
-              }).then(()=>{
-                
-              }).then(()=>{
               });
             }
           },
           {
             text: '댓글 달기',
             handler: () => {
-              console.log('Archive clicked');
+              console.log('댓글달기 clicked');
+              this.navCtrl.push('CommunitycommentPage');
             }
           },
           {
@@ -119,7 +119,8 @@ export class CommunityPostsPage {
           {
             text: '댓글 달기',
             handler: () => {
-              console.log('Archive clicked');
+              console.log('댓글달기 clicked');
+              this.navCtrl.push('CommunityCommentPage', { post: post });
             }
           },
           {
