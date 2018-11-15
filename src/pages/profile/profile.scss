@@ -29,13 +29,13 @@ page-profile {
         }
         .communities-container {
             width: 100%;
-            .scroll-content {
+            .scroll .scroll-content {
                 padding: 0;
+                overflow: auto;
             }
             .scroll {
                 height: 45px;
                 white-space: nowrap;
-                overflow: hidden;
                 display: flex;
                 align-items: center;
                 ::-webkit-scrollbar {

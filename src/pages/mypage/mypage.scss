@@ -1,16 +1,20 @@
 page-mypage {
   .profile {
-      font-size: 30px;
-      width: 100%;
-      text-align: center;
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      margin: 1rem 0;
+    }
   }
 
-.profile .photo {
-  width: 100px;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block !important;
+  .profile .photo {
+    width: 30vw;
+    height: auto;
+    border-radius: 50%;
   }
 
   .modal {

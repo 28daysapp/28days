@@ -12,7 +12,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding no-bounce>
   <div class="spinner-container" *ngIf="!this.user">
     <ion-spinner></ion-spinner>
   </div>
@@ -30,7 +30,7 @@
           <div *ngIf="!joinedCommunities">
             <ion-spinner></ion-spinner>
           </div>
-          <ion-scroll *ngIf="joinedCommunities" class="scroll" scrollX="true" scrollbar-y="false">
+          <ion-scroll *ngIf="joinedCommunities" class="scroll" scrollX="true" scrollbar-x="false">
             <div *ngIf="joinedCommunities.length === 0">아직 가입한 그룹이 없습니다!</div>
             <div *ngFor="let community of joinedCommunities" class="community-icon">
               <p>{{community.communityName}}</p>
