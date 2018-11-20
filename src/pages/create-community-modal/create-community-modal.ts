@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController,  ModalController, AlertController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { UserProvider } from '../../providers/user/user';
-import { SelectImageModalPage } from '../select-image-modal/select-image-modal';
-
 
 @IonicPage()
 @Component({

@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SupporterProvider } from '../../providers/supporter/supporter'
 import { UserProvider } from '../../providers/user/user'
 import { OperatorProvider } from '../../providers/operator/operator'
-import firebase from 'firebase';
 import { ReviewProvider } from '../../providers/review/review';
-
-/**
- * Generated class for the OperatorPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

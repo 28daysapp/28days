@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-import { MyProvider } from '../../providers/my/my'
 
 @Injectable()
 export class CommunityProvider {
@@ -33,7 +32,7 @@ export class CommunityProvider {
 	mosttag1: number = 0;
 	morepost: number = 0;
 	moresearch: number = 0;
-	constructor(public my: MyProvider) {
+	constructor() {
 
 	}
 
@@ -199,8 +198,6 @@ export class CommunityProvider {
 	deleteMyPost(post) {
 		var promise = new Promise((resolve) => {
 			const uid = firebase.auth().currentUser.uid;
-			console.log("uid: " + uid)
-			console.log("postid: " + post.postId)
 
 			firebase.database().ref(`userPost/${uid}/${post.postId}`).remove();
 			resolve(true);
@@ -247,7 +244,6 @@ export class CommunityProvider {
 			var time = firebase.database.ServerValue.TIMESTAMP;
 			var postId = newPostRef.key;
 			if (anonymity) { // 익명 체크의 경우
-				console.log(anonymity);
 				if (dataURL) { // 사진이 있을 경우
 					var imageStore1 = this.firestore.ref('/community/').child(postId);
 					imageStore1.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
@@ -265,32 +261,6 @@ export class CommunityProvider {
 							urlcheck: true,
 							anonymity: true,
 							communityName: communityInfo.communityName
-						}).then(() => {
-							this.my.addmypost(uid, postId, time).then(() => {
-								resolve(true);
-							}).then(() => {
-								if (tag1 != '') {
-									this.gettag(tag1).then((tags) => {
-										this.tags = tags;
-										if (this.tags == null) {
-											this.firetag.child(`${tag1}`).set({
-												tag1: tag1,
-												tagcnt: 1,
-											}).then(() => {
-												resolve(true);
-											});
-										}
-										else {
-											this.firetag.child(`${tag1}`).set({
-												tag1: tag1,
-												tagcnt: this.tags.tagcnt + 1
-											}).then(() => {
-												resolve(true);
-											});
-										}
-									})
-								}
-							})
 						});
 					});
 				} else { // 사진이 없을 경우
@@ -307,10 +277,6 @@ export class CommunityProvider {
 						tag1: tag1,
 						anonymity: true,
 						communityName: communityInfo.communityName
-					}).then(() => {
-						this.my.addmypost(uid, postId, time).then(() => {
-							resolve(true);
-						})
 					}).then(() => {
 						if (tag1 != '') {
 							this.gettag(tag1).then((tags) => {
@@ -336,7 +302,6 @@ export class CommunityProvider {
 					})
 				}
 			} else { // 익명 체크가 아닌 경우
-				console.log("else");
 				if (dataURL) { // 사진이 있을 경우
 					var imageStore2 = this.firestore.ref('/community/').child(postId);
 					imageStore2.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((savedImage) => {
@@ -354,10 +319,8 @@ export class CommunityProvider {
 							urlcheck: true,
 							anonymity: false,
 							communityName: communityInfo.communityName
-						}).then(() => {
-							this.my.addmypost(uid, postId, time).then(() => {
-								resolve(true);
-							}).then(() => {
+						})
+							.then(() => {
 								if (tag1 != '') {
 									this.gettag(tag1).then((tags) => {
 										this.tags = tags;
@@ -380,7 +343,7 @@ export class CommunityProvider {
 									})
 								}
 							})
-						});
+						
 					});
 				} else { // 사진이 없을 경우
 					newPostRef.set({
@@ -395,10 +358,6 @@ export class CommunityProvider {
 						report: 0,
 						tag1: tag1,
 						communityName: communityInfo.communityName
-					}).then(() => {
-						this.my.addmypost(uid, postId, time).then(() => {
-							resolve(true);
-						})
 					}).then(() => {
 						if (tag1 != '') {
 							this.gettag(tag1).then((tags) => {
@@ -519,7 +478,6 @@ export class CommunityProvider {
 	}
 
 	reportpost(post) { // 게시글 신고
-		console.log("test");
 		var uid = firebase.auth().currentUser.uid;
 		var promise = new Promise((resolve) => {
 			this.getreport(post).then((report) => {
@@ -631,7 +589,6 @@ export class CommunityProvider {
 				});
 			});
 		});
-		console.log(this.morepost);
 		return promise;
 	}
 
@@ -665,7 +622,6 @@ export class CommunityProvider {
 				});
 			});
 		});
-		console.log(this.moresearch);
 		return promise;
 	}
 
@@ -699,7 +655,6 @@ export class CommunityProvider {
 				});
 			});
 		});
-		console.log(this.moresearch);
 		return promise;
 	}
 
@@ -733,7 +688,6 @@ export class CommunityProvider {
 				});
 			});
 		});
-		console.log(this.moresearch);
 		return promise;
 	}
 

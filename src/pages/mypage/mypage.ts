@@ -26,16 +26,12 @@ export class MypagePage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController) {
-    // Receive message from push notifications
-    if (params.data.message) {
-      console.log('message: ' + params.data.message);  
-    }
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchtagPage');
     this.navBar.backButtonClick = (e:UIEvent)=>{
-      // todo something
       this.navCtrl.pop();
      }
   }
@@ -207,13 +203,7 @@ export class MypagePage {
   gogoOperator(){
     this.navCtrl.push('OperatorPage');
   }
-  mychat(){
-    if (this.user) {
-      this.navCtrl.push('MychatsPage');
-    } else {
-      this.pleaselogin();
-    }
-  }
+
   mypost(){
     if (this.user) {
       this.navCtrl.push('MypostPage');
@@ -233,14 +223,6 @@ export class MypagePage {
   terms2(){
     if (this.user) {
       this.navCtrl.push('TermsUsePage');
-    } else {
-      this.pleaselogin();
-    }
-  }
-
-  mypay(){
-    if (this.user) {
-      this.navCtrl.push('PaymentPage');
     } else {
       this.pleaselogin();
     }

@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
-/*
-  Generated class for the ChatProvider provider.
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+
+
 @Injectable()
 export class ChatProvider {
   firechat = firebase.database().ref('/chats');
@@ -230,7 +227,6 @@ export class ChatProvider {
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
       this.firechat.child(uid).once("value").then((snapshot) => {
-        var requestedchatuids = [];
         var requestedchats = [];
         snapshot.forEach((childSnapshot) => {
           if (childSnapshot.val().requester != uid) {
@@ -240,30 +236,7 @@ export class ChatProvider {
         resolve(requestedchats);
       })
     });
-    return promise;
-    // var promise = new Promise((resolve) => {
-    //   this.firechat.child(uid).once("value").then((snapshot) => {
-    //     var requestedchatuids = [];
-    //     var requestedchats = [];
-    //     snapshot.forEach((childSnapshot) => {
-    //       if (childSnapshot.val().requester != uid) {
-    //         requestedchatuids.push(Object.keys(snapshot.val())[0]);
-    //         requestedchats.push(childSnapshot.val());
-    //       }
-    //     });
-    //     this.fireusers.once("value").then((userprofile) => {
-    //       userprofile.forEach((childSnapshot) => {
-    //         var index = requestedchatuids.indexOf(childSnapshot.val().uid);
-    //         if (index != -1) {
-    //           requestedchats[index].buddyusername = childSnapshot.val().username;
-    //           requestedchats[index].buddyphotoURL = childSnapshot.val().photoURL;
-    //         }
-    //       });
-    //       resolve(requestedchats);
-    //     });
-    //   });
-    // });
-    // return promise;
+    return promise; 
   }
   checkstart() {
     var uid = firebase.auth().currentUser.uid;

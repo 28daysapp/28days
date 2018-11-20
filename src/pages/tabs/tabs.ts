@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Platform, App, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, Platform, } from 'ionic-angular';
 
 import { Tab1Root, Tab2Root, Tab3Root, Tab4Root, Tab5Root } from '../';
 
@@ -23,7 +23,7 @@ export class TabsPage {
   tab5Title = "프로필";
   lastBack;
   allowClose;
-  constructor(public navCtrl: NavController, private app: App, private toastCtrl: ToastController, public platform: Platform, ) {
+  constructor(public navCtrl: NavController, public platform: Platform, ) {
 
   }
 }

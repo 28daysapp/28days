@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { SupporterProvider } from '../../providers/supporter/supporter'
-import { UserProvider } from '../../providers/user/user'
 import firebase from 'firebase';
 
 /**
@@ -27,7 +26,7 @@ export class SupporterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public supporter: SupporterProvider, public userp: UserProvider
+    public supporter: SupporterProvider
   ) {
     this.UserRef = firebase.database().ref('/users');
   }

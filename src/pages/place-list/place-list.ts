@@ -1,9 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, AlertController, App, LoadingController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
-import { MenuController } from 'ionic-angular';
-import { GoogleProvider } from '../../providers/google/google';
-import { PlaceProvider } from '../../providers/place/place';
+import { NavController, NavParams, IonicPage, AlertController, LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
 
@@ -43,8 +39,8 @@ export class PlaceListPage {
   apiProvider;
   loading;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private geolocation: Geolocation,
-    public menu: MenuController, public userProvider: UserProvider, public placeProvider: PlaceProvider, public googleProvider: GoogleProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
+    public userProvider: UserProvider, public loadingCtrl: LoadingController) {
     this.places = [];
     this.user = this.userProvider.readCurrentUser();
   }

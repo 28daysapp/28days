@@ -14,11 +14,10 @@
     <textarea class="name-form" [(ngModel)]="communityName" placeholder="커뮤니티 이름"></textarea>
     <textarea class="description-form" [(ngModel)]="communityDescription" placeholder="멤버들에게 커뮤니티를 간략하게 소개해주고 어떤 주제로 대화했으면 하는지 적어줘!"></textarea>
     <div class="image-container">
-        <img src="../../assets/imgs/post5.jpg">
-       
-            <button ion-button icon-only class="image-button bottom-right" color="textgray" (click)="presentImageModal()">
-                <ion-icon name="albums"></ion-icon>
-              </button>
+      <img src="../../assets/imgs/post5.jpg">
+      <button ion-button icon-only class="image-button bottom-right" color="textgray" (click)="presentImageModal()">
+        <ion-icon name="albums"></ion-icon>
+      </button>
     </div>
     <div class="create-button-container">
       <button ion-button class="create-button" (click)="addCommunity()">커뮤니티 추가하기</button>

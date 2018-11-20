@@ -2,16 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController, App } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 import { SupporterProvider } from '../../providers/supporter/supporter'
-import { UserProvider } from '../../providers/user/user'
 import firebase from 'firebase';
-import { MenuController } from 'ionic-angular';
-
-/**
- * Generated class for the OnofflinePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -32,9 +23,9 @@ export class OnofflinePage {
   isCounselor;
   loading;
 
-  constructor(public menu: MenuController, public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
+  constructor( public navCtrl: NavController, public navParams: NavParams, public chat: ChatProvider,
     public viewCtrl: ViewController, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public appCrtl: App,
-    public supporter: SupporterProvider, public userp: UserProvider) {
+    public supporter: SupporterProvider) {
 
     this.SupporterRef = firebase.database().ref('/supporter');
     this.CounselorRef = firebase.database().ref('/counselor');
@@ -44,14 +35,6 @@ export class OnofflinePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnofflinePage');
     this.user = firebase.auth().currentUser;
-    if (this.user) {
-      this.menu.enable(true, 'loggedInMenu');
-      this.menu.enable(false, 'loggedOutMenu');
-    }
-    else {
-      this.menu.enable(true, 'loggedOutMenu');
-      this.menu.enable(false, 'loggedInMenu');
-    }
   }
 
   ionViewWillEnter() {

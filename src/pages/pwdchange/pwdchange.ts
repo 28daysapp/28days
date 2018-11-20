@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, Loading, AlertController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
-import { UserProvider } from '../../providers/user/user';
 import { EmailValidator } from '../../validators/email';
 import { matchOtherValidator } from '../../validators/match-other-validator';
 import { PasswordValidator } from '../../validators/password';
@@ -32,7 +31,7 @@ export class PwdchangePage {
   confirmation = this.confirmation;
   email = this.email;
 
-  constructor(public navCtrl: NavController, public auth: AuthProvider, public user: UserProvider,
+  constructor(public navCtrl: NavController, public auth: AuthProvider,
     public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public storage: Storage, public navParams: NavParams) {
     this.loginForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.maxLength(8)])],

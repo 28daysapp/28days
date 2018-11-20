@@ -2,12 +2,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 
-/*
-  Generated class for the SupporterProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class SupporterProvider {
   firesupporter = firebase.database().ref('/supporter');
@@ -42,18 +36,17 @@ export class SupporterProvider {
   }
 
   addsupportersum(supporterid) {
-    var supporter;
     var promise = new Promise((resolve) => {
       this.firesupporterreview.child(supporterid).once("value").then((snapshot) => {
         console.log(snapshot.numChildren())
-      this.firesupporter.child(`${supporterid}`).update({
-        reviewcnt: snapshot.numChildren()
-      }).then(() => {
-        resolve(true);
+        this.firesupporter.child(`${supporterid}`).update({
+          reviewcnt: snapshot.numChildren()
+        }).then(() => {
+          resolve(true);
+        });
       });
     });
-  });
-  console.log('1');
+    return promise;
   }
 
   sumrating(r1, r2, r3, r4, supporterid) {

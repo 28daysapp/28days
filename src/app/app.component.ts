@@ -1,6 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
 import {
-  MenuController,
   AlertController,
   Nav,
   Platform,
@@ -78,7 +77,6 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public menu: MenuController,
     public alertCtrl: AlertController,
     public auth: AuthProvider,
     public storage: Storage
@@ -110,7 +108,6 @@ export class MyApp {
 
   openPage(page: PageInterface) {
     // close the menu when clicking a link from the menu
-    this.menu.close();
     // navigate to the new page if it is not the current page
     if (page.title == "로그아웃") {
       // Give the menu time to close before changing to logged out
@@ -124,7 +121,6 @@ export class MyApp {
   }
 
   changeProfilePicture() {
-    this.menu.close();
     this.nav.push('CharacterPage');
   }
 
