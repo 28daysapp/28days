@@ -1,9 +1,11 @@
-<ion-header no-border>
-  <ion-navbar no-border-bottom>
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>새 커뮤니티 만들기</ion-title>
-    <div class="close-button">
-      <ion-icon name="close" (click)="dismiss()"></ion-icon>
-    </div>
   </ion-navbar>
 </ion-header>
 
@@ -11,8 +13,15 @@
   <div class="form-container">
     <textarea class="name-form" [(ngModel)]="communityName" placeholder="커뮤니티 이름"></textarea>
     <textarea class="description-form" [(ngModel)]="communityDescription" placeholder="멤버들에게 커뮤니티를 간략하게 소개해주고 어떤 주제로 대화했으면 하는지 적어줘!"></textarea>
-  </div>
-  <div class="create-button-container">
-    <button ion-button class="create-button" (click)="addCommunity()">커뮤니티 추가하기</button>
+    <div class="image-container">
+        <img src="../../assets/imgs/post5.jpg">
+       
+            <button ion-button icon-only class="image-button bottom-right" color="textgray" (click)="presentImageModal()">
+                <ion-icon name="albums"></ion-icon>
+              </button>
+    </div>
+    <div class="create-button-container">
+      <button ion-button class="create-button" (click)="addCommunity()">커뮤니티 추가하기</button>
+    </div>
   </div>
 </ion-content>

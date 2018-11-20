@@ -17,7 +17,7 @@ export class ReviewProvider {
     console.log('Hello ReviewProvider Provider');
   }
 
-  writeReview(placeId, placeName, rating, text) {
+  createReview(placeId, placeName, rating, text) {
 
     var uid = firebase.auth().currentUser.uid;
     var promise = new Promise((resolve) => {
@@ -62,16 +62,16 @@ export class ReviewProvider {
     return promise;
   }
 
-  getReviews(placeId) {
+  readReviews(placeId) {
     this.placeId = placeId;
 
     var promise = new Promise((resolve) => {
       var posts = [];
-      this.fireReview.child(this.placeId).orderByChild('timestamp').once("value").then((snapshot) => { // fireReview에서 시간 순으로 가져오고 snapshot에 하나씩 가져옴
-        snapshot.forEach((childSnapshot) => { //스냅샷의 child개수만큼 for
+      this.fireReview.child(this.placeId).orderByChild('timestamp').once("value").then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
           posts.push(childSnapshot.val());
           posts.reverse();
-          resolve(posts); //여기서 post를 보내주는 것 같다
+          resolve(posts);
         });
       });
     });
@@ -80,22 +80,22 @@ export class ReviewProvider {
 
   }
 
-  getsearchposts(tag) {
-    var promise = new Promise((resolve) => {
-      this.fireReview.child(``).orderByChild('timestamp').once("value").then((snapshot) => {
+  countTotalReviews() {
+    let reviewCount = 0;
+    const promise = new Promise((resolve) => {
+      this.fireReview.once('value').then((snapshot) => {
+
+        snapshot.forEach((childSnapshot) => {
+          childSnapshot.forEach(() => {
+            reviewCount += 1;
+          });
+        });
+        resolve(reviewCount)
 
       });
-    });
+    })
     return promise;
+
   }
-
-
-  // this.firecomment.child(`${ this.community.namecom }/${ this.postid }`).on('value', (snapshot) => {
-  //   this.comments = [];
-  //   for (var i in snapshot.val()) {
-  //     this.comments.push(snapshot.val()[i]);
-  //   }
-  //   this.events.publish('community-newcomment');
-  // });
 
 }

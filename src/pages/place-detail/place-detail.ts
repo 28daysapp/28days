@@ -53,7 +53,7 @@ export class PlaceDetailPage {
   }
 
   ionViewWillEnter() {
-    this.review.getReviews(this.placeId).then((posts) => {
+    this.review.readReviews(this.placeId).then((posts) => {
       this.posts = posts;
       console.log(this.posts)
       console.log(this.posts[0]);

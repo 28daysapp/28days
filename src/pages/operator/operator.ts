@@ -4,6 +4,7 @@ import { SupporterProvider } from '../../providers/supporter/supporter'
 import { UserProvider } from '../../providers/user/user'
 import { OperatorProvider } from '../../providers/operator/operator'
 import firebase from 'firebase';
+import { ReviewProvider } from '../../providers/review/review';
 
 /**
  * Generated class for the OperatorPage page.
@@ -19,8 +20,9 @@ import firebase from 'firebase';
 })
 export class OperatorPage {
   list;
+  reviews;
   constructor(public navCtrl: NavController, public navParams: NavParams, public user: UserProvider,
-  public operator: OperatorProvider) {
+  public operator: OperatorProvider, public reviewProvider: ReviewProvider) {
   }
 
   ionViewDidLoad() {
@@ -48,5 +50,11 @@ export class OperatorPage {
   }
   changeTypeOperatorDelete(user){
     this.operator.deleteOperator(user);
+  }
+
+  getTotalReviewNum(){
+    this.reviewProvider.countTotalReviews().then((reviewCount)=> {
+      this.reviews = reviewCount;
+    });
   }
 }

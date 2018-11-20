@@ -2,12 +2,6 @@ import { Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, AlertController, NavParams, LoadingController, Slides } from 'ionic-angular';
 import { CounselorProvider } from '../../providers/counselor/counselor';
 import firebase from 'firebase';
-/**
- * Generated class for the CounselorReviewWritePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

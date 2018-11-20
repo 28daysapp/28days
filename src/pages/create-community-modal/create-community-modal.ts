@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController,  ModalController, AlertController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { UserProvider } from '../../providers/user/user';
+import { SelectImageModalPage } from '../select-image-modal/select-image-modal';
 
 
 @IonicPage()
@@ -15,8 +16,13 @@ export class CreateCommunityModalPage {
   communityDescription: String = '';
   isComplete: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewController: ViewController, public userProvider: UserProvider, public communityProvider: CommunityProvider,
-    private alertCtrl: AlertController, ) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public viewController: ViewController, 
+    public userProvider: UserProvider, 
+    public communityProvider: CommunityProvider,
+    private alertCtrl: AlertController,
+    public modalCtrl: ModalController ) {
   }
 
   ionViewDidLoad() {
@@ -36,6 +42,11 @@ export class CreateCommunityModalPage {
       this.dismiss();
       this.showAlert()
     }
+  }
+
+  presentImageModal(){
+    let imageModal = this.modalCtrl.create('SelectImageModalPage', {  });
+    imageModal.present();
   }
 
   showAlert() {

@@ -25,18 +25,26 @@ page-create-community-modal {
             border-bottom: 1px solid color($colors, black);
             height: 20rem;
         }
-    }
-    .create-button-container {
-        display: flex;
-        margin: 1rem;
-        padding: 1rem;
-        width: 100%;
-        justify-content: center;
-    }
-    .create-button {
-        padding: 0.5rem;
-        text-align: center;
-        width: 100%;
-        border-radius: 10rem;
+        .image-container {
+            img {
+                border-radius: 8px;
+            }
+            .image-button {
+                z-index: 2;
+                border-radius: 10rem;
+            }
+        }
+        .create-button-container {
+            display: flex;
+            padding: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+        .create-button {
+            padding: 0.5rem;
+            text-align: center;
+            width: 100%;
+            border-radius: 10rem;
+        }
     }
 }
