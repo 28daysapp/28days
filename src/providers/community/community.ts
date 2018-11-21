@@ -38,16 +38,15 @@ export class CommunityProvider {
 
 	//--------------------------------------------------------------------------------
 
-	createCommunity(communityName, communityDescription) {
+	createCommunity(communityName, communityDescription, communityImage) {
 		const promise = new Promise((resolve) => {
 			const createdTime = firebase.database.ServerValue.TIMESTAMP;
-			// const newMember = 1;
 
 			firebase.database().ref(`/communityList/${communityName}`).set({
 				communityName: communityName,
 				communityDescription: communityDescription,
+				communityImage: communityImage,
 				createdTime: createdTime
-				// members: newMember
 			})
 			resolve(true);
 		});

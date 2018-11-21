@@ -12,6 +12,7 @@ export class CreateCommunityModalPage {
 
   communityName: String = '';
   communityDescription: String = '';
+  communityImage: String = 'assets/imgs/post5.jpg';
   isComplete: boolean = false;
 
   constructor(public navCtrl: NavController, 
@@ -27,23 +28,24 @@ export class CreateCommunityModalPage {
     console.log('ionViewDidLoad CreateCommunityModalPage');
   }
 
-  addCommunity() {
+  async addCommunity() {
     this.checkForm();
     if (this.isComplete) {
-      this.communityProvider.createCommunity(this.communityName, this.communityDescription)
-        .then(() => {
-          this.userProvider.createCommunityMembership(this.communityName);
-        }).then(() => {
-          this.communityProvider.increaseCommunityMember(this.communityName);
-        });
-
-      this.dismiss();
-      this.showAlert()
+      await this.communityProvider.createCommunity(this.communityName, this.communityDescription, this.communityImage);
+      await this.userProvider.createCommunityMembership(this.communityName);
+      await this.communityProvider.increaseCommunityMember(this.communityName);
+      await this.dismiss();
+      await this.showAlert();
     }
   }
 
   presentImageModal(){
     let imageModal = this.modalCtrl.create('SelectImageModalPage', {  });
+    imageModal.onDidDismiss(communityImage => {
+      console.log(communityImage)
+      console.log(communityImage.communityImage)
+      this.communityImage = communityImage.communityImageReference
+    });
     imageModal.present();
   }
 

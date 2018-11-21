@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-/**
- * Generated class for the SelectImageModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-select-image-modal',
   templateUrl: 'select-image-modal.html',
 })
 export class SelectImageModalPage {
+
+  images = [];
+  selectedIndex;
+  communityImageReference;
 
   constructor(
     public navCtrl: NavController, 
@@ -24,15 +21,25 @@ export class SelectImageModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SelectImageModalPage');
+    this.initializeImages();
   }
 
-  clicked(event: any){
-    console.log(event)
-    console.log("ao")
+  initializeImages(){
+    console.log("initialize images")
+    for (var i = 1; i < 15; i++) {
+      this.images.push({reference: `../../assets/imgs/post${i}.jpg`})
+    }
   }
 
-  dismiss() {
-    this.viewController.dismiss();
+  selectImage(selectedIndex){
+    this.selectedIndex = selectedIndex;
+    this.communityImageReference = `assets/imgs/post${selectedIndex + 1}.jpg`
+  }
+
+  dismissModal() {
+    this.viewController.dismiss({
+      communityImageReference : this.communityImageReference
+    });
   }
 
 }

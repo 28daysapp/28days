@@ -1,9 +1,5 @@
 page-select-image-modal {
-    img {
-        width: 33%;
-        height: auto;
-        background-color: transparent;
-    }
+
     .close-button {
         padding: 1rem;
         display: flex;
@@ -17,6 +13,19 @@ page-select-image-modal {
         justify-content: flex-start;
         align-items: baseline;
         align-content: flex-start;
+
+        .image-size {
+            width: 33%;
+            height: auto;
+        }
+
+        .active {
+            opacity: 0.5;
+        }
+
+        .inactive {
+            opacity: 1;
+        }
     }
 
 }

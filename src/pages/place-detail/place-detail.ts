@@ -46,22 +46,13 @@ export class PlaceDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlaceDetailPage');
-
-    // this.getGoogleInfo();
-    // this.changeTab();
     this.changeTab();
   }
 
   ionViewWillEnter() {
     this.review.readReviews(this.placeId).then((posts) => {
       this.posts = posts;
-      console.log(this.posts)
-      console.log(this.posts[0]);
     });
-  }
-
-  ionViewWillLeave() {
-    
   }
 
   getGoogleInfo() {
