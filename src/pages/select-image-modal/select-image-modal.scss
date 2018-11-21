@@ -1,22 +1,7 @@
 page-select-image-modal {
-    img {
-        width: 33%;
-        height: auto;
-        background-color: transparent;
-    }
     .close-button {
         padding: 1rem;
         display: flex;
         justify-content: flex-start;
     }
-
-    .image-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: baseline;
-        align-content: flex-start;
-    }
-
 }

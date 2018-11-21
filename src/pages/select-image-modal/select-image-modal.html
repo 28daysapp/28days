@@ -15,21 +15,9 @@
 
 <ion-content padding>
 
-  <div class="image-container" (click)="clicked()">
-    <img  value="post1" src="../../assets/imgs/post1.jpg" >
-    <img src="../../assets/imgs/post2.jpg">
-    <img src="../../assets/imgs/post3.jpg">
-    <img src="../../assets/imgs/post4.jpg">
-    <img src="../../assets/imgs/post5.jpg">
-    <img src="../../assets/imgs/post6.jpg">
-    <img src="../../assets/imgs/post7.jpg">
-    <img src="../../assets/imgs/post8.jpg">
-    <img src="../../assets/imgs/post9.jpg">
-    <img src="../../assets/imgs/post10.jpg">
-    <img src="../../assets/imgs/post11.jpg">    
-    <img src="../../assets/imgs/post12.jpg">
-    <img src="../../assets/imgs/post13.jpg">
-    <img src="../../assets/imgs/post14.jpg">
+  <div class="image-container" *ngFor="let image of images" (click)="clicked()">
+    <img class="community-image" src="{{image.reference}}" >
+
   </div>
 
 </ion-content>

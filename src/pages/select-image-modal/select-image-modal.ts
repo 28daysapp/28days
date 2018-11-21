@@ -15,20 +15,28 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class SelectImageModalPage {
 
+  images = [];
+
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public viewController: ViewController, 
-    ) {
+    public viewController: ViewController,
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SelectImageModalPage');
+    this.initializeImages();
   }
 
-  clicked(event: any){
-    console.log(event)
-    console.log("ao")
+  initializeImages() {
+    for (let i = 0; i < 14; i++) {
+      this.images.push({reference: `../../assets/imgs/post${i + 1}.jpg`})
+    }
+  }
+
+  clicked() {
+
   }
 
   dismiss() {
