@@ -57,12 +57,10 @@ export class CounselorProvider {
       });
     });
   });
-  console.log('1');
+  return promise;
   }
 
   sumrating(r1, r2, r3, r4, counselorid) {
-    var avg;
-    avg = this.getsumrating(counselorid);
     var promise = new Promise((resolve) => {
       this.getreviewrating(counselorid).then((reviewrating) => {
         this.reviewrating = reviewrating;

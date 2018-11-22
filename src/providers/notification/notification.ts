@@ -1,4 +1,4 @@
-import firebase, { database } from 'firebase';
+import firebase from 'firebase';
 import { Injectable } from '@angular/core';
 
 /*
@@ -81,7 +81,7 @@ export class NotificationProvider {
   }
 
   deleteAllNotifications() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       let readerUid = firebase.auth().currentUser.uid;
       firebase.database().ref(`/notification/${readerUid}`).remove().then(() => {
         resolve(true);

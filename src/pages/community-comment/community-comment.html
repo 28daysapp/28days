@@ -1,40 +1,33 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>댓글</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-
-		<ion-card class="card-container"*ngFor="let card of comments">
-				<ion-item>
-					<ion-avatar item-start>
-						<img src="{{card.profilePicture}}">
-					</ion-avatar>
-					<div ion-content>
-						<h2 (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>
-					</div>
-					<button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
-						<ion-icon name="more"></ion-icon>
-					</button>
-				</ion-item>
-				<ion-card-content class="card-content">
-					<p class="card-text">{{card.text}}</p>
-				</ion-card-content>
-			</ion-card>
-
+  <ion-card class="card-container" *ngFor="let card of comments">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{card.profilePicture}}">
+      </ion-avatar>
+      <div ion-content>
+        <h2 (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>
+      </div>
+      <button ion-button item-end icon-only clear (click)="presentActionSheet(card)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-card-content class="card-content">
+      <p class="card-text">{{card.text}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 <ion-footer>
 
-	<form [formGroup]="commentForm" (ngSubmit)="writeComment()"> 
-		<ion-input type="text" formControlName="commentInput" ></ion-input>
-		<button ion-button round type="submit" [disabled]="!commentForm.valid">
-			게시
-		</button>
-
-	</form>
-
+  <form class="form-container" [formGroup]="commentForm" (ngSubmit)="writeComment()">
+	  <ion-item>
+			<ion-input type="text" formControlName="commentInput"></ion-input>
+			<button ion-button round item-right type="submit" [disabled]="!commentForm.valid">게시</button>
+	  </ion-item>
+  </form>
 </ion-footer>

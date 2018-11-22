@@ -99,9 +99,6 @@ export class PlaceListPage {
     if (!userInput) {
       userInput = "강남"
     }
-
-    console.log("USER INPUT: " + userInput)
-
     if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
 
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
@@ -202,7 +199,6 @@ export class PlaceListPage {
 
     setTimeout(() => {
       console.log('Async operation has ended');
-      //this.ionViewWillEnter();
       refresher.complete();
     }, 2000);
   }
