@@ -23,7 +23,7 @@ export class NotificationProvider {
       type: 게시물, 댓글, 채팅
       uid: 고유 아이디 (알림을 눌렀을때 그 페이지로 갈 수 있기 위해 필요)
     }
-    creatorType: 댓굴, 좋아요, 채팅
+    creatorType: 댓글, 좋아요, 채팅
     readerUid: Reader Uid
   }
   */

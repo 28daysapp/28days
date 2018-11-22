@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, NavParams, ActionSheetController } from 'ionic-angular';
 import { CommunityProvider } from '../../providers/community/community';
 import { UserProvider } from '../../providers/user/user';
+import { NotificationProvider } from '../../providers/notification/notification';
 import firebase from 'firebase';
 
 @IonicPage()
@@ -17,9 +18,14 @@ export class CommunityPostsPage {
   alreadyJoined: boolean = false;
   currentUserUid: String = firebase.auth().currentUser.uid;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, 
-    public navParams: NavParams, public communityProvider: CommunityProvider, 
-    public userProvider: UserProvider, public actionSheetCtrl: ActionSheetController) {
+  constructor(
+    public navCtrl: NavController, 
+    public alertCtrl: AlertController,
+    public navParams: NavParams, 
+    public communityProvider: CommunityProvider,
+    public notificationProvider: NotificationProvider,
+    public userProvider: UserProvider, 
+    public actionSheetCtrl: ActionSheetController) {
     this.communityInfo = this.navParams.get('communityInfo');
   }
 
@@ -47,8 +53,27 @@ export class CommunityPostsPage {
     });
   }
 
-  toComments(post){
-    this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post});
+  async pressedLikeButton(post) {
+    const postId = post.postId;
+    const writerUid = post.uid;
+    const communityName = post.communityName;
+
+    const notificationParameter = {
+      readerType: {
+        type: "게시물",
+        uid: postId
+      },
+      creatorType: "좋아요",
+      readerUid: writerUid
+    }
+
+    await this.communityProvider.likePost(communityName, postId);
+    await this.getCommunityPosts(this.communityInfo.communityName);
+    await this.notificationProvider.createNotification(notificationParameter)
+  }
+
+  toComments(post) {
+    this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
   }
 
   joinCommunity() {
@@ -56,7 +81,7 @@ export class CommunityPostsPage {
     this.communityProvider.joinCommunity(communityName)
       .then(() => {
         this.userProvider.createCommunityMembership(communityName)
-      }).then(()=>{
+      }).then(() => {
         this.communityProvider.increaseCommunityMember(communityName);
       })
       .then(() => {
@@ -105,7 +130,7 @@ export class CommunityPostsPage {
             text: '댓글 달기',
             handler: () => {
               console.log('댓글달기 clicked');
-              this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post});
+              this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
             }
           },
           {
@@ -163,7 +188,7 @@ export class CommunityPostsPage {
   }
 
   navigateToPage(page, uid) {
-    this.navCtrl.push(page, {uid});
+    this.navCtrl.push(page, { uid });
   }
 
 }

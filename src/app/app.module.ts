@@ -21,7 +21,6 @@ import { ChatProvider } from '../providers/chat/chat';
 import { IonicStorageModule } from '@ionic/storage';
 import { EmotionProvider } from '../providers/emotion/emotion';
 import { CommunityProvider } from '../providers/community/community';
-import { CommunitycommentProvider } from '../providers/communitycomment/communitycomment';
 import { PostProvider } from '../providers/post/post';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -70,7 +69,6 @@ import { CommentProvider } from '../providers/comment/comment';
     ChatProvider,
     EmotionProvider,
     CommunityProvider,
-    CommunitycommentProvider,
     PostProvider,
     InAppBrowser,
     SupporterProvider,

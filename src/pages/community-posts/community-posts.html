@@ -33,13 +33,13 @@
       <button *ngIf="!alreadyJoined" ion-button (click)="joinCommunity()">
         커뮤니티 가입하기
       </button>
-      <button *ngIf="alreadyJoined" ion-button >
+      <button *ngIf="alreadyJoined" ion-button>
         커뮤니티 멤버
       </button>
     </ion-slide>
   </ion-slides>
 
-  <ion-card class="card-container"*ngFor="let card of posts">
+  <ion-card class="card-container" *ngFor="let card of posts">
     <ion-item>
       <ion-avatar item-start>
         <img *ngIf="!card.anonymity" src="{{card.profilePicture}}">
@@ -59,26 +59,27 @@
       <p class="card-text">{{card.text}}</p>
     </ion-card-content>
     <ion-row class="card-buttons">
-      <ion-col class="button-wrapper" col-5>
+      <ion-col class="button-wrapper" col-3>
         <!-- 좋아요 기능 -->
-        <button ion-button icon-start clear small>
-             <ion-icon name="thumbs-up"></ion-icon>
-             좋아요 {{card.like}}개
-             </button>
-      </ion-col>
-      <ion-col class="button-wrapper" col-5>
-        <!-- 댓글 기능 -->
-        <button ion-button icon-start clear small (click)="toComments(card)">
-          <ion-icon name="text"></ion-icon>
-          댓글 {{card.comment}}개
+        <button ion-button icon-start clear small (click)="pressedLikeButton(card)">
+          <ion-icon name="thumbs-up"></ion-icon> {{card.likes}}
         </button>
       </ion-col>
-      <ion-col class="button-wrapper" class="card-time">
-        <ion-note>{{card.createdTime | date: 'MM/dd'}}</ion-note>
+      <ion-col class="button-wrapper" col-3>
+        <!-- 댓글 기능 -->
+        <button ion-button icon-start clear small (click)="toComments(card)">
+          <ion-icon name="text"></ion-icon> {{card.comment}}
+        </button>
+      </ion-col>
+      <ion-col class="button-wrapper" col-3>
+        <button ion-button clear small>
+        </button>
+      </ion-col>
+      <ion-col class="button-wrapper">
+        <button ion-button clear small>
+          <ion-note>{{card.createdTime | date: 'MM/dd'}}</ion-note>
+        </button>
       </ion-col>
     </ion-row>
   </ion-card>
-
-
-
 </ion-content>

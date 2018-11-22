@@ -76,7 +76,7 @@ export class CommunityProvider {
 					profilePicture: profilePicture,
 					createdTime: createdTime,
 					comment: 0,
-					like: 0,
+					likes: 0,
 					report: 0,
 					anonymity: anonymity,
 					communityName: communityInfo.communityName
@@ -117,7 +117,7 @@ export class CommunityProvider {
 					profilePicture: profilePicture,
 					createdTime: createdTime,
 					comment: 0,
-					like: 0,
+					likes: 0,
 					report: 0,
 					urlcheck: true,
 					anonymity: anonymity,
@@ -141,9 +141,9 @@ export class CommunityProvider {
 				});
 				resolve(userPosts);
 			})
-			.catch(() => {
-				reject("Error in Reading Post!");
-			})
+				.catch(() => {
+					reject("Error in Reading Post!");
+				})
 		})
 	}
 
@@ -199,6 +199,13 @@ export class CommunityProvider {
 		const communityMemberCountRef = firebase.database().ref(`/communityList/${communityName}/members`)
 		communityMemberCountRef.transaction((currentMemberCount) => {
 			return (currentMemberCount || 0) + 1;
+		})
+	}
+
+	likePost(communityName, postId) {
+		const communityPostLikeRef = firebase.database().ref(`communityPost/${communityName}/${postId}/likes`);
+		communityPostLikeRef.transaction((currentLikesCount) => {
+			return (currentLikesCount || 0) + 1;
 		})
 	}
 

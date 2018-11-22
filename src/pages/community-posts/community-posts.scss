@@ -1,66 +1,76 @@
 page-community-posts {
 
-    .slides {
-        height: 30%;
-        background: color($colors, primary);
+  .slides {
+    height: 30%;
+    background: color($colors, primary);
+    color: white;
+
+    h1 {
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.25rem;
+    }
+
+    hr {
+      background: white;
+      width: 80vw;
+      margin-left: 10vw;
+      margin-right: 10vw;
+    }
+
+    .text {
+      text-align: left;
+      margin-left: 10vw;
+      margin-right: 10vw;
+      color: white;
+    }
+
+    button {
+      background: white;
+      color: color($colors, primary);
+
+      &:hover {
         color: white;
-        h1 {
-            margin: 0;
-        }
-        p {
-            font-size: 1.25rem;
-        }
-        hr {
-            background: white;
-            width: 80vw;
-            margin-left: 10vw;
-            margin-right: 10vw;
-        }
-        .text {
-            text-align: left;
-            margin-left: 10vw;
-            margin-right: 10vw;
-            color: white;
-        }
-        button {
-            background: white;
-            color: color($colors, primary);
-            &:hover {
-                color: white;
-            }
-        }
+      }
     }
+  }
 
-    .post-card{
-        margin: 0.5rem;
-        padding: 1rem;
-        border-bottom: 1px solid color($colors, bordergray);
-        
-    }
+  .post-card {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid color($colors, bordergray);
 
-    .cards-container {
-        width: 100%;
-        .card-container {
-            .card-content {
-                padding-top: 1vh;
-                height: 10vh;
-                text-align: left;
-                .card-text {
-                    white-space: normal;
-                }
-            }
-            .card-time {
-                display: flex;
-                justify-content: center;
-                ion-note {
-                    margin: 4px 2px;
-                }
-            }
-            .card-buttons {
-                .button-wrapper {
-                    padding: 0;
-                }
-            }
+  }
+
+  .cards-container {
+    width: 100%;
+
+    .card-container {
+      .card-content {
+        padding-top: 1vh;
+        height: 10vh;
+        text-align: left;
+
+        .card-text {
+          white-space: normal;
         }
+      }
+
+      .card-time {
+    padding: 3rem;
+
+        ion-note {
+        //   margin: 4px 2px;
+        }
+      }
+
+      .card-buttons {
+        .button-wrapper {
+          padding: 0;
+        }
+      }
     }
+  }
 }
