@@ -13,10 +13,10 @@ export class SelectImageModalPage {
   communityImageReference;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public viewController: ViewController, 
-    ) {
+    public viewController: ViewController,
+  ) {
   }
 
   ionViewDidLoad() {

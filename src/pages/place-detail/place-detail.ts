@@ -93,9 +93,6 @@ export class PlaceDetailPage {
 
 
   changeTab() {
-
-    console.log("tab changed")
-    console.log('this.tab: ' + this.tab);
     if (this.tab === 'info') {
       this.showInfo = true;
       this.getGoogleInfo();
@@ -104,41 +101,12 @@ export class PlaceDetailPage {
       this.showInfo = false;
       return;
     }
-
-
   }
 
   reviewWrite() {
-    if (this.user) {
       this.navCtrl.push('ReviewWritePage', {
         place: this.place
       });
-    } else {
-      this.pleaselogin();
-    }
-
-  }
-
-  pleaselogin() {
-    let alert = this.alertCtrl.create({
-      title: '로그인 후 사용하실 수 있습니다.',
-      message: '코코넛에 로그인하시겠습니까?',
-      buttons: [
-        {
-          text: '확인',
-          handler: () => {
-            this.navCtrl.push('LoginPage');
-          }
-        },
-        {
-          text: '취소',
-          role: 'cancel',
-          handler: () => {
-          }
-        }
-      ]
-    });
-    alert.present();
   }
 
 }
