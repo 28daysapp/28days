@@ -86,6 +86,7 @@ export class CommunityPostsPage {
 
     const alert = this.alertCtrl.create({
       title: '커뮤니티의 멤버가 된 걸 축하해!',
+      message: '좋은 경험이 되었으면 좋겠다!'
     });
 
     alert.present();
@@ -96,7 +97,7 @@ export class CommunityPostsPage {
   }
 
   async leaveCommunity() {
-    const communityName = this.communityInfo.communityName;
+    const communityName = this.communityInfo.communityName.trim();
 
     await this.communityProvider.leaveCommunity(communityName);
     await this.userProvider.deleteCommunityMembership(communityName);
@@ -115,6 +116,29 @@ export class CommunityPostsPage {
         }
       }
     })
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: '커뮤니티 탈퇴',
+      message: '정말 나갈거야??',
+      buttons: [
+        {
+          text: '응 이제 안녕이야',
+          role: 'cancel',
+          handler: () => {
+            this.leaveCommunity();
+            console.log("llega?")
+          }
+        },
+        {
+          text: '아냐 남을래!',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   presentActionSheet(post) {

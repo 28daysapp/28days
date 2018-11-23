@@ -196,12 +196,11 @@ export class CommunityProvider {
 		return promise
 	}
 
-	leaveCommunity(communityName: String, ) {
+	leaveCommunity(communityName: String) {
 		const currentUserUid = firebase.auth().currentUser.uid;
-
 		const promise = new Promise((resolve) => {
-			firebase.database().ref(`/communityMembers/${communityName}/${currentUserUid}`).remove();
-			resolve(true);
+				firebase.database().ref(`/communityMembers/${communityName.trim()}/${currentUserUid.trim()}`).remove();
+				resolve(true);
 		});
 		return promise
 	}
