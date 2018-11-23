@@ -33,7 +33,7 @@
       <button *ngIf="!alreadyJoined" ion-button (click)="joinCommunity()">
         커뮤니티 가입하기
       </button>
-      <button *ngIf="alreadyJoined" ion-button>
+      <button *ngIf="alreadyJoined" ion-button (click)="leaveCommunity()">
         커뮤니티 멤버
       </button>
     </ion-slide>
@@ -43,7 +43,7 @@
     <ion-item>
       <ion-avatar item-start>
         <img *ngIf="!card.anonymity" src="{{card.profilePicture}}">
-        <img *ngIf="card.anonymity" src="../../assets/round-account_circle.svg">
+        <img *ngIf="card.anonymity" src="assets/round-account_circle.svg">
       </ion-avatar>
       <div ion-content>
         <h2 *ngIf="!card.anonymity" (click)="navigateToPage('ProfilePage', card.uid)">{{card.username}}</h2>

@@ -19,12 +19,12 @@ export class CommunityPostsPage {
   currentUserUid: String = firebase.auth().currentUser.uid;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public alertCtrl: AlertController,
-    public navParams: NavParams, 
+    public navParams: NavParams,
     public communityProvider: CommunityProvider,
     public notificationProvider: NotificationProvider,
-    public userProvider: UserProvider, 
+    public userProvider: UserProvider,
     public actionSheetCtrl: ActionSheetController) {
     this.communityInfo = this.navParams.get('communityInfo');
   }
@@ -76,33 +76,42 @@ export class CommunityPostsPage {
     this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
   }
 
-  joinCommunity() {
+  async joinCommunity() {
     const communityName = this.communityInfo.communityName;
-    this.communityProvider.joinCommunity(communityName)
-      .then(() => {
-        this.userProvider.createCommunityMembership(communityName)
-      }).then(() => {
-        this.communityProvider.increaseCommunityMember(communityName);
-      })
-      .then(() => {
-        this.checkIfJoinedCommunity();
-        this.getCommunityPosts(this.communityInfo.communityName);
 
-        const alert = this.alertCtrl.create({
-          title: '커뮤니티의 멤버가 된 걸 축하해!',
-        });
-        alert.present();
-        setTimeout(() => {
-          alert.dismiss();
-        }, 1500);
-      });
+    await this.communityProvider.joinCommunity(communityName);
+    await this.userProvider.createCommunityMembership(communityName);
+    await this.checkIfJoinedCommunity();
+    await this.getCommunityPosts(this.communityInfo.communityName);
+
+    const alert = this.alertCtrl.create({
+      title: '커뮤니티의 멤버가 된 걸 축하해!',
+    });
+
+    alert.present();
+    setTimeout(() => {
+      alert.dismiss();
+    }, 1500);
+
+  }
+
+  async leaveCommunity() {
+    const communityName = this.communityInfo.communityName;
+
+    await this.communityProvider.leaveCommunity(communityName);
+    await this.userProvider.deleteCommunityMembership(communityName);
+    await this.checkIfJoinedCommunity();
+    await this.getCommunityPosts(this.communityInfo.communityName);
   }
 
   checkIfJoinedCommunity() {
     this.userProvider.readJoinedCommunities(this.currentUserUid).then((joinedCommunities) => {
       for (let i in joinedCommunities) {
-        if (this.communityInfo.communityName == joinedCommunities[i].communityName) {
+        if (this.communityInfo.communityName.includes(joinedCommunities[i].communityName)) {
           this.alreadyJoined = true
+          return
+        } else {
+          this.alreadyJoined = false
         }
       }
     })

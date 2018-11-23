@@ -152,7 +152,9 @@ export class CommunityProvider {
 			this.fireCommunityPost.child(communityName).orderByKey().once('value').then((snapshot) => {
 				const posts = [];
 				snapshot.forEach((childSnapshot) => {
-					const post = childSnapshot.val();
+					const refKey = childSnapshot.key;
+					let post = childSnapshot.val();
+					post.refKey = refKey;
 					posts.push(post);
 					posts.reverse();
 				});
@@ -185,11 +187,20 @@ export class CommunityProvider {
 		const currentUserUsername = firebase.auth().currentUser.displayName;
 		const joinedTime = firebase.database.ServerValue.TIMESTAMP
 		const promise = new Promise((resolve) => {
-			firebase.database().ref(`/communityMembers/${communityName}`).push({
-				uid: currentUserUid,
+			firebase.database().ref(`/communityMembers/${communityName}/${currentUserUid}`).set({
 				username: currentUserUsername,
 				joinedTime: joinedTime
 			});
+			resolve(true);
+		});
+		return promise
+	}
+
+	leaveCommunity(communityName: String, ) {
+		const currentUserUid = firebase.auth().currentUser.uid;
+
+		const promise = new Promise((resolve) => {
+			firebase.database().ref(`/communityMembers/${communityName}/${currentUserUid}`).remove();
 			resolve(true);
 		});
 		return promise

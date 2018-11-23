@@ -12,11 +12,14 @@ export class UserProvider {
   }
 
   readJoinedCommunities(uid) {
-    var promise = new Promise((resolve) => {
+    const promise = new Promise((resolve) => {
       const communities = []
-      firebase.database().ref(`/users/${uid}`).child("joinedCommunities").once("value").then((snapshot)=>{
+      firebase.database().ref(`/users/${uid}`).child("joinedCommunities").once("value").then((snapshot)=>{        
         snapshot.forEach((childSnapshot) => {
-          const community = childSnapshot.val();
+          let community = {
+            communityName: childSnapshot.val().communityName,
+            joinedTime: childSnapshot.val().joinedTime
+          }
           communities.push(community);
         });
         resolve(communities);
@@ -47,14 +50,29 @@ export class UserProvider {
 
   createCommunityMembership(communityName) {
     const currentUserUid = firebase.auth().currentUser.uid;
+    const joinedTime = firebase.database.ServerValue.TIMESTAMP;
+
     const promise = new Promise((resolve) => {
-			firebase.database().ref(`/users/${currentUserUid}/joinedCommunities`).push({
-        communityName: communityName
+			firebase.database().ref(`/users/${currentUserUid}/joinedCommunities/${communityName}`).set({
+        communityName: communityName,
+        joinedTime: joinedTime
       });
       resolve(true);
 		});
 		return promise;
   }
+
+  deleteCommunityMembership(communityName) {
+    const currentUserUid = firebase.auth().currentUser.uid;
+
+    const promise = new Promise((resolve) => {
+			firebase.database().ref(`/users/${currentUserUid}/joinedCommunities/${communityName}`).remove()
+      resolve(true);
+		});
+		return promise;
+  }
+
+
 
   isSameUser(currentUserUid: String, targetUserUid: String) {
     if (currentUserUid == targetUserUid) {
