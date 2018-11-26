@@ -1,12 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, App, Events, ModalController } from 'ionic-angular';
-import { CommunityProvider } from '../../providers/community/community';
-import firebase from 'firebase';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, LoadingController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { MenuController } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
 import { AuthProvider } from '../../providers/auth/auth';
+import { CommunityProvider } from '../../providers/community/community';
 
 @IonicPage()
 @Component({
@@ -14,82 +11,17 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'community.html',
 })
 export class CommunityPage {
-  @ViewChild(Content) content: Content;
 
-  communities: any;
-  searchQuery: String;
-
-  fireusers = firebase.database().ref('/users');
-
-  user;
-  userprofile;
-  username;
-  photoURL;
-  greeting;
-  origGreeting;
-  showmodal = false;
-  token;
-  count;
+  communities: any = [];
 
   constructor(
-    public modalCtrl: ModalController, 
-    public storage: Storage, 
-    public auth: AuthProvider, 
-    public events: Events, 
-    public menu: MenuController, 
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public storage: Storage,
+    public modalCtrl: ModalController,
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    public authProvider: AuthProvider,
     public communityProvider: CommunityProvider,
-    public loadingCtrl: LoadingController, 
-    public userProvider: UserProvider,
-    public popoverCtrl: PopoverController, 
-    public viewCtrl: ViewController, 
-    public appCtrl: App,
-  ) {
-    this.initializeCommunities()
-  }
-
-  ionViewWillLoad() {
-
-    // check if user already logged-in
-    this.user = firebase.auth().currentUser;
-    if (this.user) {
-      this.username = this.user.displayName;
-      this.photoURL = this.user.photoURL;
-      this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
-        this.userprofile = userprofile;
-        this.greeting = this.userprofile.greeting;
-        this.createUser();
-        this.menu.enable(true, 'loggedInMenu');
-        this.menu.enable(false, 'loggedOutMenu');
-      })
-    } else {
-
-      try {
-        // check if cache info exists in local storage
-        this.storage.get('localcred').then((localcred) => {
-          if (localcred) {
-            // cache exists
-            this.auth.loginUser(localcred.email, localcred.password).then((result) => {
-              this.user = result.user;
-              this.username = result.user.displayName;
-              this.photoURL = result.user.photoURL;
-              this.userProvider.getUserprofile(result.user.uid).then((userprofile) => {
-                this.userprofile = userprofile;
-                this.greeting = this.userprofile.greeting;
-                this.createUser();
-                this.menu.enable(true, 'loggedInMenu');
-                this.menu.enable(false, 'loggedOutMenu');
-              });
-            });
-          }
-        });
-      } catch (error) {
-        console.log(error)
-      }
-
-    }
-  }
+  ) { }
 
   ionViewWillEnter() {
     this.initializeCommunities()
@@ -112,36 +44,32 @@ export class CommunityPage {
   }
 
   searchCommunity(searchbarInput: any) {
-    this.searchQuery = searchbarInput.srcElement.value;
-    if (this.searchQuery && this.searchQuery.trim() != '') {
+    let searchQuery = searchbarInput.srcElement.value;
+
+    if (searchQuery && searchQuery.trim() != '') {
       this.communities = this.communities.filter((community) => {
-        return (community.communityName.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1);
+        return (community.communityName.toLowerCase().indexOf(searchQuery.toLowerCase()) > -1);
       })
     } else {
-      this.initializeCommunities()
-      return
+      return this.initializeCommunities()
     }
-
   }
 
-  presentCreateCommunityModal() {
+  async presentCreateCommunityModal() {
     let newCommunityModal = this.modalCtrl.create('CreateCommunityModalPage');
-    newCommunityModal.onDidDismiss(data => {
+
+    await newCommunityModal.onDidDismiss(() => {
       this.initializeCommunities();
     });
-    newCommunityModal.present();
+    await newCommunityModal.present();
   }
 
-  doRefresh(refresher) {
-    this.getCommunityList();
+  async doRefresh(refresher) {
+    await this.getCommunityList();
 
-    setTimeout(() => {
+    await setTimeout(() => {
       refresher.complete();
     }, 500);
-  }
-
-  createUser() {
-    this.events.publish('user:created', this.user, Date.now());
   }
 
   navigateTo(page) {

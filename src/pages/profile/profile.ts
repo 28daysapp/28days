@@ -1,29 +1,22 @@
 import { Component } from '@angular/core';
-import { 
-  IonicPage, 
-  NavController, 
-  NavParams, 
-  AlertController,
-  LoadingController,
-  ActionSheetController
-} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ActionSheetController } from 'ionic-angular';
+
 import { UserProvider } from '../../providers/user/user';
 import { CommunityProvider } from '../../providers/community/community';
+
 @IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  profileUid;
-  loading;
-  user;
+
+  profileUid: String;
+  user: any;
   currentUser = true;
-
-  postCards;
-  joinedCommunities;
-
-  displayedPostCards = [];
+  postCards: any = [];
+  joinedCommunities: any = [];
+  displayedPostCards: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -42,7 +35,6 @@ export class ProfilePage {
       this.user = this.userProvider.readCurrentUser();
       this.profileUid = this.user.uid;
     }
-    console.log("Constructor");
   }
 
   ionViewWillEnter() {
@@ -72,7 +64,6 @@ export class ProfilePage {
     this.communityProvider.readUserPost(uid).then(response => {
       this.displayedPostCards = [];
       this.postCards = response;
-      console.log(this.postCards);
       for (let i = 0; i < this.postCards.length; i++) {
         this.displayedPostCards.push(this.postCards[i]);
       }
@@ -85,7 +76,6 @@ export class ProfilePage {
   getUserData(uid) {
     this.userProvider.readUserData(uid).then(response => {
       this.user = response;
-      console.log(this.user);
     })
   }
 
@@ -105,7 +95,6 @@ export class ProfilePage {
             text: '글 삭제',
             role: 'destructive',
             handler: () => {
-              console.log('Destructive clicked');
               this.communityProvider.deleteCommunityPost(post).then(() => {
               this.communityProvider.deleteMyPost(post);
               this.displayedPostCards = this.deletePost(this.displayedPostCards, post.postId)
@@ -115,14 +104,12 @@ export class ProfilePage {
           {
             text: '댓글 달기',
             handler: () => {
-              console.log('Archive clicked');
             }
           },
           {
             text: '닫기',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
             }
           }
         ]
@@ -133,14 +120,12 @@ export class ProfilePage {
           {
             text: '댓글 달기',
             handler: () => {
-              console.log('Archive clicked');
             }
           },
           {
             text: '닫기',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
             }
           }
         ]

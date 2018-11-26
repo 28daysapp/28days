@@ -48,8 +48,6 @@ export class CounselorreviewPage {
   }
 
   ionViewWillEnter() {
-    var auth = firebase.auth().currentUser.uid;
-
     if(this.type=='profile'){
       this.isProfile = true;
       this.isReview = false;

@@ -12,13 +12,10 @@ import { Crop } from '@ionic-native/crop';
 })
 export class CharacterPage {
   @ViewChild(Navbar) nb: Navbar;
-  // flags which character is picked
   p = [false, false, false, false];
-  // original character index
   originpick;
   emailcheck;
   user2;
-  // character index which user picks
   pick;
 
   firestore = firebase.storage();
@@ -41,11 +38,9 @@ export class CharacterPage {
     this.createUser();
     this.originpick = parseInt(firebase.auth().currentUser.photoURL.charAt(14));
     this.pick = this.originpick;
-    // set flags which character was set
     if (this.pick != 0) {
       this.p[this.pick - 1] = true;
     }
-    // set back button click listener
     this.nb.backButtonClick = () => {
       this.backhandler();
     };
@@ -56,7 +51,6 @@ export class CharacterPage {
   }
 
   backhandler() {
-    // go to home page
     this.navCtrl.pop();
   }
 
@@ -105,9 +99,8 @@ export class CharacterPage {
                   this.navCtrl.push('TabsPage');
                 }).then(()=> {
                   const alert = this.alertCtrl.create({
-                    message: `
-                    <p>사진이 변경되었습니다</p>
-                    `
+                    title: '완료',
+                    message: '사진이 변경되었습니다'
                   });
                   alert.present();
                   setTimeout(()=> {
@@ -118,9 +111,7 @@ export class CharacterPage {
                 console.log("Could not upload profile picture.")
               }
             })
-  
           });
-  
         }
       } catch (error) {
         console.log(error)
