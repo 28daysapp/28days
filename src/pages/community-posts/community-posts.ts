@@ -128,7 +128,6 @@ export class CommunityPostsPage {
           role: 'cancel',
           handler: () => {
             this.leaveCommunity();
-            console.log("llega?")
           }
         },
         {
@@ -152,7 +151,6 @@ export class CommunityPostsPage {
             text: '글 삭제',
             role: 'destructive',
             handler: () => {
-              console.log('Destructive clicked');
               this.communityProvider.deleteCommunityPost(post).then(() => {
                 this.communityProvider.deleteMyPost(post);
                 this.getCommunityPosts(this.communityInfo.communityName)
@@ -162,7 +160,6 @@ export class CommunityPostsPage {
           {
             text: '댓글 달기',
             handler: () => {
-              console.log('댓글달기 clicked');
               this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
             }
           },
@@ -170,7 +167,6 @@ export class CommunityPostsPage {
             text: '닫기',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
             }
           }
         ]
@@ -181,7 +177,6 @@ export class CommunityPostsPage {
           {
             text: '댓글 달기',
             handler: () => {
-              console.log('댓글달기 clicked');
               this.navCtrl.push('CommunityCommentPage', { post: post });
             }
           },

@@ -60,7 +60,6 @@ export class CommunityPage {
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.createUser();
-        console.log("User created: " + JSON.stringify(this.createUser));
         this.menu.enable(true, 'loggedInMenu');
         this.menu.enable(false, 'loggedOutMenu');
       })
@@ -128,24 +127,20 @@ export class CommunityPage {
   presentCreateCommunityModal() {
     let newCommunityModal = this.modalCtrl.create('CreateCommunityModalPage');
     newCommunityModal.onDidDismiss(data => {
-      console.log("Modal closed");
       this.initializeCommunities();
     });
     newCommunityModal.present();
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
     this.getCommunityList();
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
     }, 500);
   }
 
   createUser() {
-    console.log('User created!')
     this.events.publish('user:created', this.user, Date.now());
   }
 

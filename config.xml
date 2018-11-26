@@ -77,15 +77,6 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <allow-navigation href="http://192.168.200.199:8100" />
-    <allow-navigation href="http://192.168.200.199:8101" />
-    <allow-navigation href="http://169.254.253.8:8101" />
-    <allow-navigation href="http://192.168.200.155:8101" />
-    <allow-navigation href="http://169.254.117.54:8101" />
-    <allow-navigation href="http://137.68.247.64:8100" />
-    <allow-navigation href="http://137.68.247.216:8100" />
-    <allow-navigation href="http://137.68.247.64:8100" />
-    <allow-navigation href="http://137.68.247.29:8100" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.1" />
@@ -102,40 +93,10 @@
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <allow-navigation href="http://137.68.247.152:8101" />
     <plugin name="cordova-support-google-services" spec="^1.2.0" />
-    <allow-navigation href="http://137.68.247.22:8103" />
-    <allow-navigation href="http://137.68.247.22:8104" />
-    <allow-navigation href="http://137.68.247.22:8105" />
-    <allow-navigation href="http://137.68.247.22:8106" />
-    <allow-navigation href="http://137.68.247.22:8107" />
-    <allow-navigation href="http://137.68.247.22:8108" />
-    <allow-navigation href="http://137.68.247.22:8100" />
-    <allow-navigation href="http://137.68.247.22:8101" />
-    <allow-navigation href="http://137.68.247.22:8102" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
-    <allow-navigation href="http://137.68.247.45:8101" />
-    <allow-navigation href="http://137.68.247.45:8100" />
-    <allow-navigation href="http://137.68.247.45:8103" />
-    <allow-navigation href="http://137.68.247.45:8104" />
-    <allow-navigation href="http://137.68.247.45:8102" />
-    <allow-navigation href="http://137.68.247.45:8105" />
-    <allow-navigation href="http://137.68.247.13:8101" />
-    <allow-navigation href="http://137.68.246.201:8100" />
-    <allow-navigation href="http://137.68.247.139:8100" />
-    <allow-navigation href="http://137.68.247.135:8101" />
-    <allow-navigation href="http://10.231.4.185:8100" />
-    <allow-navigation href="http://137.68.247.161:8100" />
-    <allow-navigation href="http://137.68.248.13:8100" sessionid="4af4f417" />
-    <allow-navigation href="http://137.68.248.20:8100" sessionid="5859b138" />
-    <allow-navigation href="http://137.68.249.34:8100" sessionid="67887f9e" />
-    <allow-navigation href="http://192.168.35.51:8100" sessionid="fc12cd45" />
-    <allow-navigation href="http://137.68.247.254:8100" sessionid="0d00c399" />
-    <allow-navigation href="http://137.68.247.237:8100" sessionid="c2cb6854" />
-    <allow-navigation href="http://137.68.247.237:8100" sessionid="aed0612d" />
     <plugin name="cordova-plugin-crop" spec="^0.4.0" />
-    <allow-navigation href="http://137.68.247.203:8100" sessionid="c5aa2330" />
     <engine name="browser" spec="^5.0.4" />
     <engine name="android" spec="7.1.3" />
     <engine name="ios" spec="4.5.5" />

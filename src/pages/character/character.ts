@@ -94,20 +94,13 @@ export class CharacterPage {
       const uid = firebase.auth().currentUser.uid;
       const imageStore = this.firestore.ref('/user/').child(uid);
       try {
-        // console.log("dataURL: "  + dataURL)
         if (dataURL) {
           imageStore.putString(dataURL, 'base64', { contentType: 'image/jpeg' }).then((uploadTask) => {
-  
-            console.log("what is this? " +  uploadTask.ref.getDownloadURL);
-            console.log('what the heck')
-  
             uploadTask.ref.getDownloadURL().then((downloadURL)=> {
               this.photoURL = downloadURL;
-              console.log(this.photoURL)
             }).then(()=>{
               if(this.photoURL) {
                 this.userProvider.updateProfilePicture(`${this.photoURL}`).then(() => {
-                  console.log("Photo uploaded")
                   this.user = this.userProvider.getUserprofile(uid);
                   this.navCtrl.push('TabsPage');
                 }).then(()=> {

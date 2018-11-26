@@ -31,9 +31,6 @@ export class MyprofilePage {
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public auth: AuthProvider, public userProvider: UserProvider,
     public storage: Storage, public loadingCtrl: LoadingController, public params: NavParams, public modalCtrl: ModalController) {
     // Receive message from push notifications
-    if (params.data.message) {
-      console.log('message: ' + params.data.message);  
-    }
   }
 
   ionViewDidLoad() {
@@ -47,13 +44,10 @@ export class MyprofilePage {
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
       // user already logged-in
-      console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
       this.photoURL = this.user.photoURL;
       
       this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
-        console.log("user profile");
-        console.log(JSON.stringify(userprofile));
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.loading.dismiss();

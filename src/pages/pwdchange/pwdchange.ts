@@ -8,12 +8,6 @@ import { PasswordValidator } from '../../validators/password';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 
-/**
- * Generated class for the PwdchangePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -31,8 +25,14 @@ export class PwdchangePage {
   confirmation = this.confirmation;
   email = this.email;
 
-  constructor(public navCtrl: NavController, public auth: AuthProvider,
-    public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public storage: Storage, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public auth: AuthProvider,
+    public formBuilder: FormBuilder, 
+    public loadingCtrl: LoadingController, 
+    public alertCtrl: AlertController, 
+    public storage: Storage, 
+    public navParams: NavParams) {
     this.loginForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required, Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -47,9 +47,7 @@ export class PwdchangePage {
 
   changepwd(password) {
     var user = firebase.auth().currentUser;
-    //var newPassword = getASecureRandomPassword();
     if (this.password != this.confirmation){
-      //console.log(this.loginForm.value.email + '/' + this.loginForm.value.password);
       let alert = this.alertCtrl.create({
         title: '오류',
         message: '비밀번호가 같지 않습니다. <br> 다시 확인해주세요!',
@@ -63,11 +61,9 @@ export class PwdchangePage {
       alert.present();
     }
     else{
-      console.log(this.password);
       user.updatePassword(password).then(function() {
-
       }).catch(function(error){
-
+        console.log(error)
       });
       let alert = this.alertCtrl.create({
         title: '변경 완료',

@@ -13,8 +13,6 @@ export class GoogleProvider {
   // Received data is the Google Place photo image reference
   getPlacePhoto(reference) {
 
-    console.log("Google photo reference: " + reference);
-
     const apiKey = 'AIzaSyDrABdIKzwnM37L1q1R_0qCMwsLhSiMjWk';
     const url = 'https://maps.googleapis.com/maps/api/place/photo?'
 
@@ -22,7 +20,6 @@ export class GoogleProvider {
 
     this.http.get(url + `maxwidth=400&photoreference=${reference}&key=${apiKey}`, { headers })
       .subscribe(photos => {
-        console.log("PlacePhoto: " + JSON.stringify(photos));
         return photos
       }, (error) => {
         console.log(error);

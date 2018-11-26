@@ -52,7 +52,6 @@ export class CommunityCommentPage {
   getCommunityComments() {
     this.commentProvider.readCommunityComment(this.post).then((comments) => {
       this.comments = comments;
-      console.log(this.comments)
     });
   }
 

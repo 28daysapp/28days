@@ -49,7 +49,6 @@ export class CounselorProvider {
   addcounselorsum(counselorid) {
     var promise = new Promise((resolve) => {
       this.firecounselorreview.child(counselorid).once("value").then((snapshot) => {
-        console.log(snapshot.numChildren())
       this.firecounselor.child(`${counselorid}`).update({
         reviewcnt: snapshot.numChildren()
       }).then(() => {

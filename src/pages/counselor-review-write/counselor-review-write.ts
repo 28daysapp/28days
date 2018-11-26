@@ -40,10 +40,8 @@ export class CounselorReviewWritePage {
       this.likesrc[i][j] = 'assets/icon/star-empty.svg';
     }
     this.counselor = this.navParams.get("user");
-    console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.counselor));
     this.counselorName = this.counselor.username;
     this.user = firebase.auth().currentUser;
-    console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.user));
   }
 
   ionViewDidLoad() {
@@ -76,13 +74,11 @@ export class CounselorReviewWritePage {
     this.rating[item] = num+1;
 
     if (this.rating[0] != null && this.rating[1] != null && this.rating[2] != null && this.rating[3] != null) {
-      console.log('eh?')
       this.nextDisabled = null;
     }
   }
 
   reviewwrite(){
-    console.log('gg');
     if(!this.text) {
       let alert = this.alertCtrl.create({
             'title': '후기 내용을 작성해주세요!',

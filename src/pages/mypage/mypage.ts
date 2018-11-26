@@ -37,25 +37,21 @@ export class MypagePage {
   }
 
   ionViewWillLoad() {
-    console.log('ionViewDidLoad - Home')
     // present loading
     this.loading = this.loadingCtrl.create();
     this.loading.present();
 
     // set defualt user photo
-    this.photoURL = 'assets/profile0.png';
+    this.photoURL = 'assets/imgs/post5.jpg';
 
     // check if user already logged-in
     this.user = firebase.auth().currentUser;
     if (this.user) {
       // user already logged-in
-      console.log('this.user: ' + this.user.displayName + '/' + this.user.photoURL);
       this.username = this.user.displayName;
       this.photoURL = this.user.photoURL;
       
       this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
-        console.log("user profile");
-        console.log(JSON.stringify(userprofile));
         this.userprofile = userprofile;
         this.greeting = this.userprofile.greeting;
         this.loading.dismiss();
@@ -71,14 +67,11 @@ export class MypagePage {
         if (localcred) {
           // cache exists
           this.auth.loginUser(localcred.email, localcred.password).then((user) => {
-            console.log('Home - ionViewDidLoad - load token ' + user.displayName + '/' + user.photoURL);
             this.user = user;
             this.username = this.user.displayName;
             this.photoURL = this.user.photoURL;
 
             this.userProvider.getUserprofile(this.user.uid).then((userprofile) => {
-              console.log("user profile");
-              console.log(JSON.stringify(userprofile));
               this.userprofile = userprofile;
               this.greeting = this.userprofile.greeting;
               this.loading.dismiss();

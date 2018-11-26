@@ -35,7 +35,6 @@ export class ChatbotPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public storage: Storage) {
-    console.log("Start Chatbot")
   }
 
   ngAfterViewChecked() {
@@ -326,9 +325,7 @@ export class ChatbotPage {
     }
   }
 
-  modalhandler(modal) {
-    console.log(modal.value.mediname + ' / ' + modal.value.mediamount);
-    console.log(JSON.stringify(this.modaltime));
+  modalhandler() {
     this.showmodal = false;
     this.gogomsg('얘기해줘서 고마워! 약을 복용할 시간에 알람을 줘서 도움을 줄게!', true).then(() => {
       this.gogomsg('그럼 감정 상태를 알아볼 수 있는 테스트가 하나 있는데, 한번 해볼래?', false).then(() => {

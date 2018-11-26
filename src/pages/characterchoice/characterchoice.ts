@@ -30,14 +30,11 @@ export class CharacterchoicePage {
     this.user2 = firebase.auth().currentUser;
     events.subscribe('user:created', (user, time) => {
       // user and time are the same arguments passed in `events.publish(user, time)`
-      console.log('Welcome', user, 'at', time);
       this.emailcheck = user.email;
-      console.log("email:" + user.email);
     });
   }
 
   ionViewDidLoad() {
-    console.log('original profile index : ' + firebase.auth().currentUser.photoURL.charAt(14));
     this.originpick = parseInt(firebase.auth().currentUser.photoURL.charAt(14));
     this.pick = this.originpick;
     // set flags which character was set

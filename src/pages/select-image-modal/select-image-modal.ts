@@ -25,7 +25,6 @@ export class SelectImageModalPage {
   }
 
   initializeImages(){
-    console.log("initialize images")
     for (var i = 1; i < 15; i++) {
       this.images.push({reference: `../../assets/imgs/post${i}.jpg`})
     }

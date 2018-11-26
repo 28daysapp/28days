@@ -49,7 +49,6 @@ export class CounselorreviewPage {
 
   ionViewWillEnter() {
     var auth = firebase.auth().currentUser.uid;
-    console.log("me : "+auth+"supporter : "+this.user.uid);
 
     if(this.type=='profile'){
       this.isProfile = true;
@@ -63,7 +62,6 @@ export class CounselorreviewPage {
     var promise = new Promise((resolve) => {
       this.counselor.getallreview(this.user.uid).then((reviews) => {
         this.reviews = reviews;
-        console.log('SupporterPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(this.reviews));
       }).then(() => {
       this.counselor.getcounselor(this.user.uid).then((supporter) => {
         this.user = supporter;
@@ -100,7 +98,6 @@ export class CounselorreviewPage {
   }
 
   makeRating(num) {
-    console.log('hi' + num);
     var ratings = [];
     for (var i = 1; i < 6; i++) {
       var rating: any = {};
@@ -111,7 +108,6 @@ export class CounselorreviewPage {
       }
       ratings.push(rating);
     }
-    // console.log(JSON.stringify(ratings));
     return ratings;
   }
 

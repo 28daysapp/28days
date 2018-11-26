@@ -48,7 +48,6 @@ export class UserNotificationPage {
 /* ------------------------------------------------------------------ */
   getNotificationList() {
     this.notification.readNotifications().then((response:any) => {
-      console.log(response);
       this.notifications = response;
     })
   }

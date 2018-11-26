@@ -38,7 +38,6 @@ export class SupporterProvider {
   addsupportersum(supporterid) {
     var promise = new Promise((resolve) => {
       this.firesupporterreview.child(supporterid).once("value").then((snapshot) => {
-        console.log(snapshot.numChildren())
         this.firesupporter.child(`${supporterid}`).update({
           reviewcnt: snapshot.numChildren()
         }).then(() => {

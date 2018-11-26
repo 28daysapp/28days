@@ -33,7 +33,6 @@ export class CommunitywritePage {
 		private camera: Camera, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
 
 		this.communityInfo = this.navParams.get('communityInfo');
-		console.log("The community INFO!!: " + JSON.stringify(this.communityInfo));
 	}
 
 	write() { 
@@ -86,7 +85,6 @@ export class CommunitywritePage {
 		}
 
 		this.camera.getPicture(options).then((imagePath) => {
-			console.log('CAMERA getPicture - imagePath : ' + imagePath);
 			this.fileURL = 'data:image/jpeg;base64,' + imagePath;
 			this.dataURL = imagePath;
 			this.pick = true;

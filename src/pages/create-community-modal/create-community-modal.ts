@@ -42,8 +42,6 @@ export class CreateCommunityModalPage {
   presentImageModal(){
     let imageModal = this.modalCtrl.create('SelectImageModalPage', {  });
     imageModal.onDidDismiss(communityImage => {
-      console.log(communityImage)
-      console.log(communityImage.communityImage)
       this.communityImage = communityImage.communityImageReference
     });
     imageModal.present();

@@ -35,9 +35,7 @@ export class PwdcheckPage {
     this.user = firebase.auth().currentUser;
     events.subscribe('user:created', (user, time) => {
       // user and time are the same arguments passed in `events.publish(user, time)`
-      console.log('Welcome', user, 'at', time);
       this.emailcheck = user.email;
-      console.log("email:" + user.email);
     });
   }
 
@@ -48,7 +46,6 @@ export class PwdcheckPage {
 
   checkpwd() {
     if (!this.loginForm.valid){
-      console.log(this.loginForm.value.email + '/' + this.loginForm.value.password);
       let alert = this.alertCtrl.create({
         title: '로그인 오류',
         message: '이메일 주소와 비밀번호의 형식이<br>올바르지 않습니다. 다시 확인해주세요!',
@@ -61,8 +58,6 @@ export class PwdcheckPage {
       });
       alert.present();
     } else if(this.email != this.emailcheck){
-      console.log(this.email);
-      console.log(this.emailcheck);
       let alert = this.alertCtrl.create({
         title: '로그인 오류',
         message: '이메일 주소 또는 비밀번호가 올바르지 않습니다. 다시 확인해주세요!',
@@ -82,7 +77,6 @@ export class PwdcheckPage {
         });
         this.navCtrl.push('PwdchangePage', {email : this.loginForm.value.email});
       }, (error) => { 
-        console.log(JSON.stringify(error));
         var message;
         if (error.code == 'auth/wrong-password') {
           message = '비밀번호가 맞지 않습니다.<br>다시 확인해주세요!';
@@ -114,7 +108,6 @@ export class PwdcheckPage {
   }
 
   createUser() {
-    console.log('User created!')
     this.events.publish('user:created', this.user, Date.now());
   }
 }

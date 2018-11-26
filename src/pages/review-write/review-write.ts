@@ -85,7 +85,6 @@ export class ReviewWritePage {
     this.rating[item] = num + 1;
 
     if (this.rating[0] != null && this.rating[1] != null && this.rating[2] != null && this.rating[3] != null) {
-      console.log('eh?')
       this.nextDisabled = null;
     }
   }

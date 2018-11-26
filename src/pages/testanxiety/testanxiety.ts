@@ -85,7 +85,6 @@ export class TestanxietyPage {
 
   nextquestion(answer) {
   	this.useranswers.push(this.getscore(this.answers.indexOf(answer)));
-  	console.log(this.useranswers.toString());
   	if (this.qcount == 19) {
   		this.getresult();
   		if (this.score <= 51) {
@@ -112,7 +111,6 @@ export class TestanxietyPage {
   getresult() {
   	const add = (a, b) => a + b;
   	this.score = this.useranswers.reduce(add);
-  	console.log('test score: ' + this.score);
   	if (this.score <= 51) {
   		this.category = ' 불안감이 없음 ';
   	} else if (this.score <= 56) {

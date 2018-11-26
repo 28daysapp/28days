@@ -73,7 +73,6 @@ export class TestdepressionPage {
   nextquestion(answer) {
   	if (this.qcount == 8) {
   		this.useranswers.push(this.answers.indexOf(answer));
-  		console.log(this.useranswers.toString());
   		this.getresult();
   		this.toresult = true;
   		return;
@@ -81,7 +80,6 @@ export class TestdepressionPage {
   	this.qcount++;
   	this.question = this.questions[this.qcount];
   	this.useranswers.push(this.answers.indexOf(answer));
-  	console.log(this.useranswers.toString());
   }
 
   getresult() {

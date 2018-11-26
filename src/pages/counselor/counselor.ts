@@ -41,7 +41,6 @@ export class CounselorPage {
 
   	this.count = 0;
     this.chat.getallusersExceptbuddy().then((res) => {
-      console.log('CounselorPage - getallusersExceptbuddy - userprofiles : ' + JSON.stringify(res));
     	this.userprofiles = res;
     	this.usernum = this.userprofiles.length;
       if (this.usernum == 0) {
@@ -102,7 +101,6 @@ export class CounselorPage {
       }
       ratings.push(rating);
     }
-    // console.log(JSON.stringify(ratings));
     return ratings;
   }
 

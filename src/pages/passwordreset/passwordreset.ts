@@ -27,7 +27,6 @@ export class PasswordresetPage {
 
   resetpassword(){
     if (!this.resetPasswordForm.valid){
-      console.log(this.resetPasswordForm.value.email);
       let alert = this.alertCtrl.create({
         title: '이메일 주소',
         message: '이메일 주소의 형식이<br>올바르지 않습니다. 다시 확인해주세요!',
@@ -56,7 +55,6 @@ export class PasswordresetPage {
         });
         alert.present();
       }, (error) => {
-        console.log(JSON.stringify(error));
         var message;
         if (error.code == 'auth/user-not-found') {
           message = '등록되지 않은 이메일 주소입니다.<br>다시 확인해주세요!';

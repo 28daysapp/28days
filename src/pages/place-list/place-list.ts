@@ -53,10 +53,7 @@ export class PlaceListPage {
   }
 
   loadMap() {
-    // this.geolocatio이 안돼서 임의로 기본 위치는 서울
     // this.geolocation.getCurrentPosition().then((position) => {
-    //   console.log("여긴 못오고?");
-
     //   this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     //   // If Google Api current location is disabled, default location is Seoul City Hall
     //   if (!position) {
@@ -70,14 +67,11 @@ export class PlaceListPage {
     //     streetViewControl: false
     //   }
     //   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-    //   console.log("THIS MAP: " + this.map);
     // }, (error) => {
     //   console.log('Could not load the map: ' + error);
     // });
-    // console.log("여기는???")
 
     // If Google Api current location is disabled, default location is Seoul City Hall
-
     this.latLng = new google.maps.LatLng(37.532600, 127.024612)
 
     this.mapOptions = {
@@ -162,7 +156,6 @@ export class PlaceListPage {
   }
 
   sort() {
-    console.log("sort clicked")
     let alert = this.alertCtrl.create({
       title: '정렬 순서',
       buttons: [{ text: '후기 많은 순' }, { text: '별점 높은 순' }]
@@ -195,10 +188,7 @@ export class PlaceListPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
   }

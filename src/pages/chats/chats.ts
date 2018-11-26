@@ -43,8 +43,7 @@ export class ChatsPage {
     this.loading.dismiss();
   }
 
-  filterItems(event) {
-    console.log(event.target.value);
+  filterItems() {
   }
 
   refreshList() {
@@ -106,10 +105,7 @@ export class ChatsPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
     setTimeout(() => {
-      console.log('Async operation has ended');
       this.ionViewWillEnter();
       refresher.complete();
     }, 2000);
