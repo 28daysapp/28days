@@ -66,14 +66,18 @@ export class CommunityPage {
 
   async doRefresh(refresher) {
     await this.getCommunityList();
-
     await setTimeout(() => {
       refresher.complete();
     }, 500);
   }
 
-  navigateTo(page) {
-    this.navCtrl.push(page);
+  navigateTo(page, payload = null) {
+    if (payload){
+      this.navCtrl.push(page, {payload: payload});
+    }
+    else {
+      this.navCtrl.push(page);
+    }
   }
 
 }

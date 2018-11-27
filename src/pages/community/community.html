@@ -15,7 +15,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div class="community-container">
-    <div class="community-card" *ngFor="let community of communities" (click)="toCommunityPosts(community)">
+    <div class="community-card" *ngFor="let community of communities" (click)="navigateTo('CommunityPostsPage', community)">
       <img class="image center" src="{{community.communityImage}}" alt="assets/digital-campaign.png" />
       <div class="community-name">{{ community.communityName }}</div>
       <ion-badge item-end>{{ community.members }}명</ion-badge>

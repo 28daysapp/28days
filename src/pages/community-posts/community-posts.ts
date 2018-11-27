@@ -26,7 +26,8 @@ export class CommunityPostsPage {
     public notificationProvider: NotificationProvider,
     public userProvider: UserProvider,
     public actionSheetCtrl: ActionSheetController) {
-    this.communityInfo = this.navParams.get('communityInfo');
+      console.log(JSON.stringify(this.navParams.get('payload')));
+    this.communityInfo = this.navParams.get('payload');
   }
 
   ionViewWillEnter() {
@@ -206,11 +207,9 @@ export class CommunityPostsPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
     this.getCommunityPosts(this.communityInfo.communityName)
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
     }, 700);
   }
