@@ -24,9 +24,9 @@
 </ion-content>
 <ion-footer>
 
-  <form class="form-container" [formGroup]="commentForm" (ngSubmit)="writeComment()">
+  <form [formGroup]="commentForm" (ngSubmit)="writeComment()">
 	  <ion-item>
-			<ion-input type="text" formControlName="commentInput"></ion-input>
+			<ion-input type="text" formControlName="commentInput" placeholder="댓글 작성"></ion-input>
 			<button ion-button round item-right type="submit" [disabled]="!commentForm.valid">게시</button>
 	  </ion-item>
   </form>

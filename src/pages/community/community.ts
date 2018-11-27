@@ -72,8 +72,8 @@ export class CommunityPage {
   }
 
   navigateTo(page, payload = null) {
-    if (payload){
-      this.navCtrl.push(page, {payload: payload});
+    if (payload) {
+      this.navCtrl.push(page, { payload });
     }
     else {
       this.navCtrl.push(page);

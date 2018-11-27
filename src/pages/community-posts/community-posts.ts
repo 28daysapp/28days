@@ -26,7 +26,6 @@ export class CommunityPostsPage {
     public notificationProvider: NotificationProvider,
     public userProvider: UserProvider,
     public actionSheetCtrl: ActionSheetController) {
-      console.log(JSON.stringify(this.navParams.get('payload')));
     this.communityInfo = this.navParams.get('payload');
   }
 

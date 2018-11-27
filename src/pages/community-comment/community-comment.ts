@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+
 import { CommentProvider } from '../../providers/comment/comment';
 import { UserProvider } from '../../providers/user/user';
 
@@ -12,13 +14,19 @@ import { UserProvider } from '../../providers/user/user';
 export class CommunityCommentPage {
 
   commentForm: FormGroup;
-  community;
-  post;
-  comments;
-  currentUser;
+  community: any;
+  post: any;
+  comments: any = [];
+  currentUser: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public commentProvider: CommentProvider,
-    public userProvider: UserProvider, public actionSheetCtrl: ActionSheetController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    public actionSheetCtrl: ActionSheetController,
+    public commentProvider: CommentProvider,
+    public userProvider: UserProvider,
+  ) {
     this.commentForm = this.formBuilder.group({
       commentInput: ['', Validators.required]
     });
@@ -27,55 +35,58 @@ export class CommunityCommentPage {
     this.post = this.navParams.get('post');
   }
 
-  ionViewWillEnter() {
-  }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityCommentPage');
-    this.getCommunityComments();
-    this.commentProvider.initializePost(this.post);
+    this.initializeComments();
   }
 
-  writeComment() {
+  async initializeComments() {
+    await this.commentProvider.initializePost(this.post);
+    await this.getCommunityComments();
+  }
+
+  async writeComment() {
     try {
-      const comment = this.commentForm.value.commentInput;
-      this.commentForm.reset();
-      this.commentProvider.createCommunityComment(comment).then(() => {
-        this.updateCommentCount();
-        this.getCommunityComments();
-      });
+      const comment = await this.commentForm.value.commentInput;
+      await this.commentForm.reset();
+      await this.commentProvider.createCommunityComment(comment)
+      await this.updateCommentCount();
+      await this.getCommunityComments();
     } catch (error) {
       console.log(error)
     }
   }
 
   getCommunityComments() {
-    this.commentProvider.readCommunityComment(this.post).then((comments) => {
-      this.comments = comments;
-    });
+    try {
+      this.commentProvider.readCommunityComment(this.post).then((comments) => {
+        this.comments = comments;
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  updateCommentCount() {
-    this.commentProvider.countComments(this.post).then((commentCount) => {
-      this.commentProvider.updateCommentCount(this.community.communityName, commentCount)
-    })
+  async updateCommentCount() {
+    const commentCount = await this.commentProvider.countComments(this.post);
+    await this.commentProvider.updateCommentCount(this.community.communityName, commentCount);
   }
 
-  presentActionSheet(comment) {
+  async presentActionSheet(comment) {
     const commentWriterUid = comment.uid;
     let actionSheet;
 
-    if (this.userProvider.isSameUser(this.currentUser.uid, commentWriterUid)) {
-      actionSheet = this.actionSheetCtrl.create({
+    if (await this.userProvider.isSameUser(this.currentUser.uid, commentWriterUid)) {
+      actionSheet = await this.actionSheetCtrl.create({
         buttons: [
           {
             text: '글 삭제',
             role: 'destructive',
-            handler: () => {
-              this.commentProvider.deleteCommunityComment(this.post.postId, comment.commentId).then(() => {
-                this.updateCommentCount();
-                this.getCommunityComments();
-              })
+            handler: async () => {
+              await this.commentProvider.deleteCommunityComment(this.post.postId, comment.commentId);
+              await this.updateCommentCount();
+              await this.getCommunityComments();
+
             }
           },
           {
@@ -87,7 +98,7 @@ export class CommunityCommentPage {
         ]
       });
     } else {
-      actionSheet = this.actionSheetCtrl.create({
+      actionSheet = await this.actionSheetCtrl.create({
         buttons: [
           {
             text: '신고',
@@ -103,7 +114,7 @@ export class CommunityCommentPage {
         ]
       });
     }
-    actionSheet.present();
+    await actionSheet.present();
   }
 
   navigateToPage(page, uid) {
