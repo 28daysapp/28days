@@ -2,13 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
 import { CounselorProvider } from '../../providers/counselor/counselor';
 import { ChatProvider } from '../../providers/chat/chat';
-import  firebase  from 'firebase';
-/**
- * Generated class for the CounselorreviewPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -34,7 +27,7 @@ export class CounselorreviewPage {
   reviewnum;
   count;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public counselor: CounselorProvider,public chat: ChatProvider,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public counselor: CounselorProvider,public chatProvider: ChatProvider,
     public loadingCtrl: LoadingController, public popoverCtrl: PopoverController, public viewCtrl: ViewController,
     public alertCtrl: AlertController
   ) {
@@ -88,7 +81,7 @@ export class CounselorreviewPage {
   }
 
   sendRequest() {
-    this.chat.initializebuddy(this.user);
+    this.chatProvider.initializebuddy(this.user);
     this.navCtrl.push('CounselorchatPage').then(() => {
       var index = this.viewCtrl.index;
       this.navCtrl.remove(index);

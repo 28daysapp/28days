@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
+
 import { UserProvider } from '../../providers/user/user';
+
 import firebase from 'firebase';
 
 
