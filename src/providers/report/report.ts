@@ -11,9 +11,9 @@ export class ReportProvider {
   }
 
   reportPost(communityName, postId){
-    console.log(communityName, postId)
-    this.firebaseCommunityPost.child(`/${communityName}/${postId}`).update({
-      reportCount: 1
+    const communityPostReportRef = this.firebaseCommunityPost.child(`/${communityName}/${postId}/reportCount`)
+    communityPostReportRef.transaction((currentReportCount) => {
+      return (currentReportCount || 0) + 1;
     })
   }
 
