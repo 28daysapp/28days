@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, ViewController } from 'ionic-angular';
 import { CounselorProvider } from '../../providers/counselor/counselor';
 import { ChatProvider } from '../../providers/chat/chat';
 
@@ -16,20 +16,16 @@ export class CounselorreviewPage {
   isReview;
 
   user;
-  auth;
-  loading;
   reviews;
   review;
-  ratingsA;
-  ratingsB;
-  ratingsC;
-  ratingsD;
-  reviewnum;
   count;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public counselor: CounselorProvider,public chatProvider: ChatProvider,
-    public loadingCtrl: LoadingController, public popoverCtrl: PopoverController, public viewCtrl: ViewController,
-    public alertCtrl: AlertController
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public counselor: CounselorProvider,
+    public chat: ChatProvider,
+    public viewCtrl: ViewController,
   ) {
     this.user = this.navParams.get("user");
     this.type = 'profile';
@@ -81,7 +77,7 @@ export class CounselorreviewPage {
   }
 
   sendRequest() {
-    this.chatProvider.initializebuddy(this.user);
+    this.chat.initializebuddy(this.user);
     this.navCtrl.push('CounselorchatPage').then(() => {
       var index = this.viewCtrl.index;
       this.navCtrl.remove(index);
