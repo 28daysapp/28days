@@ -1,15 +1,6 @@
 {
   "rules": {
-    ".read": "true",
-    ".write": "true",
-    "users": {
-      ".write": "auth != null",
-      "username": {
-        ".validate": "!root.child('usernames').child(newData.val()).exists()"
-      }
-    },
-    "usernames": {
-      ".write": "auth != null"
-    }
+    ".read": "auth != null",
+    ".write": "auth != null"
   }
 }
