@@ -168,14 +168,6 @@ export class CommunityPostsPage {
             }
           },
           {
-            text: '신고',
-            handler: () => {
-              console.log("신고하기")
-              this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
-              this.reportCompletionAlert();
-            }
-          },
-          {
             text: '닫기',
             role: 'cancel',
             handler: () => {
@@ -194,6 +186,7 @@ export class CommunityPostsPage {
           },
           {
             text: '신고',
+            role: 'destructive',
             handler: () => {
               console.log("신고하기")
               this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
