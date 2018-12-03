@@ -62,8 +62,8 @@
     "cordova-support-google-services": "^1.2.1",
     "cors": "^2.8.4",
     "firebase": "^5.5.6",
-    "firebase-admin": "^6.0.0",
-    "firebase-functions": "^2.0.5",
+    "firebase-admin": "^6.3.0",
+    "firebase-functions": "^2.1.0",
     "iamport-ionic-kcp": "^0.9.5",
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
@@ -76,7 +76,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.2.0",
+    "@ionic/app-scripts": "^3.2.1",
     "typescript": "2.4.2"
   },
   "description": "An Ionic project",
