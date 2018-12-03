@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, NavParams, ActionSheetController } from 'ionic-angular';
+
 import { CommunityProvider } from '../../providers/community/community';
-import { UserProvider } from '../../providers/user/user';
 import { NotificationProvider } from '../../providers/notification/notification';
-import firebase from 'firebase';
+import { ReportProvider } from '../../providers/report/report';
+import { UserProvider } from '../../providers/user/user';
+
 
 @IonicPage()
 @Component({
@@ -16,16 +18,18 @@ export class CommunityPostsPage {
   posts: any;
   anonymity: boolean;
   alreadyJoined: boolean = false;
-  currentUserUid: String = firebase.auth().currentUser.uid;
+  currentUserUid: String = this.userProvider.readCurrentUser().uid;
 
   constructor(
     public navCtrl: NavController,
-    public alertCtrl: AlertController,
     public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController,
     public communityProvider: CommunityProvider,
     public notificationProvider: NotificationProvider,
+    public reportProvider: ReportProvider,
     public userProvider: UserProvider,
-    public actionSheetCtrl: ActionSheetController) {
+    ) {
     this.communityInfo = this.navParams.get('payload');
   }
 
@@ -164,6 +168,14 @@ export class CommunityPostsPage {
             }
           },
           {
+            text: '신고',
+            handler: () => {
+              console.log("신고하기")
+              this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
+              this.reportCompletionAlert();
+            }
+          },
+          {
             text: '닫기',
             role: 'cancel',
             handler: () => {
@@ -178,6 +190,14 @@ export class CommunityPostsPage {
             text: '댓글 달기',
             handler: () => {
               this.navCtrl.push('CommunityCommentPage', { post: post });
+            }
+          },
+          {
+            text: '신고',
+            handler: () => {
+              console.log("신고하기")
+              this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
+              this.reportCompletionAlert();
             }
           },
           {
@@ -196,6 +216,18 @@ export class CommunityPostsPage {
   postWriteAlert() {
     const alert = this.alertCtrl.create({
       title: '커뮤니티에 가입한 후 글을 작성할 수 있어!',
+      buttons: [
+        {
+          text: '확인'
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  reportCompletionAlert(){
+    const alert = this.alertCtrl.create({
+      title: '신고가 완료되었습니다',
       buttons: [
         {
           text: '확인'

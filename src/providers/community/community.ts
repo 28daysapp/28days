@@ -77,7 +77,6 @@ export class CommunityProvider {
 					createdTime: createdTime,
 					comment: 0,
 					likes: 0,
-					report: 0,
 					anonymity: anonymity,
 					communityName: communityInfo.communityName
 				});
@@ -118,7 +117,6 @@ export class CommunityProvider {
 					createdTime: createdTime,
 					comment: 0,
 					likes: 0,
-					report: 0,
 					urlcheck: true,
 					anonymity: anonymity,
 					communityName: communityInfo.communityName
