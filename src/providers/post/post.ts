@@ -30,7 +30,6 @@ export class PostProvider {
 	  		writermajor: writermajor,
 	  		timestamp: firebase.database.ServerValue.TIMESTAMP,
 	  		comment: 0,
-		  	like: 0
 	  	}).then(() => {
 	  		resolve(true);
 	  	});

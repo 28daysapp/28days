@@ -1,14 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Content, PopoverController, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, ViewController } from 'ionic-angular';
 import { CounselorProvider } from '../../providers/counselor/counselor';
 import { ChatProvider } from '../../providers/chat/chat';
-import  firebase  from 'firebase';
-/**
- * Generated class for the CounselorreviewPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,20 +16,16 @@ export class CounselorreviewPage {
   isReview;
 
   user;
-  auth;
-  loading;
   reviews;
   review;
-  ratingsA;
-  ratingsB;
-  ratingsC;
-  ratingsD;
-  reviewnum;
   count;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public counselor: CounselorProvider,public chat: ChatProvider,
-    public loadingCtrl: LoadingController, public popoverCtrl: PopoverController, public viewCtrl: ViewController,
-    public alertCtrl: AlertController
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public counselor: CounselorProvider,
+    public chat: ChatProvider,
+    public viewCtrl: ViewController,
   ) {
     this.user = this.navParams.get("user");
     this.type = 'profile';
