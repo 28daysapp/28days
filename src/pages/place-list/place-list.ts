@@ -24,6 +24,8 @@ export class PlaceListPage {
   query: string;
   places: any;
 
+  adExists: boolean = false;
+
   details: any;
   url: string;
   user;
