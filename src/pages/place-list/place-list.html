@@ -28,7 +28,9 @@
 
   <div #map id="map"></div>
 
-  <ion-card class="card-page ad" *ngIf="type == 'psychiatric' && adExists">
+
+  <ion-card class="card-page ad" *ngIf="type == 'psychiatric' && adExists" (click)="placeDetail(place)">
+    <div class="ad">추천 병원</div>
     <ion-item class="card-item">
       <ion-avatar item-start>
         <div class="container">

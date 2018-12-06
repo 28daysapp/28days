@@ -46,6 +46,12 @@ page-place-list {
     position: relative;
     text-align: center;
 
+    .ad {
+      padding: 0.5em;
+      display: flex;
+      float: left;
+    }
+
     .container {
       padding: 0.5em;
     }
@@ -64,11 +70,6 @@ page-place-list {
       .hash-tags {
         font-family: AppleSDGothicNeo;
         font-size: 0.65em;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
         color: #4a4a4a;
 
         ion-icon {
