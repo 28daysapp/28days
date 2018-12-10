@@ -1,82 +1,81 @@
 page-profile {
-    .spinner-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .profile-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 3vh;
+    hr {
+      width: 100%;
     }
-    .profile-container{
+    .section-label {
+      padding-left: 16px;
+      margin-bottom: 0;
+      font-weight: bold;
+      align-self: flex-start;
+    }
+    .item-name {
+      margin-bottom: 0;
+    }
+    .profile-image {
+      height: 20vh;
+      width: auto;
+    }
+    .communities-container {
+      width: 100%;
+      .scroll .scroll-content {
+        padding: 0;
+        overflow: auto;
+      }
+      .scroll {
+        height: 45px;
+        white-space: nowrap;
         display: flex;
         align-items: center;
-        flex-direction: column;
-        text-align: center;
-        margin-top: 3vh;
-        hr {
-            width: 100%;
+        ::-webkit-scrollbar {
+          display: none;
         }
-        .section-label {
-            padding-left: 16px;
-            margin-bottom: 0;
-            font-weight: bold;
-            align-self: flex-start;
+        .community-icon {
+          border: 1.5px solid color($colors, primary);
+          border-radius: 20px;
+          display: inline-block;
+          padding: 10px;
+          margin-right: 6px;
+          min-width: 26vw;
+          text-align: center;
+          p {
+            margin: 0;
+          }
         }
-        .item-name {
-            margin-bottom: 0;
-        }
-        .profile-image {
-            height: 20vh;
-            width: auto;
-        }
-        .communities-container {
-            width: 100%;
-            .scroll .scroll-content {
-                padding: 0;
-                overflow: auto;
-            }
-            .scroll {
-                height: 45px;
-                white-space: nowrap;
-                display: flex;
-                align-items: center;
-                ::-webkit-scrollbar {
-                    display: none;
-                }
-                .community-icon {
-                    border: 1.5px solid color($colors, primary);
-                    border-radius: 20px;
-                    display: inline-block;
-                    padding: 10px;
-                    margin-right: 6px;
-                    width: 26vw;
-                    text-align: center;
-                    p {
-                        margin: 0;
-                    }
-                }
-            }
-        }
-        .cards-container {
-            width: 100%;
-            .card-container {
-                .card-content {
-                    padding-top: 1vh;
-                    height: auto;
-                    text-align: left;
-                }
-                .card-time {
-                    display: flex;
-                    justify-content: center;
-                    ion-note {
-                        margin: 4px 2px;
-                    }
-                }
-                .card-buttons {
-                    .button-wrapper {
-                        padding: 0;
-                    }
-                }
-
-            }
-        }
+      }
     }
+    .cards-container {
+      width: 100%;
+      .card-container {
+        .card-content {
+          padding-top: 1vh;
+          height: auto;
+          text-align: left;
+        }
+        .card-time {
+          display: flex;
+          justify-content: center;
+          ion-note {
+            margin: 4px 2px;
+          }
+        }
+        .card-buttons {
+          .button-wrapper {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
 }
