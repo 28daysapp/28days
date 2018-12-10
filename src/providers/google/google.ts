@@ -20,6 +20,7 @@ export class GoogleProvider {
 
     this.http.get(url + `maxwidth=400&photoreference=${reference}&key=${apiKey}`, { headers })
       .subscribe(photos => {
+        console.log(JSON.stringify(photos));
         return photos
       }, (error) => {
         console.log(error);

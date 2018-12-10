@@ -33,14 +33,17 @@ export class PlaceDetailPage {
   latLng: any;
   posts: any;
   showInfo: boolean = true;
-  tab: any = 'info';
+  tab: String = 'info';
 
-
-  weekdays;
-  weekend;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public auth: AuthProvider, public userProvider: UserProvider,
-    public storage: Storage, public alertCtrl: AlertController, public review: ReviewProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public loadingCtrl: LoadingController, 
+    public auth: AuthProvider, 
+    public userProvider: UserProvider,
+    public storage: Storage, 
+    public alertCtrl: AlertController, 
+    public reviewProvider: ReviewProvider) {
     this.user = firebase.auth().currentUser;
   }
 
@@ -50,7 +53,7 @@ export class PlaceDetailPage {
   }
 
   ionViewWillEnter() {
-    this.review.readReviews(this.placeId).then((posts) => {
+    this.reviewProvider.readReviews(this.placeId).then((posts) => {
       this.posts = posts;
     });
   }
