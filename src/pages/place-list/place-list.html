@@ -1,6 +1,8 @@
 <ion-header no-border>
+
   <ion-navbar no-border-bottom>
-    <ion-title>병원/센터
+    <ion-title>
+      병원/센터
       <img src="assets/icon/question.png" (click)="showExplanation()">
     </ion-title>
     <!-- <ion-buttons right>
@@ -9,8 +11,10 @@
         </button>
       </ion-buttons> -->
   </ion-navbar>
-  <ion-searchbar #userInput (keyup.enter)="searchByText(userInput.value)" placeholder="검색"></ion-searchbar>
-  <ion-segment mode="md" [(ngModel)]="type" (ionChange)="searchByText()">
+
+  <ion-searchbar #userInput (keyup.enter)="searchByText(userInput.value)" placeholder="지역이나 병원/센터 이름을 검색해보세요"></ion-searchbar>
+
+  <ion-segment mode="md" [(ngModel)]="placeType" (ionChange)="searchByText()">
     <ion-segment-button value="center">
       상담센터
     </ion-segment-button>
@@ -18,6 +22,7 @@
       정신과
     </ion-segment-button>
   </ion-segment>
+
 </ion-header>
 
 <ion-content no-border>
@@ -28,48 +33,32 @@
 
   <div #map id="map"></div>
 
+  <ion-list>
+    <ion-list-header>추천 병원</ion-list-header>
+    <ion-item>
+        <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
+          <ion-thumbnail item-start>
+            <img src="/assets/imgs/psych3.png">
+          </ion-thumbnail>
+          <h2>{{ place.name }}</h2>
+          <p>{{ place.formatted_address.substr(5) }}</p>
+          <span>평점 {{ place.ratings }}</span>
+          <span>리뷰 {{ place.reviewCount }}</span>
+        </ion-item>
+      </ion-item>
 
-  <ion-card class="card-page ad" *ngIf="type == 'psychiatric' && adExists" (click)="placeDetail(place)">
-    <div class="ad">추천 병원</div>
-    <ion-item class="card-item">
-      <ion-avatar item-start>
-        <div class="container">
-          <img id="main-img" src="/assets/imgs/psych3.png" (Error)="this.src='/assets/imgs/hospital-default1.svg';">
-        </div>
-      </ion-avatar>
-      <div class="content-wrapper">
-        <div class="card-title"> 병원</div>
-        <div class="card-subtitle">주소</div>
-        <div class="card-bottom">
-          <button class="card-star" ion-button icon-start clear small>
-            <ion-icon name="star"> 5.0 리뷰 5</ion-icon>
-          </button>
-          <button class="card-review" ion-button icon-start clear small>
-          </button>
-        </div>
-      </div>
+    <ion-list-header>광고 아닌 애들</ion-list-header>
+    <ion-item>
+      <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
+        <ion-thumbnail item-start>
+          <img src="/assets/imgs/psych3.png">
+        </ion-thumbnail>
+        <h2>{{ place.name }}</h2>
+        <p>{{ place.formatted_address.substr(5) }}</p>
+        <span>평점 {{ place.ratings }}</span>
+        <span>리뷰 {{ place.reviewCount }}</span>
+      </ion-item>
     </ion-item>
-  </ion-card>
-
-  <ion-card class="card-page" *ngFor="let place of places" (click)="placeDetail(place)">
-    <ion-item class="card-item">
-      <ion-avatar item-start>
-        <div class="container">
-          <img id="main-img" src="{{place.image}}" (Error)="this.src='/assets/imgs/hospital-default1.svg';">
-        </div>
-      </ion-avatar>
-      <div class="content-wrapper">
-        <div class="card-title"> {{ place.name }}</div>
-        <div class="card-subtitle">{{ place.formatted_address.substr(5) }}</div>
-        <div class="card-bottom">
-          <button class="card-star" ion-button icon-start clear small>
-            <ion-icon name="star"> {{ place.ratings }} 리뷰 {{ place.reviewCount }}</ion-icon>
-          </button>
-          <button class="card-review" ion-button icon-start clear small>
-          </button>
-        </div>
-      </div>
-    </ion-item>
-  </ion-card>
+  </ion-list>
 
 </ion-content>

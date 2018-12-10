@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, IonicPage, AlertController, LoadingController } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
 
 
@@ -16,42 +15,27 @@ export class PlaceListPage {
   @ViewChild("map") mapElement: ElementRef;
 
   map: any;
-  service: any;
   latLng: any;
-  mapOptions: any;
-  marker: any;
-  type: string = "center"
-  query: string;
-  places: any;
 
-  adExists: boolean = false;
+  placeType: String = "center"
+  searchQuery: string;
+  places: any = [];
 
-  details: any;
-  url: string;
-  user;
+  adExists: boolean = true;
 
-  rating;
-  reviewCount;
-
-  placePicture;
-
-  matches;
-  selected;
-  loadingPlaces;
-  apiProvider;
-  loading;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
-    public userProvider: UserProvider, public loadingCtrl: LoadingController) {
-    this.places = [];
-    this.user = this.userProvider.readCurrentUser();
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
+    ) {
+    
   }
 
   ionViewWillEnter() {
     console.log('ionViewDidLoad PlaceListPage');
 
     this.loadMap();
-
   }
 
   loadMap() {
@@ -76,13 +60,13 @@ export class PlaceListPage {
     // If Google Api current location is disabled, default location is Seoul City Hall
     this.latLng = new google.maps.LatLng(37.532600, 127.024612)
 
-    this.mapOptions = {
+    const mapOptions = {
       center: this.latLng,
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       streetViewControl: false
     }
-    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     this.searchByText("강남");
 
@@ -95,14 +79,14 @@ export class PlaceListPage {
     if (!userInput) {
       userInput = "강남"
     }
-    if (this.type === "psychiatric" ? this.query = "정신과" : this.query = "심리상담센터") {
+    if (this.placeType === "psychiatric" ? this.searchQuery = "정신과" : this.searchQuery = "심리상담센터") {
 
       this.latLng = new google.maps.LatLng(37.532600, 127.024612)
 
       let request = {
         location: this.latLng,
         radius: '500',
-        query: userInput + " " + this.query,
+        query: userInput + " " + this.searchQuery,
         language: 'ko',
         type: ["hospital", "health", "doctor"]
       };
@@ -117,7 +101,6 @@ export class PlaceListPage {
             this.places[i].reviewCount = 0;
             this.places[i].ratings = 0;
             this.places[i].image = "assets/imgs/hospital-default" + randomNumber + ".svg";
-            // this.places[i].photo = this.googleProvider.getPlacePhoto(results[i].reference)
             this.countReviews(this.places[i].place_id, i);
 
           }
@@ -125,8 +108,6 @@ export class PlaceListPage {
           console.log("Status error: " + status);
         }
       })
-
-
     }
   }
 
@@ -180,10 +161,8 @@ export class PlaceListPage {
   }
 
   presentLoading() {
-    let loading = this.loadingCtrl.create();
-
+    const loading = this.loadingCtrl.create();
     loading.present()
-
     setTimeout(() => {
       loading.dismiss();
     }, 300)
