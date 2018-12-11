@@ -18,7 +18,7 @@
     <ion-segment-button value="center">
       상담센터
     </ion-segment-button>
-    <ion-segment-button value="psychiatric">
+    <ion-segment-button value="hospital">
       정신과
     </ion-segment-button>
   </ion-segment>
@@ -33,30 +33,35 @@
 
   <div #map id="map"></div>
 
-  <ion-list>
-    <ion-list-header>추천 병원</ion-list-header>
-    <ion-item>
-        <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
-          <ion-thumbnail item-start>
-            <img src="/assets/imgs/psych3.png">
-          </ion-thumbnail>
-          <h2>{{ place.name }}</h2>
-          <p>{{ place.formatted_address.substr(5) }}</p>
-          <span>평점 {{ place.ratings }}</span>
-          <span>리뷰 {{ place.reviewCount }}</span>
-        </ion-item>
+  <ion-list class="remover">
+    <ion-list-header *ngIf="placeType == 'center'">추천 상담센터</ion-list-header>
+    <ion-list-header *ngIf="placeType == 'hospital'">추천 병원</ion-list-header>
+    <ion-item *ngIf="placeType == 'center'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/imgs/ctoc.png">
+        </ion-thumbnail>
+        <h2>CTOC</h2>
+        <p>서울특별시 성동구 서울숲 4길 5 1층</p>
+        <div class="flex-container">
+          <p>평점 5.0</p>
+          <p>리뷰 6</p>
+        </div>
       </ion-item>
+    </ion-item>
 
-    <ion-list-header>광고 아닌 애들</ion-list-header>
     <ion-item>
       <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
         <ion-thumbnail item-start>
-          <img src="/assets/imgs/psych3.png">
+          <img src="{{ place.image }}">
         </ion-thumbnail>
         <h2>{{ place.name }}</h2>
         <p>{{ place.formatted_address.substr(5) }}</p>
-        <span>평점 {{ place.ratings }}</span>
-        <span>리뷰 {{ place.reviewCount }}</span>
+        <div class="flex-container">
+          <p>평점 {{ place.ratings }}</p>
+          <p>리뷰 {{ place.reviewCount }}</p>
+        </div>
+
       </ion-item>
     </ion-item>
   </ion-list>

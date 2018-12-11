@@ -1,10 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { ReviewProvider } from '../../providers/review/review';
-import firebase from 'firebase';
-import { UserProvider } from '../../providers/user/user';
 import { Storage } from '@ionic/storage';
+
+import firebase from 'firebase';
+
 import { AuthProvider } from '../../providers/auth/auth';
+import { ReviewProvider } from '../../providers/review/review';
+import { UserProvider } from '../../providers/user/user';
 
 declare var google;
 
@@ -43,7 +45,8 @@ export class PlaceDetailPage {
     public userProvider: UserProvider,
     public storage: Storage, 
     public alertCtrl: AlertController, 
-    public reviewProvider: ReviewProvider) {
+    public reviewProvider: ReviewProvider
+    ) {
     this.user = firebase.auth().currentUser;
   }
 
@@ -65,6 +68,8 @@ export class PlaceDetailPage {
     this.placeId = this.place.place_id;
     this.getPlaceDetails();
   }
+
+
 
   getPlaceDetails() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);

@@ -1,7 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Navbar, LoadingController, Events } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
-import firebase from 'firebase';
+import { Component, ViewChild } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Navbar,
+  LoadingController,
+  Events
+} from "ionic-angular";
+import { UserProvider } from "../../providers/user/user";
+import firebase from "firebase";
 
 /**
  * Generated class for the CharacterchoicePage page.
@@ -12,8 +19,8 @@ import firebase from 'firebase';
 
 @IonicPage()
 @Component({
-  selector: 'page-characterchoice',
-  templateUrl: 'characterchoice.html',
+  selector: "page-characterchoice",
+  templateUrl: "characterchoice.html"
 })
 export class CharacterchoicePage {
   @ViewChild(Navbar) nb: Navbar;
@@ -25,10 +32,15 @@ export class CharacterchoicePage {
   user2;
   // character index which user picks
   pick;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public user: UserProvider,
-    public loadingCtrl: LoadingController, public events: Events) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public user: UserProvider,
+    public loadingCtrl: LoadingController,
+    public events: Events
+  ) {
     this.user2 = firebase.auth().currentUser;
-    events.subscribe('user:created', (user, time) => {
+    events.subscribe("user:created", (user, time) => {
       // user and time are the same arguments passed in `events.publish(user, time)`
       this.emailcheck = user.email;
     });
@@ -62,12 +74,14 @@ export class CharacterchoicePage {
   setcharacter() {
     if (this.pick == this.originpick) {
       // not change character image
-      this.navCtrl.push('TabsPage');
+      this.navCtrl.push("TabsPage");
       return;
     }
     // change character image
-    this.user.updateProfilePicture(`assets/profile${this.pick}.png`).then(() => {
-      this.navCtrl.push('TabsPage');
-    });
+    this.user
+      .updateProfilePicture(`assets/profile${this.pick}.png`)
+      .then(() => {
+        this.navCtrl.push("TabsPage");
+      });
   }
 }
