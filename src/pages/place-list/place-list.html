@@ -28,6 +28,7 @@
 
   <div #map id="map"></div>
 
+<<<<<<< HEAD
   <ion-list class="remover">
     <ion-list-header *ngIf="placeType == 'center'">추천 상담센터</ion-list-header>
     <ion-list-header *ngIf="placeType == 'hospital'">추천 병원</ion-list-header>
@@ -42,6 +43,22 @@
           <p>평점 5.0</p>
           <p>리뷰 6</p>
         </div>
+=======
+  <ion-list>
+    <ion-list-header>추천 병원</ion-list-header>
+    <ion-item>
+      <ion-item
+        *ngFor="let premiumPlace of premiumPlaces"
+        (click)="placeDetail(place)"
+      >
+        <ion-thumbnail item-start>
+          <img [src]="premiumPlace.images[0]" />
+        </ion-thumbnail>
+        <h2>{{ premiumPlace.name }}</h2>
+        <p>{{ premiumPlace.address }}</p>
+        <span>평점 {{ premiumPlace.ratings || 0 }}</span>
+        <span>리뷰 {{ premiumPlace.reviewCount || 0 }}</span>
+>>>>>>> af9faf6f9934b6e1e80a85f4823d09dca8125723
       </ion-item>
     </ion-item>
 

@@ -28,4 +28,19 @@ export class PlaceProvider {
         });
     });
   }
+  readPlaceReviews({ placeId }) {
+    return new Promise(resolve => {
+      firebase
+        .database()
+        .ref(`/placeInfo/${placeId}`)
+        .once("value")
+        .then(snapshot => {
+          if (snapshot.val() === null) {
+            resolve(false);
+          } else {
+            resolve(snapshot.val());
+          }
+        });
+    });
+  }
 }
