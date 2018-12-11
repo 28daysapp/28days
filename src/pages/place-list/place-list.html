@@ -1,32 +1,27 @@
 <ion-header no-border>
-
   <ion-navbar no-border-bottom>
     <ion-title>
       병원/센터
-      <img src="assets/icon/question.png" (click)="showExplanation()">
+      <img src="assets/icon/question.png" (click)="showExplanation()" />
     </ion-title>
-    <!-- <ion-buttons right>
+    <!--
+      <ion-buttons right>
         <button ion-button icon-only">
           정렬
         </button>
-      </ion-buttons> -->
+      </ion-buttons>
+    -->
   </ion-navbar>
 
   <ion-searchbar #userInput (keyup.enter)="searchByText(userInput.value)" placeholder="지역이나 병원/센터 이름을 검색해보세요"></ion-searchbar>
 
   <ion-segment mode="md" [(ngModel)]="placeType" (ionChange)="searchByText()">
-    <ion-segment-button value="center">
-      상담센터
-    </ion-segment-button>
-    <ion-segment-button value="hospital">
-      정신과
-    </ion-segment-button>
+    <ion-segment-button value="center"> 상담센터 </ion-segment-button>
+    <ion-segment-button value="hospital"> 정신과 </ion-segment-button>
   </ion-segment>
-
 </ion-header>
 
 <ion-content no-border>
-
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -65,5 +60,4 @@
       </ion-item>
     </ion-item>
   </ion-list>
-
 </ion-content>

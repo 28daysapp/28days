@@ -1,61 +1,43 @@
 <ion-header no-border>
-
   <ion-navbar class="top-buttons">
-    <ion-title>
-      {{ name }}
-    </ion-title>
+    <ion-title> {{ name }} </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-border class="contents">
-  <div class="top-image">
-    <div id="main-img"></div>
-  </div>
+  <ion-slides pager class="top-image">
+    <ion-slide id="main-img"></ion-slide>
+  </ion-slides>
 
   <ion-segment mode="md" [(ngModel)]="tab" (click)="changeTab()">
-    <ion-segment-button value="info">
-      센터정보
-    </ion-segment-button>
-    <ion-segment-button value="reviews">
-      리뷰
-    </ion-segment-button>
+    <ion-segment-button value="info"> 센터정보 </ion-segment-button>
+    <ion-segment-button value="reviews"> 리뷰 </ion-segment-button>
   </ion-segment>
 
   <div #map id="map"></div>
 
   <div *ngIf="showInfo" class="details">
-    <p *ngIf="website">
-      <strong>웹사이트   </strong>{{ website }}</p>
-    <p>
-      <strong>주소   </strong>{{ address }}</p>
-    <p *ngIf="openingHours">
-      <strong>영업시간  </strong>{{ openingHours }}</p>
-    <p>
-      <strong>연락처   </strong>{{ phone }}</p>   
+    <p *ngIf="website"><strong>웹사이트 </strong>{{ website }}</p>
+    <p><strong>주소 </strong>{{ address }}</p>
+    <p *ngIf="openingHours"><strong>영업시간 </strong>{{ openingHours }}</p>
+    <p><strong>연락처 </strong>{{ phone }}</p>
   </div>
 
   <div *ngIf="!showInfo" class="reviews">
-
     <div class="review-button" (click)="reviewWrite()">
-      <div>
-        <img src="assets/icon/edit.svg">
-        <span>리뷰 남기기</span>
-      </div>
+      <div><img src="assets/icon/edit.svg" /> <span>리뷰 남기기</span></div>
     </div>
 
     <ion-list *ngFor="let post of posts">
       <div class="review">
         <div class="review-star-points">
           <span id="average-text">평균</span>
-          <img src="assets/icon/star.svg">
-          <span> {{ post.ratingAvg }} </span>
+          <img src="assets/icon/star.svg" /> <span> {{ post.ratingAvg }} </span>
         </div>
-        <div class="review-text">
-          {{ post.text }}
-        </div>
+        <div class="review-text">{{ post.text }}</div>
         <div class="review-info">
           <span>{{ post.username }}</span>
-          <span>   {{ post.timestamp | date:'yyyy.MM.dd' }}</span>
+          <span> {{ post.timestamp | date: "yyyy.MM.dd" }}</span>
         </div>
       </div>
     </ion-list>

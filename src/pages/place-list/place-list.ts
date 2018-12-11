@@ -10,6 +10,7 @@ import {
 import firebase from "firebase";
 
 import { GoogleProvider } from "../../providers/google/google";
+import { PlaceProvider } from "../../providers/place/place";
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class PlaceListPage {
 
   placeType: String = "center";
   searchQuery: string;
+  premiumPlaces: any = [];
   places: any = [];
 
   adExists: boolean = true;
@@ -33,7 +35,8 @@ export class PlaceListPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public googleProvider: GoogleProvider
+    public googleProvider: GoogleProvider,
+    public placeProvider: PlaceProvider
   ) {}
 
   ionViewWillEnter() {
@@ -45,6 +48,10 @@ export class PlaceListPage {
 
       this.searchByText("서울");
     });
+
+    // --------- Getting Premium Place DB ------------
+
+    this.premiumPlaces = this.getPlaceList(this.placeType);
   }
 
   searchByText(userInput) {
@@ -106,5 +113,11 @@ export class PlaceListPage {
     setTimeout(() => {
       refresher.complete();
     }, 2000);
+  }
+
+  /* ------ Functions for Calling Premium Place DB ------ */
+
+  async getPlaceList(reference) {
+    return await this.placeProvider.readPlaceList(reference);
   }
 }
