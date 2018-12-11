@@ -87,7 +87,7 @@ export class PlaceListPage {
 
     // --------- Getting Premium Place DB ------------
 
-    this.premiumPlaces = this.getPlaceList(this.placeType);
+    this.getPlaceList(this.placeType);
 
     // -----------------------------------------------
 
@@ -195,6 +195,26 @@ export class PlaceListPage {
   /* ------ Functions for Calling Premium Place DB ------ */
 
   async getPlaceList(reference) {
-    return await this.placeProvider.readPlaceList(reference);
+    try {
+      const placeList = await this.placeProvider.readPlaceList(reference);
+      this.premiumPlaces = await this.handlePlaceReviews(placeList);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async handlePlaceReviews(placeList) {
+    const updatedPlaceList = placeList.map(async place => {
+      const placeReview = await this.placeProvider.readPlaceReviews(
+        place.placeId
+      );
+      if (!placeReview) {
+        return place;
+      }
+      return {
+        ...place,
+        ...placeReview
+      };
+    });
+    return await Promise.all(updatedPlaceList);
   }
 }

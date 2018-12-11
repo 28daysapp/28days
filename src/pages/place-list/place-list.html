@@ -35,14 +35,17 @@
   <ion-list>
     <ion-list-header>추천 병원</ion-list-header>
     <ion-item>
-      <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
+      <ion-item
+        *ngFor="let premiumPlace of premiumPlaces"
+        (click)="placeDetail(place)"
+      >
         <ion-thumbnail item-start>
-          <img src="/assets/imgs/psych3.png" />
+          <img [src]="premiumPlace.images[0]" />
         </ion-thumbnail>
-        <h2>{{ place.name }}</h2>
-        <p>{{ place.formatted_address.substr(5) }}</p>
-        <span>평점 {{ place.ratings }}</span>
-        <span>리뷰 {{ place.reviewCount }}</span>
+        <h2>{{ premiumPlace.name }}</h2>
+        <p>{{ premiumPlace.address }}</p>
+        <span>평점 {{ premiumPlace.ratings || 0 }}</span>
+        <span>리뷰 {{ premiumPlace.reviewCount || 0 }}</span>
       </ion-item>
     </ion-item>
 
