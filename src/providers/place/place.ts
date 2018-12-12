@@ -23,7 +23,7 @@ export class PlaceProvider {
             const place = childSnapshot.val();
             places.push(place);
           });
-          console.log(places);
+          console.log("Places man: ", places);
           resolve(places);
         });
     });

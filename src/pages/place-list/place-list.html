@@ -28,53 +28,33 @@
 
   <div #map id="map"></div>
 
-<<<<<<< HEAD
-  <ion-list class="remover">
+  <ion-list no-border>
     <ion-list-header *ngIf="placeType == 'center'">추천 상담센터</ion-list-header>
     <ion-list-header *ngIf="placeType == 'hospital'">추천 병원</ion-list-header>
-    <ion-item *ngIf="placeType == 'center'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="../../assets/imgs/ctoc.png">
-        </ion-thumbnail>
-        <h2>CTOC</h2>
-        <p>서울특별시 성동구 서울숲 4길 5 1층</p>
-        <div class="flex-container">
-          <p>평점 5.0</p>
-          <p>리뷰 6</p>
-        </div>
-=======
-  <ion-list>
-    <ion-list-header>추천 병원</ion-list-header>
-    <ion-item>
-      <ion-item
-        *ngFor="let premiumPlace of premiumPlaces"
-        (click)="placeDetail(place)"
-      >
-        <ion-thumbnail item-start>
-          <img [src]="premiumPlace.images[0]" />
-        </ion-thumbnail>
-        <h2>{{ premiumPlace.name }}</h2>
-        <p>{{ premiumPlace.address }}</p>
-        <span>평점 {{ premiumPlace.ratings || 0 }}</span>
-        <span>리뷰 {{ premiumPlace.reviewCount || 0 }}</span>
->>>>>>> af9faf6f9934b6e1e80a85f4823d09dca8125723
-      </ion-item>
+
+    <ion-item *ngFor="let premiumPlace of premiumPlaces" (click)="placeDetail(place)">
+      <ion-thumbnail item-start>
+        <img [src]="premiumPlace.images[0]" />
+      </ion-thumbnail>
+      <h2>{{ premiumPlace.name }}</h2>
+      <p>{{ premiumPlace.address }}</p>
+      <div class="flex-container">
+        <p>평점 {{ premiumPlace.ratings || 0 }}</p>
+        <p>리뷰 {{ premiumPlace.reviewCount || 0 }}</p>
+      </div>
     </ion-item>
 
-    <ion-item>
-      <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
-        <ion-thumbnail item-start>
-          <img src="{{ place.image }}">
-        </ion-thumbnail>
-        <h2>{{ place.name }}</h2>
-        <p>{{ place.formatted_address.substr(5) }}</p>
-        <div class="flex-container">
-          <p>평점 {{ place.ratings }}</p>
-          <p>리뷰 {{ place.reviewCount }}</p>
-        </div>
-
-      </ion-item>
+    <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
+      <ion-thumbnail item-start>
+        <img src="{{ place.image }}">
+      </ion-thumbnail>
+      <h2>{{ place.name }}</h2>
+      <p>{{ place.formatted_address.substr(5) }}</p>
+      <div class="flex-container">
+        <p>평점 {{ place.ratings }}</p>
+        <p>리뷰 {{ place.reviewCount }}</p>
+      </div>
     </ion-item>
+
   </ion-list>
 </ion-content>

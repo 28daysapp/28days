@@ -51,7 +51,7 @@ export class PlaceListPage {
 
     // --------- Getting Premium Place DB ------------
 
-    this.premiumPlaces = this.getPlaceList(this.placeType);
+    this.getPlaceList(this.placeType);
   }
 
   searchByText(userInput) {
@@ -121,6 +121,7 @@ export class PlaceListPage {
     try {
       const placeList = await this.placeProvider.readPlaceList(reference);
       this.premiumPlaces = await this.handlePlaceReviews(placeList);
+      console.log("What am i getting here?: ", this.premiumPlaces);
     } catch (e) {
       console.log(e);
     }
