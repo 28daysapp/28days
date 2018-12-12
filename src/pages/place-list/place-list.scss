@@ -32,14 +32,9 @@ page-place-list {
     color: #4a4a4a;
   }
 
-  .remover {
-    margin: 0;
-    padding: 0;
-  }
-
-  ion-item {
-    margin: 0;
-    padding: 0;
+  .divider {
+    margin: 1em 0;
+    border-bottom: 1px dashed color($colors, primary_light);
   }
 
   .flex-container {

@@ -60,6 +60,7 @@ export class PlaceListPage {
       .then(results => {
         this.places = results;
       });
+    this.getPlaceList(this.placeType);
   }
 
   countReviews(placeId, i) {
@@ -78,6 +79,12 @@ export class PlaceListPage {
 
   placeDetail(place) {
     this.navCtrl.push("PlaceDetailPage", { place: place });
+  }
+
+  premiumPlaceDetail(premiumPlaceDetail) {
+    this.navCtrl.push("PlaceDetailPage", {
+      premiumPlaceDetail: premiumPlaceDetail
+    });
   }
 
   showExplanation() {
@@ -121,7 +128,6 @@ export class PlaceListPage {
     try {
       const placeList = await this.placeProvider.readPlaceList(reference);
       this.premiumPlaces = await this.handlePlaceReviews(placeList);
-      console.log("What am i getting here?: ", this.premiumPlaces);
     } catch (e) {
       console.log(e);
     }
@@ -129,7 +135,7 @@ export class PlaceListPage {
   async handlePlaceReviews(placeList) {
     const updatedPlaceList = placeList.map(async place => {
       const placeReview = await this.placeProvider.readPlaceReviews(
-        place.placeId
+        place.reviewReference
       );
       if (!placeReview) {
         return place;

@@ -12,6 +12,7 @@ export class PlaceProvider {
   // <Function to Read Place List>
   // Reference: String, Accepting Values: 'hospital', 'center'
   readPlaceList(reference: String) {
+    console.log("reference: ", reference);
     return new Promise(resolve => {
       firebase
         .database()
@@ -23,12 +24,11 @@ export class PlaceProvider {
             const place = childSnapshot.val();
             places.push(place);
           });
-          console.log("Places man: ", places);
           resolve(places);
         });
     });
   }
-  readPlaceReviews({ placeId }) {
+  readPlaceReviews(placeId: String) {
     return new Promise(resolve => {
       firebase
         .database()

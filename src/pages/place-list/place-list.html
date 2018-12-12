@@ -29,10 +29,9 @@
   <div #map id="map"></div>
 
   <ion-list no-border>
-    <ion-list-header *ngIf="placeType == 'center'">추천 상담센터</ion-list-header>
-    <ion-list-header *ngIf="placeType == 'hospital'">추천 병원</ion-list-header>
+    <ion-list-header>Sponsored</ion-list-header>
 
-    <ion-item *ngFor="let premiumPlace of premiumPlaces" (click)="placeDetail(place)">
+    <ion-item class="ad" no-lines *ngFor="let premiumPlace of premiumPlaces" (click)="premiumPlaceDetail(premiumPlace)">
       <ion-thumbnail item-start>
         <img [src]="premiumPlace.images[0]" />
       </ion-thumbnail>
@@ -44,7 +43,11 @@
       </div>
     </ion-item>
 
-    <ion-item *ngFor="let place of places" (click)="placeDetail(place)">
+    <div class="divider">
+
+    </div>
+
+    <ion-item no-lines *ngFor="let place of places" (click)="placeDetail(place)">
       <ion-thumbnail item-start>
         <img src="{{ place.image }}">
       </ion-thumbnail>
