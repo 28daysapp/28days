@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 
 import { CommentProvider } from '../../providers/comment/comment';
+import { ReportProvider } from '../../providers/report/report';
 import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
@@ -22,9 +23,11 @@ export class CommunityCommentPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public alertCtrl: AlertController,
     public formBuilder: FormBuilder,
     public actionSheetCtrl: ActionSheetController,
     public commentProvider: CommentProvider,
+    public reportProvider: ReportProvider,
     public userProvider: UserProvider,
   ) {
     this.commentForm = this.formBuilder.group({
@@ -86,7 +89,6 @@ export class CommunityCommentPage {
               await this.commentProvider.deleteCommunityComment(this.post.postId, comment.commentId);
               await this.updateCommentCount();
               await this.getCommunityComments();
-
             }
           },
           {
@@ -102,7 +104,10 @@ export class CommunityCommentPage {
         buttons: [
           {
             text: '신고',
+            role: 'destructive',
             handler: () => {
+              this.reportProvider.reportComment(this.post.postId, comment.commentId);
+              this.reportCompletionAlert();
             }
           },
           {
@@ -115,6 +120,18 @@ export class CommunityCommentPage {
       });
     }
     await actionSheet.present();
+  }
+
+  reportCompletionAlert() {
+    const alert = this.alertCtrl.create({
+      title: '신고가 완료되었습니다',
+      buttons: [
+        {
+          text: '확인'
+        }
+      ]
+    });
+    alert.present();
   }
 
   navigateToPage(page, uid) {

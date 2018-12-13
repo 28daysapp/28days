@@ -7,6 +7,7 @@ export class UserProvider {
   fireusers = firebase.database().ref('/users');
   fireusernames = firebase.database().ref('/usernames');
   photo;
+  
   constructor() {
 
   }
@@ -27,7 +28,6 @@ export class UserProvider {
     });
     return promise;
   }
-
 
   readCurrentUser() {
     return firebase.auth().currentUser;
@@ -71,8 +71,6 @@ export class UserProvider {
 		});
 		return promise;
   }
-
-
 
   isSameUser(currentUserUid: String, targetUserUid: String) {
     if (currentUserUid == targetUserUid) {

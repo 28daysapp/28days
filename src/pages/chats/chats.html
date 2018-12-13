@@ -14,12 +14,12 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content no-border>
 
   <ion-segment mode="md" [(ngModel)]="type" (ionChange)="getChatList()">
-      <ion-segment-button value="request">
-          요청한 상담
-        </ion-segment-button>
+    <ion-segment-button value="request">
+      요청한 상담
+    </ion-segment-button>
     <ion-segment-button value="requested">
       요청받은 상담
     </ion-segment-button>

@@ -29,7 +29,7 @@ export class CommunityPostsPage {
     public notificationProvider: NotificationProvider,
     public reportProvider: ReportProvider,
     public userProvider: UserProvider,
-    ) {
+  ) {
     this.communityInfo = this.navParams.get('payload');
   }
 
@@ -89,8 +89,8 @@ export class CommunityPostsPage {
     await this.getCommunityPosts(this.communityInfo.communityName);
 
     const alert = this.alertCtrl.create({
-      title: '커뮤니티의 멤버가 된 걸 축하해!',
-      message: '좋은 경험이 되었으면 좋겠다!'
+      title: '멤버가 된 걸 축하해요!',
+      message: '좋은 사람들과 만났으면 좋겠어요!'
     });
 
     alert.present();
@@ -125,7 +125,7 @@ export class CommunityPostsPage {
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: '커뮤니티 탈퇴',
-      message: '정말 나갈거야??',
+      message: '정말 나갈거에요??',
       buttons: [
         {
           text: '응 이제 안녕이야',
@@ -152,6 +152,12 @@ export class CommunityPostsPage {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {
+            text: '댓글 달기',
+            handler: () => {
+              this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
+            }
+          },
+          {
             text: '글 삭제',
             role: 'destructive',
             handler: () => {
@@ -159,20 +165,6 @@ export class CommunityPostsPage {
                 this.communityProvider.deleteMyPost(post);
                 this.getCommunityPosts(this.communityInfo.communityName)
               });
-            }
-          },
-          {
-            text: '댓글 달기',
-            handler: () => {
-              this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
-            }
-          },
-          {
-            text: '신고',
-            handler: () => {
-              console.log("신고하기")
-              this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
-              this.reportCompletionAlert();
             }
           },
           {
@@ -194,8 +186,8 @@ export class CommunityPostsPage {
           },
           {
             text: '신고',
+            role: 'destructive',
             handler: () => {
-              console.log("신고하기")
               this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
               this.reportCompletionAlert();
             }
@@ -204,7 +196,6 @@ export class CommunityPostsPage {
             text: '닫기',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
             }
           }
         ]
@@ -215,7 +206,7 @@ export class CommunityPostsPage {
 
   postWriteAlert() {
     const alert = this.alertCtrl.create({
-      title: '커뮤니티에 가입한 후 글을 작성할 수 있어!',
+      title: '커뮤니티에 가입한 후 글을 작성할 수 있어요!',
       buttons: [
         {
           text: '확인'
@@ -225,7 +216,7 @@ export class CommunityPostsPage {
     alert.present();
   }
 
-  reportCompletionAlert(){
+  reportCompletionAlert() {
     const alert = this.alertCtrl.create({
       title: '신고가 완료되었습니다',
       buttons: [
