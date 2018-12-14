@@ -53,7 +53,6 @@ export class SupporterListPage {
     this.SupporterRef.on("value", userList => {
       let users = [];
       userList.forEach(user => {
-        console.log(user.toJSON());
         if (user.val().uid != this.user.uid) {
           users.push(user.val());
         }

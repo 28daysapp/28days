@@ -31,7 +31,7 @@ export class CommunityProvider {
   }
 
   readCommunityList() {
-    const promise = new Promise(resolve => {
+    return new Promise(resolve => {
       this.fireCommunityList.once("value").then(snapshot => {
         const communities = [];
         snapshot.forEach(childSnapshot => {
@@ -41,7 +41,6 @@ export class CommunityProvider {
         resolve(communities);
       });
     });
-    return promise;
   }
 
   createCommunityPost(text, dataURL, anonymity, communityInfo) {

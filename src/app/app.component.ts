@@ -1,10 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import {
-  AlertController,
-  Nav,
-  Platform,
-  Events
-} from "ionic-angular";
+import { AlertController, Nav, Platform, Events } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import firebase from "firebase";
@@ -44,7 +39,7 @@ export class MyApp {
   rootPage = FirstRunPage;
 
   pages: any[] = [
-    { title: "Community", component: "CommunityPage" },
+    { title: "Community", component: "CommunityListPage" },
     { title: "Supporter", component: "SupporterPage" },
     { title: "Tabs", component: "TabsPage" },
     { title: "Home", component: "HomePage" },
@@ -87,17 +82,15 @@ export class MyApp {
       firebase.initializeApp(firebaseConfig);
       this.user = firebase.auth().currentUser;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
     platform.ready().then(() => {
-
       try {
         statusBar.styleDefault();
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-
     });
     events.subscribe("user:created", (user, time) => {
       this.photoURL = user.photoURL;
@@ -121,7 +114,7 @@ export class MyApp {
   }
 
   changeProfilePicture() {
-    this.nav.push('CharacterPage');
+    this.nav.push("CharacterPage");
   }
 
   logout() {
@@ -143,7 +136,7 @@ export class MyApp {
           {
             text: "취소",
             role: "cancel",
-            handler: () => { }
+            handler: () => {}
           }
         ]
       });
@@ -152,5 +145,4 @@ export class MyApp {
       this.nav.push("LoginPage");
     }
   }
-
 }
