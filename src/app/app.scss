@@ -13,375 +13,216 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.image-container {
-
-}
+.image-container {}
 
 .profile-image {
-    width: 200px;
-    height: 200;
-    background-size: cover;
-    border-radius: 50% !important;
-    overflow: hidden;   
+  width: 200px;
+  height: 200;
+  background-size: cover;
+  border-radius: 50% !important;
+  overflow: hidden;
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .logInMenu .scroll-content {
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 6%;
-    overflow: hidden;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 6%;
+  overflow: hidden;
 }
 
 .logInMenu .header {
-    height: 12%;
-    width: 100%;
-    text-align: right;
+  height: 12%;
+  width: 100%;
+  text-align: right;
 }
 
 .logInMenu .header img {
-    width: 7%;
-    object-fit: contain;
+  width: 7%;
+  object-fit: contain;
 }
 
 .logInMenu .profile {
-    text-align: center;
-    height: 30%;
-    color: #ffffff;
+  text-align: center;
+  height: 30%;
+  color: #ffffff;
 }
 
 .logInMenu .profile img {
-    width: 30%;
-    object-fit: contain;
+  width: 30%;
+  object-fit: contain;
 }
 
 .logInMenu .profile .username {
-    padding: 3%;
-    font-size: 24px;
-    font-weight: 500;
+  padding: 3%;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .logInMenu .profile .email {
-    display: inline-block;
-    width: 70%;
-    height: 13%;
-    line-height: 150%;
-    border-radius: 12px;
-    border: solid 1px #ffffff;
+  display: inline-block;
+  width: 70%;
+  height: 13%;
+  line-height: 150%;
+  border-radius: 12px;
+  border: solid 1px #ffffff;
 }
 
 .logInMenu .profile .myLog {
-    font-size: 16px;
-    padding: 6%;
-    width: 100%;
-    height: 30%;
-    text-align: center;
+  font-size: 16px;
+  padding: 6%;
+  width: 100%;
+  height: 30%;
+  text-align: center;
 }
 
 .logInMenu .profile .myLog .mypage {
-    display: inline-block;
+  display: inline-block;
 }
 
 .logInMenu .profile .myLog .logout {
-    display: inline-block;
-    color: #ffffff;
+  display: inline-block;
+  color: #ffffff;
 }
 
 .logInMenu .profile .myLog .bar {
-    padding-left: 6%;
-    padding-right: 6%;
-    display: inline-block;
+  padding-left: 6%;
+  padding-right: 6%;
+  display: inline-block;
 }
 
 .logInMenu .itemlist {
-    margin-left: 10%;
-    margin-top: 15%;
-    color: #ffffff;
+  margin-left: 10%;
+  margin-top: 15%;
+  color: #ffffff;
 }
 
 .list-md[no-lines] .item-block,
 .list-md[no-lines] ion-item-options,
 .list-md[no-lines] .item .item-inner {
-    color: #ffffff;
-    font-size: 20px;
+  color: #ffffff;
+  font-size: 20px;
 }
 
 .toolbar-background {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .back {
-    background-color: color($colors, primary);
+  background-color: color($colors, primary);
 }
 
 .title.title-md {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    height: 100%;
-    width: 70%;
-    text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 70%;
+  text-align: center;
 }
 
 .toolbar-title-md {
-    color: color($colors, primary);
-    font-size: 18px;
-    font-weight: bold;
+  color: color($colors, primary);
+  font-size: 18px;
+  font-weight: bold;
 }
 
 span.coconut {
-    padding-top: 40px;
-    width: 100%;
-    height: 36px;
-    font-family: Baruta;
-    font-size: 30px;
-    font-weight: 900;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #ffffff;
+  padding-top: 40px;
+  width: 100%;
+  height: 36px;
+  font-family: Baruta;
+  font-size: 30px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
 }
 
 span.message {
-    width: 155px;
-    height: 19px;
-    font-family: AppleSDGothicNeo;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #ffffff;
-    text-align: center;
+  width: 155px;
+  height: 19px;
+  font-family: AppleSDGothicNeo;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  text-align: center;
 }
 
 button.message_button {
-    width: 70%;
-    height: 29px;
-    font-family: AppleSDGothicNeo;
-    font-size: 24px;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #ffffff;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    display: block !important;
+  width: 70%;
+  height: 29px;
+  font-family: AppleSDGothicNeo;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  display: block !important;
 }
 
 ion-icon {
-    &[class*="coconut-"] {
-        // Instead of using the font-based icons
-        // We're applying svg masks
-        mask-size: contain;
-        mask-position: 50% 50%;
-        mask-repeat: no-repeat;
-        background: currentColor;
-        width: 1em;
-        height: 1em;
-    } // custom icons
-    &[class*="coconut-home"] {
-        mask-image: url(../assets/icon/home.svg);
-    }
-    &[class*="coconut-icon2"] {
-        mask-image: url(../assets/icon/customicon2.svg);
-    }
-    &[class*="coconut-icon3"] {
-        mask-image: url(../assets/icon/customicon3.svg);
-    }
+  &[class*="coconut-"] {
+    // Instead of using the font-based icons
+    // We're applying svg masks
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+
+  // custom icons
+  &[class*="coconut-home"] {
+    mask-image: url(../assets/icon/home.svg);
+  }
+
+  &[class*="coconut-icon2"] {
+    mask-image: url(../assets/icon/customicon2.svg);
+  }
+
+  &[class*="coconut-icon3"] {
+    mask-image: url(../assets/icon/customicon3.svg);
+  }
 }
 
 // Media of at most the maximum breakpoint width. No query for the largest breakpoint.
 // Makes the @content apply to the given breakpoint and narrower.
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
-    $max: breakpoint-max($name, $breakpoints);
-    @if $max {
-        @media (max-width: $max) {
-            @content;
-        }
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
     }
-    @else {
-        @content;
-    }
+  }
+
+  @else {
+    @content;
+  }
 }
 
-.deleteAlert {
-    border-radius: 9px;
-    text-align: center;
-    border: solid 1px #d8d8d8;
-    button {
-        width: 50%;
-        margin: 0 !important;
-        text-align: left;
-        border-top: .55px solid #d8d8d8;
-    }
-    .alert-message {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-    }
-    button.alert-button:nth-child(1) {
-        color: #55b26e;
-        text-align: left;
-    }
-    button.alert-button:nth-child(2) {
-        color: #55b26e;
-        text-align: left;
-    }
-}
 
-.reportAlert {
-    border-radius: 9px;
-    border: solid 1px #d8d8d8;
-    text-align: center;
-    vertical-align: middle;
-    .alert-message {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #55b26e;
-        text-align: center;
-    }
-    button {
-        width: 100%;
-        margin: 0 !important;
-        text-align: center;
-        border-top: .55px solid #d8d8d8;
-    }
-    button.alert-button:nth-child(1) {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-        text-align: center;
-    }
-    button.alert-button:nth-child(2) {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-        text-align: center;
-    }
-    button.alert-button:nth-child(3) {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-        ;
-        text-align: center;
-    }
-    button.alert-button:nth-child(4) {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-        text-align: center;
-    }
-    button.alert-button:nth-child(5) {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-        text-align: center;
-    }
-    button.alert-button:nth-child(6) {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: 500;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: left;
-        color: #55b26e;
-    }
-}
-
-.reportComplete {
-    border-radius: 9px;
-    border: solid 1px #d8d8d8;
-    button {
-        width: 100%;
-        margin: 0 !important;
-        text-align: center;
-        border-top: .55px solid #d8d8d8;
-    }
-    .alert-title {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #55b26e;
-    }
-    .alert-message {
-        font-family: AppleSDGothicNeo;
-        font-size: 18px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #000000;
-    }
-    button.alert-button:nth-child(1) {
-        color: #55b26e;
-        text-align-last: center;
-    }
-}
 
 // Name of the next breakpoint, or null for the last breakpoint.
 //
@@ -392,8 +233,8 @@ ion-icon {
 //    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl))
 //    md
 @function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
-    $n: index($breakpoint-names, $name);
-    @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
 }
 
 // Maximum breakpoint width. Null for the largest (last) breakpoint.
@@ -402,32 +243,38 @@ ion-icon {
 //    >> breakpoint-max(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    767px
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
-    $next: breakpoint-next($name, $breakpoints);
-    @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
 }
 
 // Creates text alignment classes based on screen size
 // TODO this would be nice to add to the framework
 @each $breakpoint in map-keys($grid-breakpoints) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
-        // Provide text `[text-{bp}]` attributes for aligning text based on screen size
-        [text#{$infix}-center] {
-            text-align: center;
-        }
-        [text#{$infix}-left] {
-            text-align: left;
-        }
-        [text#{$infix}-right] {
-            text-align: right;
-        }
-        [hidden#{$infix}-up] {
-            display: none;
-        }
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+
+    // Provide text `[text-{bp}]` attributes for aligning text based on screen size
+    [text#{$infix}-center] {
+      text-align: center;
     }
-    @include media-breakpoint-down($breakpoint, $grid-breakpoints) {
-        [hidden#{$infix}-down] {
-            display: none;
-        }
+
+    [text#{$infix}-left] {
+      text-align: left;
     }
+
+    [text#{$infix}-right] {
+      text-align: right;
+    }
+
+    [hidden#{$infix}-up] {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-down($breakpoint, $grid-breakpoints) {
+    [hidden#{$infix}-down] {
+      display: none;
+    }
+  }
 }
