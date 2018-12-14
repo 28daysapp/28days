@@ -102,7 +102,7 @@ export class GoogleProvider {
               try {
                 this.places[i].image = results[i].photos[0].getUrl();
               } catch (error) {
-                this.places[i].image = "/assets/imgs/psych1.png";
+                this.places[i].image = "assets/imgs/psych1.png";
 
                 console.log(error);
               }
