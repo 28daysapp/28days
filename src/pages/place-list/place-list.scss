@@ -50,4 +50,8 @@ page-place-list {
   .ad {
     background-color: color($colors, primary_light)
   }
+
+  .rounded-edges {
+    border-radius: 20%;
+  }
 }

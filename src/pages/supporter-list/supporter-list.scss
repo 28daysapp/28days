@@ -1,0 +1,15 @@
+page-supporter-list {
+  .rounded-edges {
+    border-radius: 20%;
+  }
+
+  .flex-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    p {
+      padding-right: 2em;
+    }
+  }
+}

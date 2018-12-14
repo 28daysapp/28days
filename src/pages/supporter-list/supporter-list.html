@@ -1,0 +1,23 @@
+<ion-header no-border>
+  <ion-navbar no-border-bottom>
+    <ion-title class="title">서포터</ion-title>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="검색"></ion-searchbar>
+</ion-header>
+
+<ion-content no-border>
+  <ion-list no-lines>
+    <ion-item no-lines *ngFor="let user of userList" (click)="supporterreview(user)">
+      <ion-thumbnail item-start>
+        <img *ngIf="user.photoURL" class="rounded-edges" src="{{ user.photoURL }}">
+        <img *ngIf="!user.photoURL" src="assets/peanut.png">
+      </ion-thumbnail>
+      <p>{{ user.username }}</p>
+      <p>{{ user.greeting }}</p>
+      <div class="flex-container">
+        <p>후기 {{ user.reviewcnt || 0 }}</p>ß
+      </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

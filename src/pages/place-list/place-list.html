@@ -33,7 +33,7 @@
 
     <ion-item class="ad" no-lines *ngFor="let premiumPlace of premiumPlaces" (click)="premiumPlaceDetail(premiumPlace)">
       <ion-thumbnail item-start>
-        <img [src]="premiumPlace.images[0]" />
+        <img [src]="premiumPlace.images[0]" class="rounded-edges" />
       </ion-thumbnail>
       <h2>{{ premiumPlace.name }}</h2>
       <p>{{ premiumPlace.address }}</p>
@@ -49,7 +49,7 @@
 
     <ion-item no-lines *ngFor="let place of places" (click)="placeDetail(place)">
       <ion-thumbnail item-start>
-        <img src="{{ place.image }}">
+        <img src="{{ place.image }}" class="rounded-edges">
       </ion-thumbnail>
       <h2>{{ place.name }}</h2>
       <p>{{ place.formatted_address.substr(5) }}</p>
