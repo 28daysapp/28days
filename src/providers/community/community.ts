@@ -9,7 +9,6 @@ export class CommunityProvider {
   firestore = firebase.storage();
   fireUsers = firebase.database().ref("/users");
 
-  photoURL: String = "";
   constructor() {}
 
   createCommunity(communityName, communityDescription, communityImage) {
@@ -43,49 +42,32 @@ export class CommunityProvider {
     });
   }
 
-  createCommunityPost(text, dataURL, anonymity, communityInfo) {
+  createCommunityPost(text, anonymity = false, communityInfo) {
     return new Promise(resolve => {
       const uid = firebase.auth().currentUser.uid;
-      let user;
       this.fireUsers
         .child(uid)
         .once("value")
         .then(snapshot => {
-          user = snapshot.val();
-        })
-        .then(() => {
+          const user = snapshot.val();
           const newPostRef = firebase
             .database()
             .ref(`/communityPost/${communityInfo.communityName}`)
             .push();
           const createdTime = firebase.database.ServerValue.TIMESTAMP;
           const postId = newPostRef.key;
-          const imageStore = this.firestore.ref("/community/").child(postId);
           const profilePicture = user.photoURL;
 
-          if (dataURL) {
-            imageStore
-              .putString(dataURL, "base64", { contentType: "image/jpeg" })
-              .then(savedImage => {
-                this.photoURL = savedImage.downloadURL;
-              });
-          }
-
-          if (!anonymity) {
-            anonymity = false;
-          }
-
           newPostRef.set({
-            uid: uid,
-            postId: postId,
+            uid,
+            postId,
             username: firebase.auth().currentUser.displayName,
-            text: text,
-            photoURL: this.photoURL,
-            profilePicture: profilePicture,
-            createdTime: createdTime,
+            text,
+            profilePicture,
+            createdTime,
             comment: 0,
             likes: 0,
-            anonymity: anonymity,
+            anonymity,
             communityName: communityInfo.communityName
           });
           resolve(postId);
@@ -93,42 +75,24 @@ export class CommunityProvider {
     });
   }
 
-  createMyPost(postId, text, dataURL, anonymity, communityInfo) {
+  createMyPost(postId, text, anonymity = false, communityInfo) {
     const promise = new Promise(resolve => {
       const uid = firebase.auth().currentUser.uid;
-      let user;
       this.fireUsers
         .child(uid)
         .once("value")
         .then(snapshot => {
-          user = snapshot.val();
-        })
-        .then(() => {
+          const user = snapshot.val();
           const newPostRef = firebase
             .database()
             .ref(`/userPost/${uid}/${postId}`);
           const createdTime = firebase.database.ServerValue.TIMESTAMP;
-          const imageStore = this.firestore.ref("/community/").child(postId);
           const profilePicture = user.photoURL;
-
-          if (dataURL) {
-            imageStore
-              .putString(dataURL, "base64", { contentType: "image/jpeg" })
-              .then(savedImage => {
-                this.photoURL = savedImage.downloadURL;
-              });
-          }
-
-          if (!anonymity) {
-            anonymity = false;
-          }
-
           newPostRef.set({
             postId,
             uid,
             username: firebase.auth().currentUser.displayName,
             text,
-            photoURL: this.photoURL,
             profilePicture,
             createdTime,
             comment: 0,
@@ -166,7 +130,7 @@ export class CommunityProvider {
   }
 
   readCommunityPosts(communityName) {
-    var promise = new Promise(resolve => {
+    const promise = new Promise(resolve => {
       this.fireCommunityPost
         .child(communityName)
         .orderByKey()
@@ -198,7 +162,7 @@ export class CommunityProvider {
   }
 
   deleteMyPost(post) {
-    var promise = new Promise(resolve => {
+    const promise = new Promise(resolve => {
       const uid = firebase.auth().currentUser.uid;
 
       firebase

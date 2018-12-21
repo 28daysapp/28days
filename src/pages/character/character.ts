@@ -19,7 +19,7 @@ import { Crop } from "@ionic-native/crop";
   templateUrl: "character.html"
 })
 export class CharacterPage {
-  @ViewChild(Navbar) nb: Navbar;
+  @ViewChild(Navbar) navbar: Navbar;
   p = [false, false, false, false];
   originpick;
   emailcheck;
@@ -57,7 +57,7 @@ export class CharacterPage {
     if (this.pick != 0) {
       this.p[this.pick - 1] = true;
     }
-    this.nb.backButtonClick = () => {
+    this.navbar.backButtonClick = () => {
       this.backhandler();
     };
 
@@ -169,9 +169,5 @@ export class CharacterPage {
 
   createUser() {
     this.events.publish("user:created", this.user2, Date.now());
-  }
-
-  pickpicture() {
-    this.navCtrl.push("CharacterchoicePage");
   }
 }

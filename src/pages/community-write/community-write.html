@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>글쓰기</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="writePost()">
+        완료
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label class="anonymitywrite">익명으로 글쓰기</ion-label>
+      <ion-checkbox [(ngModel)]="anonymity"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <div class="area">
+    <textarea class="area2" [(ngModel)]="text" placeholder="내용을 입력해주세요." style="border:0;"></textarea>
+  </div>
+</ion-content>

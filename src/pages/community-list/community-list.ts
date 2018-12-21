@@ -41,7 +41,7 @@ export class CommunityListPage {
   }
 
   searchCommunity(searchbarInput: any) {
-    let searchQuery = searchbarInput.srcElement.value;
+    const searchQuery = searchbarInput.srcElement.value;
 
     if (searchQuery && searchQuery.trim() != "") {
       this.communities = this.communities.filter(community => {
@@ -57,7 +57,7 @@ export class CommunityListPage {
   }
 
   async presentCreateCommunityModal() {
-    let newCommunityModal = await this.modalCtrl.create(
+    const newCommunityModal = await this.modalCtrl.create(
       "CreateCommunityModalPage"
     );
 

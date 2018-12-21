@@ -109,10 +109,10 @@ export class UserProvider {
   }
 
   updateUserprofile(email: string, username: string) {
-    let uid = firebase.auth().currentUser.uid;
-    let data = {};
+    const uid = firebase.auth().currentUser.uid;
+    const data = {};
     data[username] = uid;
-    var promise = new Promise(resolve => {
+    return new Promise(resolve => {
       firebase
         .auth()
         .currentUser.updateProfile({
@@ -136,20 +136,18 @@ export class UserProvider {
             });
         });
     });
-    return promise;
   }
 
   getallUserprofiles() {
-    var promise = new Promise(resolve => {
+    return new Promise(resolve => {
       this.fireusers.once("value").then(snapshot => {
-        var userprofiles = [];
+        const userprofiles = [];
         snapshot.forEach(childSnapshot => {
           userprofiles.push(childSnapshot.val());
         });
         resolve(userprofiles);
       });
     });
-    return promise;
   }
 
   updateProfilePicture(path) {
@@ -177,7 +175,7 @@ export class UserProvider {
 
   getUserprofile(uid) {
     if (uid) {
-      var promise = new Promise(resolve => {
+      const promise = new Promise(resolve => {
         this.fireusers
           .child(uid)
           .once("value")
@@ -190,8 +188,8 @@ export class UserProvider {
   }
 
   updateGreeting(greeting) {
-    var uid = firebase.auth().currentUser.uid;
-    var promise = new Promise(resolve => {
+    const uid = firebase.auth().currentUser.uid;
+    const promise = new Promise(resolve => {
       this.fireusers
         .child(uid)
         .update({
@@ -205,8 +203,8 @@ export class UserProvider {
   }
 
   updatePassword(password) {
-    var uid = firebase.auth().currentUser.uid;
-    var promise = new Promise(resolve => {
+    const uid = firebase.auth().currentUser.uid;
+    const promise = new Promise(resolve => {
       this.fireusers
         .child(uid)
         .update({

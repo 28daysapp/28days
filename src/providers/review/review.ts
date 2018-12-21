@@ -15,16 +15,16 @@ export class ReviewProvider {
   }
 
   createReview(placeId, placeName, rating, text) {
-    var uid = firebase.auth().currentUser.uid;
-    var promise = new Promise(resolve => {
-      var newPostRef = firebase
+    const uid = firebase.auth().currentUser.uid;
+    const promise = new Promise(resolve => {
+      const newPostRef = firebase
         .database()
         .ref(`/review/` + placeId)
         .push();
-      var time = firebase.database.ServerValue.TIMESTAMP;
-      var postId = newPostRef.key;
+      const time = firebase.database.ServerValue.TIMESTAMP;
+      const postId = newPostRef.key;
 
-      var ratingAvg = (rating[0] + rating[1] + rating[2] + rating[3]) / 4.0;
+      const ratingAvg = (rating[0] + rating[1] + rating[2] + rating[3]) / 4.0;
 
       newPostRef
         .set({
@@ -67,8 +67,8 @@ export class ReviewProvider {
   readReviews(placeId) {
     this.placeId = placeId;
 
-    var promise = new Promise(resolve => {
-      var posts = [];
+    const promise = new Promise(resolve => {
+      const posts = [];
       this.fireReview
         .child(this.placeId)
         .orderByChild("timestamp")

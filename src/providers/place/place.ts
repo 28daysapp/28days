@@ -9,8 +9,6 @@ export class PlaceProvider {
     console.log("Hello PlaceProvider Provider");
   }
 
-  // <Function to Read Place List>
-  // Reference: String, Accepting Values: 'hospital', 'center'
   readPlaceList(reference: String) {
     console.log("reference: ", reference);
     return new Promise(resolve => {
@@ -28,6 +26,7 @@ export class PlaceProvider {
         });
     });
   }
+
   readPlaceReviews(placeId: String) {
     return new Promise(resolve => {
       firebase

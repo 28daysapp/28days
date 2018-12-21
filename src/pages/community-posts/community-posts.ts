@@ -1,19 +1,23 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, NavParams, ActionSheetController } from 'ionic-angular';
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  AlertController,
+  NavParams,
+  ActionSheetController
+} from "ionic-angular";
 
-import { CommunityProvider } from '../../providers/community/community';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { ReportProvider } from '../../providers/report/report';
-import { UserProvider } from '../../providers/user/user';
-
+import { CommunityProvider } from "../../providers/community/community";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { ReportProvider } from "../../providers/report/report";
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
-  selector: 'page-community-posts',
-  templateUrl: 'community-posts.html',
+  selector: "page-community-posts",
+  templateUrl: "community-posts.html"
 })
 export class CommunityPostsPage {
-
   communityInfo: any;
   posts: any;
   anonymity: boolean;
@@ -28,9 +32,9 @@ export class CommunityPostsPage {
     public communityProvider: CommunityProvider,
     public notificationProvider: NotificationProvider,
     public reportProvider: ReportProvider,
-    public userProvider: UserProvider,
+    public userProvider: UserProvider
   ) {
-    this.communityInfo = this.navParams.get('payload');
+    this.communityInfo = this.navParams.get("payload");
   }
 
   ionViewWillEnter() {
@@ -38,7 +42,7 @@ export class CommunityPostsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommunityPostsPage');
+    console.log("ionViewDidLoad CommunityPostsPage");
   }
 
   ionViewWillLoad() {
@@ -46,13 +50,13 @@ export class CommunityPostsPage {
   }
 
   getCommunityPosts(communityName) {
-    this.communityProvider.readCommunityPosts(communityName).then((posts) => {
+    this.communityProvider.readCommunityPosts(communityName).then(posts => {
       this.posts = posts;
     });
   }
 
   toCommunityWrite(communityInfo) {
-    this.navCtrl.push("CommunitywritePage", {
+    this.navCtrl.push("CommunityWritePage", {
       communityInfo: communityInfo
     });
   }
@@ -69,15 +73,18 @@ export class CommunityPostsPage {
       },
       creatorType: "좋아요",
       readerUid: writerUid
-    }
+    };
 
     await this.communityProvider.likePost(communityName, postId);
     await this.getCommunityPosts(this.communityInfo.communityName);
-    await this.notificationProvider.createNotification(notificationParameter)
+    await this.notificationProvider.createNotification(notificationParameter);
   }
 
   toComments(post) {
-    this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
+    this.navCtrl.push("CommunityCommentPage", {
+      community: this.communityInfo,
+      post: post
+    });
   }
 
   async joinCommunity() {
@@ -89,15 +96,14 @@ export class CommunityPostsPage {
     await this.getCommunityPosts(this.communityInfo.communityName);
 
     const alert = this.alertCtrl.create({
-      title: '멤버가 된 걸 축하해요!',
-      message: '좋은 사람들과 만났으면 좋겠어요!'
+      title: "멤버가 된 걸 축하해요!",
+      message: "좋은 사람들과 만났으면 좋겠어요!"
     });
 
     alert.present();
     setTimeout(() => {
       alert.dismiss();
     }, 1500);
-
   }
 
   async leaveCommunity() {
@@ -110,34 +116,39 @@ export class CommunityPostsPage {
   }
 
   checkIfJoinedCommunity() {
-    this.userProvider.readJoinedCommunities(this.currentUserUid).then((joinedCommunities) => {
-      for (let i in joinedCommunities) {
-        if (this.communityInfo.communityName.includes(joinedCommunities[i].communityName)) {
-          this.alreadyJoined = true
-          return
-        } else {
-          this.alreadyJoined = false
+    this.userProvider
+      .readJoinedCommunities(this.currentUserUid)
+      .then(joinedCommunities => {
+        for (let i in joinedCommunities) {
+          if (
+            this.communityInfo.communityName.includes(
+              joinedCommunities[i].communityName
+            )
+          ) {
+            this.alreadyJoined = true;
+            return;
+          } else {
+            this.alreadyJoined = false;
+          }
         }
-      }
-    })
+      });
   }
 
   presentConfirm() {
-    let alert = this.alertCtrl.create({
-      title: '커뮤니티 탈퇴',
-      message: '정말 나갈거에요??',
+    const alert = this.alertCtrl.create({
+      title: "커뮤니티 탈퇴",
+      message: "정말 나갈거에요??",
       buttons: [
         {
-          text: '응 이제 안녕이야',
-          role: 'cancel',
+          text: "응 이제 안녕이야",
+          role: "cancel",
           handler: () => {
             this.leaveCommunity();
           }
         },
         {
-          text: '아냐 남을래!',
-          handler: () => {
-          }
+          text: "아냐 남을래!",
+          handler: () => {}
         }
       ]
     });
@@ -152,26 +163,28 @@ export class CommunityPostsPage {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {
-            text: '댓글 달기',
+            text: "댓글 달기",
             handler: () => {
-              this.navCtrl.push('CommunityCommentPage', { community: this.communityInfo, post: post });
-            }
-          },
-          {
-            text: '글 삭제',
-            role: 'destructive',
-            handler: () => {
-              this.communityProvider.deleteCommunityPost(post).then(() => {
-                this.communityProvider.deleteMyPost(post);
-                this.getCommunityPosts(this.communityInfo.communityName)
+              this.navCtrl.push("CommunityCommentPage", {
+                community: this.communityInfo,
+                post: post
               });
             }
           },
           {
-            text: '닫기',
-            role: 'cancel',
+            text: "글 삭제",
+            role: "destructive",
             handler: () => {
+              this.communityProvider.deleteCommunityPost(post).then(() => {
+                this.communityProvider.deleteMyPost(post);
+                this.getCommunityPosts(this.communityInfo.communityName);
+              });
             }
+          },
+          {
+            text: "닫기",
+            role: "cancel",
+            handler: () => {}
           }
         ]
       });
@@ -179,24 +192,26 @@ export class CommunityPostsPage {
       actionSheet = this.actionSheetCtrl.create({
         buttons: [
           {
-            text: '댓글 달기',
+            text: "댓글 달기",
             handler: () => {
-              this.navCtrl.push('CommunityCommentPage', { post: post });
+              this.navCtrl.push("CommunityCommentPage", { post: post });
             }
           },
           {
-            text: '신고',
-            role: 'destructive',
+            text: "신고",
+            role: "destructive",
             handler: () => {
-              this.reportProvider.reportPost(this.communityInfo.communityName, post.postId);
+              this.reportProvider.reportPost(
+                this.communityInfo.communityName,
+                post.postId
+              );
               this.reportCompletionAlert();
             }
           },
           {
-            text: '닫기',
-            role: 'cancel',
-            handler: () => {
-            }
+            text: "닫기",
+            role: "cancel",
+            handler: () => {}
           }
         ]
       });
@@ -206,10 +221,10 @@ export class CommunityPostsPage {
 
   postWriteAlert() {
     const alert = this.alertCtrl.create({
-      title: '커뮤니티에 가입한 후 글을 작성할 수 있어요!',
+      title: "커뮤니티에 가입한 후 글을 작성할 수 있어요!",
       buttons: [
         {
-          text: '확인'
+          text: "확인"
         }
       ]
     });
@@ -218,10 +233,10 @@ export class CommunityPostsPage {
 
   reportCompletionAlert() {
     const alert = this.alertCtrl.create({
-      title: '신고가 완료되었습니다',
+      title: "신고가 완료되었습니다",
       buttons: [
         {
-          text: '확인'
+          text: "확인"
         }
       ]
     });
@@ -229,7 +244,7 @@ export class CommunityPostsPage {
   }
 
   doRefresh(refresher) {
-    this.getCommunityPosts(this.communityInfo.communityName)
+    this.getCommunityPosts(this.communityInfo.communityName);
 
     setTimeout(() => {
       refresher.complete();
@@ -239,5 +254,4 @@ export class CommunityPostsPage {
   navigateToPage(page, uid) {
     this.navCtrl.push(page, { uid });
   }
-
 }

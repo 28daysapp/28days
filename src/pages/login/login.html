@@ -1,11 +1,10 @@
-
 <ion-content no-bounce>
   <div class="header-container">
     <div>
       <img class="logo-KR" src="assets/logo_loginKR.png">
     </div>
     <div>
-      <img class="logo-EN"src="assets/logo_loginEN.png">
+      <img class="logo-EN" src="assets/logo_loginEN.png">
     </div>
   </div>
 
@@ -14,18 +13,12 @@
     <div class="form-content">
       <ion-item class="input-email">
         <ion-icon item-start name="mail"></ion-icon>
-        <ion-input
-          formControlName="email"
-          type="email"
-          placeholder="이메일 계정">
+        <ion-input formControlName="email" type="email" placeholder="이메일 계정">
         </ion-input>
       </ion-item>
       <ion-item class="input-password">
         <ion-icon item-start name="lock"></ion-icon>
-        <ion-input
-          formControlName="password"
-          type="password"
-          placeholder="비밀번호">
+        <ion-input formControlName="password" type="password" placeholder="비밀번호">
         </ion-input>
       </ion-item>
     </div>
@@ -33,18 +26,14 @@
     <div class="form-btn-container">
       <div class="form-login-btn">
         <button (click)="signin()">
-           로그인 하기
+          로그인 하기
         </button>
-      </div>
-      <div class="form-sns-btn">
-        <button>kakao-talk</button>
-        <button>facebook</button>
       </div>
     </div>
 
     <div class="form-account-container">
       <button class="form-account-btn btn-signup" (click)="signup()">
-       회원가입
+        회원가입
       </button>
       <button class="form-account-btn btn-password" (click)="passwordreset()">
         비밀번호 찾기
