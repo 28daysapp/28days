@@ -29,23 +29,6 @@
   <div #map id="map"></div>
 
   <ion-list no-border>
-    <ion-list-header>Sponsored</ion-list-header>
-
-    <ion-item class="ad" no-lines *ngFor="let premiumPlace of premiumPlaces" (click)="premiumPlaceDetail(premiumPlace)">
-      <ion-thumbnail item-start>
-        <img [src]="premiumPlace.images[0]" class="rounded-edges" />
-      </ion-thumbnail>
-      <h2>{{ premiumPlace.name }}</h2>
-      <p>{{ premiumPlace.address }}</p>
-      <div class="flex-container">
-        <p>평점 {{ premiumPlace.ratings || 0 }}</p>
-        <p>리뷰 {{ premiumPlace.reviewCount || 0 }}</p>
-      </div>
-    </ion-item>
-
-    <div class="divider">
-
-    </div>
 
     <ion-item no-lines *ngFor="let place of places" (click)="placeDetail(place)">
       <ion-thumbnail item-start>

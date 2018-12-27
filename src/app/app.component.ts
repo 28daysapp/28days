@@ -5,7 +5,7 @@ import firebase from "firebase";
 import { FirstRunPage } from "../pages";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBz5qFakcahaCIdkR1XbDemZEJc37-l7vs",
+  apiKey: "AIzaSyAFjTzQOcwJrMPpmvOtT9boYuhYJxKI88U",
   authDomain: "days-fd14f.firebaseapp.com",
   databaseURL: "https://days-fd14f.firebaseio.com",
   projectId: "days-fd14f",

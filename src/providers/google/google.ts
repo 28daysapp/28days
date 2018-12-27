@@ -49,7 +49,7 @@ export class GoogleProvider {
   }
 
   getPlacePhoto(reference) {
-    const apiKey = "AIzaSyAUmoDlosjlNS8kaaw6zwH5yC5FAlKP7Yg";
+    const apiKey = "AIzaSyAFjTzQOcwJrMPpmvOtT9boYuhYJxKI88U";
     const url = "https://maps.googleapis.com/maps/api/place/photo?";
 
     const headers = new HttpHeaders().set("Access-Control-Allow-Origin", "*");

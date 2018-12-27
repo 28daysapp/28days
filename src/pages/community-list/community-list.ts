@@ -7,8 +7,9 @@ import {
 } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 
-import { AuthProvider } from "../../providers/auth/auth";
 import { CommunityProvider } from "../../providers/community/community";
+import { UserProvider } from "../../providers/user/user";
+
 @IonicPage()
 @Component({
   selector: "page-community-list",
@@ -22,11 +23,14 @@ export class CommunityListPage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public authProvider: AuthProvider,
-    public communityProvider: CommunityProvider
+    public communityProvider: CommunityProvider,
+    public userProvider: UserProvider
   ) {}
 
   ionViewWillEnter() {
+    if (!this.userProvider.readCurrentUser()) {
+      this.toLogin();
+    }
     this.getCommunityList();
   }
 
@@ -38,6 +42,10 @@ export class CommunityListPage {
     this.navCtrl.push("CommunityPostsPage", {
       communityInfo: community
     });
+  }
+
+  toLogin() {
+    this.navCtrl.push("LoginPage");
   }
 
   searchCommunity(searchbarInput: any) {

@@ -1,48 +1,43 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { ChartsModule } from 'ng2-charts';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from "@angular/platform-browser";
+import { ErrorHandler, NgModule } from "@angular/core";
+import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+import { ChartsModule } from "ng2-charts";
+import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
+import { Camera } from "@ionic-native/camera";
 
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
-import { Camera } from '@ionic-native/camera';
+import { MyApp } from "./app.component";
 
-import { MyApp } from './app.component';
+import { AuthProvider } from "../providers/auth/auth";
+import { UserProvider } from "../providers/user/user";
+import { ChatProvider } from "../providers/chat/chat";
 
-import { AuthProvider } from '../providers/auth/auth';
-import { UserProvider } from '../providers/user/user';
-import { ChatProvider } from '../providers/chat/chat';
+import { IonicStorageModule } from "@ionic/storage";
+import { CommunityProvider } from "../providers/community/community";
+import { PostProvider } from "../providers/post/post";
 
-import { IonicStorageModule } from '@ionic/storage';
-import { EmotionProvider } from '../providers/emotion/emotion';
-import { CommunityProvider } from '../providers/community/community';
-import { PostProvider } from '../providers/post/post';
+import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { Geolocation } from "@ionic-native/geolocation";
+import { SupporterProvider } from "../providers/supporter/supporter";
+import { ReviewProvider } from "../providers/review/review";
 
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Geolocation } from '@ionic-native/geolocation';
-import { SupporterProvider } from '../providers/supporter/supporter';
-import { ReviewProvider } from '../providers/review/review';
-
-import { OperatorProvider } from '../providers/operator/operator';
-import { GoogleProvider } from '../providers/google/google';
-import { CounselorProvider } from '../providers/counselor/counselor';
-import { PlaceProvider } from '../providers/place/place';
-import { Crop } from '@ionic-native/crop';
-import { NotificationProvider } from '../providers/notification/notification';
-import { CameraProvider } from '../providers/camera/camera';
-import { CommentProvider } from '../providers/comment/comment';
-import { ReportProvider } from '../providers/report/report';
-
+import { OperatorProvider } from "../providers/operator/operator";
+import { GoogleProvider } from "../providers/google/google";
+import { CounselorProvider } from "../providers/counselor/counselor";
+import { PlaceProvider } from "../providers/place/place";
+import { Crop } from "@ionic-native/crop";
+import { NotificationProvider } from "../providers/notification/notification";
+import { CameraProvider } from "../providers/camera/camera";
+import { CommentProvider } from "../providers/comment/comment";
+import { ReportProvider } from "../providers/report/report";
 
 @NgModule({
-  declarations: [
-    MyApp
-  ],
+  declarations: [MyApp],
   imports: [
     BrowserModule,
     IonicModule,
@@ -50,12 +45,10 @@ import { ReportProvider } from '../providers/report/report';
     ChartsModule,
     IonicStorageModule.forRoot(),
     HttpModule,
-    HttpClientModule    
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp
-  ],
+  entryComponents: [MyApp],
   providers: [
     Crop,
     StatusBar,
@@ -68,7 +61,6 @@ import { ReportProvider } from '../providers/report/report';
     AuthProvider,
     UserProvider,
     ChatProvider,
-    EmotionProvider,
     CommunityProvider,
     PostProvider,
     InAppBrowser,
@@ -84,4 +76,4 @@ import { ReportProvider } from '../providers/report/report';
     ReportProvider
   ]
 })
-export class AppModule { }
+export class AppModule {}

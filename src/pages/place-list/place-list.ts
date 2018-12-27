@@ -43,7 +43,6 @@ export class PlaceListPage {
     console.log("ionViewDidLoad PlaceListPage");
 
     this.googleProvider.loadMap(this.map, this.mapElement).then(result => {
-      console.log(result);
       this.map = result;
 
       this.searchByText("서울");
@@ -122,16 +121,13 @@ export class PlaceListPage {
     }, 2000);
   }
 
-  /* ------ Functions for Calling Premium Place DB ------ */
-
   async getPlaceList(reference) {
     try {
       const placeList = await this.placeProvider.readPlaceList(reference);
       this.premiumPlaces = await this.handlePlaceReviews(placeList);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
+
   async handlePlaceReviews(placeList) {
     const updatedPlaceList = placeList.map(async place => {
       const placeReview = await this.placeProvider.readPlaceReviews(

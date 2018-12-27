@@ -21,14 +21,7 @@ export class CounselorProvider {
     this.count = 0;
   }
 
-  addcounselorreview(
-    counselorid,
-    rating1,
-    rating2,
-    rating3,
-    rating4,
-    comment,
-    username
+  addCounselorReview(counselorid, rating1, rating2, rating3, rating4, comment, username
   ) {
     const uid = firebase.auth().currentUser.uid;
     const newReviewRef = this.firecounselorreview.push();
@@ -58,6 +51,7 @@ export class CounselorProvider {
     });
     return promise;
   }
+  
   addcounselorsum(counselorid) {
     const promise = new Promise(resolve => {
       this.firecounselorreview
