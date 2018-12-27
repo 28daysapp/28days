@@ -1,16 +1,8 @@
-<!--
-  Generated template for the ChatsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header no-border>
   <ion-navbar no-border-bottom>
     <ion-title>온라인상담</ion-title>
   </ion-navbar>
-  <!-- <ion-toolbar no-border>
-    <ion-searchbar (ionInput)="filterItems($event)" placeholder="검색"></ion-searchbar>
-  </ion-toolbar> -->
+
 </ion-header>
 
 
@@ -37,9 +29,8 @@
           </ion-avatar>
           <span class="username">{{ item.requesterUsername }}</span>
           <div *ngIf="item.count != 0" class="counter">{{item.count}}</div>
-
-          <!-- <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
-              <div class="msg">{{ item.recentmessage }}</div> -->
+          <span class="time">{{ item.recenttimestamp | date:'hh:mm a' }}</span>
+          <div class="msg">{{ item.recentmessage }}</div>
         </ion-item>
       </ion-item-sliding>
 

@@ -1,5 +1,11 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, App, LoadingController } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  App,
+  LoadingController
+} from "ionic-angular";
 import { ChatProvider } from "../../providers/chat/chat";
 import { UserProvider } from "../../providers/user/user";
 import firebase from "firebase";
@@ -16,7 +22,7 @@ export class ChatsPage {
   query;
   loading;
 
-  count: string = '0';
+  count: string = "0";
   type: string = "request";
 
   constructor(
@@ -25,15 +31,13 @@ export class ChatsPage {
     public chat: ChatProvider,
     public appCrtl: App,
     public userProvider: UserProvider,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController
   ) {
     this.user = firebase.auth().currentUser;
   }
 
   ionViewDidLoad() {
-
     this.refreshList();
-
   }
 
   ionViewWillEnter() {
@@ -43,20 +47,17 @@ export class ChatsPage {
     this.loading.dismiss();
   }
 
-  filterItems() {
-  }
-
   refreshList() {
     this.chat.getAllRequestedInfos().then(info => {
+      console.log(info);
       this.requestedInfos = info;
-
-      this.requestedInfos.forEach((info) => {
+      this.requestedInfos.forEach(info => {
         this.count = info.count;
       });
     });
     this.chat.getAllRequestInfos().then(info => {
       this.requestInfos = info;
-      this.requestInfos.forEach((info) => {
+      this.requestInfos.forEach(info => {
         this.count = info.count;
       });
     });

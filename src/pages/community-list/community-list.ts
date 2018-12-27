@@ -28,7 +28,7 @@ export class CommunityListPage {
   ) {}
 
   ionViewWillEnter() {
-    if (!this.userProvider.readCurrentUser()) {
+    if (!this.storage.get("email") || !this.userProvider.readCurrentUser()) {
       this.toLogin();
     }
     this.getCommunityList();
